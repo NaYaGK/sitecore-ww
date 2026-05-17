@@ -1,0 +1,2 @@
+const colors = ['Dark Grey', 'White/Grey', 'Red/Dark Grey'];
+console.log(colors.map(c => `data:image/svg+xml;base64,${Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500"><rect width="400" height="500" fill="#f4f4f4"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#333">${c}</text></svg>`).toString('base64')}`)[0]);

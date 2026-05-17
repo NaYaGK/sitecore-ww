@@ -1,0 +1,43 @@
+﻿---
+ID: "00046bb0-3d00-493d-b3f2-e2b5fca3f102"
+Parent: "4551898f-1450-48c3-8655-34744ce1836c"
+Template: "4551898f-1450-48c3-8655-34744ce1836c"
+Path: /sitecore/templates/Project/Workwear/Search Settings/__Standard Values
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "070131f8-1904-4ea5-aad5-952b493adccf"
+      Hint: WidgetID
+      Value: rfkid_7
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260302T190947Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8837d415-909c-4e8c-b0a1-d647f7cd70f1"
+      Hint: JobEntityName
+      Value: workdayjobs
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "243d85b4-dabd-4ed8-987f-8549aee9d715"
+    - ID: "95c3e09b-7385-4445-8202-823c94a1b54b"
+      Hint: JobWidgetID
+      Value: rfkid_9
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260302T191025Z
+    - ID: "ffb1b689-72b9-439f-95a2-25c0837ec0b9"
+      Hint: EntityName
+      Value: content

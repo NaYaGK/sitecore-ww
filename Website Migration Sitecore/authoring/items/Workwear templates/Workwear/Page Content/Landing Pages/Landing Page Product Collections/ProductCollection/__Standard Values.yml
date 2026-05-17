@@ -1,0 +1,38 @@
+﻿---
+ID: "75a1d92c-9635-40ec-811a-7d98b5e59b65"
+Parent: "95f0dbc3-64ca-49ce-a5c9-1bf99a93de93"
+Template: "95f0dbc3-64ca-49ce-a5c9-1bf99a93de93"
+Path: /sitecore/templates/Project/Workwear/Page Content/Landing Pages/Landing Page Product Collections/ProductCollection/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{BD964FCE-383A-4616-A732-15D063AC3432}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "4bad8849-5d08-4860-b950-b08c9e3b6c1c"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260303T164716Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "ec09a508-69d6-445f-9925-f308c6bc5f29"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260303T165317Z

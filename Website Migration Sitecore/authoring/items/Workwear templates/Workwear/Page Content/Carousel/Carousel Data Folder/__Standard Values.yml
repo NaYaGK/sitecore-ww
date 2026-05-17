@@ -1,0 +1,38 @@
+﻿---
+ID: "f9aa8b0b-31a7-4e94-9bbb-c91f2a6265ae"
+Parent: "12d31985-f370-4632-8220-f6a2f5db76e0"
+Template: "12d31985-f370-4632-8220-f6a2f5db76e0"
+Path: /sitecore/templates/Project/Workwear/Page Content/Carousel/Carousel Data Folder/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{31F0141E-1925-45D1-8374-977AA2AACA96}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "aa84d916-2c7f-4a22-9613-008c3b8b7b86"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260209T101947Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "4bc25225-2deb-4388-8b9f-c971d23c0a2e"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260209T102309Z

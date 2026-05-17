@@ -1,0 +1,25 @@
+trigger: none
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '25.x'
+    displayName: 'Use Node 25'
+
+  - script: |
+      cd cws-xm-cloud-app
+      npm install
+    displayName: 'Install dependencies'
+
+  - task: vercel-deployment-task@3
+    displayName: 'Deploy to Vercel'
+    inputs:
+      vercelToken: 'mNylwPYt1twBOBLE7vdnXNYf'
+      vercelOrgId: 'team_CBRPMWoRaMbI2wcESfKY8Ku0'
+      vercelProjectId: 'prj_JHMuvffJnvcL2fyNP2A5DHN18J8M'
+      vercelTeamId: 'team_CBRPMWoRaMbI2wcESfKY8Ku0'
+      production: true

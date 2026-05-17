@@ -1,0 +1,31 @@
+﻿---
+ID: "a498aebb-68b0-4c67-88ac-cda5c27df846"
+Parent: "d8ef9306-569d-4712-ad64-3198a5e7d0d5"
+Template: "49c111d0-6867-4798-a724-1f103166e6e9"
+Path: /sitecore/content/cws/cws/Presentation/Headless Variants/AdvantageCards
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260307T155814Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\vikramacholan@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\vikramacholan@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a7cd3dca-5cc3-4aa2-b05c-bd9bcf00701f"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\vikramacholan@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260307T155814Z

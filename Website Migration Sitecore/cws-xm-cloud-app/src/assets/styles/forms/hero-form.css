@@ -1,0 +1,644 @@
+/* =====================================================
+   Hero Form Specific Styles
+   Form ID: 32337697abb5491ca8f64104b9e569bc-euw
+   ===================================================== */
+
+/* Hide hero form on mobile */
+@media (max-width: 1023px) {
+  form[data-formname="hero"],
+  .main-form-wrapper[data-formname="hero"] {
+    display: none !important;
+  }
+  form:has(input[name="form_name"][data-prefill="hero"]) {
+    display: none !important;
+  }
+  .main-form-wrapper:has(form input[name="form_name"][data-prefill="hero"]) {
+    display: none !important;
+  }
+}
+
+/* Black placeholder color for better visibility */
+form[data-formname="hero"] input::placeholder,
+form[data-formname="hero"] textarea::placeholder,
+form[data-formname="hero"] select::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) input::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) textarea::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) select::placeholder {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+/* =====================================================
+   Radio Button Styling for Hero Form
+   ===================================================== */
+form[data-formname="hero"] .radio-group-container,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-group-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-top: 10px !important;
+  font-size: 14px !important;
+}
+
+form[data-formname="hero"] .radio-wrapper,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-wrapper {
+  display: flex !important;
+  align-items: center !important;
+}
+
+form[data-formname="hero"] .radio-field,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-field {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+form[data-formname="hero"] .form-input-wrapper-div,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-div {
+  display: flex !important;
+  align-items: center !important;
+}
+
+form[data-formname="hero"] .global-radio-element,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-radio-element {
+  width: 14px !important;
+  height: 14px !important;
+  border: 1px solid #ebebeb !important;
+  border-radius: 50% !important;
+  position: relative !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+}
+
+form[data-formname="hero"] .global-radio-element:checked,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-radio-element:checked {
+  border-color: #ebebeb !important;
+}
+
+form[data-formname="hero"] .global-radio-element:checked::after,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-radio-element:checked::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #8f8f8f !important;
+}
+
+form[data-formname="hero"] .global-input-label,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-input-label {
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* Radio button labels - 14px font size for hero form */
+form[data-formname="hero"] .radio-field label,
+form[data-formname="hero"] .global-input-label.form-field-label,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-field label,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-input-label.form-field-label {
+  font-size: 14px !important;
+}
+
+/* Radio group field styling for hero form - target actual structure */
+form[data-formname="hero"] .radio-group-field .global-radio-element,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-group-field .global-radio-element {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  width: 13px !important;
+  height: 13px !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  position: relative !important;
+  border: 1px solid #ebebeb !important;
+  --cws-radio-dot-size: 6px;
+}
+
+form[data-formname="hero"] .radio-group-field .global-radio-element::after,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-group-field .global-radio-element::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: var(--cws-radio-dot-size) !important;
+  height: var(--cws-radio-dot-size) !important;
+  border-radius: 50% !important;
+  background-color: #8f8f8f !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  transform-origin: center !important;
+}
+
+form[data-formname="hero"] .radio-group-field .global-radio-element:checked::after,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-group-field .global-radio-element:checked::after {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+/* Radio group field labels - 14px font size for hero form */
+form[data-formname="hero"] .radio-group-field .radio-field .global-input-label.form-field-label,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-group-field .radio-field .global-input-label.form-field-label {
+  font-size: 14px !important;
+}
+
+form[data-formname="hero"] .radio-group-field .global-input-label.form-field-label.form-group-label,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-group-field .global-input-label.form-field-label.form-group-label {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  margin-bottom: -20px !important;
+  line-height: 10.2px !important;
+  margin-left: -8px !important;
+  margin-top: 30px !important;
+
+}
+
+/* Remove margin-bottom from radio wrapper */
+form[data-formname="hero"] .radio-wrapper,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-wrapper {
+  margin-bottom: 0 !important;
+}
+
+/* Remove margin-bottom from radio field labels */
+form[data-formname="hero"] .radio-field,
+form:has(input[name="form_name"][data-prefill="hero"]) .radio-field {
+  margin-bottom: 0 !important;
+}
+
+/* =====================================================
+   Hero Form Positioning & Layout
+   ===================================================== */
+/* Radio group component - remove bottom margin */
+.component.radio-group-field.radio-component.form-input-wrapper {
+  margin: 0px !important;
+  padding: 0px !important;
+  margin-left: 10px !important;
+}
+
+@media (min-width: 1024px) {
+
+  /* Hero form positioning - absolute right side, scrollable within container */
+  form[data-formname="hero"].content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form,
+  form:has(input[name="form_name"][data-prefill="hero"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    display: flex !important;
+    flex: none !important;
+    flex-direction: column !important;
+    width: 350px !important;
+    position: absolute !important;
+    top: 108px !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    z-index: 50 !important;
+    background: white !important;
+    padding: 10px 16px !important;
+    margin: 0 !important;
+    margin-left: auto !important;
+    justify-content: flex-start !important;
+    /* Max height matches hero banner height (100vh on desktop) */
+    max-height: 100vh !important;
+    height: 100vh !important;
+    /* Enable scrolling when content overflows */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    margin-bottom: 40px !important;
+    padding-top: 52px !important;
+    padding-left: 23px !important;
+    padding-right: 22px !important;
+
+  }
+
+  /* Form height reduction when hero banner has ShowArrow (reduced by 108px) */
+  body.hero-banner-with-arrow form[data-formname="hero"].content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form,
+  body.hero-banner-with-arrow form:has(input[name="form_name"][data-prefill="hero"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    max-height: calc(100vh) !important;
+    height: calc(100vh) !important;
+  }
+
+  /* Form height constraint for newsStyle variant (shorter hero banner) */
+  body.hero-banner-news-style form[data-formname="hero"].content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form,
+  body.hero-banner-news-style form:has(input[name="form_name"][data-prefill="hero"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    max-height: 74vh !important;
+    height: 74vh !important;
+  }
+
+  /* newsStyle + ShowArrow combined */
+  body.hero-banner-news-style.hero-banner-with-arrow form[data-formname="hero"].content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form,
+  body.hero-banner-news-style.hero-banner-with-arrow form:has(input[name="form_name"][data-prefill="hero"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    max-height: calc(74vh - 108px) !important;
+    height: calc(74vh - 108px) !important;
+  }
+
+  /* Fix inner containers to prevent extra width */
+  form[data-formname="hero"] .inner-row-div,
+  form[data-formname="hero"] .border-wrapper,
+  form[data-formname="hero"] .row-slot-wrapper,
+  form[data-formname="hero"] .landing-page-slot,
+  form[data-formname="hero"] .slot-container,
+  form:has(input[name="form_name"][data-prefill="hero"]) .inner-row-div,
+  form:has(input[name="form_name"][data-prefill="hero"]) .border-wrapper,
+  form:has(input[name="form_name"][data-prefill="hero"]) .row-slot-wrapper,
+  form:has(input[name="form_name"][data-prefill="hero"]) .landing-page-slot,
+  form:has(input[name="form_name"][data-prefill="hero"]) .slot-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  form[data-formname="hero"] .landing-page-slot.lp-flex-container,
+  form:has(input[name="form_name"][data-prefill="hero"]) .landing-page-slot.lp-flex-container {
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* newsStyle uses 69vh at xl breakpoint */
+  body.hero-banner-news-style form[data-formname="hero"].content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form,
+  body.hero-banner-news-style form:has(input[name="form_name"][data-prefill="hero"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    max-height: 69vh !important;
+    height: 69vh !important;
+  }
+
+  /* newsStyle + ShowArrow at xl breakpoint */
+  body.hero-banner-news-style.hero-banner-with-arrow form[data-formname="hero"].content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form,
+  body.hero-banner-news-style.hero-banner-with-arrow form:has(input[name="form_name"][data-prefill="hero"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    max-height: calc(69vh - 108px) !important;
+    height: calc(69vh - 108px) !important;
+  }
+}
+/* =====================================================
+   New Variant Styles (hero-banner-variant-news)
+   ===================================================== */
+@media (min-width: 1024px) {
+
+  /* Height adjustment for specific 'newsStyle' variant banner */
+  html body.hero-banner-variant-news form[data-formname="hero"].content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form,
+  html body.hero-banner-variant-news form:has(input[name="form_name"][data-prefill="hero"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    max-height: calc(100vh - 108px) !important;
+    height: calc(100vh - 108px) !important;
+    z-index: 40 !important;
+  }
+
+  /* newsStyle variant + ShowArrow combined height adjustment */
+  html body.hero-banner-variant-news.hero-banner-with-arrow form[data-formname="hero"].content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form,
+  html body.hero-banner-variant-news.hero-banner-with-arrow form:has(input[name="form_name"][data-prefill="hero"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    max-height: calc(100vh - 108px) !important;
+    height: calc(100vh - 108px) !important;
+    z-index: 40 !important;
+  }
+}
+
+/* =====================================================
+   Heading Styles for Hero Form
+   ===================================================== */
+
+/* Hero Form Specific h3 and strong styling - 20px font size */
+form[data-formname="hero"] h3,
+form[data-formname="hero"] h3>strong,
+form:has(input[name="form_name"][data-prefill="hero"]) h3,
+form:has(input[name="form_name"][data-prefill="hero"]) h3>strong {
+  font-size: 20px !important;
+  line-height: 28px !important;
+  margin-bottom: 8px !important;
+  margin-top: 12px !important;
+}
+
+/* Hero Form kontakt-subheadline styling */
+form[data-formname="hero"] #kontakt-subheadline,
+form:has(input[name="form_name"][data-prefill="hero"]) #kontakt-subheadline {
+  font-size: 14px !important;
+  line-height: 18px !important;
+  margin-top: 10px !important;
+}
+
+/* All other heading tags - margin-bottom 13px */
+form[data-formname="hero"] h1,
+form[data-formname="hero"] h1>strong,
+form[data-formname="hero"] h2,
+form[data-formname="hero"] h2>strong,
+form[data-formname="hero"] h4,
+form[data-formname="hero"] h4>strong,
+form[data-formname="hero"] h5,
+form[data-formname="hero"] h5>strong,
+form[data-formname="hero"] h6,
+form[data-formname="hero"] h6>strong,
+form:has(input[name="form_name"][data-prefill="hero"]) h1,
+form:has(input[name="form_name"][data-prefill="hero"]) h1>strong,
+form:has(input[name="form_name"][data-prefill="hero"]) h2,
+form:has(input[name="form_name"][data-prefill="hero"]) h2>strong,
+form:has(input[name="form_name"][data-prefill="hero"]) h4,
+form:has(input[name="form_name"][data-prefill="hero"]) h4>strong,
+form:has(input[name="form_name"][data-prefill="hero"]) h5,
+form:has(input[name="form_name"][data-prefill="hero"]) h5>strong,
+form:has(input[name="form_name"][data-prefill="hero"]) h6,
+form:has(input[name="form_name"][data-prefill="hero"]) h6>strong {
+  margin-bottom: 0px !important;
+}
+
+/* =====================================================
+   Typography & Sizing
+   ===================================================== */
+/* Set all inputs, placeholders and text to 14px for the specific form */
+form[data-formname="hero"] input,
+form[data-formname="hero"] textarea,
+form[data-formname="hero"] select,
+form:has(input[name="form_name"][data-prefill="hero"]) input,
+form:has(input[name="form_name"][data-prefill="hero"]) textarea,
+form:has(input[name="form_name"][data-prefill="hero"]) select {
+  font-size: 14px !important;
+}
+
+form[data-formname="hero"] input::placeholder,
+form[data-formname="hero"] textarea::placeholder,
+form[data-formname="hero"] select::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) input::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) textarea::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) select::placeholder {
+  font-size: 14px !important;
+}
+
+form[data-formname="hero"] label,
+form[data-formname="hero"] .global-input-label,
+form[data-formname="hero"] .form-field-label,
+form[data-formname="hero"] .form-group-label,
+form:has(input[name="form_name"][data-prefill="hero"]) label,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-input-label,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-field-label,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-group-label {
+  font-size: 14px !important;
+}
+
+form[data-formname="hero"] span,
+form[data-formname="hero"] p,
+form[data-formname="hero"] div,
+form:has(input[name="form_name"][data-prefill="hero"]) span,
+form:has(input[name="form_name"][data-prefill="hero"]) p,
+form:has(input[name="form_name"][data-prefill="hero"]) div {
+  line-height: inherit;
+}
+
+form[data-formname="hero"] p>span>strong,
+form:has(input[name="form_name"][data-prefill="hero"]) p>span>strong {
+  line-height: 16px !important;
+}
+
+form[data-formname="hero"] .global-text.text-component,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-text.text-component {
+  line-height: 16px !important;
+}
+
+form[data-formname="hero"] .global-text.text-component p,
+form[data-formname="hero"] .global-text.text-component span,
+form[data-formname="hero"] .global-text.text-component strong,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-text.text-component p,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-text.text-component span,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-text.text-component strong {
+  line-height: 16px !important;
+}
+
+/* =====================================================
+   Submit Button Styling for Hero Form
+   ===================================================== */
+
+/* Submit button font size 14px */
+form[data-formname="hero"] .submit-button,
+form:has(input[name="form_name"][data-prefill="hero"]) .submit-button {
+  font-size: 0.925rem !important;
+  margin-top: 0px !important;
+  padding: 6px 12px !important;
+}
+
+/* Responsive submit button font sizes */
+@media (max-width: 768px) {
+  form[data-formname="hero"] .submit-button,
+  form:has(input[name="form_name"][data-prefill="hero"]) .submit-button {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  form[data-formname="hero"] .submit-button,
+  form:has(input[name="form_name"][data-prefill="hero"]) .submit-button {
+    font-size: 11px;
+  }
+}
+
+/* =====================================================
+   Phone Number Field Styling
+   ===================================================== */
+/* Style hero phone number field to look like paragraph tag - no input allowed */
+form[data-formname="hero"] input[name="hero_phone_number"],
+form[data-formname="hero"] textarea[name="hero_phone_number"],
+form[data-formname="hero"] select[name="hero_phone_number"],
+form:has(input[name="form_name"][data-prefill="hero"]) input[name="hero_phone_number"],
+form:has(input[name="form_name"][data-prefill="hero"]) textarea[name="hero_phone_number"],
+form:has(input[name="form_name"][data-prefill="hero"]) select[name="hero_phone_number"] {
+  /* Make it look like <p> tag */
+  background: transparent url('/assets/icons/cws_phone_icon.svg') no-repeat left center !important;
+  background-size: 20px 20px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: inherit !important;
+  font-family: suisse_intlregular, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+  text-align: inherit !important;
+  letter-spacing: inherit !important;
+  word-spacing: inherit !important;
+  padding-left: 24px !important;
+  /* Disable all input functionality */
+  cursor: pointer !important;
+  display: block !important;
+  height: 28px !important;
+  hyphens: manual !important;
+  resize: none !important;
+
+  /* Remove all focus indicators */
+  &:focus,
+  &:active,
+  &:hover {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+
+  }
+
+  /* Remove browser defaults */
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+
+  /* Positioning */
+  position: absolute;
+  bottom: 0px;
+}
+
+/* Push phone number field to bottom of form container */
+form[data-formname="hero"] .landing-page-row:has(input[name="hero_phone_number"]),
+form[data-formname="hero"] .landing-page-row:has(textarea[name="hero_phone_number"]),
+form[data-formname="hero"] .landing-page-row:has(select[name="hero_phone_number"]),
+form:has(input[name="form_name"][data-prefill="hero"]) .landing-page-row:has(input[name="hero_phone_number"]),
+form:has(input[name="form_name"][data-prefill="hero"]) .landing-page-row:has(textarea[name="hero_phone_number"]),
+form:has(input[name="form_name"][data-prefill="hero"]) .landing-page-row:has(select[name="hero_phone_number"]) {
+  border-width: 0px !important;
+}
+
+/* Remove borders from hero phone number input field and all focus states */
+form[data-formname="hero"] input[name="hero_phone_number"],
+form[data-formname="hero"] input[name="hero_phone_number"]:focus,
+form[data-formname="hero"] .global-input-wrapper.form-input-wrapper-div:has(input[name="hero_phone_number"]),
+form[data-formname="hero"] .global-input-wrapper.form-input-wrapper-div:has(input[name="hero_phone_number"]):focus-within,
+form:has(input[name="form_name"][data-prefill="hero"]) input[name="hero_phone_number"],
+form:has(input[name="form_name"][data-prefill="hero"]) input[name="hero_phone_number"]:focus,
+form:has(input[name="form_name"][data-prefill="hero"]) .global-input-wrapper.form-input-wrapper-div:has(input[name="hero_phone_number"]),
+form:has(input[name="form_name"][data-prefill="hero"]) .global-input-wrapper.form-input-wrapper-div:has(input[name="hero_phone_number"]):focus-within {
+  border-width: 0px !important;
+}
+
+/* =====================================================
+   Error States & Validation
+   ===================================================== */
+/* Set error container font size to 12px for the specific form */
+form[data-formname="hero"] .cws-error-container,
+form:has(input[name="form_name"][data-prefill="hero"]) .cws-error-container {
+  font-size: 12px !important;
+  margin-top: 0px !important;
+  color: rgb(102, 102, 102) !important;
+}
+
+/* Override border bottom color and width for all input fields in the specific form */
+form[data-formname="hero"] .form-input-wrapper-div,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-div {
+  border-bottom-color: rgb(235, 235, 235) !important;
+  border-bottom-width: 0.1px !important;
+}
+
+/* Reduce padding-bottom for input fields in hero form */
+form[data-formname="hero"] .form-input-wrapper-element,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-element {
+  padding-bottom: 0px !important;
+}
+
+/* Reduce padding-bottom for text input components in hero form */
+form[data-formname="hero"] .component.shared-input-field.required-component.text_input-component,
+form[data-formname="hero"] .component.shared-input-field.required-component.email_input-component,
+form:has(input[name="form_name"][data-prefill="hero"]) .component.shared-input-field.required-component.text_input-component,
+form:has(input[name="form_name"][data-prefill="hero"]) .component.shared-input-field.required-component.email_input-component {
+  padding-bottom: 0px !important;
+}
+
+/* Align checkbox field labels to start in hero form */
+form[data-formname="hero"] .cws-form .checkbox-field label,
+.main-form-wrapper[data-formname="hero"] .checkbox-field label,
+form:has(input[name="form_name"][data-prefill="hero"]) .cws-form .checkbox-field label,
+.main-form-wrapper:has(form input[name="name"][data-prefill="hero"]) .checkbox-field label {
+  display: block !important;
+}
+
+/* Add margin-top: 8px specifically for checkbox inputs in hero form */
+form[data-formname="hero"] input[type="checkbox"],
+form:has(input[name="form_name"][data-prefill="hero"]) input[type="checkbox"] {
+  margin-top: 0 !important;
+}
+
+form[data-formname="hero"] .cws-form .checkbox-field .global-checkbox-element,
+.main-form-wrapper[data-formname="hero"] .checkbox-field .global-checkbox-element,
+form:has(input[name="form_name"][data-prefill="hero"]) .cws-form .checkbox-field .global-checkbox-element,
+.main-form-wrapper:has(form input[name="name"][data-prefill="hero"]) .checkbox-field .global-checkbox-element {
+  vertical-align: top !important;
+  margin-right: 12px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.lp-flex-container {
+  position: unset !important;
+}
+form[data-formname="hero"] .lp-flex-container,
+form:has(input[name="form_name"][data-prefill="hero"]) .lp-flex-container {
+  position: unset !important;
+  margin-top: 4px !important;
+
+}
+/* Prevent border-bottom color change on focus for the specific form */
+form[data-formname="hero"] .form-input-wrapper-div:focus-within,
+form[data-formname="hero"] .form-input-wrapper-div:focus,
+form[data-formname="hero"] .form-input-wrapper-div:has(input:focus),
+form[data-formname="hero"] .form-input-wrapper-div:has(textarea:focus),
+form[data-formname="hero"] .form-input-wrapper-div:has(select:focus),
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-div:focus-within,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-div:focus,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-div:has(input:focus),
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-div:has(textarea:focus),
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-div:has(select:focus) {
+  border-bottom-color: rgb(235, 235, 235) !important;
+  border-bottom-width: 1px !important;
+}
+
+/* Make placeholder text red when error occurs in the specific form */
+form[data-formname="hero"] .form-input-wrapper-element.has-error input::placeholder,
+form[data-formname="hero"] .form-input-wrapper-element.has-error textarea::placeholder,
+form[data-formname="hero"] .form-input-wrapper-element.has-error select::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-element.has-error input::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-element.has-error textarea::placeholder,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-element.has-error select::placeholder {
+  color: #f03434 !important;
+}
+
+/* =====================================================
+   Mobile Responsive
+   ===================================================== */
+/* =====================================================
+   Dynamic Field Padding Fix
+   ===================================================== */
+/* Remove extra padding from dynamically added fields in hero form - preserve existing styles */
+form[data-formname="hero"] .component.shared-input-field.text_input-component,
+form[data-formname="hero"] .component.shared-input-field.email_input-component,
+form[data-formname="hero"] .component.shared-input-field.required-component.text_input-component,
+form[data-formname="hero"] .component.shared-input-field.required-component.email_input-component,
+form:has(input[name="form_name"][data-prefill="hero"]) .component.shared-input-field.text_input-component,
+form:has(input[name="form_name"][data-prefill="hero"]) .component.shared-input-field.email_input-component,
+form:has(input[name="form_name"][data-prefill="hero"]) .component.shared-input-field.required-component.text_input-component,
+form:has(input[name="form_name"][data-prefill="hero"]) .component.shared-input-field.required-component.email_input-component {
+  /* Only remove problematic extra padding, preserve existing margin-bottom from common.css */
+  padding: 0 0 15px 0 !important;
+  margin-top: 0 !important;
+  /* Keep margin-bottom: 22px from common.css for consistent spacing */
+}
+
+/* Specifically target the customer number field and any dynamically added text input fields */
+form[data-formname="hero"] .component.shared-input-field.text_input-component[id*="text_input"],
+form[data-formname="hero"] .component.shared-input-field.required-component.text_input-component[id*="text_input"],
+form:has(input[name="form_name"][data-prefill="hero"]) .component.shared-input-field.text_input-component[id*="text_input"],
+form:has(input[name="form_name"][data-prefill="hero"]) .component.shared-input-field.required-component.text_input-component[id*="text_input"] {
+  /* Only remove problematic extra padding, preserve existing margin-bottom from common.css */
+  padding: 0 0 8px 0 !important;
+  margin-top: 0 !important;
+  /* Keep margin-bottom: 22px from common.css for consistent spacing */
+}
+
+/* Remove padding from form input wrapper elements in dynamically added fields - preserve other styles */
+form[data-formname="hero"] .form-input-wrapper-element,
+form[data-formname="hero"] .form-input-wrapper-element.lp-flex-container,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-element,
+form:has(input[name="form_name"][data-prefill="hero"]) .form-input-wrapper-element.lp-flex-container {
+  /* Only remove problematic extra padding, preserve existing margin-bottom from common.css */
+  padding: 0 0 8px 0 !important;
+  margin-top: 0 !important;
+  /* Keep margin-bottom: 22px from common.css for consistent spacing */
+}

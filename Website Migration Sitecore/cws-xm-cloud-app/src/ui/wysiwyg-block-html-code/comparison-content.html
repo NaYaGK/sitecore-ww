@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWS Comparison Component Snippet</title>
+    <style>
+        /* Base Styles - Emulating CWS Global Styles */
+        html {
+            font-size: 100%; /* Reset to default */
+        }
+
+        :root {
+            --cws-font-family: "Suisse Intl", Helvetica, Arial, sans-serif;
+            --cws-primary-black: #000000;
+            --cws-bg-cream: #fef9db; /* Cream color for left side */
+            --cws-bg-white: #ffffff;
+            --cws-text-grey: #666666;
+            --cws-yellow: #f9e244;
+        }
+
+        body {
+            font-family: var(--cws-font-family);
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* Comparison Component Styles */
+        .paragraph--type--comparison {
+            position: relative;
+            z-index: 1;
+            background-color: var(--cws-bg-cream); /* Overall background set to cream */
+            overflow: hidden;
+            padding: 0px;
+        }
+
+        /* Container centering */
+        .paragraph--type--comparison .container {
+            max-width: 1360px;
+            margin: 0 auto;
+            
+        }
+
+        /* Flex layout for items */
+        .comparison-content--items {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: stretch;
+            position: relative;
+        }
+
+        /* Content Sections (Left & Right) */
+        .comparison-content--left,
+        .comparison-content--right {
+            flex: 0 0 34%;
+            width: 34%;
+            box-sizing: border-box;
+            padding-top: 70px;
+            padding-bottom: 85px;
+            position: relative;
+            padding: 0 15px;
+        }
+
+        .comparison-content--left {
+            padding-right: 37px;
+        }
+
+        .comparison-content--right {
+            padding-left: 37px;
+        }
+
+        /* Bleeding backgrounds (Consolidated) */
+        .comparison-content--left:before,
+        .comparison-content--right:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+            height: 100%;
+            width: 50vw;
+            opacity: 1;
+        }
+
+        .comparison-content--left:before {
+            right: 0;
+            left: 0;
+            margin-left: calc((-100vw + 100%) / 2);
+            background-color: var(--cws-bg-cream);
+        }
+
+        .comparison-content--right:before {
+            left: 0;
+            right: 0;
+            margin-right: calc((-100vw + 100%) / 2);
+            background-color: var(--cws-yellow);
+        }
+
+        /* Image Section */
+        .comparison-image {
+            flex: 0 0 32%;
+            width: 32%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding-right: 0;
+            position: relative;
+            background: linear-gradient(to right, var(--cws-bg-cream) 50%, var(--cws-yellow) 50%);
+        }
+
+        .comparison-image img {
+            max-width: 450px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        .paragraph--type--comparison h2 {
+            font-size: 27px;
+            line-height: 34px;
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: 700;
+            color: var(--cws-primary-black);
+        }
+
+        .paragraph--type--comparison p {
+            font-size: 16px;
+            line-height: 24px;
+            margin-top: 5px;
+            margin-bottom: 23px;
+            
+        }
+
+        /* Highlight Items (User labeled as 'p' in request point 2) */
+        .comparison-highlight-item {
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 1.4;
+            margin-top: 14px;
+            padding: 0 0 13px 33px;
+            position: relative;
+            border-bottom: 2px solid #000;
+            color: var(--cws-primary-black);
+        }
+
+        .comparison-highlight-item:first-child {
+            margin-top: 0;
+        }
+
+        .comparison-highlight-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        /* Checkmark Icon */
+        .comparison-highlight-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -1px;
+            width: 25px;
+            height: 25px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1023px) {
+            .comparison-content--items {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+            }
+
+            .comparison-content--left,
+            .comparison-content--right,
+            .comparison-image {
+                flex: 0 0 100%;
+                width: 100%;
+                padding: 20px 0;
+                text-align: left;
+            }
+
+            .comparison-image img {
+                width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                height: auto;
+            }
+
+            .comparison-content--left {
+                padding-right: 0;
+                margin: 0;
+                padding: 0 8px;
+                width: 100%;
+            }
+
+            .comparison-content--right {
+                
+                margin: 0;
+                padding: 0 8px;
+                width: 100%;
+            }
+
+            .comparison-highlight-item {
+                text-align: left;
+                max-width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .comparison-image {
+                order: 0; /* Middle */
+                margin-bottom: 0;
+                background: linear-gradient(to bottom, var(--cws-bg-cream) 50%, var(--cws-yellow) 50%);
+            }
+
+            .comparison-content--left {
+                order: -1; /* Top */
+                padding-right: 0;
+                background-color: var(--cws-bg-cream);
+            }
+
+            .comparison-content--right {
+                order: 1; /* Bottom */
+                
+                background-color: var(--cws-yellow);
+            }
+
+            .comparison-content--left:before,
+            .comparison-content--right:before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="paragraph paragraph--type--comparison workwear">
+        <div class="container">
+            <div class="comparison-content--items">
+                
+                <!-- Left Content -->
+                <div class="comparison-content--left">
+                    <h2>Was wir bieten</h2>
+                    <p>Nachhaltigkeit auf ganzer Linie</p>
+                    
+                    <div class="comparison-highlight-item">Nachhaltige Kleidung & nachhaltiger Service</div>
+                    <div class="comparison-highlight-item">Hautfreundliche Textilien</div>
+                    <div class="comparison-highlight-item">Langlebige Materialien</div>
+                    <div class="comparison-highlight-item">Ressourcenschonende Pflege</div>
+                    <div class="comparison-highlight-item">Nachweislich sozial- und umweltverträgliche Produktion</div>
+                    <div class="comparison-highlight-item">Umweltschonende Wäsche, Schmutz wie Öle und Fette gelangen nicht ins Abwasser</div>
+                </div>
+
+                <!-- Center Image -->
+                <div class="comparison-image">
+                    <picture>
+                        <source srcset="https://www.cws.com/sites/default/files/styles/photoswipe/public/2021-12/_d6z7322.jpg.webp?itok=dlIXZjFi 1x" media="all and (min-width: 1024px)" type="image/webp">
+                        <source srcset="https://www.cws.com/sites/default/files/styles/photoswipe_600_x_/public/2021-12/_d6z7322.jpg.webp?itok=AAqyAGHE 1x" media="all and (min-width: 550px) and (max-width: 1023px)" type="image/webp">
+                        <img loading="eager" src="https://www.cws.com/sites/default/files/styles/photoswipe_600_x_/public/2021-12/_d6z7322.jpg.webp?itok=AAqyAGHE" alt="Fairtrade-Urkunde">
+                    </picture>
+                </div>
+
+                <!-- Right Content -->
+                <div class="comparison-content--right">
+                    <h2>Das haben Sie davon</h2>
+                    <p>Mit CWS Workwear</p>
+                    
+                    <div class="comparison-highlight-item">Optimierung der Nachhaltigkeit Ihres Unternehmens durch CWS als nachhaltigen Lieferanten</div>
+                    <div class="comparison-highlight-item">Fairtrade-Urkunde bei Wahl einer Fairtrade-Kollektion</div>
+                    <div class="comparison-highlight-item">Angenehmer Komfort</div>
+                    <div class="comparison-highlight-item">Weniger Ersatz dank Langlebigkeit</div>
+                    <div class="comparison-highlight-item">Sicherheit durch verantwortungsvolle Lieferkette</div>
+                    <div class="comparison-highlight-item">Sicherheit durch professionelle Aufbereitung der Kleidung</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

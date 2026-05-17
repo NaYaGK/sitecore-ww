@@ -1,0 +1,23 @@
+﻿---
+ID: "197a5ab1-4ccb-4672-a9d1-391ef8c0d7d1"
+Parent: "3b893c24-e914-4e55-9c7f-cc1b090699b3"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Project/Workwear/Page Content/Workwear Collections Teaser Grids/Workwear Collections Teaser Grids/Content
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T220000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "843773f2-f975-46c1-b572-8a4044d37644"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260206T045937Z

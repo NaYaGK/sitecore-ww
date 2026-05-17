@@ -1,0 +1,43 @@
+trigger: none
+
+pr:
+  branches:
+    include:
+      - main
+      - staging
+      - develop
+      - feature/*
+      - release/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: AI-Code-Review-Secrets
+  - name: pythonVersion
+    value: '3.11'
+
+steps:
+- checkout: self
+  fetchDepth: 0
+  persistCredentials: true
+
+- task: UsePythonVersion@0
+  displayName: 'Use Python $(pythonVersion)'
+  inputs:
+    versionSpec: '$(pythonVersion)'
+    addToPath: true
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install anthropic requests
+  displayName: 'Install Dependencies'
+
+- script: |
+    python scripts/claude_pr_review.py
+  displayName: 'Run Claude Code Review'
+  condition: eq(variables['Build.Reason'], 'PullRequest')
+  env:
+    ANTHROPIC_API_KEY: $(ANTHROPIC_API_KEY)
+    AZURE_DEVOPS_PAT: $(AZURE_DEVOPS_PAT)
+  continueOnError: true

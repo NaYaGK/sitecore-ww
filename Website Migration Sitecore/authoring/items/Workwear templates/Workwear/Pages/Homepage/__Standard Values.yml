@@ -1,0 +1,48 @@
+﻿---
+ID: "e6ad87b1-c6f0-420c-8b35-e864cb3b9913"
+Parent: "53f38fd0-f88d-4e79-9990-deea7e8b139c"
+Template: "53f38fd0-f88d-4e79-9990-deea7e8b139c"
+Path: /sitecore/templates/Project/Workwear/Pages/Homepage/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: |
+    {2A21DA99-42DE-492A-BCBE-251761F3614E}
+    {C14B6289-8AC2-439C-9E5B-40DE9F820C3F}
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "63785c52-84ce-479c-9d21-2e235628a200"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        <p
+          uid="{099FD2F1-B57D-4D05-A700-C1F2BA8329A6}"
+          key="headless-main"
+          md="{8E7FC6F3-B3DB-4529-9141-F341013DB99E}" />
+      </d>
+    </r>
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251115T191245Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "7cdd6735-860d-420a-b175-29cd5310837b"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260217T101103Z

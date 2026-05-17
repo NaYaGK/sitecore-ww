@@ -1,0 +1,41 @@
+﻿---
+ID: "6a2af654-1961-4d5c-99a7-8f340da8c6e3"
+Parent: "3c1b553e-8c0f-4e40-9ff6-c89451120d76"
+Template: "a68a6d3d-fb2b-4e27-9653-8a71c53e48de"
+Path: /sitecore/templates/Project/Workwear/Page Content/Contact Form Banner/ContactFormBannerFolder/__Standard Values
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: applications/16x16/preferences.png
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{B7833869-FEA2-4D8B-BC68-1B6FCDD2E236}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "45cf10c4-6f40-4d6b-839c-5a2b69d5b013"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251202T051527Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "7e0983ca-2151-41c0-90fa-52ba204016aa"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251202T135719Z

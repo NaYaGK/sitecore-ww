@@ -1,0 +1,41 @@
+﻿---
+ID: "fb3b8de9-7f1f-47ee-b888-d77e88eae6be"
+Parent: "f08665f6-6f0c-4e2d-ad11-217622a423a6"
+Template: "f08665f6-6f0c-4e2d-ad11-217622a423a6"
+Path: /sitecore/templates/Project/Workwear/Page Content/Text Highlight/TextHighlightFolder/__Standard Values
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: WordProcessing/32x32/align_right.png
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{A84EA48C-7BD4-4A20-A289-E3F3F22EFFD2}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "14a4297d-7b34-40e2-bbe3-0d0234d1e6bc"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251202T132912Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "7aea4308-0e65-45a2-9a25-de31aaa865ad"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251202T133021Z

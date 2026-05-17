@@ -1,0 +1,41 @@
+﻿---
+ID: "9f00a51e-85fe-44d4-a8b1-95a24bd69a4c"
+Parent: "c1ccbd5a-d7b4-426c-bb0c-75ea51b8282f"
+Template: "c1ccbd5a-d7b4-426c-bb0c-75ea51b8282f"
+Path: /sitecore/templates/Project/Workwear/Page Content/Videos Player/Video Player/__Standard Values
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: multimedia/32x32/new_video.png
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{A84EA48C-7BD4-4A20-A289-E3F3F22EFFD2}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "3df70f27-a00e-4cd3-b78e-84068ee866e4"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251201T184353Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "34193d17-470c-4e54-a21d-784480ead379"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251205T055914Z

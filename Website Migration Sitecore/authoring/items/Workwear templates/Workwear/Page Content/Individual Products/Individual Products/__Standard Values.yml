@@ -1,0 +1,38 @@
+﻿---
+ID: "b81a288f-c417-469f-8cf0-9f34ff485cbc"
+Parent: "667e46d8-320d-4cfd-b71e-4a4a2bdbf236"
+Template: "667e46d8-320d-4cfd-b71e-4a4a2bdbf236"
+Path: /sitecore/templates/Project/Workwear/Page Content/Individual Products/Individual Products/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{02E5A786-6A23-4F2B-A43B-3167209772A8}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "febb15f3-32ac-4db5-9c00-b1990c861701"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251201T110151Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "322118e5-511a-40b4-ae97-e42d699c6742"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260113T203842Z

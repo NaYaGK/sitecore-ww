@@ -1,0 +1,90 @@
+﻿---
+ID: "f4fa263c-5592-497f-bac5-717f9dd4d398"
+Parent: "ff953dcb-6c9e-413f-acfd-ff025474ae27"
+Template: "04646a89-996f-4ee7-878a-ffdbf1f0ef0d"
+Path: /sitecore/layout/Renderings/Project/cws/Breadcrumb/Breadcrumb
+SharedFields:
+- ID: "037fe404-dd19-4bf7-8e30-4dadf68b27b0"
+  Hint: componentName
+  Value: Breadcrumb
+- ID: "069a8361-b1cd-437c-8c32-a3be78941446"
+  Hint: Placeholders
+  Value: "{8E7FC6F3-B3DB-4529-9141-F341013DB99E}"
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: applications/32x32/bullet_triangle_green.png
+- ID: "17bb046a-a32a-41b3-8315-81217947611b"
+  Hint: ComponentQuery
+  Value: |
+    query BreadcrumbQuery($contextItem: String!, $language: String!) {
+      contextItem: item(path: $contextItem, language: $language) {
+        id
+        name
+        displayName
+        url { path }
+    
+        linkCaption: field(name: "Link caption in navigation") { value }
+        navigationTitle: field(name: "NavigationTitle") { value }
+        title: field(name: "Title") { value }
+    
+        ancestors(hasLayout: true) {
+          id
+          name
+          displayName
+          url { path }
+    
+          linkCaption: field(name: "Link caption in navigation") { value }
+          navigationTitle: field(name: "NavigationTitle") { value }
+          title: field(name: "Title") { value }
+        }
+      }
+    }
+- ID: "b0b15510-b138-470e-8f33-8da2e228aafe"
+  Hint: Rendering Contents Resolver
+  Value: "{2F5C334E-5615-423C-8281-9FC180191302}"
+- ID: "b4bbc0be-7619-4678-b2f7-947d84aa77a9"
+  Hint: Content Dependencies
+  Value: |
+    {CF1FF438-35EF-4C9D-A365-CFD60A794DCB}
+    {E548CD8C-BCF7-46F6-A576-B1DCFAD66062}
+    {15F0229E-41E0-442B-94C5-243CBA793465}
+    {07BB8ABE-7A1D-4AF2-B7D6-BF5140AAAF21}
+    {5E13EE6F-522F-41CA-8929-AEE8EE103862}
+    {B0B5B0CD-6445-4FAE-A989-6CA9C50CC29A}
+    {A0E6ACDE-987D-49EC-9503-85FD995DE19E}
+- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
+  Hint: Datasource Location
+  Value: /sitecore/content/cws/cws/Data
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "f50ad346-85f9-4b35-bc1e-ce089c4dc296"
+Languages:
+- Language: en
+  Fields:
+  - ID: "30e85e5d-e00a-4864-b358-7624d511deb4"
+    Hint: __Unversioned revision
+    Value: "cce3861d-c1be-4233-91f8-a13d3478326a"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251209T134640Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "263a1577-ce81-47b7-9f25-42bf51e5434e"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260312T040055Z

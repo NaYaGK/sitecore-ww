@@ -1,0 +1,16 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="background: transparent;">
+  <!-- Washing Machine Icon -->
+  <!-- Main body -->
+  <rect x="25" y="20" width="70" height="80" rx="4" stroke="currentColor" stroke-width="3" fill="none"/>
+  <!-- Control panel top -->
+  <rect x="30" y="25" width="60" height="15" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+  <!-- Buttons -->
+  <circle cx="40" cy="32.5" r="3" fill="currentColor"/>
+  <circle cx="52" cy="32.5" r="3" fill="currentColor"/>
+  <!-- Door/Window circle -->
+  <circle cx="60" cy="65" r="25" stroke="currentColor" stroke-width="3" fill="none"/>
+  <!-- Inner circle (glass) -->
+  <circle cx="60" cy="65" r="18" stroke="currentColor" stroke-width="2" fill="none"/>
+  <!-- Water swirl effect -->
+  <path d="M 52 65 Q 60 60, 68 65 T 52 70" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+</svg>

@@ -1,0 +1,31 @@
+﻿---
+ID: "f915a418-b824-4ec3-a83a-ab78c8e6b863"
+Parent: "03162975-4e68-4ce1-8478-9b87d22eeba2"
+Template: "03162975-4e68-4ce1-8478-9b87d22eeba2"
+Path: /sitecore/templates/Project/Workwear/Page Content/Slider Component/Slide Item/__Standard Values
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251204T095643Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "3d80efb0-bd0e-4368-97fb-6e7a6a1b8cce"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251204T095643Z

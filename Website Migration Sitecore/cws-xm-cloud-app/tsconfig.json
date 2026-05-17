@@ -1,0 +1,64 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@components_codex/*": ["./src/components_codex/*"],
+      "@components_claude/*": ["./src/components_claude/*"],
+      "@/components/*": ["./src/components_codex/*"],
+      "@/components_claude/*": ["./src/components_claude/*"],
+      "src/byoc": ["./byoc"],
+      "byoc": ["./byoc"],
+      "sitecore.config": ["./sitecore.config.ts"],
+      "next.config": ["./next.config.ts"],
+      "@sitecore/component-map": ["./.sitecore/component-map.ts"]
+    },
+    "jsx": "preserve",
+    "types": [
+      "@types/node"
+    ],
+    "noEmit": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    ".storybook",
+    "next-env.d.ts",
+    "next.config.d.ts",
+    "next.config.ts",
+    "playwright.config.ts",
+    "src",
+    ".sitecore",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/components_claude",
+    "src/components_codex",
+    "src/mocks",
+    "src/story-book"
+  ]
+}

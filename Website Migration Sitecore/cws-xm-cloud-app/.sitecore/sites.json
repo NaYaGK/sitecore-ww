@@ -1,0 +1,29 @@
+[
+  {
+    "name": "cws",
+    "hostName": "stage-sc.cws.com|xmc-cwsinternatcacc-cws0400-stagingc957.sitecorecloud.io",
+    "language": "en",
+    "includeProductUrlInSitemap": false
+  },
+  {
+    "name": "workwear",
+    "hostName": "stage-sc-workwear.cws.com|xmc-cwsinternatcacc-cws0400-stagingc957.sitecorecloud.io",
+    "language": "en",
+    "virtualFolder": "/workwear",
+    "includeProductUrlInSitemap": true
+  },
+  {
+    "name": "healthcare",
+    "hostName": "stage-sc-healthcare.cws.com|xmc-cwsinternatcacc-cws0400-stagingc957.sitecorecloud.io",
+    "language": "en",
+    "virtualFolder": "/healthcare",
+    "includeProductUrlInSitemap": false
+  },
+  {
+    "name": "hygiene",
+    "hostName": "stage-sc-hygiene.cws.com|xmc-cwsinternatcacc-cws0400-stagingc957.sitecorecloud.io",
+    "language": "en",
+    "virtualFolder": "/hygiene",
+    "includeProductUrlInSitemap": false
+  }
+]

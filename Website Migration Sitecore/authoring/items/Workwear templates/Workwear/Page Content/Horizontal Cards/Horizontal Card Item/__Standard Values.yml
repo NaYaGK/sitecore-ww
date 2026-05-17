@@ -1,0 +1,38 @@
+﻿---
+ID: "468fc538-706d-41c5-a864-9a2c2905c853"
+Parent: "3912d7b2-815e-4a47-9103-e896c9f37332"
+Template: "3912d7b2-815e-4a47-9103-e896c9f37332"
+Path: /sitecore/templates/Project/Workwear/Page Content/Horizontal Cards/Horizontal Card Item/__Standard Values
+SharedFields:
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "a48d4db2-d809-42ed-99e8-bcee5ce5b7fa"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251201T162601Z
+    - ID: "37a4cb0f-a860-4f6a-bc13-14988bb8ac90"
+      Hint: Image Left Position
+      Value: 1
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "b6b0afe0-7264-409d-b9f4-a9eb2eed6b57"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251204T125411Z

@@ -1,0 +1,41 @@
+﻿---
+ID: "856d1650-9f42-4eac-92dc-044e328b0df9"
+Parent: "76f3bbbf-d064-4e84-83e0-d7fdc9fd4216"
+Template: "76f3bbbf-d064-4e84-83e0-d7fdc9fd4216"
+Path: /sitecore/templates/Project/Workwear/Page Content/Industry Sector Teaser Grid/Industry Sector Teaser Grid Folder/__Standard Values
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: applications/32x32/clipboard_next.png
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{95D98E12-F8CE-455F-A378-0F31BFC73E79}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "e626b658-10f3-4bf7-8457-f285ba64f291"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251202T093826Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "012c4964-c171-4056-a501-56defdf4de26"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251202T093934Z

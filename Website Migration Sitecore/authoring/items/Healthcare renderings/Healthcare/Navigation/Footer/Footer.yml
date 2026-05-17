@@ -1,0 +1,108 @@
+﻿---
+ID: "6769bf60-7fd5-4362-8ef8-6bb803c944ed"
+Parent: "a4d96820-4d44-4c39-ba7c-c380ca6c5f4f"
+Template: "04646a89-996f-4ee7-878a-ffdbf1f0ef0d"
+Path: /sitecore/layout/Renderings/Project/Healthcare/Navigation/Footer/Footer
+SharedFields:
+- ID: "037fe404-dd19-4bf7-8e30-4dadf68b27b0"
+  Hint: componentName
+  Value: Footer
+- ID: "069a8361-b1cd-437c-8c32-a3be78941446"
+  Hint: Placeholders
+  Value: |
+    {84408F1A-F871-4BA8-A934-FA9A69D6913F}
+    {7E8EB5E1-613F-4787-894B-C3744E4E5B67}
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: software/32x32/front.png
+- ID: "17bb046a-a32a-41b3-8315-81217947611b"
+  Hint: ComponentQuery
+  Value: |
+    query FooterQuery($datasource: String!, $language: String!) {
+      datasource: item(path: $datasource, language: $language) {
+        phoneNumber: field(name: "Phone Number") {
+          value
+        }
+        workingHours: field(name: "Working Hours") {
+          value
+        }
+        messageLabel: field(name: "Message Label") {
+          value
+        }
+        pressContact: field(name: "Press Contact") {
+          value
+        }
+        prAgency: field(name: "PR Agency") {
+          value
+        }
+        copyright: field(name: "Copyright") {
+          value
+        }
+        children {
+          results {
+            ...footerContainerFields
+          }
+        }
+      }
+    }
+    
+    fragment footerContainerFields on Item {
+      title: field(name: "Title") {
+        value
+      }
+      children {
+        results {
+           link: field(name: "Link") {
+            link: jsonValue
+          }
+        }
+      }
+    }
+- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
+  Hint: Datasource Template
+  Value: /sitecore/templates/Project/Workwear/Base/Footer/Footer
+- ID: "a77e8568-1ab3-44f1-a664-b7c37ec7810d"
+  Hint: Parameters Template
+  Value: "{5E4ED9BD-D6DB-415A-A911-717CDED10E6E}"
+- ID: "b0b15510-b138-470e-8f33-8da2e228aafe"
+  Hint: Rendering Contents Resolver
+  Value: 
+- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
+  Hint: Datasource Location
+  Value: /sitecore/content/cws/workwear/Data/Footer
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "328310c7-2149-4a35-94e7-0d22c8639e9e"
+- ID: "e829c217-5e94-4306-9c48-2634b094fdc2"
+  Hint: OtherProperties
+  Value: IsRenderingsWithDynamicPlaceholders=true
+Languages:
+- Language: en
+  Fields:
+  - ID: "30e85e5d-e00a-4864-b358-7624d511deb4"
+    Hint: __Unversioned revision
+    Value: "689bd19c-cd52-40fd-9327-e25558f452a1"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251128T154300Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "8c8e95b7-3403-4342-9a57-900768c74270"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260114T120658Z

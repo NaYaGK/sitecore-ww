@@ -1,0 +1,1877 @@
+/* =====================================================
+   CWS Common Form Styles
+   Minimal UI tweaks on top of Sitecore defaults
+
+   USAGE: Apply .cws-form class to form element
+   Sitecore provides base styles, we only tweak:
+   - Font family
+   - Hide limit counter & floating labels
+   - Input border-bottom only
+   - Submit button styling (CWS red pill)
+   ===================================================== */
+
+/* Import hero form specific styles */
+@import './hero-form.css';
+@import './hero-landing-form.css';
+
+
+
+/* Inner row div max-width override */
+.inner-row-div {
+  max-width: 1360px !important;
+
+}
+
+.cws-form .content,
+.main-form-wrapper .content {
+  max-width: 1360px !important;
+  padding: 0px 8px !important;
+}
+
+@media (min-width: 768px) {
+  .cws-form .content,
+  .main-form-wrapper .content {
+    padding: 0px 16px !important;
+  }
+}
+
+/* Generic error state styling - change input text and placeholder color */
+.form-input-wrapper-element.has-error .form-input-element,
+.form-input-wrapper-element.has-error .global-input-element,
+.form-input-wrapper-element.has-error input,
+.form-input-wrapper-element.has-error textarea,
+.form-input-wrapper-element.has-error select {
+  color: #eb0045 !important;
+}
+
+.form-input-wrapper-element.has-error .form-input-element::placeholder,
+.form-input-wrapper-element.has-error .global-input-element::placeholder,
+.form-input-wrapper-element.has-error input::placeholder,
+.form-input-wrapper-element.has-error textarea::placeholder,
+.form-input-wrapper-element.has-error select::placeholder {
+  color: #eb0045 !important;
+}
+
+/* Textarea default styling - vertical resize only */
+.cws-form textarea,
+.main-form-wrapper textarea {
+  resize: vertical !important;
+  min-height: 170px !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  display: block !important;
+  flex: none !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure textarea wrapper doesn't constrain resize */
+.cws-form .form-input-wrapper-div:has(textarea),
+.main-form-wrapper .form-input-wrapper-div:has(textarea),
+.cws-form .global-input-wrapper:has(textarea),
+.main-form-wrapper .global-input-wrapper:has(textarea) {
+  display: block !important;
+  flex: none !important;
+  width: 100% !important;
+}
+
+
+
+/* =====================================================
+   Base Tweaks
+   ===================================================== */
+
+/* Font family override */
+.cws-form input,
+.cws-form textarea,
+.cws-form select,
+.cws-form button,
+.main-form-wrapper input,
+.main-form-wrapper textarea,
+.main-form-wrapper select,
+.main-form-wrapper button {
+  font-family: 'Suisse Intl', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* =====================================================
+   Responsive Typography - Desktop (Default)
+   ===================================================== */
+
+/* Input fields, textarea, select - 18px */
+.cws-form input,
+.cws-form textarea,
+.cws-form select,
+.main-form-wrapper input,
+.main-form-wrapper textarea,
+.main-form-wrapper select {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Input placeholders - 18px */
+.cws-form input::placeholder,
+.cws-form textarea::placeholder,
+.cws-form select::placeholder,
+.main-form-wrapper input::placeholder,
+.main-form-wrapper textarea::placeholder,
+.main-form-wrapper select::placeholder {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Labels - 18px */
+.cws-form label,
+.cws-form .global-input-label,
+.cws-form .form-field-label,
+.cws-form .form-group-label,
+.main-form-wrapper label,
+.main-form-wrapper .global-input-label,
+.main-form-wrapper .form-field-label,
+.main-form-wrapper .form-group-label {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Submit button - 18px */
+.cws-form .submit-button,
+.cws-form button[type="submit"],
+.cws-form input[type="submit"],
+.main-form-wrapper .submit-button,
+.main-form-wrapper button[type="submit"],
+.main-form-wrapper input[type="submit"] {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+/* Container max-width */
+.cws-form .inner-row-div,
+.main-form-wrapper .inner-row-div,
+.cws-form .content,
+.main-form-wrapper .content {}
+
+/* H2 headings - 100% width within 1360px container */
+.cws-form h2,
+.main-form-wrapper h2 {
+  box-sizing: border-box !important;
+  color: rgb(0, 0, 0) !important;
+  display: block !important;
+  font-family: 'Suisse Intl', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  height: auto !important;
+  hyphens: manual !important;
+  line-height: 28px !important;
+  margin-block-end: 0px !important;
+  margin-block-start: 18px !important;
+  margin-bottom: 20px !important;
+  margin-inline-end: 0px !important;
+  margin-inline-start: 0px !important;
+  max-width: 100% !important;
+  text-size-adjust: 100% !important;
+  unicode-bidi: isolate !important;
+  width: 100% !important;
+  word-break: break-word !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+/* H2 headings - mobile view */
+@media (max-width: 768px) {
+
+  .cws-form h2,
+  .main-form-wrapper h2 {
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    line-height: 25px !important;
+    margin-block-end: 20px !important;
+    margin-block-start: 17px !important;
+  }
+}
+
+/* Landing page slot max-width - removed 50% constraint for full width */
+.cws-form .landing-page-slot.lp-flex-container,
+.main-form-wrapper .landing-page-slot {
+  max-width: 100% !important;
+}
+
+/* Override font styles for all heading tags */
+.cws-form h1,
+.main-form-wrapper h1,
+.cws-form h2,
+.main-form-wrapper h2,
+.cws-form h3,
+.main-form-wrapper h3,
+.cws-form h4,
+.main-form-wrapper h4,
+.cws-form h5,
+.main-form-wrapper h5,
+.cws-form h6,
+.main-form-wrapper h6 {
+  font-size: 40px !important;
+  line-height: 48px !important;
+  margin-block-end: 24px !important;
+  font-weight: 700 !important;
+
+}
+
+/* Separate styles for p tags - 18px font size */
+.cws-form p,
+.main-form-wrapper p {
+  font-size: 18px !important;
+  line-height: 24px !important;
+  margin-block-end: 16px !important;
+}
+
+/* Increase height for specific longtext textarea */
+.longtext_inputeed9ff3a2fc540c3a789e8fab64eaadf .form-input-element {
+  height: 170px !important;
+}
+
+/* Increase spacing between input fields - desktop */
+.cws-form .form-input-wrapper-element,
+.main-form-wrapper .form-input-wrapper-element {
+  margin-bottom: 22px !important;
+}
+
+/* Increase spacing for landing page rows - desktop */
+.cws-form .landing-page-row,
+.main-form-wrapper .landing-page-row {
+  margin-bottom: 20px !important;
+}
+
+/* Move entire submit button row and hidden fields above - desktop */
+.cws-form .landing-page-row:has(.submit-button),
+.main-form-wrapper .landing-page-row:has(.submit-button) {
+  margin-top: -48px !important;
+
+}
+
+/* Radio group container spacing */
+.cws-form .radio-group-container,
+.main-form-wrapper .radio-group-container {
+  margin-top: 50px !important;
+  font-size: 18px !important;
+  gap: 100px !important;
+}
+
+/* Remove margin-bottom from first radio wrapper */
+.cws-form .radio-wrapper:first-child,
+.main-form-wrapper .radio-wrapper:first-child {
+  margin-bottom: 0px !important;
+}
+
+/* =====================================================
+   Responsive Typography - Tablet (≤768px)
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+  /* Input fields, textarea, select - 16px */
+  .cws-form input,
+  .cws-form textarea,
+  .cws-form select,
+  .main-form-wrapper input,
+  .main-form-wrapper textarea,
+  .main-form-wrapper select {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  /* Input placeholders - 16px */
+  .cws-form input::placeholder,
+  .cws-form textarea::placeholder,
+  .cws-form select::placeholder,
+  .main-form-wrapper input::placeholder,
+  .main-form-wrapper textarea::placeholder,
+  .main-form-wrapper select::placeholder {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  /* Labels - 16px */
+  .cws-form label,
+  .cws-form .global-input-label,
+  .cws-form .form-field-label,
+  .cws-form .form-group-label,
+  .main-form-wrapper label,
+  .main-form-wrapper .global-input-label,
+  .main-form-wrapper .form-field-label,
+  .main-form-wrapper .form-group-label {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  /* Submit button - 16px */
+  .cws-form .submit-button,
+  .cws-form button[type="submit"],
+  .cws-form input[type="submit"],
+  .main-form-wrapper .submit-button,
+  .main-form-wrapper button[type="submit"],
+  .main-form-wrapper input[type="submit"] {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+
+  /* Headings and paragraphs */
+  .cws-form h1,
+  .main-form-wrapper h1,
+  .cws-form h2,
+  .main-form-wrapper h2,
+  .cws-form h3,
+  .main-form-wrapper h3,
+  .cws-form h4,
+  .main-form-wrapper h4,
+  .cws-form h5,
+  .main-form-wrapper h5,
+  .cws-form h6,
+  .main-form-wrapper h6 {
+    font-size: 30px !important;
+    line-height: 36px !important;
+    margin-block-end: 20px !important;
+    font-weight: 700 !important;
+  }
+
+  /* Mobile styles for p tags - 16px */
+  .cws-form p,
+  .main-form-wrapper p {
+    font-size: 16px !important;
+    line-height: 22px !important;
+    margin-block-end: 14px !important;
+  }
+}
+
+/* =====================================================
+   Responsive Typography - Mobile (≤480px)
+   ===================================================== */
+
+@media (max-width: 480px) {
+
+  /* Input fields, textarea, select - 14px */
+  .cws-form input,
+  .cws-form textarea,
+  .cws-form select,
+  .main-form-wrapper input,
+  .main-form-wrapper textarea,
+  .main-form-wrapper select {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  /* Input placeholders - 14px */
+  .cws-form input::placeholder,
+  .cws-form textarea::placeholder,
+  .cws-form select::placeholder,
+  .main-form-wrapper input::placeholder,
+  .main-form-wrapper textarea::placeholder,
+  .main-form-wrapper select::placeholder {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  /* Labels - 14px */
+  .cws-form label,
+  .cws-form .global-input-label,
+  .cws-form .form-field-label,
+  .cws-form .form-group-label,
+  .main-form-wrapper label,
+  .main-form-wrapper .global-input-label,
+  .main-form-wrapper .form-field-label,
+  .main-form-wrapper .form-group-label {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  /* Submit button - 14px */
+  .cws-form .submit-button,
+  .cws-form button[type="submit"],
+  .cws-form input[type="submit"],
+  .main-form-wrapper .submit-button,
+  .main-form-wrapper button[type="submit"],
+  .main-form-wrapper input[type="submit"] {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  /* Headings - 24px */
+  .cws-form h1,
+  .main-form-wrapper h1 {
+    font-size: 35px !important;
+    line-height: 36px !important;
+    margin-block-end: 16px !important;
+  }
+
+  .cws-form h2,
+  .main-form-wrapper h2,
+  .cws-form h3,
+  .main-form-wrapper h3,
+  .cws-form h4,
+  .main-form-wrapper h4,
+  .cws-form h5,
+  .main-form-wrapper h5,
+  .cws-form h6,
+  .main-form-wrapper h6 {
+    font-size: 24px !important;
+    line-height: 30px !important;
+    margin-block-end: 16px !important;
+  }
+
+  /* Paragraphs - 14px */
+  .cws-form p,
+  .main-form-wrapper p {
+    font-size: 14px !important;
+    line-height: 20px !important;
+    margin-block-end: 12px !important;
+  }
+
+  /* Paragraphs with strong children - 22.5px */
+  .cws-form p:has(> strong:first-child),
+  .main-form-wrapper p:has(> strong:first-child) {
+    font-size: 20px !important;
+    line-height: 24px !important;
+    margin-block-end: 20px !important;
+  }
+}
+
+/* Radio button alignment on mobile - match desktop layout */
+.cws-form .radio-group-container,
+.main-form-wrapper .radio-group-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+}
+
+/* Radio field wrapper with specific classes */
+.cws-form .radio-field.form-input-wrapper-element.lp-flex-container.lp-flex-direction-horizontal.lp-flex-align-center.has-label,
+.main-form-wrapper .radio-field.form-input-wrapper-element.lp-flex-container.lp-flex-direction-horizontal.lp-flex-align-center.has-label {
+  display: flex !important;
+}
+
+.cws-form .radio-field,
+.main-form-wrapper .radio-field {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.cws-form .radio-field label,
+.main-form-wrapper .radio-field label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  margin-left: 4px !important;
+}
+
+.cws-form .radio-field .form-input-wrapper-div,
+.main-form-wrapper .radio-field .form-input-wrapper-div {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Remove padding from global-text text-component */
+.cws-form .global-text.text-component,
+.main-form-wrapper .global-text.text-component {
+  padding: 0 !important;
+}
+
+/* Add margin-bottom to form tags */
+.cws-form form,
+.main-form-wrapper form {
+  margin-bottom: 80px !important;
+}
+
+
+
+.row-slot-wrapper.landing-page-slot {
+  max-width: 100% !important;
+}
+
+/* Row structure type - full width */
+.cws-form [data-structure-type="row"],
+.main-form-wrapper [data-structure-type="row"] {
+  max-width: 100% !important;
+}
+
+/* Flex container justify-content */
+.cws-form .lp-flex-container,
+.main-form-wrapper .lp-flex-container {
+  justify-content: center !important;
+}
+
+/* Row slot wrapper - left aligned */
+.cws-form .row-slot-wrapper.lp-flex-container,
+.main-form-wrapper .row-slot-wrapper.lp-flex-container {
+  justify-content: flex-start !important;
+}
+
+
+
+/* Hide unnecessary elements */
+.cws-form .limit-counter,
+.main-form-wrapper .limit-counter {
+  display: none !important;
+}
+
+/* Hide floating label inside shared-input-field ONLY when data-label-populated="true" */
+.cws-form .shared-input-field .global-input-label.form-field-label[data-label-populated="true"],
+.main-form-wrapper .shared-input-field .global-input-label.form-field-label[data-label-populated="true"] {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Show labels by default (override any previous hide rules) */
+.cws-form .shared-input-field .global-input-label.form-field-label:not([data-label-populated]),
+.main-form-wrapper .shared-input-field .global-input-label.form-field-label:not([data-label-populated]),
+.cws-form .global-input-label.form-field-label:not([data-label-populated]),
+.main-form-wrapper .global-input-label.form-field-label:not([data-label-populated]) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  padding: 0 !important;
+  min-height: 24px !important;
+}
+
+/* Hide label text when data-label-populated="true" exists (keep nested spans visible) */
+.cws-form .global-input-label.form-field-label[data-label-populated="true"]:not(.shared-input-field .global-input-label.form-field-label),
+.main-form-wrapper .global-input-label.form-field-label[data-label-populated="true"]:not(.shared-input-field .global-input-label.form-field-label) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-size: 0 !important;
+  line-height: 1.5 !important;
+
+  padding: 0 !important;
+  min-height: 24px !important;
+}
+
+/* Restore font-size for nested span elements to keep them visible */
+.cws-form .global-input-label.form-field-label[data-label-populated="true"] span,
+.main-form-wrapper .global-input-label.form-field-label[data-label-populated="true"] span {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Hide label for select/multiselect inputs */
+.cws-form .multiselect-input-wrapper .global-input-label.form-field-label,
+.main-form-wrapper .multiselect-input-wrapper .global-input-label.form-field-label,
+.cws-form input[data-type="multiselect_input"]~.global-input-label.form-field-label,
+.main-form-wrapper input[data-type="multiselect_input"]~.global-input-label.form-field-label,
+.cws-form .form-input-wrapper-element:has(input[data-type="multiselect_input"]) .global-input-label.form-field-label,
+.main-form-wrapper .form-input-wrapper-element:has(input[data-type="multiselect_input"]) .global-input-label.form-field-label {
+  display: none !important;
+}
+
+/* =====================================================
+   Input Fields - Border bottom only
+   ===================================================== */
+
+.cws-form .form-input-wrapper-div,
+.main-form-wrapper .form-input-wrapper-div {
+  border: none !important;
+  border-bottom: 1px solid rgb(0, 0, 0) !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0px !important;
+
+}
+
+/* Remove border for radio button wrappers */
+.cws-form input[type="radio"]~.form-input-wrapper-div,
+.main-form-wrapper input[type="radio"]~.form-input-wrapper-div,
+.cws-form .radio-field .form-input-wrapper-div,
+.main-form-wrapper .radio-field .form-input-wrapper-div {
+  border: none !important;
+  border-bottom: none !important;
+}
+
+/* Remove border for checkbox wrappers */
+.cws-form input[type="checkbox"]~.form-input-wrapper-div,
+.main-form-wrapper input[type="checkbox"]~.form-input-wrapper-div,
+.cws-form .checkbox-field .form-input-wrapper-div,
+.main-form-wrapper .checkbox-field .form-input-wrapper-div {
+  border: none !important;
+  border-bottom: none !important;
+}
+
+input {
+  padding-left: 0px !important;
+}
+
+/* Textarea padding-left */
+.cws-form textarea,
+.main-form-wrapper textarea {
+  padding-left: 0px !important;
+}
+
+.cws-form .form-input-wrapper-div:focus-within,
+.main-form-wrapper .form-input-wrapper-div:focus-within {
+  border-bottom-color: #000 !important;
+}
+
+/* Remove focus outline from inputs and wrapper divs */
+.cws-form input:focus,
+.cws-form textarea:focus,
+.cws-form select:focus,
+.main-form-wrapper input:focus,
+.main-form-wrapper textarea:focus,
+.main-form-wrapper select:focus,
+.cws-form .global-input-wrapper.form-input-wrapper-div,
+.cws-form .global-input-wrapper.form-input-wrapper-div:focus-within,
+.main-form-wrapper .global-input-wrapper.form-input-wrapper-div,
+.main-form-wrapper .global-input-wrapper.form-input-wrapper-div:focus-within,
+.global-input-wrapper.form-input-wrapper-div,
+.global-input-wrapper.form-input-wrapper-div:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Normal text color for inputs (not red) */
+.cws-form input,
+.cws-form textarea,
+.cws-form select,
+.main-form-wrapper input,
+.main-form-wrapper textarea,
+.main-form-wrapper select {
+  color: #000 !important;
+}
+
+/* Hide number input spinner/counter icons */
+.cws-form input[type="number"]::-webkit-inner-spin-button,
+.cws-form input[type="number"]::-webkit-outer-spin-button,
+.main-form-wrapper input[type="number"]::-webkit-inner-spin-button,
+.main-form-wrapper input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  margin: 0 !important;
+}
+
+.cws-form input[type="number"],
+.main-form-wrapper input[type="number"] {
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+/* Placeholder font styling */
+.cws-form input::placeholder,
+.cws-form textarea::placeholder,
+.main-form-wrapper input::placeholder,
+.main-form-wrapper textarea::placeholder {
+  font-family: 'Suisse Intl', system-ui, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  color: #666666 !important;
+  opacity: 1 !important;
+}
+
+/* =====================================================
+   Checkbox Styling - Square with sharp edges
+   ===================================================== */
+
+.cws-form input[type="checkbox"],
+.main-form-wrapper input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  border: 1px solid #000 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Checkbox checked state - inner square */
+.cws-form input[type="checkbox"]:checked,
+.main-form-wrapper input[type="checkbox"]:checked {
+  background: transparent !important;
+}
+
+/* Remove default checkmark */
+.cws-form input[type="checkbox"]::before,
+.main-form-wrapper input[type="checkbox"]::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Hide Sitecore checkbox check marker */
+.cws-form .global-checkbox-check-marker.checkbox-check-marker,
+.main-form-wrapper .global-checkbox-check-marker.checkbox-check-marker {
+  display: none !important;
+}
+
+.cws-form input[type="checkbox"]:checked::after,
+.main-form-wrapper input[type="checkbox"]:checked::after {
+  content: '' !important;
+  display: block !important;
+  width: 8px !important;
+  height: 8px !important;
+  background-color: #000 !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* =====================================================
+   Legacy Radio Button Styling (Moved to Hero Form)
+   ===================================================== */
+
+form[data-formid="32337697abb5491ca8f64104b9e569bc-euw"] input[type="radio"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  width: 13px !important;
+  height: 13px !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  position: relative !important;
+  --cws-radio-dot-size: clamp(2px, 0.3vw, 3px);
+}
+
+form[data-formid="32337697abb5491ca8f64104b9e569bc-euw"] input[type="radio"]::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: var(--cws-radio-dot-size) !important;
+  height: var(--cws-radio-dot-size) !important;
+  border-radius: 50% !important;
+  background-color: #a5a0a0 !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  transform-origin: center !important;
+}
+
+form[data-formid="32337697abb5491ca8f64104b9e569bc-euw"] input[type="radio"]:checked::after {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+form[data-formid="32337697abb5491ca8f64104b9e569bc-euw"] input[type="radio"]:hover {
+  cursor: pointer !important;
+}
+
+/* =====================================================
+   Radio Button Styling - Standard HTML Radio Buttons
+   ===================================================== */
+
+.cws-form input[type="radio"],
+.main-form-wrapper input[type="radio"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  position: relative !important;
+  border: 2px solid #000000 !important;
+  --cws-radio-dot-size: 8px;
+}
+
+.cws-form input[type="radio"]::after,
+.main-form-wrapper input[type="radio"]::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: var(--cws-radio-dot-size) !important;
+  height: var(--cws-radio-dot-size) !important;
+  border-radius: 50% !important;
+  background-color: #000000 !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  transform-origin: center !important;
+}
+
+.cws-form input[type="radio"]:checked::after,
+.main-form-wrapper input[type="radio"]:checked::after {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+/* Radio button labels - 18px font size */
+.cws-form .radio-field label,
+.main-form-wrapper .radio-field label,
+.cws-form .global-input-label.form-field-label,
+.main-form-wrapper .global-input-label.form-field-label {
+  font-size: 18px !important;
+}
+
+/* Radio group field styling - target actual structure */
+.cws-form .radio-group-field .global-radio-element,
+.main-form-wrapper .radio-group-field .global-radio-element {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  position: relative !important;
+  border: 2px solid #000000 !important;
+  --cws-radio-dot-size: 8px;
+}
+
+.cws-form .radio-group-field .global-radio-element::after,
+.main-form-wrapper .radio-group-field .global-radio-element::after {
+  content: '' !important;
+  position: absolute !important;
+  top: calc(50% - 1px) !important;
+  left: calc(50% - 1px) !important;
+  width: var(--cws-radio-dot-size) !important;
+  height: var(--cws-radio-dot-size) !important;
+  border-radius: 50% !important;
+  background-color: #000000 !important;
+  transform: translate(-50%, -50%) scale(0) !important;
+  transform-origin: center !important;
+  box-sizing: border-box !important;
+}
+
+.cws-form .radio-group-field .global-radio-element:checked::after,
+.main-form-wrapper .radio-group-field .global-radio-element:checked::after {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+/* Radio group field labels - 18px font size */
+.cws-form .radio-group-field .radio-field .global-input-label.form-field-label,
+.main-form-wrapper .radio-group-field .radio-field .global-input-label.form-field-label {
+  font-size: 18px !important;
+}
+
+/* Cursor pointer on hover for checkbox and radio */
+.cws-form input[type="checkbox"]:hover,
+.cws-form input[type="radio"]:hover,
+.main-form-wrapper input[type="checkbox"]:hover,
+.main-form-wrapper input[type="radio"]:hover {
+  cursor: pointer !important;
+}
+
+/* =====================================================
+   Form Description Text Styling
+   ===================================================== */
+
+.cws-form .global-input-description.form-input-description,
+.main-form-wrapper .global-input-description.form-input-description {
+  display: block !important;
+  margin-top: 1rem !important;
+  padding-bottom: 0px !important;
+  font-family: 'Suisse Intl', sans-serif !important;
+  font-size: 14px !important;
+}
+
+/* =====================================================
+   Form Field Label Styling
+   ===================================================== */
+
+.cws-form .global-input-label.form-field-label,
+.main-form-wrapper .global-input-label.form-field-label {
+  box-sizing: border-box !important;
+  color: rgb(0, 0, 0) !important;
+  cursor: default !important;
+  display: inline !important;
+  height: auto !important;
+  hyphens: manual !important;
+  text-size-adjust: 100% !important;
+  width: auto !important;
+  word-break: break-word !important;
+}
+
+/* Radio group label styling */
+.cws-form .form-group-label,
+.main-form-wrapper .form-group-label {
+  box-sizing: border-box !important;
+  color: rgb(0, 0, 0) !important;
+  display: inline !important;
+  height: auto !important;
+  hyphens: manual !important;
+  margin-bottom: 4px !important;
+  opacity: 1 !important;
+  text-size-adjust: 100% !important;
+  text-wrap-mode: wrap !important;
+  white-space-collapse: collapse !important;
+  width: auto !important;
+  word-break: break-word !important;
+}
+
+/* Checkbox and radio button label alignment */
+.cws-form .checkbox-field label,
+.main-form-wrapper .checkbox-field label,
+.cws-form .radio-field label,
+.main-form-wrapper .radio-field label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+}
+
+/* Keep checkbox/radio control wrapper aligned with label text */
+.cws-form .checkbox-field .form-input-wrapper-div,
+.main-form-wrapper .checkbox-field .form-input-wrapper-div,
+.cws-form .radio-field .form-input-wrapper-div,
+.main-form-wrapper .radio-field .form-input-wrapper-div {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Radio group field spacing */
+.cws-form .radio-group-field,
+.main-form-wrapper .radio-group-field {
+  margin: 7px !important;
+}
+
+/* Radio group container - single row */
+.cws-form .radio-group-container,
+.main-form-wrapper .radio-group-container {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 70px !important;
+}
+
+/* Checkbox group container - single row */
+.cws-form .checkbox-group-container,
+.main-form-wrapper .checkbox-group-container {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 16px !important;
+}
+
+/* Checkbox group field styling */
+.cws-form .checkbox-group-field,
+.main-form-wrapper .checkbox-group-field {
+  padding: 8px !important;
+}
+
+.cws-form .global-field-required.form-field-required,
+.main-form-wrapper .global-field-required.form-field-required {
+  color: rgb(0, 0, 0) !important;
+}
+
+/* Set error container fonts to 12px */
+.cws-form .cws-error-container,
+.main-form-wrapper .cws-error-container {
+  font-size: 12px !important;
+}
+
+/* =====================================================
+   Submit Button - CWS Red Pill
+   ===================================================== */
+
+.cws-form button[type="submit"],
+.cws-form input[type="submit"],
+.cws-form .submit-button,
+.main-form-wrapper button[type="submit"],
+.main-form-wrapper input[type="submit"],
+.main-form-wrapper .submit-button {
+  appearance: none !important;
+  background-color: rgb(235, 0, 69) !important;
+  border: 1.5px solid rgba(0, 0, 0, 0) !important;
+  border-radius: 18px !important;
+  box-sizing: border-box !important;
+  color: rgb(255, 255, 255) !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  font-family: 'Suisse Intl', sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  height: auto !important;
+  hyphens: manual !important;
+  letter-spacing: normal !important;
+  line-height: 28px !important;
+  margin: 24px 0 16px 0 !important;
+  padding: 9px 0 !important;
+  text-align: center !important;
+  text-indent: 0 !important;
+  text-rendering: auto !important;
+  text-shadow: none !important;
+  text-size-adjust: 100% !important;
+  text-transform: none !important;
+  text-wrap-mode: nowrap !important;
+  transition: all 0.1s ease !important;
+  user-select: none !important;
+  white-space-collapse: preserve !important;
+  width: 100% !important;
+  word-break: break-word !important;
+  word-spacing: 0 !important;
+  -webkit-font-smoothing: antialiased !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+@media screen and (max-width: 786px) {
+  .cws-form button[type="submit"],
+.cws-form input[type="submit"],
+.cws-form .submit-button,
+.main-form-wrapper button[type="submit"],
+.main-form-wrapper input[type="submit"],
+.main-form-wrapper .submit-button {
+    width: 50% !important;
+  }
+}
+
+.cws-form button[type="submit"]:hover,
+.cws-form input[type="submit"]:hover,
+.cws-form .submit-button:hover,
+.main-form-wrapper button[type="submit"]:hover,
+.main-form-wrapper input[type="submit"]:hover,
+.main-form-wrapper .submit-button:hover {
+  color: rgb(0, 0, 0) !important;
+}
+
+.cws-form button[type="submit"]:focus,
+.cws-form input[type="submit"]:focus,
+.cws-form .submit-button:focus,
+.main-form-wrapper button[type="submit"]:focus,
+.main-form-wrapper input[type="submit"]:focus,
+.main-form-wrapper .submit-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* =====================================================
+   Contact Form Modal Styles
+   ===================================================== */
+
+/* Hide the contact form by default */
+form:has(input[name="name"][data-prefill="contact_pop_up"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* Close button with transparent background - high specificity */
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .cws-contact-form-modal-close {
+  background: transparent !important;
+  background-image: url(/assets/icons/close.svg) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 50px 50px !important;
+  border: 0px solid #000000 !important;
+  color: #000000 !important;
+  cursor: pointer;
+}
+
+/* Mobile: Smaller close button */
+@media (max-width: 768px) {
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .cws-contact-form-modal-close {
+    background-size: 30px 30px !important;
+  }
+}
+
+/* ===================================================
+   BASE MODAL STYLES - Apply to all screen sizes
+   =================================================== */
+
+body.cws-contact-form-modal-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+/* Modal overlay to prevent background interaction */
+body.cws-contact-form-modal-open::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1099;
+  pointer-events: all;
+}
+
+/* Base modal container - scrollable on ALL screen sizes */
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]),
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+  /* Display & Visibility */
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex-direction: column !important;
+
+  /* Positioning */
+  position: fixed !important;
+  z-index: 1100 !important;
+
+  /* Layout */
+  background: #ffffff !important;
+  border: 1px solid #c5c5c5 !important;
+  border-radius: 0 !important;
+
+  /* CRITICAL: Scrolling - applies to ALL screen sizes */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+
+  /* Flex behavior */
+  flex: none !important;
+  justify-content: flex-start !important;
+
+  /* Font Rendering */
+  -webkit-font-smoothing: antialiased !important;
+}
+
+/* Ensure form-page content flows naturally - ALL screen sizes */
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .form-page {
+  flex: 1 1 auto !important;
+  overflow: visible !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+/* ===================================================
+   RESPONSIVE BREAKPOINTS - Size & Position Only
+   =================================================== */
+
+/* Mobile: Full screen modal */
+@media (max-width: 768px) {
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]),
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    padding: 36px 18px !important;
+    margin: 0 !important;
+  }
+
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .form-page {
+    padding: 72px 0px 0px!important;
+  }
+}
+
+/* Tablet: Centered modal with fixed dimensions */
+@media (min-width: 769px) and (max-width: 1023px) {
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]),
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    left: 50% !important;
+    top: 50% !important;
+    width: 90vw !important;
+    max-width: 700px !important;
+    height: auto !important;
+    max-height: 85vh !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    padding: 48px 36px !important;
+  }
+
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .form-page {
+    padding: 60px 10px !important;
+  }
+}
+
+/* Desktop: 1024px - 1279px */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]),
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    left: 50% !important;
+    top: 50% !important;
+    width: 754px !important;
+    height: auto !important;
+    max-height: 85vh !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    padding: 48px 36px !important;
+  }
+
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .form-page {
+    padding: 80px 10px !important;
+  }
+}
+
+
+/* Large Desktop: 1280px - 1919px */
+@media (min-width: 1280px) and (max-width: 1919px) {
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]),
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    left: 50% !important;
+    top: 50% !important;
+    width: 880px !important;
+    height: auto !important;
+    max-height: 100vh !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    padding: 48px 36px 0px 36px !important;
+  }
+
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .form-page {
+    padding: 80px 10px 0px !important;
+  }
+}
+
+/* Extra Large Desktop: 1920px+ */
+@media (min-width: 1920px) {
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]),
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]).content.lp-flex-container.lp-flex-1.lp-flex-direction-vertical.cws-form {
+    left: 50% !important;
+    top: 50% !important;
+    width: 895px !important;
+    height: auto !important;
+    max-height: 100vh !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    padding: 48px 36px 0px 36px !important;
+  }
+
+  body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .form-page {
+    padding: 80px 10px 0px !important;
+  }
+}
+
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .inner-row-div,
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .border-wrapper,
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .row-slot-wrapper,
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .landing-page-slot,
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .slot-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Reduce radio group margin in modal */
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .radio-group-container {
+  margin-top: 10px !important;
+}
+
+.cws-contact-form-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: #555555;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.cws-contact-form-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1900;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+
+  background: url(/assets/icons/close.svg) no-repeat, #ff4d4d;
+  background-position: center;
+  background-size: 20px 20px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: all 0.2s ease;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+}
+
+.cws-contact-form-modal-close:hover {
+
+
+}
+
+@media (min-width: 1024px) {
+  .cws-contact-form-modal-close {
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background-size: 22px 22px;
+    font-size: 32px;
+  }
+}
+
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) {
+  position: relative;
+}
+
+/* Add pointer cursor to any form element with underline text decoration */
+form[style*="text-decoration: underline"],
+form *[style*="text-decoration: underline"] {
+  cursor: pointer !important;
+}
+
+/* =====================================================
+   Links Styling
+   ===================================================== */
+
+.cws-form a,
+.main-form-wrapper a {
+  text-decoration: underline !important;
+}
+
+.cws-form a:hover,
+.main-form-wrapper a:hover {
+  cursor: pointer !important;
+}
+
+/* Checkbox Links - CWS Red */
+.cws-form .checkbox-field label a,
+.main-form-wrapper .checkbox-field label a {
+  color: #eb0045 !important;
+  text-decoration: underline !important;
+}
+
+/* Large Heading Span Styling */
+.cws-form span[dir="auto"],
+.main-form-wrapper span[dir="auto"] {
+  box-sizing: border-box !important;
+  color: rgb(0, 0, 0) !important;
+  display: inline !important;
+  font-family: 'Suisse Intl', sans-serif !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  height: auto !important;
+  hyphens: manual !important;
+  line-height: 40px !important;
+  text-size-adjust: 100% !important;
+  width: auto !important;
+  word-break: break-word !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+/* Strong Tag Styling */
+.cws-form strong,
+.main-form-wrapper strong {
+  font-family: 'Suisse Intl', sans-serif !important;
+  font-feature-settings: 'calt', 'rlig' !important;
+  font-variation-settings: normal !important;
+  font-weight: 700 !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+/* Paragraph Styling */
+.cws-form p,
+.main-form-wrapper p {
+  height: auto !important;
+  hyphens: manual !important;
+}
+
+/* =====================================================
+   Multiselect Dropdown Styling
+   ===================================================== */
+
+/* Multiselect input wrapper - relative positioning for icon */
+.cws-form .form-input-wrapper-element:has(input[data-type="multiselect_input"]),
+.main-form-wrapper .form-input-wrapper-element:has(input[data-type="multiselect_input"]) {
+  position: relative !important;
+}
+
+/* Multiselect input - transparent background and padding */
+.cws-form input[data-type="multiselect_input"],
+.main-form-wrapper input[data-type="multiselect_input"],
+.cws-form .multiselect-input,
+.main-form-wrapper .multiselect-input {
+  background-color: transparent !important;
+  background: transparent !important;
+  padding-left: 10px !important;
+  padding-right: 40px !important;
+}
+
+/* Hide mdi-menu-down icon */
+.cws-form .mdi-menu-down,
+.main-form-wrapper .mdi-menu-down,
+.cws-form input[data-type="multiselect_input"]~.mdi-menu-down,
+.main-form-wrapper input[data-type="multiselect_input"]~.mdi-menu-down {
+  display: none !important;
+}
+
+/* Chevron icon (from public/assets/icons) */
+.cws-form .form-input-wrapper-element:has(input[data-type="multiselect_input"])::after,
+.main-form-wrapper .form-input-wrapper-element:has(input[data-type="multiselect_input"])::after {
+  content: '' !important;
+  position: absolute !important;
+  right: 12px !important;
+  top: 30% !important;
+  width: 16px !important;
+  height: 16px !important;
+  background-image: url('/assets/icons/chevron-right.svg') !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  transform: translateY(-50%) rotate(90deg) !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+/* Dropdown container */
+.cws-form .multiselect-dropdown,
+.main-form-wrapper .multiselect-dropdown,
+.cws-form [role="listbox"],
+.main-form-wrapper [role="listbox"] {
+  background-color: #666666 !important;
+  border-radius: 8px !important;
+  /* overflow: hidden !important; */
+  /* transform: translateY(-66px) !important; */
+  /* position: relative !important; */
+}
+
+/* Dropdown options */
+.cws-form .multiselect-option,
+.main-form-wrapper .multiselect-option,
+.cws-form [role="option"],
+.main-form-wrapper [role="option"] {
+  background-color: #666666 !important;
+  color: #ffffff !important;
+  padding: 8px 12px !important;
+}
+
+/* Dropdown option hover */
+.cws-form .multiselect-option:hover,
+.main-form-wrapper .multiselect-option:hover,
+.cws-form [role="option"]:hover,
+.main-form-wrapper [role="option"]:hover {
+  background-color: #555555 !important;
+}
+
+/* text-indicator */
+.cws-form .text-indicator,
+.main-form-wrapper .text-indicator {
+  padding-left: 8px !important;
+}
+
+/* form-select-option-container positioning */
+.cws-form .form-select-option-container,
+.main-form-wrapper .form-select-option-container {
+  position: absolute !important;
+  left: 0px !important;
+  z-index: 6 !important;
+  right: 0 !important;
+  top: calc(2.5rem) !important;
+}
+
+.radio-field .form-field-label {
+  margin-left: 4px !important;
+  display: block !important;
+}
+
+/* =====================================================
+   Mobile Responsive Styles
+   ===================================================== */
+
+/* H2 headings - mobile only */
+@media (max-width: 768px) {
+
+  .cws-form h2,
+  .main-form-wrapper h2 {
+    font-size: 30px !important;
+    line-height: 36px !important;
+  }
+
+  .cws-form h2 strong,
+  .main-form-wrapper h2 strong {}
+}
+
+/* Span[dir="auto"] - mobile only */
+@media (max-width: 768px) {
+
+  .cws-form span[dir="auto"],
+  .main-form-wrapper span[dir="auto"] {
+    font-size: 17px !important;
+    line-height: 16px !important;
+  }
+}
+
+/* All inputs, buttons, and text - mobile only */
+@media (max-width: 768px) {
+
+  .cws-form input,
+  .cws-form textarea,
+  .cws-form select,
+  .cws-form button,
+  .cws-form a,
+  .main-form-wrapper input,
+  .main-form-wrapper textarea,
+  .main-form-wrapper select,
+  .main-form-wrapper button,
+  .main-form-wrapper a {
+    font-size: 14px !important;
+  }
+
+  /* Placeholder text */
+  .cws-form input::placeholder,
+  .cws-form textarea::placeholder,
+  .main-form-wrapper input::placeholder,
+  .main-form-wrapper textarea::placeholder {
+    font-size: 18px !important;
+  }
+
+  /* Increase spacing between input fields on mobile */
+  .cws-form .form-input-wrapper-element,
+  .main-form-wrapper .form-input-wrapper-element {
+    margin-bottom: 10px !important;
+  }
+
+  /* Increase spacing for landing page rows on mobile */
+  .cws-form .landing-page-row,
+  .main-form-wrapper .landing-page-row {
+    margin-bottom: 14px !important;
+  }
+
+  /* Increase bottom border width for input wrapper divs on mobile */
+  .cws-form .form-input-wrapper-div,
+  .main-form-wrapper .form-input-wrapper-div {
+    border-bottom-width: 2px !important;
+  }
+
+  /* Fix textarea mobile issues - increase height and ensure resize works */
+  .cws-form textarea,
+  .main-form-wrapper textarea {
+    min-height: 120px !important;
+    height: 120px !important;
+    resize: vertical !important;
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    z-index: 1 !important;
+  }
+
+  /* Remove all flex constraints from textarea and its containers */
+  .cws-form textarea,
+  .main-form-wrapper textarea,
+  .cws-form .form-input-wrapper-element textarea,
+  .main-form-wrapper .form-input-wrapper-element textarea,
+  .cws-form .global-input-wrapper textarea,
+  .main-form-wrapper .global-input-wrapper textarea {
+    flex: none !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+  }
+
+  /* Ensure textarea wrapper containers don't constrain resize */
+  .cws-form .form-input-wrapper-element,
+  .main-form-wrapper .form-input-wrapper-element,
+  .cws-form .global-input-wrapper,
+  .main-form-wrapper .global-input-wrapper {
+    display: block !important;
+    flex: none !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Specific targeting for textarea wrapper divs */
+  .cws-form .form-input-wrapper-div,
+  .main-form-wrapper .form-input-wrapper-div {
+    display: block !important;
+    flex: none !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
+    flex-basis: auto !important;
+  }
+
+
+
+}
+
+/* Submit button - max-width 50% on mobile only */
+@media (max-width: 768px) {
+
+  .cws-form button[type="submit"],
+  .cws-form input[type="submit"],
+  .cws-form .submit-button,
+  .main-form-wrapper button[type="submit"],
+  .main-form-wrapper input[type="submit"],
+  .main-form-wrapper .submit-button {
+
+    margin-right: auto !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    margin-left: 10px !important;
+  }
+}
+
+/* =====================================================
+   Validation States (matching hero form UI)
+   ===================================================== */
+
+/* Ensure form input wrapper has relative positioning for error message placement */
+.cws-form .form-input-wrapper-element,
+.main-form-wrapper .form-input-wrapper-element {
+  position: relative !important;
+}
+
+/* Reserve a fixed slot for validation message so layout doesn't jump */
+.cws-form .form-input-error-field,
+.main-form-wrapper .form-input-error-field {
+  position: relative !important;
+
+}
+
+/* Padding-bottom ONLY for common forms (not hero forms) to reserve space for error container */
+.cws-form .form-input-wrapper-element {
+  padding-bottom: 0 !important;
+}
+
+/* Hide Sitecore error elements EXCEPT server error messages */
+.cws-form .global-input-description,
+.cws-form .description,
+.cws-form .form-field-validation-error,
+.cws-form .form-item--error-message,
+.main-form-wrapper .global-input-description,
+.main-form-wrapper .description,
+.main-form-wrapper .form-field-validation-error,
+.main-form-wrapper .form-item--error-message {
+  display: none !important;
+}
+
+/* Show server-side error messages when present */
+.cws-form .global-input-error-message.form-input-error-message,
+.main-form-wrapper .global-input-error-message.form-input-error-message {
+  display: block !important;
+  font-size: 0.8125rem !important;
+  font-weight: 400 !important;
+  color: #eb0045 !important;
+  margin: 0.25rem !important;
+  padding: 0 !important;
+  position: absolute !important;
+  top: 40px !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.cws-form .radio-field .global-input-error-message.form-input-error-message,
+.main-form-wrapper .radio-field .global-input-error-message.form-input-error-message,
+.cws-form .radio-group-field .global-input-error-message.form-input-error-message,
+.main-form-wrapper .radio-group-field .global-input-error-message.form-input-error-message {
+  margin-top: 20px !important;
+}
+
+/* Error state - border turns red */
+.cws-form .form-input-wrapper-element.has-error .form-input-wrapper-div,
+.cws-form .form-input-wrapper-element.has-error textarea,
+.cws-form .form-input-wrapper-element.has-error select,
+.cws-form .has-error .form-input-wrapper-div,
+.cws-form .error .form-input-wrapper-div,
+.main-form-wrapper .form-input-wrapper-element.has-error .form-input-wrapper-div,
+.main-form-wrapper .form-input-wrapper-element.has-error textarea,
+.main-form-wrapper .form-input-wrapper-element.has-error select,
+.main-form-wrapper .has-error .form-input-wrapper-div,
+.main-form-wrapper .error .form-input-wrapper-div {
+  border-bottom-color: #eb0045 !important;
+}
+
+/* Old Sitecore error elements remain hidden - we only use .cws-error-container */
+
+.cws-form .error-message,
+.cws-form .field-error,
+.main-form-wrapper .error-message,
+.main-form-wrapper .field-error {
+  font-size: 0.8125rem !important;
+  font-weight: 400 !important;
+  margin-top: 0.25rem !important;
+  padding: 0 !important;
+}
+
+/* Dynamically injected error container - uses padding-bottom space */
+.cws-form .cws-error-container,
+.main-form-wrapper .cws-error-container {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 40px !important;
+  height: 1.25rem !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  font-family: 'Suisse Intl', sans-serif !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  color: #666 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+
+}
+
+/* When label is present, increase top spacing for error container */
+.cws-form .form-input-wrapper-element.has-label .cws-error-container,
+.main-form-wrapper .form-input-wrapper-element.has-label .cws-error-container {
+  top: 40px !important;
+}
+
+/* Modal form: Increase error container top spacing */
+body.cws-contact-form-modal-open form:has(input[name="name"][data-prefill="contact_pop_up"]) .form-input-wrapper-element.has-label .cws-error-container {
+  top: 60px !important;
+}
+
+.cws-form .radio-group-field .cws-error-container,
+.main-form-wrapper .radio-group-field .cws-error-container {
+  top: 50px !important;
+  bottom: auto !important;
+}
+
+/* Show error when has-error class */
+.cws-form .form-input-wrapper-element.has-error .cws-error-container,
+.main-form-wrapper .form-input-wrapper-element.has-error .cws-error-container {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* If container is empty, keep it fully collapsed */
+.cws-form .cws-error-container:empty,
+.main-form-wrapper .cws-error-container:empty {
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Remove padding-bottom for checkbox and radio fields */
+.cws-form .checkbox-field.form-input-wrapper-element,
+.cws-form .radio-field.form-input-wrapper-element,
+.main-form-wrapper .checkbox-field.form-input-wrapper-element,
+.main-form-wrapper .radio-field.form-input-wrapper-element {
+  padding-bottom: 0 !important;
+}
+
+/* Remove horizontal padding from checkbox field container */
+.cws-form .checkbox-field,
+.main-form-wrapper .checkbox-field {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Position checkbox input at top-left corner of its parent container */
+.cws-form .checkbox-field .form-input-wrapper-div,
+.main-form-wrapper .checkbox-field .form-input-wrapper-div {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.cws-form .checkbox-field .global-checkbox-element,
+.main-form-wrapper .checkbox-field .global-checkbox-element {
+  align-self: flex-start !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Checkbox label styling to match reference design */
+.cws-form .checkbox-field label,
+.main-form-wrapper .checkbox-field label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Checkbox wrapper div styling */
+.cws-form .checkbox-field .form-input-wrapper-div,
+.main-form-wrapper .checkbox-field .form-input-wrapper-div {
+  display: inline-flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Checkbox label text positioning */
+.cws-form .checkbox-field .global-input-label.form-field-label,
+.main-form-wrapper .checkbox-field .global-input-label.form-field-label {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+  font-size: 14px !important;
+  align-self: flex-start !important;
+  text-align: left !important;
+}
+
+/* Add extra margin-bottom to checkbox wrapper div */
+.cws-form .checkbox-field .form-input-wrapper-div,
+.main-form-wrapper .checkbox-field .form-input-wrapper-div {
+  margin-bottom: 0px !important;
+}
+
+/* Add margin-top to radio group form wrapper div */
+.cws-form .form-input-wrapper-element.lp-flex-direction-vertical:has(.radio-group-container),
+.main-form-wrapper .form-input-wrapper-element.lp-flex-direction-vertical:has(.radio-group-container) {
+  margin-top: 20px !important;
+}
+
+/* Alternative approach - target radio group container directly */
+.cws-form .radio-group-container,
+.main-form-wrapper .radio-group-container {
+  margin-top: 20px !important;
+}
+
+/* Target the parent of radio group containers */
+.cws-form .form-input-wrapper-element:has(.radio-wrapper),
+.main-form-wrapper .form-input-wrapper-element:has(.radio-wrapper) {
+  margin-top: 20px !important;
+}
+
+/* Add margin-top to radio group labels */
+.cws-form .form-group-label:has(+ .radio-group-container),
+.main-form-wrapper .form-group-label:has(+ .radio-group-container) {
+  margin-top: 20px !important;
+}
+
+
+/* Style labels within radio-group-field */
+.cws-form .radio-group-field .global-input-label.form-field-label.form-group-label,
+.main-form-wrapper .radio-group-field .global-input-label.form-field-label.form-group-label {
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  margin-bottom: -10px !important;
+  line-height: 10.2px !important;
+  margin-left: -8px !important;
+  margin-top: 8px !important;
+}
+
+/* =====================================================
+   Server Error Messages (Sitecore)
+   ===================================================== */
+
+/* Server-side error elements are not used; keep them hidden if Sitecore renders them */
+.cws-form .global-input-error-message.form-input-error-message,
+.main-form-wrapper .global-input-error-message.form-input-error-message {
+  /* display: none !important; */
+}

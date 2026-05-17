@@ -1,0 +1,13 @@
+﻿---
+ID: "28e05f97-101b-42d1-b05a-35e368d9aec0"
+Parent: "76153166-aefb-47d1-9e1f-20097f80a65e"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Workwear/Page Content/Footer/ContactPersonItem/Content/Name
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T220000Z

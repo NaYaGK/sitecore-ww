@@ -1,0 +1,38 @@
+﻿---
+ID: "ffd7b525-527f-4d99-8f31-cc498b56e20b"
+Parent: "e0d4ee17-e79b-4976-a81b-6c56a7284d15"
+Template: "e0d4ee17-e79b-4976-a81b-6c56a7284d15"
+Path: /sitecore/templates/Project/Workwear/Page Content/Accordion Item/AccordionItem/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{E0D4EE17-E79B-4976-A81B-6C56A7284D15}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "f63cb329-50ff-47e9-929e-fc769e939462"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251201T184202Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "5144f7ad-3bf7-4230-ae56-dde1311481f2"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251201T194318Z

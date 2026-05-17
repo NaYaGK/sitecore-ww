@@ -1,0 +1,13 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="background: transparent;">
+  <!-- Checking Icon - Checkboxes -->
+  <!-- First checkbox (checked) -->
+  <rect x="25" y="30" width="30" height="30" rx="3" stroke="currentColor" stroke-width="3" fill="none"/>
+  <path d="M 32 45 L 40 53 L 50 35" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Second checkbox (checked) -->
+  <rect x="65" y="30" width="30" height="30" rx="3" stroke="currentColor" stroke-width="3" fill="none"/>
+  <path d="M 72 45 L 80 53 L 90 35" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Third checkbox (empty) -->
+  <rect x="25" y="70" width="30" height="30" rx="3" stroke="currentColor" stroke-width="3" fill="none"/>
+</svg>

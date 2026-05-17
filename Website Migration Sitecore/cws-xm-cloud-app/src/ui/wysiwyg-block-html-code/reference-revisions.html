@@ -1,0 +1,225 @@
+<style>
+.entity-reference-cards-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px;
+}
+
+.entity-reference-card {
+    flex: 1 1 calc(50% - 20px);
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.entity-reference-subtitle {
+    font-family: 'suisse_intlbold', Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 0 0;
+    line-height: 28px;
+    color: #000000;
+}
+
+.entity-reference-title {
+    font-family: 'suisse_intlbold', Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 16px 0 24px;
+    line-height: 1.2;
+    color: #000000;
+}
+
+.entity-reference-image-container {
+    width: 100%;
+    margin-bottom: 0px;
+    line-height: 0;
+    padding: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.entity-reference-image-container img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.entity-reference-rich-text {
+    font-size: 18px;
+    line-height: 28px;
+    color: #000000;
+    margin: 18px 0 18px 0;
+    flex-grow: 1;
+}
+
+.entity-reference-rich-text p {
+    margin: 0 0 16px 0;
+}
+
+.entity-reference-rich-text p:last-child {
+    margin-bottom: 0;
+}
+
+.entity-reference-rich-text strong {
+    font-family: 'suisse_intlbold', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+.entity-reference-button {
+    display: inline-block;
+    background-color: #f9e244;
+    color: #000000;
+    text-decoration: none;
+    padding: 9px 60px;
+    border-radius: 18px;
+    font-size: 20px;
+    font-weight: 700;
+    width: fit-content;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    text-align: center;
+    cursor: pointer;
+}
+
+.entity-reference-button:hover {
+    background-color: #e6d03d;
+    color: white;
+}
+
+/* Tablet View */
+@media (max-width: 1024px) {
+    .entity-reference-cards-container {
+        gap: 30px;
+        display: flex;
+        flex-direction: column
+    }
+    .entity-reference-title {
+        font-size: 28px;
+    }
+    .entity-reference-rich-text {
+        font-size: 17px;
+    }
+}
+
+/* Mobile View - Cards Stack Vertically */
+@media (max-width: 768px) {
+    .entity-reference-cards-container {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding: 15px;
+        gap: 30px;
+    }
+    
+    .entity-reference-card {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        flex-basis: 100%;
+    }
+    
+    .entity-reference-subtitle {
+        font-size: 18px;
+    }
+    
+    .entity-reference-title {
+        font-size: 24px;
+        margin-bottom: 16px;
+        padding: 12px 0 20px;
+    }
+    
+    .entity-reference-image-container {
+        padding: 15px;
+    }
+    
+    .entity-reference-rich-text {
+        font-size: 16px;
+        line-height: 24px;
+        margin: 15px 0;
+    }
+    
+    .entity-reference-button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 20px;
+        font-size: 18px;
+    }
+}
+
+/* Small Mobile View */
+@media (max-width: 480px) {
+    .entity-reference-cards-container {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        padding: 10px;
+        gap: 25px;
+    }
+    
+    .entity-reference-card {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        flex-basis: 100%;
+    }
+    
+    .entity-reference-subtitle {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    
+    .entity-reference-title {
+        font-size: 20px;
+        padding: 10px 0 16px;
+    }
+    
+    .entity-reference-image-container {
+        padding: 10px;
+    }
+    
+    .entity-reference-rich-text {
+        font-size: 15px;
+        line-height: 22px;
+    }
+    
+    .entity-reference-button {
+        padding: 10px 16px;
+        font-size: 16px;
+    }
+}
+</style>
+
+<div class="entity-reference-cards-container">
+    <!-- Card 1: Visite virtuelle -->
+    <div class="entity-reference-card">
+        <div class="entity-reference-subtitle">Découvrir notre blanchisserie</div>
+        <div class="entity-reference-title">Visite virtuelle</div>
+        <div class="entity-reference-image-container">
+            <img src="https://www.cws.com/sites/default/files/styles/teaser_image_600_x_600_/public/2019-11/prufen_von_psa_in_wascherei.jpg.webp?itok=Q4B7qzXH" alt="Prüfen von PSA in Wäscherei">
+        </div>
+        <div class="entity-reference-rich-text">
+            <p>Vous souhaitez en savoir plus sur les procédés utilisés dans nos blanchisseries ? Nous vous invitons à y jeter un coup d'œil par vous-même. Découvrez le traitement durable de vos vêtements grâce à notre personnel qui, chaque jour, veille à ce que les vêtements soient rendus hygiéniquement propres au bon porteur.</p>
+        </div>
+        <a href="https://www.cws.com/vr-tour-cws" class="entity-reference-button">Vers la visite virtuelle</a>
+    </div>
+
+    <!-- Card 2: CWS Repair App -->
+    <div class="entity-reference-card">
+        <div class="entity-reference-subtitle">Demander des réparations</div>
+        <div class="entity-reference-title">CWS Repair App</div>
+        <div class="entity-reference-image-container">
+            <img src="https://www.cws.com/sites/default/files/styles/cover_small_600_x_/public/2021-09/bild_email.jpg.webp?itok=Oi8QXLQy" alt="Visual Repair App">
+        </div>
+        <div class="entity-reference-rich-text">
+            <p>L'application CWS Repair permet aux clients de nous envoyer des <strong>demandes de réparation par le biais de l'application</strong> - sans aucun enregistrement.</p>
+            <p>Voici comment cela fonctionne : l'application est téléchargée dans l'App Store d'Apple ou dans le Play Store de Google, puis le code-barres du vêtement de travail est scanné et le type de réparation est sélectionné et envoyé. Une indication de réparation est alors créée dans l'outil client CWS et transmise à la blanchisserie. La prochaine fois que le vêtement concerné sera envoyé au lavage, il sera réparé.</p>
+        </div>
+        <a href="https://www.cws.com/fr-LU/vetements-professionnels/services/cws-application-de-reparation" class="entity-reference-button">En savoir plus sur CWS Repair</a>
+    </div>
+</div>

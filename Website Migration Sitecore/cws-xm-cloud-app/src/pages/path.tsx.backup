@@ -1,0 +1,959 @@
+import { useEffect, JSX } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import sites from '.sitecore/sites.json';
+import NotFound from 'src/NotFound';
+import Layout from 'src/Layout';
+import {
+  SitecoreProvider,
+  ComponentPropsContext,
+  SitecorePageProps,
+  StaticPath,
+  SiteInfo,
+  Page,
+  LayoutServicePageState,
+  ComponentRendering,
+} from '@sitecore-content-sdk/nextjs';
+import { extractPath, handleEditorFastRefresh } from '@sitecore-content-sdk/nextjs/utils';
+import { isDesignLibraryPreviewData } from '@sitecore-content-sdk/nextjs/editing';
+import client from '@/lib/sitecore-client';
+import { componentMap as components } from '.sitecore/component-map';
+import scConfig from 'sitecore.config';
+import { fetchProductByIdWithSlugs, fetchAllProductSlugs, ProductData } from '../lib/content-hub-client';
+import { SUPPORTED_LOCALES } from '@/config/locales';
+
+const localeSet = new Set(SUPPORTED_LOCALES.filter((l) => l !== 'default').map((l) => l.toLowerCase().replace(/_/g, '-')));
+function isLocalePathSegment(segment: string | undefined): boolean {
+  return Boolean(segment && localeSet.has(segment.toLowerCase().replace(/_/g, '-')));
+}
+
+const siteNames = Array.from(new Set(sites.map((site: SiteInfo) => site.name).filter(Boolean))).map(
+  (name) => name.toLowerCase(),
+);
+const siteNameSet = new Set(siteNames);
+const DEFAULT_SITE_NAME = (
+  process.env.NEXT_PUBLIC_DEFAULT_SITE_NAME ||
+  process.env.SITECORE_SITE_NAME ||
+  'cws'
+).toLowerCase();
+
+/**
+ * Locale-specific path segments that map to workwear/healthcare sites.
+ * Must stay in sync with middleware.ts WORKWEAR_PATH_SEGMENTS / HEALTHCARE_PATH_SEGMENTS.
+ */
+const WORKWEAR_PATH_SEGMENTS = new Set(
+  [
+    'workwear',
+    'arbeitskleidung',
+    'vetements-de-travail',
+    'ropa-de-trabajo',
+    'abbigliamento-da-lavoro',
+    'werkkledij',
+    'odziez-robocza-i-ochronna',
+    'pracovni-odevy',
+    'pracovne-odevy',
+    'munka-es-vedoruha',
+    'imbracaminte-de-lucru',
+    'rabotno-obleklo',
+    'radna-odjeca',
+    'delovna-oblacila',
+    'arbetsklader',
+  ].map((s) => s.toLowerCase()),
+);
+const HEALTHCARE_PATH_SEGMENTS = new Set(
+  ['healthcare'].map((s) => s.toLowerCase()),
+);
+const PRODUCT_ROUTE_SEGMENTS = ['produkte', 'produkty'] as const;
+
+function resolveSiteFromSegment(segment: string | undefined): string | null {
+  const normalized = segment?.toLowerCase();
+  if (!normalized) return null;
+  if (WORKWEAR_PATH_SEGMENTS.has(normalized)) return 'workwear';
+  if (HEALTHCARE_PATH_SEGMENTS.has(normalized)) return 'healthcare';
+  return null;
+}
+
+function getFieldStringValue(field: unknown): string | undefined {
+  if (!field || typeof field !== 'object' || !('value' in field)) {
+    return undefined;
+  }
+
+  const value = (field as { value?: unknown }).value;
+  return typeof value === 'string' && value.trim() ? value : undefined;
+}
+
+function getSiteNameFromParams(
+  params: { path?: string | string[] },
+  locale?: string,
+): string | null {
+  const pathArray = Array.isArray(params?.path) ? params.path : params?.path ? [params.path] : [];
+  if (pathArray.length === 0) return null;
+
+  const normalizedLocale = locale?.toLowerCase();
+  const normalizedFirst = pathArray[0]?.toLowerCase();
+  const siteIndex = normalizedLocale && normalizedFirst === normalizedLocale ? 1 : 0;
+  const siteCandidate = pathArray[siteIndex];
+  const normalizedSiteCandidate = siteCandidate?.toLowerCase();
+
+  // Check for _site_ prefix (rewritten paths)
+  if (normalizedSiteCandidate && normalizedSiteCandidate.startsWith('_site_')) {
+    const siteName = normalizedSiteCandidate.replace('_site_', '');
+    if (siteNameSet.has(siteName)) {
+      return siteName;
+    }
+  }
+
+  // Check direct site name match
+  if (normalizedSiteCandidate && siteNameSet.has(normalizedSiteCandidate)) {
+    return normalizedSiteCandidate;
+  }
+
+  // Check locale-specific path segments (e.g. arbeitskleidung → workwear)
+  return resolveSiteFromSegment(normalizedSiteCandidate);
+}
+
+/** Product page segment for getStaticPaths (produkte/produkty match at runtime) */
+const PRODUCT_PAGE_SEGMENT = 'produkte';
+
+/**
+ * Extract product ID from URL path or params
+ * Supports produkte, produkty (locale-specific segments)
+ */
+function extractProductIdFromPath(pathname: string): string | null {
+  console.log(`[extractProductIdFromPath] Extracting from: ${pathname}`);
+
+  const normalizedPath = pathname.startsWith('/') ? pathname : `/${pathname}`;
+  const match = normalizedPath.match(/\/(produkte|produkty)\/([^/]+)$/i);
+  const productMatch = match ? [, match[2]] : null;
+
+  if (!productMatch || !productMatch[1]) {
+    console.log(`[extractProductIdFromPath] No match found`);
+    return null;
+  }
+
+  const fullSlug = productMatch[1];
+  console.log(`[extractProductIdFromPath] Full slug: ${fullSlug}`);
+
+  // Remove variant suffix (e.g., -0, -1, -2) from the end
+  // Pattern: ends with - followed by one or more digits
+  const productId = fullSlug.replace(/-\d+$/, '');
+  console.log(`[extractProductIdFromPath] Extracted product ID: ${productId}`);
+
+  return productId || null;
+}
+
+/**
+ * Extract product ID from Next.js params array
+ * Handles paths like: ['workwear', 'produkte', 'cws-devon-line-trousers-0']
+ */
+function extractProductIdFromParams(params: { path?: string | string[] }): string | null {
+  if (!params || !params.path) return null;
+
+  const pathArray = Array.isArray(params.path) ? params.path : [params.path];
+  console.log(`[extractProductIdFromParams] Path array:`, pathArray);
+
+  const productIndex = pathArray.findIndex((segment) =>
+    /^(produkte|produkty)$/i.test(String(segment)),
+  );
+
+  if (productIndex === -1 || productIndex >= pathArray.length - 1) {
+    return null;
+  }
+
+  const fullSlug = pathArray[productIndex + 1];
+  if (!fullSlug) {
+    return null;
+  }
+
+  console.log(`[extractProductIdFromParams] Full slug from params: ${fullSlug}`);
+
+  const productId = String(fullSlug).replace(/-\d+$/, '');
+  console.log(`[extractProductIdFromParams] Extracted product ID: ${productId}`);
+
+  return productId || null;
+}
+
+/**
+ * Check if a path is a product detail page
+ * Pattern: /(produkte|produkty)/{slug}
+ */
+function isProductPath(path: string): boolean {
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  const isProduct = /\/(produkte|produkty)\/[^/]+$/i.test(normalizedPath);
+  console.log(
+    `[isProductPath] Checking path "${path}" (normalized: "${normalizedPath}"): ${isProduct}`,
+  );
+  return isProduct;
+}
+
+/**
+ * Check if params indicate a product path
+ */
+function isProductPathFromParams(params: { path?: string | string[] }): boolean {
+  if (!params || !params.path) return false;
+
+  const pathArray = Array.isArray(params.path) ? params.path : [params.path];
+  const pathString = pathArray.join('/');
+  return isProductPath(pathString);
+}
+
+/**
+ * Fetch a base Sitecore page to extract header and footer placeholders
+ * This allows product pages to inherit the standard page layout
+ */
+async function fetchBasePageForLayout(
+  locale: string,
+  siteName: string,
+  currentPath?: string,
+): Promise<{ header?: ComponentRendering[]; footer?: ComponentRendering[]; fields?: any } | null> {
+  const defaultBasePagePath =
+    process.env.PRODUCT_BASE_PAGE_PATH || process.env.NEXT_PUBLIC_PRODUCT_BASE_PAGE_PATH || '/';
+  const candidatePaths: string[] = [defaultBasePagePath];
+
+  // If a current path is provided, try to resolve the actual page hosting the rendering
+  // Example: /en/workwear/produkte/cws-devon-line-trousers -> /produkte
+  if (currentPath) {
+    const normalizedPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
+    const productUrlMatch = normalizedPath.match(/^(.*?)\/(produkte|produkty)\//i);
+
+    if (productUrlMatch && productUrlMatch[0]) {
+      let pathSegments = productUrlMatch[0].split('/').filter(Boolean);
+
+      if (pathSegments.length > 1 && isLocalePathSegment(pathSegments[0])) {
+        pathSegments = pathSegments.slice(1);
+      }
+
+      if (pathSegments.length > 1) {
+        const firstSegment = pathSegments[0]?.toLowerCase();
+        const resolvedSite = resolveSiteFromSegment(firstSegment);
+        if (firstSegment === siteName || resolvedSite === siteName) {
+          pathSegments = pathSegments.slice(1);
+        }
+      }
+
+      const resolvedPath = `/${pathSegments.join('/')}`;
+      console.log(`[fetchBasePageForLayout] Resolved dynamic base page path: ${resolvedPath}`);
+      candidatePaths.unshift(resolvedPath);
+
+      const productSegmentIndex = pathSegments.findIndex((segment) =>
+        PRODUCT_ROUTE_SEGMENTS.includes(
+          segment.toLowerCase() as (typeof PRODUCT_ROUTE_SEGMENTS)[number],
+        ),
+      );
+
+      if (productSegmentIndex !== -1) {
+        PRODUCT_ROUTE_SEGMENTS.forEach((segment) => {
+          const variantSegments = [...pathSegments];
+          variantSegments[productSegmentIndex] = segment;
+          candidatePaths.push(`/${variantSegments.join('/')}`);
+        });
+      }
+    }
+  }
+
+  const uniqueCandidatePaths = Array.from(new Set(candidatePaths.filter(Boolean)));
+  const localeCandidates = locale === 'en' ? ['en', 'en-GB', 'en-IE'] : [locale];
+  let fallbackLayout: { header?: ComponentRendering[]; footer?: ComponentRendering[]; fields?: any } | null =
+    null;
+
+  for (const candidateLocale of localeCandidates) {
+    for (const basePagePath of uniqueCandidatePaths) {
+      try {
+        console.log(
+          `[fetchBasePageForLayout] Fetching base page from: ${basePagePath} (locale: ${candidateLocale})`,
+        );
+        const basePage = await client.getPage(basePagePath, {
+          locale: candidateLocale,
+          site: siteName,
+        });
+        const route = basePage?.layout?.sitecore?.route;
+
+        if (!route) {
+          console.warn(
+            `[fetchBasePageForLayout] No route data for "${basePagePath}" (locale: ${candidateLocale})`,
+          );
+          continue;
+        }
+
+        const placeholders = route.placeholders || {};
+        const header = placeholders['headless-header'];
+        const footer = placeholders['headless-footer'];
+        const metaTypeValue = getFieldStringValue(route.fields?.MetaType);
+        const currentLayout = {
+          header: header || undefined,
+          footer: footer || undefined,
+          fields: route.fields || undefined,
+        };
+
+        console.log('[fetchBasePageForLayout] Extracted route data:', {
+          path: basePagePath,
+          locale: candidateLocale,
+          hasHeader: !!header,
+          hasFooter: !!footer,
+          hasFields: !!route.fields,
+          hasMetaType: !!metaTypeValue,
+          metaTypeValue,
+        });
+
+        if (!fallbackLayout) {
+          fallbackLayout = currentLayout;
+        }
+
+        if (metaTypeValue) {
+          return currentLayout;
+        }
+      } catch (error) {
+        console.warn(
+          `[fetchBasePageForLayout] Failed to fetch base page from "${basePagePath}" (locale: ${candidateLocale}):`,
+          error instanceof Error ? error.message : error,
+        );
+      }
+    }
+  }
+
+  return fallbackLayout;
+}
+
+/**
+ * Create a synthetic Sitecore page for product detail pages
+ * Merges header and footer from a base Sitecore page if available
+ */
+function createProductPage(
+  path: string,
+  locale: string,
+  siteName: string,
+  productId: string,
+  product?: ProductData | null,
+  contactFormId?: string,
+  localizedSlugs?: Record<string, string> | null,
+): Page {
+  const productRendering: ComponentRendering = {
+    componentName: 'ProductDetail',
+    uid: 'product-detail-component',
+    dataSource: '',
+    placeholders: {},
+    fields: {},
+    params: {
+      productId,
+      ...(contactFormId && { contactFormId }),
+    },
+  };
+
+  const formRendering: ComponentRendering = {
+    componentName: 'Form',
+    uid: 'product-contact-form-component',
+    dataSource: contactFormId || 'f968dd4b2d7f48e8817e02891a954f1e-euw',
+    placeholders: {},
+    fields: {},
+    params: {},
+  };
+
+  // Build placeholders - only main content; header/footer come from wildcard route when page is fetched via getPage
+  const placeholders: Record<string, ComponentRendering[]> = {
+    'headless-main': [productRendering, formRendering],
+  };
+
+  // Resolve metadata for SEO
+  const stripHtml = (html?: string): string =>
+    html
+      ? html
+        .replace(/<[^>]*>/g, '') // strip HTML
+        .replace(/\s+/g, ' ') // replace all whitespace with single space
+        .trim()
+      : '';
+
+  const siteUrl = process.env.NEXT_PUBLIC_RENDERING_HOST_URL?.replace(/\/$/, '') || '';
+
+  // Construct current URL to include locale and siteName
+  // Remove internal Sitecore path segments like _site_hygiene
+  const cleanPath = path
+    .split('/')
+    .filter((segment) => segment && !segment.startsWith('_site_'))
+    .join('/');
+
+  const pathSegments = cleanPath.split('/').filter(Boolean);
+  const startsWithLocale = pathSegments[0]?.toLowerCase() === locale.toLowerCase();
+  const startsWithSite =
+    pathSegments[startsWithLocale ? 1 : 0]?.toLowerCase() === siteName.toLowerCase();
+
+  let finalUrlPath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
+  if (!startsWithLocale && !startsWithSite) {
+    finalUrlPath = `/${locale}/${siteName}${finalUrlPath}`;
+  } else if (startsWithLocale && !startsWithSite) {
+    finalUrlPath = `/${pathSegments[0]}/${siteName}/${pathSegments.slice(1).join('/')}`;
+  }
+
+  const currentUrl = `${siteUrl}${finalUrlPath}`;
+
+  const descriptionText = product?.fullDescription || '';
+  const productName = product?.h1 || product?.title;
+  const ogTitle = `${productName} | CWS Workwear`;
+  const ogDescription = stripHtml(descriptionText);
+  const ogImage = product?.images?.[0] || '';
+
+  return {
+    layout: {
+      sitecore: {
+        context: {
+          language: locale,
+          site: { name: siteName },
+          itemPath: cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`,
+          pageState: LayoutServicePageState.Normal,
+          pageEditing: false,
+        },
+        route: {
+          name: productId,
+          displayName: productName,
+          fields: {
+            Title: { value: ogTitle },
+            MetaTitle: { value: ogTitle },
+            MetaDescription: { value: ogDescription },
+            OGTitle: { value: ogTitle },
+            OGDescription: { value: ogDescription },
+            OGURL: { value: currentUrl },
+            OGImage: {
+              value: {
+                src: ogImage,
+                alt: productName,
+              },
+            },
+            ...(localizedSlugs && {
+              ProductLocalizedSlugs: { value: JSON.stringify(localizedSlugs) },
+            }),
+          },
+          placeholders,
+        },
+      },
+    },
+    siteName,
+    locale,
+    mode: {
+      name: LayoutServicePageState.Normal,
+      designLibrary: {
+        isVariantGeneration: false,
+      },
+      isNormal: true,
+      isPreview: false,
+      isEditing: false,
+      isDesignLibrary: false,
+    },
+  };
+}
+
+const SitecorePage = ({ page, notFound, componentProps }: SitecorePageProps): JSX.Element => {
+  useEffect(() => {
+    // Since Sitecore Editor does not support Fast Refresh, need to refresh editor chromes after Fast Refresh finished
+    handleEditorFastRefresh();
+  }, []);
+
+  if (notFound || !page) {
+    // Shouldn't hit this (as long as 'notFound' is being returned below), but just to be safe
+    return <NotFound />;
+  }
+
+  // Extract product data injected during getStaticProps for product pages
+  const productData = (componentProps?.['product-detail-component'] as Record<string, unknown>)
+    ?.initialProductData as ProductData | null | undefined;
+
+  const productFacets = productData?.facets;
+  const hasProductFacets =
+    productFacets?.gender ||
+    productFacets?.productGrouping?.length ||
+    productFacets?.primaryColor?.length ||
+    productFacets?.productCategory;
+
+  return (
+    <ComponentPropsContext value={componentProps || {}}>
+      <SitecoreProvider componentMap={components} api={scConfig.api} page={page}>
+        <Layout page={page} />
+      </SitecoreProvider>
+      {hasProductFacets && (
+        <div className="product-facet" style={{ display: 'none' }}>
+          {productFacets?.gender && <div className="product-gender">{productFacets.gender}</div>}
+          {productFacets?.productGrouping && productFacets.productGrouping.length > 0 && (
+            <div className="product-grouping">{productFacets.productGrouping.join(', ')}</div>
+          )}
+          {productFacets?.primaryColor && productFacets.primaryColor.length > 0 && (
+            <div className="product-primary-color">{productFacets.primaryColor.join(', ')}</div>
+          )}
+          {productFacets?.productCategory && (
+            <div className="product-category">{productFacets.productCategory}</div>
+          )}
+        </div>
+      )}
+    </ComponentPropsContext>
+  );
+};
+
+// This function gets called at build and export time to determine
+// pages for SSG ("paths", as tokenized array).
+export const getStaticPaths: GetStaticPaths = async (context) => {
+  // Fallback, along with revalidate in getStaticProps (below),
+  // enables Incremental Static Regeneration. This allows us to
+  // leave certain (or all) paths empty if desired and static pages
+  // will be generated on request (development mode in this example).
+  // Alternatively, the entire sitemap could be pre-rendered
+  // ahead of time (non-development mode in this example).
+  // See https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration
+
+  let paths: StaticPath[] = [];
+  let fallback: boolean | 'blocking' = 'blocking';
+  // Filter out the synthetic 'default' locale — it's only used for Next.js routing,
+  // not for actual content delivery.
+  const locales = (context?.locales || [scConfig.defaultLanguage || 'en']).filter((l) => l !== 'default');
+  const sitesForPaths = Array.from(new Set([...siteNames, DEFAULT_SITE_NAME])).filter(Boolean);
+  const enableProductStaticPaths = process.env.PRODUCT_STATIC_PATHS_ENABLED === 'true';
+  const defaultLocale = scConfig.defaultLanguage || locales[0] || 'en';
+
+  // Fetch product paths from Content Hub
+  if (enableProductStaticPaths) {
+    try {
+      const hostLevelSlugs = new Set<string>();
+
+      // Generate paths for each product in each locale
+      for (const locale of locales) {
+        const productSlugs = await fetchAllProductSlugs(locale);
+        for (const siteName of sitesForPaths) {
+          for (const productSlug of productSlugs) {
+            paths.push({
+              params: {
+                path: [locale, siteName, PRODUCT_PAGE_SEGMENT, productSlug],
+              },
+              locale,
+            });
+          }
+        }
+
+        if (locale === defaultLocale) {
+          productSlugs.forEach((slug) => hostLevelSlugs.add(slug));
+        }
+      }
+
+      // Also add host-level product paths without site/locale
+      for (const productSlug of hostLevelSlugs) {
+        paths.push({
+          params: {
+            path: [PRODUCT_PAGE_SEGMENT, productSlug],
+          },
+        });
+      }
+
+      console.log(`Generated ${paths.length} product paths from Content Hub`);
+    } catch (error) {
+      console.warn('Error occurred while fetching product paths from Content Hub:', error);
+    }
+  } else {
+    console.log('[getStaticPaths] Product static paths disabled via PRODUCT_STATIC_PATHS_ENABLED');
+  }
+
+  // Fetch Sitecore page paths
+  if (process.env.NODE_ENV !== 'development' && scConfig.generateStaticPaths) {
+    try {
+      const sitecorePaths = await client.getPagePaths(sitesForPaths, locales);
+
+      // Normalize all paths to lowercase to match Next.js file generation
+      const normalizedSitecorePaths = sitecorePaths.map((path) => ({
+        ...path,
+        params: {
+          ...path.params,
+          path: Array.isArray(path.params.path)
+            ? path.params.path.map((segment) => segment.toLowerCase())
+            : path.params.path,
+        },
+      }));
+
+      const filteredSitecorePaths = enableProductStaticPaths
+        ? normalizedSitecorePaths
+        : normalizedSitecorePaths.filter(
+          (pathEntry) =>
+            !isProductPathFromParams(pathEntry.params as { path?: string | string[] }),
+        );
+
+      paths = [...paths, ...filteredSitecorePaths];
+    } catch (error) {
+      console.log('Error occurred while fetching static paths from Sitecore');
+      console.log(error);
+    }
+
+    fallback = process.env.EXPORT_MODE ? false : fallback;
+  } else {
+    // In development, use blocking fallback to generate pages on-demand
+    fallback = 'blocking';
+  }
+
+  return {
+    paths,
+    fallback,
+  };
+};
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// revalidation (or fallback) is enabled and a new request comes in.
+export const getStaticProps: GetStaticProps = async (context) => {
+  try {
+    // Enhanced logging - these will appear in your terminal/server logs
+    console.log('='.repeat(80));
+    console.log('[getStaticProps] ===== START =====');
+    console.log('[getStaticProps] Context:', {
+      locale: context.locale,
+      params: context.params,
+      preview: context.preview,
+    });
+
+    let props = {};
+    let path = extractPath(context);
+    const params = context.params || {};
+
+    console.log(`[getStaticProps] Extracted path: "${path}"`);
+    console.log(`[getStaticProps] Params path:`, params.path);
+    console.log(`[getStaticProps] Full params:`, JSON.stringify(params, null, 2));
+
+    let page: Page | null = null;
+    let product: ProductData | null = null;
+    let localizedProductSlugs: Record<string, string> | null = null;
+
+    const locale = (context.locale === 'default' ? 'en' : context.locale) || scConfig.defaultLanguage;
+    const siteName = getSiteNameFromParams(params, locale) || DEFAULT_SITE_NAME;
+
+    // Strip the localized site segment from the path before querying Sitecore.
+    // The first path segment may be a site name (workwear, healthcare) or a localized
+    // equivalent (arbeitskleidung, vetements-de-travail). Sitecore expects the content
+    // path within the site, not the URL prefix.
+    // e.g. "arbeitskleidung/core-solutions" → "core-solutions" (for site "workwear")
+    //      "workwear/core-solutions"        → "core-solutions"
+    //      "arbeitskleidung"                → "/" (site homepage)
+    {
+      const segments = path.split('/').filter(Boolean);
+      const firstSegment = segments[0]?.toLowerCase();
+      if (
+        firstSegment &&
+        (siteNameSet.has(firstSegment) || resolveSiteFromSegment(firstSegment))
+      ) {
+        path = segments.slice(1).join('/') || '/';
+        console.log(`[getStaticProps] Stripped site segment: path is now "${path}"`);
+      }
+    }
+    console.log(`[getStaticProps] Site: "${siteName}", locale: "${locale}", path: "${path}"`);
+    const isPageBuilderMode = !!context.preview || isDesignLibraryPreviewData(context.previewData);
+
+    // Check if this is a product detail page - check both path string and params
+    // Also check the raw params array to handle cases where extractPath might not work as expected
+    const rawPathArray = Array.isArray(params.path)
+      ? params.path
+      : params.path
+        ? [params.path]
+        : [];
+    const rawPathString = rawPathArray.join('/');
+
+    console.log('[getStaticProps] Raw path analysis:', {
+      extractedPath: `"${path}"`,
+      rawPathArray,
+      rawPathString: `"${rawPathString}"`,
+      paramsPath: params.path,
+    });
+
+    const isProductFromPath = isProductPath(path);
+    const isProductFromParams = isProductPathFromParams(params);
+    const isProductFromRawPath = isProductPath(rawPathString);
+    const isProduct = isProductFromPath || isProductFromParams || isProductFromRawPath;
+
+    // Extract product ID early so we only treat true product pages as such
+    let productId = extractProductIdFromPath(path);
+    if (!productId) {
+      productId = extractProductIdFromParams(params);
+    }
+    if (!productId && rawPathString) {
+      productId = extractProductIdFromPath(rawPathString);
+    }
+    const isProductWithSlug = isProduct && !!productId;
+
+    console.log('[getStaticProps] Product path detection:', {
+      path: `"${path}"`,
+      rawPathString: `"${rawPathString}"`,
+      isProductFromPath,
+      isProductFromParams,
+      isProductFromRawPath,
+      isProduct,
+      productId,
+      isProductWithSlug,
+      isPageBuilderMode,
+      paramsPath: params.path,
+    });
+
+    if (isProductWithSlug && !isPageBuilderMode) {
+      console.log(`[getStaticProps] Product ID extraction result: ${productId}`);
+
+      if (productId) {
+        // Try to fetch product from Content Hub (with localized slugs for language switcher)
+        console.log(`[getStaticProps] Fetching product data for ID: ${productId}`);
+        try {
+          const productResult = await fetchProductByIdWithSlugs(productId, locale);
+          product = productResult?.product ?? null;
+          localizedProductSlugs = productResult?.localizedSlugs ?? null;
+        } catch (e: unknown) {
+          console.error(`[getStaticProps] Error fetching product:`, e);
+        }
+
+        if (product) {
+          // Try to fetch wildcard page from Sitecore (header/footer are in the wildcard route)
+          const productPath = path || rawPathString;
+          let wildcardPage: Page | null = null;
+          try {
+            wildcardPage = await client.getPage(productPath, { locale, site: siteName });
+          } catch (e) {
+            console.log(
+              `[getStaticProps] Wildcard page not found for "${productPath}", using synthetic page`,
+            );
+          }
+
+          if (wildcardPage?.layout?.sitecore?.route) {
+            // Merge ProductDetail into headless-main of the wildcard page
+            const route = wildcardPage.layout.sitecore.route;
+            const placeholders = { ...(route.placeholders || {}) };
+            const routeContactFormId = getFieldStringValue(route.fields?.ContactFormId);
+            const productRendering: ComponentRendering = {
+              componentName: 'ProductDetail',
+              uid: 'product-detail-component',
+              dataSource: '',
+              placeholders: {},
+              fields: {},
+              params: {
+                productId,
+                ...(routeContactFormId && { contactFormId: routeContactFormId }),
+              },
+            };
+
+            const existingMain = (placeholders['headless-main'] || []) as ComponentRendering[];
+            const existingProductDetailIdx = existingMain.findIndex(
+              (c) => c.componentName === 'ProductDetail'
+            );
+
+            if (existingProductDetailIdx >= 0) {
+              const existing = existingMain[existingProductDetailIdx];
+              if (existing) {
+                existingMain[existingProductDetailIdx] = {
+                  ...existing,
+                  ...productRendering,
+                  params: {
+                    ...(existing.params || {}),
+                    ...productRendering.params,
+                  }
+                };
+              }
+              placeholders['headless-main'] = existingMain;
+            } else {
+              placeholders['headless-main'] = [productRendering, ...existingMain];
+            }
+
+            const productName = product.h1 || product.title;
+            const stripHtml = (html?: string): string =>
+              html
+                ? html
+                  .replace(/<[^>]*>/g, '')
+                  .replace(/\s+/g, ' ')
+                  .trim()
+                : '';
+            const siteUrl = process.env.NEXT_PUBLIC_RENDERING_HOST_URL?.replace(/\/$/, '') || '';
+            const cleanPath = productPath
+              .split('/')
+              .filter((segment) => segment && !segment.startsWith('_site_'))
+              .join('/');
+            const pathSegments = cleanPath.split('/').filter(Boolean);
+            const startsWithLocale = pathSegments[0]?.toLowerCase() === locale.toLowerCase();
+            const startsWithSite =
+              pathSegments[startsWithLocale ? 1 : 0]?.toLowerCase() === siteName.toLowerCase();
+            let finalUrlPath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
+            if (!startsWithLocale && !startsWithSite) {
+              finalUrlPath = `/${locale}/${siteName}${finalUrlPath}`;
+            } else if (startsWithLocale && !startsWithSite) {
+              finalUrlPath = `/${pathSegments[0]}/${siteName}/${pathSegments.slice(1).join('/')}`;
+            }
+            const currentUrl = `${siteUrl}${finalUrlPath}`;
+            const descriptionText = product.fullDescription || '';
+            const ogTitle = `${productName} | CWS Workwear`;
+            const ogDescription = stripHtml(descriptionText);
+            const ogImage = product.images?.[0] || '';
+
+            page = {
+              ...wildcardPage,
+              layout: {
+                ...wildcardPage.layout,
+                sitecore: {
+                  ...wildcardPage.layout.sitecore,
+                  route: {
+                    ...route,
+                    placeholders,
+                    fields: {
+                      ...(route.fields || {}),
+                      Title: { value: ogTitle },
+                      MetaTitle: { value: ogTitle },
+                      MetaDescription: { value: ogDescription },
+                      OGTitle: { value: ogTitle },
+                      OGDescription: { value: ogDescription },
+                      OGURL: { value: currentUrl },
+                      OGImage: {
+                        value: {
+                          src: ogImage,
+                          alt: productName,
+                        },
+                      },
+                      ...(localizedProductSlugs && {
+                        ProductLocalizedSlugs: { value: JSON.stringify(localizedProductSlugs) },
+                      }),
+                    },
+                  },
+                },
+              },
+            };
+            console.log(`[getStaticProps] Merged ProductDetail into wildcard page for: ${product.title}`);
+          } else {
+            // Fallback: create synthetic page when wildcard does not return a page
+            const contactFormId =
+              process.env.CONTACT_FORM_ID || process.env.NEXT_PUBLIC_CONTACT_FORM_ID;
+            console.log(`[getStaticProps] Product found: ${product.title}. Creating synthetic page.`);
+            page = createProductPage(
+              productPath,
+              locale,
+              siteName,
+              productId,
+              product,
+              contactFormId || undefined,
+              localizedProductSlugs,
+            );
+          }
+        } else {
+          // Product doesn't exist in Content Hub — try to render the Sitecore 404 page
+          console.warn(`[getStaticProps] Product not found in Content Hub for ID: ${productId}`);
+          try {
+            page = await client.getPage('/404', { locale, site: siteName });
+            console.log(`[getStaticProps] Fetched Sitecore 404 page for site "${siteName}"`);
+          } catch (e) {
+            console.error('[getStaticProps] Failed to fetch Sitecore 404 page:', e);
+          }
+          if (!page) {
+            return { props: {}, notFound: true as const, revalidate: 5 };
+          }
+        }
+      }
+    } else {
+      // Regular Sitecore page handling - only if NOT a product path
+      if (isProduct && (!isProductWithSlug || isPageBuilderMode)) {
+        console.log(
+          `[getStaticProps] Skipping product fetch (slug:${!!productId}, builder:${isPageBuilderMode})`,
+        );
+      }
+      console.log(`[getStaticProps] Standard Sitecore page request`);
+      try {
+        if (context.preview && isDesignLibraryPreviewData(context.previewData)) {
+          page = await client.getDesignLibraryData(context.previewData);
+        } else {
+          page = context.preview
+            ? await client.getPreview(context.previewData)
+            : await client.getPage(path, { locale, site: siteName });
+        }
+      } catch (error) {
+        console.error(`[getStaticProps] Error fetching page from Sitecore:`, error);
+        // If it's a 404 from Sitecore and the path looks like a product path,
+        // we might want to try Content Hub as fallback
+        // For now, just let it return notFound
+      }
+    }
+
+    if (page) {
+      // Inject virtualFolder for client-side Link handling
+      if (page.layout?.sitecore?.context?.site) {
+        if (siteName === 'workwear') {
+          // Force virtualFolder for workwear site
+          (page.layout.sitecore.context.site as any).virtualFolder = '/workwear';
+        } else if (siteName === 'healthcare') {
+          // Force virtualFolder for healthcare site
+          (page.layout.sitecore.context.site as any).virtualFolder = '/healthcare';
+        }
+      }
+
+      const componentProps = await client.getComponentData(page.layout, context, components);
+
+      // Inject product data if we have it (SSG)
+      // The UID 'product-detail-component' must match what's in createProductPage
+      if (product) {
+        // We know 'product-detail-component' is the UID used in createProductPage
+        // In a real Sitecore page, we don't know the UID easily, but here we control the synthetic page.
+        // For standard pages, 'product' will be null, so this block won't run.
+        if (!componentProps['product-detail-component']) {
+          componentProps['product-detail-component'] = {};
+        }
+        // Type assertion needed because componentProps values are typed as unknown
+        (componentProps['product-detail-component'] as Record<string, unknown>).initialProductData =
+          product;
+      }
+
+      props = {
+        page,
+        dictionary: await client.getDictionary({
+          site: page.siteName,
+          locale: page.locale,
+        }),
+        componentProps,
+      };
+    }
+
+    // If the requested page doesn't exist, try to render the Sitecore 404 page inline
+    if (!page) {
+      console.log('[getStaticProps] Page not found, fetching Sitecore 404 page');
+      try {
+        page = await client.getPage('/404', { locale, site: siteName });
+        console.log(`[getStaticProps] Fetched Sitecore 404 page for site "${siteName}"`);
+      } catch (e) {
+        console.error('[getStaticProps] Failed to fetch Sitecore 404 page:', e);
+      }
+      if (!page) {
+        return { props: {}, notFound: true as const, revalidate: 5 };
+      }
+
+      // Populate props for the 404 page so it renders with header/footer/dictionary
+      const componentProps = await client.getComponentData(page.layout, context, components);
+      props = {
+        page,
+        dictionary: await client.getDictionary({
+          site: page.siteName,
+          locale: page.locale,
+        }),
+        componentProps,
+      };
+    }
+
+    const result = {
+      props,
+      // Next.js will attempt to re-generate the page:
+      // - When a request comes in
+      // - At most once every 5 seconds
+      revalidate: 5, // In seconds
+    };
+
+    console.log('[getStaticProps] Result:', {
+      hasPage: !!page,
+      hasProps: Object.keys(props).length > 0,
+    });
+    console.log('[getStaticProps] ===== END =====');
+    console.log('='.repeat(80));
+
+    return result;
+  } catch (error) {
+    console.error('[getStaticProps] FATAL ERROR:', error);
+    console.error(
+      '[getStaticProps] Error stack:',
+      error instanceof Error ? error.stack : 'No stack',
+    );
+    console.log('[getStaticProps] ===== ERROR END =====');
+    console.log('='.repeat(80));
+
+    // Return 404 on error
+    return {
+      props: {},
+      notFound: true,
+      revalidate: 5,
+    };
+  }
+};
+
+export default SitecorePage;

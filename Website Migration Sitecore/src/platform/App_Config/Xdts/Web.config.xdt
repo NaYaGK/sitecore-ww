@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+    <location path="sitecore">
+        <system.webServer>
+            <httpProtocol>
+                <customHeaders>
+                    <add name="Content-Security-Policy" 
+                    value="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://apps.sitecore.net https://*.sitecorecloud.io https://*.sitecorecontenthub.cloud https://qa.contenthub.cws.com https://www.contenthub.cws.com https://*.aptrinsic.com/; img-src 'self' data: https://*.sitecorecloud.io https://*.sitecorecontenthub.cloud/ https://qa.contenthub.cws.com https://www.contenthub.cws.com https://s.gravatar.com https://cdn.auth0.com https://*.wp.com/cdn.auth0.com/avatars; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://web-sdk-eu.aptrinsic.com/; font-src 'self' 'unsafe-inline' https://fonts.gstatic.com; block-all-mixed-content; child-src 'self' https://*.sitecorecloud.io https://*.sitecorecontenthub.cloud/ https://www.contenthub.cws.com https://qa.contenthub.cws.com; connect-src 'self' https://*.sitecorecloud.io https://*.sitecorecontenthub.cloud/ https://www.contenthub.cws.com https://qa.contenthub.cws.com/ https://*.aptrinsic.com/; media-src https://*.sitecorecloud.io https://*.sitecorecontenthub.cloud/ https://www.contenthub.cws.com https://qa.contenthub.cws.com; frame-ancestors 'self' https://apps.sitecore.net https://*.sitecorecloud.io https://*.sitecorecontenthub.cloud https://www.contenthub.cws.com https://qa.contenthub.cws.com;" 
+                    xdt:Transform="Replace" 
+                    xdt:Locator="Match(name)"/> 
+                </customHeaders>
+            </httpProtocol>
+        </system.webServer>
+    </location>
+</configuration>

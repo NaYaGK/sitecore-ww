@@ -1,0 +1,167 @@
+/* Rich Text Editor Content Styles - Reusable class for WYSIWYG content */
+.rte-content {
+  @apply prose max-w-none !text-[17px] lg:!text-lg;
+}
+
+/* Paragraph styles */
+.rte-content p {
+  @apply !mx-0 !my-[17px] !block !w-full !max-w-full !text-[17px] lg:!text-[18px] leading-[25px]! !font-normal !break-words !text-black !antialiased;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+}
+
+@media (min-width: 1024px) {
+  .rte-content p {
+    @apply !my-[18px] !text-[18px] !leading-[28px];
+  }
+}
+
+
+
+.rte-content a {
+  @apply !text-black !no-underline !transition-colors !duration-200;
+}
+
+.rte-content a:hover {
+  @apply !text-[#eb0045] !no-underline;
+}
+/* Emphasis (em) styles */
+.rte-content em {
+  @apply !m-0 !text-black;
+  font-size: 22px !important;
+}
+
+@media (min-width: 1280px) {
+  .rte-content em {
+    font-size: 28px !important;
+  }
+}
+
+/* Strong styles */
+.rte-content strong {
+  font-weight: 700 !important;
+}
+
+/* List container styles */
+.rte-content ul,
+.rte-content ol {
+  margin-bottom: 1rem !important;
+  padding-left: 2rem !important;
+  display: block !important;
+}
+
+.rte-content ul {
+  list-style-position: outside !important;
+}
+
+.rte-content ol {
+  list-style-type: decimal !important;
+  list-style-position: outside !important;
+}
+
+.rte-content .ul-space-btw-li li{
+  padding: 18px 0px !important;
+}
+
+/* List item styles */
+.rte-content li {
+  @apply !block !font-normal !text-black !antialiased;
+  font-family: 'Suisse Intl', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+  word-break: break-word !important;
+  -webkit-font-smoothing: antialiased !important;
+  margin-bottom: 0rem !important;
+  margin-top: 0 !important;
+  display: list-item !important;
+  list-style-position: outside !important;
+}
+
+.rte-content li:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Ensure nested lists work properly */
+.rte-content ul ul,
+.rte-content ol ol,
+.rte-content ul ol,
+.rte-content ol ul {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Remove any conflicting styles that might hide list markers */
+.rte-content li::marker {
+  color: inherit !important;
+  font-size: inherit !important;
+}
+
+/* ============================================================================
+   HEADING STYLES - Inherit from globals.css
+   ============================================================================
+   All headings within .rte-content automatically use the standard heading
+   styles defined in globals.css (.font-heading-h1, .font-heading-h2, etc.)
+   This ensures consistency across the application with full responsive support
+   ============================================================================ */
+
+/* H1 - Uses .font-heading-h1 from globals.css */
+.rte-content h1 {
+  @apply font-heading-h1;
+}
+
+/* H2 - Uses .font-heading-h2 from globals.css */
+.rte-content h2 {
+  @apply font-heading-h2;
+}
+
+/* H3 - Uses .font-heading-h3 from globals.css */
+.rte-content h3 {
+  @apply font-heading-h3;
+}
+
+/* Override h3 margin-top to be exactly 16px */
+.rte-content :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 16px !important;
+}
+
+/* H4 - Uses .font-heading-h4 from globals.css */
+.rte-content h4 {
+  @apply font-heading-h4;
+}
+
+/* H5 - Uses .font-heading-h5 from globals.css */
+.rte-content h5 {
+  @apply font-heading-h5;
+}
+
+/* H6 - Uses .font-heading-h6 from globals.css */
+.rte-content h6 {
+  @apply font-heading-h6;
+}
+
+/* Rich Text Editor Image Caption Background Override */
+.ck-content .image>figcaption {
+  background-color: transparent !important;
+}
+
+/* Rich Text Editor Image Styles Override */
+.ck-content .image img {
+  display: block !important;
+  margin: auto !important;
+  min-width: unset !important;
+  margin-top: -48px !important;
+}
+
+/* CKEditor content container */
+.rte-content .ck-content {
+  @apply !box-border !w-full !overflow-hidden;
+}
+
+.rte-content .entity-ref-style {
+  @apply !text-[17px] !font-normal;
+}
+
+.rte-content .ck-content p:first-child {
+ margin-top:0px !important;
+}

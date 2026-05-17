@@ -1,0 +1,770 @@
+﻿---
+ID: "f421e06d-f34a-4c62-9d21-b66f34b42b00"
+Parent: "09af41bd-2652-49dd-93c8-30c4483c142d"
+Template: "09af41bd-2652-49dd-93c8-30c4483c142d"
+Path: /sitecore/templates/Project/Workwear/Pages/News/News Page/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: |
+    {C14B6289-8AC2-439C-9E5B-40DE9F820C3F}
+    {02BE8C1D-6482-4354-AE50-00F387D3467A}
+    {09AF41BD-2652-49DD-93C8-30C4483C142D}
+- ID: "34cacbb8-602f-4566-b0f6-5e45ab0870e8"
+  Hint: NewsType
+  Value: News
+- ID: "da2c0ef2-94ea-4061-9071-f745312564a4"
+  Hint: SolutionArea
+  Value: Workwear
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "080c1663-17ca-40bc-ab48-04929e896768"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        <p
+          uid="{8106498E-1401-4186-9CF1-556925CEF8D8}"
+          key="headless-main"
+          md="{8E7FC6F3-B3DB-4529-9141-F341013DB99E}" />
+        <r
+          id="{4ADCF35E-4AD0-4E32-AF97-48C2F76E44BC}"
+          ph="headless-main"
+          uid="{1C7B4671-A353-42AF-881F-2472464F4E45}" />
+        <r
+          id="{BFA51106-60DF-42D2-9CE3-1AC6F1072F8D}"
+          ph="headless-main"
+          uid="{4A902BB2-2401-4750-B04E-C3BB11CDF94D}" />
+      </d>
+    </r>
+Languages:
+- Language: "cs-CZ"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T191011Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Zprávy
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "826ed176-4520-4411-948f-1c35bf03bc08"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110956Z
+- Language: "de-AT"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T183713Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: News
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "5f9dfbf4-0bde-49c0-8587-de06c0d35c3b"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110948Z
+- Language: "de-CH"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T132852Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: News
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "27b56918-1283-483f-86e6-4ae2420c9b2a"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111015Z
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T191735Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: News
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "015f4430-082d-46b4-b4d8-462997873339"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260303T161953Z
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "04bf00db-f5fb-41f7-8ab7-22408372a981"
+      Hint: __Final Renderings
+      Value: |
+        <r xmlns:p="p" xmlns:s="s"
+          p:p="1">
+          <d
+            id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}">
+            <r
+              uid="{1C7B4671-A353-42AF-881F-2472464F4E45}">
+              <p:d />
+            </r>
+            <r
+              uid="{5A75E9C1-759F-447C-BBC4-82DEFB8B1D90}"
+              p:after="p[@uid='{8106498E-1401-4186-9CF1-556925CEF8D8}']"
+              s:id="{4ADCF35E-4AD0-4E32-AF97-48C2F76E44BC}"
+              s:ph="headless-main" />
+          </d>
+        </r>
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260209T183311Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: News
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "3fcb51c3-630d-4738-bf59-a0a45d8d8c90"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "a14f1b0c-4384-49ec-8790-28a440f3670c"
+      Hint: __Semantics
+      Value: 
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260303T164152Z
+- Language: "en-IE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T140059Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: News
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "d1b7089b-9259-4e67-bbe1-a5092f11e987"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110918Z
+- Language: "fr-BE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T185343Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Actualités
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "93309550-61c1-42da-8450-bf334bbe053d"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110912Z
+- Language: "fr-CH"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T142558Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Actualités
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "c3a6fbfd-eab1-4379-8bf3-a8bde8aad957"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111003Z
+- Language: "fr-LU"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T143516Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Actualités
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "1e290df9-50cb-44a6-b0a3-2df1d8e9a992"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111021Z
+- Language: "hr-HR"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T185712Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Vijesti
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "44a7492b-a476-45af-8ed2-82c8d1269a77"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111053Z
+- Language: "hu-HU"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T145911Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Hírek
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "d89f9272-49d9-4f35-98bb-74897c0f2275"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111043Z
+- Language: "nl-BE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T185104Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Nieuws
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "97bb84cb-945a-4ec5-91d9-9929bc641401"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111035Z
+- Language: "nl-NL"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T153228Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Nieuws
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "9017df41-6020-4794-8fa4-f0f526ac6ecf"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110926Z
+- Language: "pl-PL"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T155455Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Nowości
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "8ceead03-b925-419c-8bfa-4c32d90a69a8"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111009Z
+- Language: "ro-RO"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T164223Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Noutăți
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "463d46f0-4780-43f4-98ee-f6ee589ad5d4"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111344Z
+- Language: "sk-SK"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T165007Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Novinky
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "bd6b6000-7cc5-4872-9da5-b92041e0570e"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110940Z
+- Language: "sl-SI"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T165733Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Novice
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "62760e3f-fd52-4bbd-80a8-0eeb17c73cc1"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111200Z
+- Language: "sv-SE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "001dd393-96c5-490b-924a-b0f25cd9efd8"
+      Hint: __Lock
+      Value: <r />
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T111853Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Nyheter
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "ab6b0c0f-1d73-4eed-b3c5-4e885ee23d98"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{CFE79315-E349-4DDC-9ECC-014A0E2C22B1}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "c3bc6ee9-eba4-4479-95a2-0e266244ec23"
+      Hint: IncludeInListing
+      Value: 1
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T111030Z

@@ -1,0 +1,342 @@
+@import 'tailwindcss';
+@import './tokens.css';
+@import './forms/common.css';
+@import './rte-content.css';
+
+/* Utility class to hide scrollbars while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ============================================================================
+   FONT FACE DECLARATIONS
+   ============================================================================
+   Source: /public/assets/fonts/
+   Suisse Intl font family with multiple weights
+   All weights use the same font-family name for proper Tailwind integration
+   ============================================================================ */
+
+/* Light - 300 */
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/suisseIntl-light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Regular - 400 */
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/suisseIntl-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium - 500 */
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/suisseIntl-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Semibold - 600 */
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/suisseIntl-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold - 700 */
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/assets/fonts/suisseIntl-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'suisse_intlregular';
+  src: url('/assets/fonts/suisseIntl-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'suisse_intlmedium';
+  src: url('/assets/fonts/suisseIntl-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Compatibility: suisse_intlbold family */
+@font-face {
+  font-family: 'suisse_intlbold';
+  src: url('/assets/fonts/suisseIntl-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border-default);
+  }
+
+  html {
+    overflow-x: hidden;
+    font-family: 'Suisse Intl', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'Suisse Intl', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    /* Regular by default */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Suisse Intl', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  body {
+    background-color: var(--color-background, #ffffff);
+    color: var(--color-foreground, #000);
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+    overflow-x: hidden;
+  }
+}
+
+@config '../../../tailwind.config.ts';
+
+@utility text-box-trim-start {
+  text-box-trim: trim-start;
+}
+
+@utility text-box-trim-end {
+  text-box-trim: trim-end;
+}
+
+@utility text-box-trim-both {
+  text-box-trim: trim-both;
+}
+
+@utility text-box-edge-asc-desc {
+  text-box-edge: text text;
+}
+
+@utility text-box-edge-asc-baseline {
+  text-box-edge: text alphabetic;
+}
+
+@utility text-box-edge-cap-baseline {
+  text-box-edge: cap alphabetic;
+}
+
+@utility position-left {
+  text-align: start;
+}
+
+@utility position-center {
+  text-align: center;
+}
+
+@utility position-right {
+  text-align: end;
+}
+
+@utility indent-top {
+  margin-top: 32px;
+}
+
+@utility indent-bottom {
+  margin-bottom: 32px;
+}
+
+@utility indent {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+@utility wrap-break-word {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (min-width: 768px) {
+  .indent-top {
+    margin-top: 64px;
+  }
+
+  .indent-bottom {
+    margin-bottom: 64px;
+  }
+
+  .indent {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Fade in and out animation with 1 second stay */
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+
+    25% {
+      opacity: 1;
+    }
+
+    75% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .animate-fadeInOut {
+    animation: fadeInOut 2s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  .animate-fadeInOut-delayed {
+    animation: fadeInOut 2s ease-in-out infinite;
+    animation-delay: 2s;
+    animation-fill-mode: both;
+  }
+
+  /* Quotation class for wrapping strong tags with double quotes */
+  .quotation strong::before {
+    content: '"';
+    font-weight: 400;
+  }
+
+  .quotation strong::after {
+    content: '"';
+    font-weight: 400;
+  }
+
+  .quotation strong {
+    font-weight: 400;
+  }
+
+}
+
+.chevron-icon {
+  stroke-width: 2;
+  /* mobile + tablet */
+}
+
+@media (min-width: 1024px) {
+  .chevron-icon {
+    stroke-width: 3;
+    /* large and up */
+
+  }
+}
+
+/* Search Bar Animations */
+@keyframes expandFromRight {
+  0% {
+    transform: scaleX(0.05);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes collapseToRight {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0.05);
+  }
+}
+
+/* Search form embed override - applies modal-open styles directly to the no-results form */
+.search-no-results-form {
+  position: relative;
+  margin-top: 40px;
+  text-align: left;
+}
+
+/* Make the form visible */
+.search-no-results-form form.content,
+.search-no-results-form form:has(input[name="name"][data-prefill="contact_pop_up"]) {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  transform: none !important;
+  left: auto !important;
+  top: auto !important;
+  background: transparent !important;
+  z-index: 1 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+.search-no-results-form h1,
+.search-no-results-form h2,
+.search-no-results-form h3,
+.search-no-results-form h4,
+.search-no-results-form h5,
+.search-no-results-form h6,
+.search-no-results-form p,
+.search-no-results-form label,
+.search-no-results-form .form-field-label,
+.search-no-results-form .form-group-label {
+  text-align: left !important;
+}
+
+.search-no-results-form .lp-flex-container,
+.search-no-results-form .main-form-wrapper.lp-flex-container {
+  justify-content: flex-start !important;
+}
+
+.search-no-results-form h1 > strong {
+  display: inline-block;
+  margin-top: 16px;
+}

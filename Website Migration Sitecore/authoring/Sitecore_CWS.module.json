@@ -1,0 +1,28 @@
+{
+  "namespace": "Project.CWS",
+  "items": {
+    "includes": [
+      {
+        "name": "CWS templates",
+        "path": "/sitecore/templates/Project/cws",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "CWS renderings",
+        "path": "/sitecore/layout/Renderings/Project/cws",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "CWS placeholder settings",
+        "path": "/sitecore/layout/Placeholder Settings/Project/cws",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "CWS headlessvariants",
+        "path": "/sitecore/content/cws/cws/Presentation/Headless Variants",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      }
+    ]
+  }
+}
+  

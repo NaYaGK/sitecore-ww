@@ -1,0 +1,23 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "rewrites": [
+    { "source": "/sites/:path*", "destination": "https://www.cws.com/sites/:path*" },
+    { "source": "/themes/:path*", "destination": "https://www.cws.com/themes/:path*" },
+    { "source": "/modules/:path*", "destination": "https://www.cws.com/modules/:path*" },
+    { "source": "/core/:path*", "destination": "https://www.cws.com/core/:path*" },
+    { "source": "/libraries/:path*", "destination": "https://www.cws.com/libraries/:path*" },
+    { "source": "/firesafety/:path*", "destination": "https://www.cws.com/firesafety/:path*" },
+    { "source": "/:locale/:seg(fire-safety|brandschutz|brandbeveiliging)/:path*", "destination": "https://www.cws.com/:locale/:seg/:path*" },
+    { "source": "/:locale/:seg(fire-safety|brandschutz|brandbeveiliging)", "destination": "https://www.cws.com/:locale/:seg" },
+    { "source": "/fire-safety/:path*", "destination": "https://www.cws.com/en/fire-safety/:path*" },
+    { "source": "/fire-safety", "destination": "https://www.cws.com/en/fire-safety" },
+    { "source": "/:locale/:seg(cleanroom|reinraum|salle-blanche)/:path*", "destination": "https://www.cws.com/:locale/:seg/:path*" },
+    { "source": "/:locale/:seg(cleanroom|reinraum|salle-blanche)", "destination": "https://www.cws.com/:locale/:seg" },
+    { "source": "/cleanroom/:path*", "destination": "https://www.cws.com/en/cleanroom/:path*" },
+    { "source": "/cleanroom", "destination": "https://www.cws.com/en/cleanroom" },
+    { "source": "/:locale/:seg(hygiene|higijena|hygiena|higienia|higiena|hygien|igiene)/:path*", "destination": "https://www.cws.com/:locale/:seg/:path*" },
+    { "source": "/:locale/:seg(hygiene|higijena|hygiena|higienia|higiena|hygien|igiene)", "destination": "https://www.cws.com/:locale/:seg" }
+  ]
+}

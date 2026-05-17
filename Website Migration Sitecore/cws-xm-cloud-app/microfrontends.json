@@ -1,0 +1,59 @@
+{
+    "$schema": "https://openapi.vercel.sh/microfrontends.json",
+    "applications": {
+        "staging-cws-website": {
+            "development": {
+                "fallback": "stage-sc.cws.com"
+            }
+        },
+        "staging-cws-xm-cloud-app": {
+            "packageName": "cws-xm-cloud-app",
+            "development": {
+                "fallback": "stage-sc-workwear.cws.com"
+            },
+            "routing": [
+                {
+                    "paths": [
+                        "/en/workwear/:path*",
+                        "/de-DE/arbeitskleidung/:path*",
+                        "/de-AT/arbeitskleidung/:path*",
+                        "/de-CH/arbeitskleidung/:path*",
+                        "/fr-FR/vetements-de-travail/:path*",
+                        "/fr-BE/vetements-de-travail/:path*",
+                        "/fr-LU/vetements-de-travail/:path*",
+                        "/fr-CH/vetements-de-travail/:path*",
+                        "/es-ES/ropa-de-trabajo/:path*",
+                        "/it-IT/abbigliamento-da-lavoro/:path*",
+                        "/nl-NL/werkkledij/:path*",
+                        "/nl-BE/werkkledij/:path*",
+                        "/pl-PL/odziez-robocza-i-ochronna/:path*",
+                        "/cs-CZ/pracovni-odevy/:path*",
+                        "/sk-SK/pracovne-odevy/:path*",
+                        "/hu-HU/munka-es-vedoruha/:path*",
+                        "/ro-RO/imbracaminte-de-lucru/:path*",
+                        "/bg-BG/rabotno-obleklo/:path*",
+                        "/hr-HR/radna-odjeca/:path*",
+                        "/sl-SI/delovna-oblacila/:path*",
+                        "/sv-SE/arbetsklader/:path*",
+                        "/en-IE/workwear/:path*"
+                    ]
+                }
+            ]
+        },
+        "staging-healthcare": {
+            "development": {
+                "fallback": "stage-sc-healthcare.cws.com"
+            },
+            "routing": [
+                {
+                    "paths": [
+                        "/healthcare",
+                        "/healthcare/:path*",
+                        "/en/healthcare/:path*",
+                        "/de-DE/healthcare/:path*"
+                    ]
+                }
+            ]
+        }
+    }
+}

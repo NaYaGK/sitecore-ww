@@ -1,0 +1,16 @@
+/* =====================================================
+   CWS Form Styles - Entry Point
+   
+   TWO SEPARATE BUNDLES:
+   
+   1. common.css - Minimal tweaks for common forms
+      - Uses .cws-form class
+      - Sitecore defaults + small UI overrides
+   
+   Import what you need:
+   @import './forms/common.css';  // Common forms
+ 
+   ===================================================== */
+
+@import './common.css';
+

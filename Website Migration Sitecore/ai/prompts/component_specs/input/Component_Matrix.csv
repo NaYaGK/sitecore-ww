@@ -1,0 +1,84 @@
+Component,Sample URLs of Component,Component ID,Component Class,Fields,,Image,Notes
+Header Search Bar,https://www.cws.com/en/workwear,header-search-form-wrapper,header-search-form-wrapper search-visible,"header .header-search-form-wrapper.search-visible {
+
+opacity: 1;
+pointer-events: auto",,,
+Find your product,"https://www.cws.com/en/workwear
+https://www.cws.com/en/workwear/products/bestsellers",views-exposed-form,views-exposed-form bef-exposed-form,"div.view-products-filter.view-id-products_filter .view-filters .mobile-filters form {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+width: 100%;
+-moz-column-gap: 2rem;
+column-gap: 2rem;
+}
+}",,,
+work-wear shop searchbar,https://workwear-shop.cws.com/,large-search,large-search desktop-4,".gridlock .row .desktop-4 {
+width: 31.25%
+",,,
+work-wear shop navigation bar,https://workwear-shop.cws.com/,navigation__maincontainer,navigation__maincontainer row,".gridlock .row {
+width: 94%;
+}",,,
+Find your Job at CWS Workwear,"https://www.cws.com/en/workwear/career
+",js-form-item,js-form-item form-item form-type-textfield js-form-type-textfield form-item-title js-form-item-title,NA,,,
+Header Search Bar,https://www.cws.com/en/healthcare,header-search-form-wrapper,header-search-form-wrapper search-visible,"header .header-search-form-wrapper.search-visible {
+
+opacity: 1;
+pointer-events: auto",,,
+Header Search Bar,https://www.cws.com/en/hygiene,header-search-form-wrapper,header-search-form-wrapper search-visible,"header .header-search-form-wrapper.search-visible {
+
+opacity: 1;
+pointer-events: auto",,,
+Find your product,https://www.cws.com/en/hygiene/products,views-exposed-form,views-exposed-form bef-exposed-form,"div.view-products-filter.view-id-products_filter .view-filters .mobile-filters form {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+width: 100%;
+-moz-column-gap: 2rem;
+column-gap: 2rem;
+}",,,
+Header Search Bar,https://cwsdirect.com/en,header__search header__search--collapsible-mob ,header__search header__search--collapsible-mob js-search-bar relative js-closes-menu,,,,
+Available Colours,"https://www.cws.com/en/hygiene/produkte/cws-pureline-cream-non-touch
+https://www.cws.com/en/hygiene/produkte/cws-pureline-surface-cleaner-toilet-non-touch
+https://www.cws.com/en/hygiene/produkte/cws-pureline-surface-cleaner-toilet
+https://www.cws.com/en/hygiene/produkte/cws-paradise-stainless-steel-seatcleaner
+https://www.cws.com/en/hygiene/produkte/cws-paradise-cleanseat-universal
+https://www.cws.com/en/hygiene/produkte/cws-pureline-surface-cleaner-toilet-non-touch
+https://www.cws.com/en/hygiene/produkte/cws-pureline-surface-cleaner-toilet
+https://www.cws.com/en/hygiene/produkte/cws-paradise-stainless-steel-seatcleaner
+https://www.cws.com/en/hygiene/produkte/cws-pureline-foam-soap-dispenser-non-touch
+https://www.cws.com/en/hygiene/produkte/cws-pureline-foam
+https://www.cws.com/en/hygiene/produkte/cws-pureline-cream-non-touch
+https://www.cws.com/en/hygiene/produkte/cws-pureline-cream
+https://www.cws.com/en/hygiene/produkte/cws-stainless-steel-foam-slim
+https://www.cws.com/en/hygiene/produkte/cws-pureline-disinfect-foam
+https://www.cws.com/en/hygiene/produkte/cws-pureline-dry
+https://www.cws.com/en/hygiene/produkte/cws-stainless-steel-cotton-towel-dispenser-dry-slim
+https://www.cws.com/en/hygiene/produkte/cws-pureline-disinfect-gel-non-touch
+https://www.cws.com/en/hygiene/produkte/cws-mediline-universal-dispenser-500-ml-stainless-steel
+https://www.cws.com/en/hygiene/produkte/cws-pureline-handlotion-non-touch
+https://www.cws.com/en/hygiene/produkte/cws-mediline-universal-dispenser-500-ml-stainless-steel
+https://www.cws.com/en/hygiene/produkte/cws-pureline-handlotion-04
+",product-color-switcher,select-wrap,"products>.node__content .select-wrap {
+position: relative;
+padding-bottom: 10px;
+padding-top: 10px;
+border: 2px solid #000;",,,
+Filter & Sort by,"https://cwsdirect.com/en/collections/seifenspender-lotionspender?sort_by=manual
+https://cwsdirect.com/en/collections/papierspender
+https://cwsdirect.com/en/collections/desinfektionsspender
+https://cwsdirect.com/en/collections/duftspender",main-products-grid ,main-products-grid main-products-grid--contained flex,"body {
+color: rgb(var(--text-color));
+font-family: var(--body-font-family);
+font-size: calc(var(--body-font-size) * .1rem);
+font-style: var(--body-font-style);
+font-weight: var(--body-font-weight);
+line-height: 1.5;
+}",,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,},,,

@@ -1,0 +1,13 @@
+﻿---
+ID: "55f5946c-8bef-441e-a91e-3f8aaef42d5f"
+Parent: "976e1141-ece4-4fb9-8d5f-f3588ed5bdca"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Workwear/Page Content/Job Search/JobSearch/Content/SearchPlaceholder
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T220000Z

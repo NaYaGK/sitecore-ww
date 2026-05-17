@@ -1,0 +1,38 @@
+﻿---
+ID: "497da766-8e19-4c48-8256-549aaa338ddc"
+Parent: "7a4e304b-2d58-42c9-9fff-d5728146b691"
+Template: "7a4e304b-2d58-42c9-9fff-d5728146b691"
+Path: /sitecore/templates/Project/Workwear/Page Content/Advantage Cards/AdvantageCards/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{0CCE428B-79EA-4EA8-A0D3-C8271E9276C1}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "f4871de3-e6cc-482a-8dfc-cd433a89516f"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251230T205906Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "ed4daa65-906d-4d7c-8d4b-e8780dfe7236"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251230T205916Z

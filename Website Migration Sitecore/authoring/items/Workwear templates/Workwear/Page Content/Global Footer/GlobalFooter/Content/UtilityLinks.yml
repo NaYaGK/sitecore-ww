@@ -1,0 +1,20 @@
+﻿---
+ID: "8b9bcfc2-0d8c-4668-a014-b6ca28d6952d"
+Parent: "530a6153-97e9-421f-a1d6-b885af085375"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Workwear/Page Content/Global Footer/GlobalFooter/Content/UtilityLinks
+SharedFields:
+- ID: "1eb8ae32-e190-44a6-968d-ed904c794ebf"
+  Hint: Source
+  Value: "query:./UtilityLinks/*[@@templateid='{cf1e105f-99f0-4dd7-8e42-0480d93ee861}']"
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: Multilist
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T220000Z

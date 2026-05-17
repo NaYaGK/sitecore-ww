@@ -1,0 +1,48 @@
+﻿---
+ID: "53f38fd0-f88d-4e79-9990-deea7e8b139c"
+Parent: "6874679f-d77f-483d-9297-ab1887baa345"
+Template: "ab86861a-6030-46c5-b394-e8f99e8b87db"
+Path: /sitecore/templates/Project/Workwear/Pages/Homepage
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Core3/32x32/home_brown.png
+- ID: "12c33f3f-86c5-43a5-aeb4-5598cec45116"
+  Hint: __Base template
+  Value: |
+    {1778CF18-996B-4168-BEB9-78B5E8E8E944}
+    {4455C67A-7FFF-4D05-8FE6-A4D2FAE04FB9}
+    {D5E7FDC2-697A-415A-BE8E-651A175DF557}
+    {5E9B0C6F-31FD-4BA4-8331-A91E00161036}
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "9f5e37b7-efb1-4def-beed-2ea7048f283b"
+- ID: "f7d48a55-2158-4f02-9356-756654404f73"
+  Hint: __Standard values
+  Value: "{E6AD87B1-C6F0-420C-8B35-E864CB3B9913}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251115T191041Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "3fa27790-9924-4d3d-bd49-39aa2baf3f19"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260217T101050Z

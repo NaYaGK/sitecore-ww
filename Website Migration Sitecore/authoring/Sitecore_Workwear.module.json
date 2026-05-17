@@ -1,0 +1,28 @@
+{
+  "namespace": "Project.Workwear",
+  "items": {
+    "includes": [
+      {
+        "name": "Workwear templates",
+        "path": "/sitecore/templates/Project/workwear",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "Workwear renderings",
+        "path": "/sitecore/layout/Renderings/Project/workwear",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "Workwear placeholder settings",
+        "path": "/sitecore/layout/Placeholder Settings/Project/Workwear",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "Workwear headlessvariants",
+        "path": "/sitecore/content/workwear/workwear/Presentation/Headless Variants",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      }
+    ]
+  }
+}
+  

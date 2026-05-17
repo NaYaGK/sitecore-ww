@@ -1,0 +1,38 @@
+﻿---
+ID: "9efc7522-6271-4c1f-8f9d-36426e37ca0a"
+Parent: "0515fdc0-7ce6-42dd-a527-7c2cd1591c04"
+Template: "0515fdc0-7ce6-42dd-a527-7c2cd1591c04"
+Path: /sitecore/templates/Project/Workwear/Page Content/Circular Animation/Circular Animation Component/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{329D0BE2-9F5A-4F9F-B5B2-A2A7359C5920}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "2207c7c9-5137-4cb0-a6b7-4d07030e9333"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251205T093441Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "df0ae068-382e-49bb-b87c-8f27ff69aea3"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251205T093608Z

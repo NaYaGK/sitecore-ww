@@ -1,0 +1,38 @@
+﻿---
+ID: "5e6d717e-1f9d-4599-99cc-936065b98d13"
+Parent: "14c1398d-10d9-4cdc-8e0a-f3dd0ef429ea"
+Template: "14c1398d-10d9-4cdc-8e0a-f3dd0ef429ea"
+Path: /sitecore/templates/Project/Workwear/Page Content/Workwear Collections Teaser Grids/WorkwearCollectionsTeaserGridsFolder/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{3B893C24-E914-4E55-9C7F-CC1B090699B3}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "910fcd55-e19a-405f-a548-dcd11618344a"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251202T091341Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "b42a8cb4-3977-48a4-8a3f-04403226abd9"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251202T091404Z

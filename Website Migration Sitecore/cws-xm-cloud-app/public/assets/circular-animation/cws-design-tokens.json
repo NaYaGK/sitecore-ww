@@ -1,0 +1,49 @@
+{
+  "colors": {
+    "background": "#f5f5f7",
+    "yellowPrimary": "#f9e244",
+    "yellowDark": "#e6cf3d",
+    "textPrimary": "#000000",
+    "textSecondary": "#333333",
+    "circleBorder": "#e5e5e5",
+    "white": "#ffffff",
+    "shadowYellow": "rgba(249, 226, 68, 0.3)",
+    "shadowDefault": "rgba(0, 0, 0, 0.08)"
+  },
+  "sizes": {
+    "circleRadius": 160,
+    "centerIconSize": 120,
+    "stepMarkerOuter": 28,
+    "stepMarkerInner": 22,
+    "arrowIconSize": 32,
+    "centerCircleRadius": 100
+  },
+  "angles": {
+    "delivery": 45,
+    "washing": 135,
+    "checking": 225,
+    "repair": 315
+  },
+  "animations": {
+    "arcDuration": "0.6s",
+    "arcEasing": "ease-out",
+    "iconFadeDuration": "0.3s",
+    "iconFadeEasing": "ease",
+    "hoverScale": 1.1,
+    "activeScale": 1.1
+  },
+  "typography": {
+    "titleSize": "1.25rem",
+    "titleWeight": 700,
+    "descriptionSize": "0.9375rem",
+    "descriptionLineHeight": 1.6,
+    "fontFamilyHeading": "var(--font-heading)",
+    "fontFamilyBody": "var(--font-body)"
+  },
+  "spacing": {
+    "containerMaxWidth": "800px",
+    "svgMaxWidth": "600px",
+    "minHeight": "600px",
+    "textBlockMaxWidth": "250px"
+  }
+}

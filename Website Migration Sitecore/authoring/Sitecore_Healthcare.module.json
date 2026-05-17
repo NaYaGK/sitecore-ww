@@ -1,0 +1,28 @@
+{
+  "namespace": "Project.Healthcare",
+  "items": {
+    "includes": [
+      {
+        "name": "Healthcare templates",
+        "path": "/sitecore/templates/Project/healthcare",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "Healthcare renderings",
+        "path": "/sitecore/layout/Renderings/Project/healthcare",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "Healthcare placeholder settings",
+        "path": "/sitecore/layout/Placeholder Settings/Project/Healthcare",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      },
+      {
+        "name": "Healthcare headlessvariants",
+        "path": "/sitecore/content/healthcare/healthcare/Presentation/Headless Variants",
+        "allowedPushOperations": "CreateUpdateAndDelete"
+      }
+    ]
+  }
+}
+  

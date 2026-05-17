@@ -1,0 +1,13 @@
+﻿---
+ID: "31728012-4e7a-47b0-bece-5f46d89a6160"
+Parent: "f871b2d1-c339-495a-848a-56d23032ab0e"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Workwear/Page Content/Header Search Bar/HeaderSearchBar/Content/AnimationDuration
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T220000Z

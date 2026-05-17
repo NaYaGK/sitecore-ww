@@ -1,0 +1,37 @@
+| Field name          | Machine name        | Type   | Default value                  | Notes / Source                    |
+| ------------------- | ------------------- | ------ | ------------------------------ | --------------------------------- |
+| Redirect URL        | url                 | Hidden | Current page URL               | Auto-populated with JS            |
+| Referrer            | referrer            | Hidden | Previous page URL              | Auto-populated with JS            |
+| Form type           | form_type           | Hidden | —                              | Sitecore form prefill             |
+| Division            | division            | Hidden |                                | Sitecore form prefill               |
+| Product ID          | productid           | Hidden | —                              | Auto-populated on PDP             |
+| Product name        | productname         | Hidden | —                              | Auto-populated on PDP             |
+| Source              | source              | Hidden | Current page URL               | Auto-populated with JS            |
+| Is customer         | is_customer         | Hidden | 0                              | sitecore form prefill                     |
+| GCLID               | gclid               | Hidden | —                              | URL parameter        |
+| FBCLID              | fbclid              | Hidden | —                              | URL parameter          |
+| GA Client ID        | ga_client_id        | Hidden |                                | Hard coded values in browser              |
+| Form transaction ID | form_transaction_id | Hidden | -                              | Auto-generated unique ID with JS        |
+| Lead source         | lead_source         | Hidden | —                              | URL parameter                     |
+| Marketing code      | marketingcode       | Hidden | —                              | URL parameter                     |
+| Campaign            | campaign            | Hidden | —                              | URL parameter                     |
+| OID                 | oid                 | Hidden | - |                            |Sitecore form prefill          
+| Recommended by Name | recommended_by_name | Hidden | —                              |               |
+| Is hero form        | is_hero_form        | Hidden | 0                              | Sitecore form prefill                                |
+| Is switcher form    | is_switcher_form    | Hidden | 0                              | Sitecore form prefill                                |
+| Language            | language            | Hidden | de-DE / en-GB / fr-FR          | Extracted from URL path           |
+| Country             | country             | Hidden |                                | Sitecore form prefill                 |
+| Media               | media               | Hidden | Web Form Lite                  | Sitecore form prefill                                |
+| Solution area       | solution_area       | Hidden | Hygiene / Workwear / etc       | Sitecore form prefill                     |
+| DOI Pardot          | doi_pardot          | Hidden | —                              | Sitecore form prefill                |
+| DOI soft lead       | doi_soft_lead       | Hidden | 0                              | Sitecore form prefill            |
+| Send DOI email      | send_doi_email__c   | Hidden | —                              | Sitecore form prefill              |
+| Member status       | member_status       | Hidden | Responded                      | Sitecore form prefill               |
+| Campaign ID         | campaign_id         | Hidden | —                              | URL parameter           |
+| Name                | name                | Hidden | —                              | Sitecore form prefill                            |
+
+---
+
+## Sample URLs and Expected Field Values
+
+http://localhost:3000/products/business-fashion?gclid=12345-67890-abcdef&fbclid=98765-43210-fedcba&lead_source=google_ads&marketingcode=WINTER_SALE_2024&campaign=WORKWEAR_LAUNCH&campaign_id=WORKWEAR_LAUNCH&form_type=Lead&division=Workwear&is_customer=0&recommended_by_name=John+Doe&is_hero_form=1&is_switcher_form=0&country=Germany&solution_area=Workwear&doi_pardot=1&doi_soft_lead=1&send_doi_email__c=1&member_status=Responded&name=Contact+Form

@@ -1,0 +1,13 @@
+﻿---
+ID: "8ee9b207-b9f4-4509-ac64-f575a30c0f84"
+Parent: "0cca4c25-9ffb-4b20-a0db-f4e4dc971989"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Workwear/Page Content/Footer/SocialLinkItem/Content/Icon
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T220000Z

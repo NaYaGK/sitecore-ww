@@ -1,0 +1,13 @@
+﻿---
+ID: "cd008106-d2d1-4969-aa54-8c94b85c1704"
+Parent: "980136f0-0f91-4e5a-9d6f-0356b1d028c5"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Workwear/Page Content/Footer/FooterLinkGroup/Content/PrimaryLinks
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T220000Z

@@ -1,0 +1,16 @@
+{
+  "components": [
+    "Header",
+    "HeaderLogo",
+    "HealthcareHeader",
+    "TopHeader",
+    "LanguageSelector",
+    "PartialDesignDynamicPlaceholder",
+    "HeroBanner",
+    "TextHighlight",
+    "HorizontalTeaser",
+    "ContactFormBanner",
+    "CertificatesSlider"
+  ]
+}
+

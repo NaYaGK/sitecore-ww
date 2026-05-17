@@ -1,0 +1,106 @@
+﻿---
+ID: "9a30e6e4-c09e-4795-9caa-12febb1cf284"
+Parent: "861393ff-ecb2-4932-91c7-afa510137dfa"
+Template: "04646a89-996f-4ee7-878a-ffdbf1f0ef0d"
+Path: /sitecore/layout/Renderings/Project/Healthcare/Navigation/Header/Header
+SharedFields:
+- ID: "037fe404-dd19-4bf7-8e30-4dadf68b27b0"
+  Hint: componentName
+  Value: Header
+- ID: "069a8361-b1cd-437c-8c32-a3be78941446"
+  Hint: Placeholders
+  Value: |
+    {0E10EE1E-173B-449D-B681-03E71C0EA7C9}
+    {D02A3296-BD37-4CB6-B220-056AB1074D46}
+    {4B0DBCCE-290B-49DD-9F40-B68582BC8849}
+    {A10BB836-B235-4035-9450-19C3F027FB54}
+- ID: "17bb046a-a32a-41b3-8315-81217947611b"
+  Hint: ComponentQuery
+  Value: |
+    query HeaderQuery($datasource: String!, $language: String!) {
+      datasource: item(path: $datasource, language: $language) {
+    ContactLabel: field(name: "ContactLabel") {
+          value
+        }
+        children {
+          results {
+            title: field(name: "Title") {
+              value
+            }
+            link: field(name: "Link") {
+              link: jsonValue
+            }
+            children {
+              results {
+                ...linkWithImageFields
+                children {
+                  results {
+                    ...linkFields
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    fragment linkWithImageFields on Item {
+      title: field(name: "Title") {
+        value
+      }
+      link: field(name: "Link") {
+        link: jsonValue
+      }
+    }
+    
+    fragment linkFields on Item {
+      link: field(name: "Link") {
+        link: jsonValue
+      }
+    }
+- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
+  Hint: Datasource Template
+  Value: /sitecore/templates/Project/Workwear/Base/LinkList/Link List Folder
+- ID: "a77e8568-1ab3-44f1-a664-b7c37ec7810d"
+  Hint: Parameters Template
+  Value: "{5E4ED9BD-D6DB-415A-A911-717CDED10E6E}"
+- ID: "b5b27af1-25ef-405c-87ce-369b3a004016"
+  Hint: Datasource Location
+  Value: 
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "d07fed46-8e12-4e0e-b024-96851ade5a1d"
+- ID: "e829c217-5e94-4306-9c48-2634b094fdc2"
+  Hint: OtherProperties
+  Value: IsRenderingsWithDynamicPlaceholders=true
+Languages:
+- Language: en
+  Fields:
+  - ID: "30e85e5d-e00a-4864-b358-7624d511deb4"
+    Hint: __Unversioned revision
+    Value: "d44a32fb-1362-4ffa-aa38-2150571e46b8"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251107T140826Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "5ab285c0-6ef9-4494-b4c2-f39e35badcdd"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260309T163856Z

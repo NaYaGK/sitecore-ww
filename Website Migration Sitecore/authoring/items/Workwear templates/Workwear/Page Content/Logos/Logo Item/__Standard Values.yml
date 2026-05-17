@@ -1,0 +1,31 @@
+﻿---
+ID: "03d3d376-4cde-40b2-bc2b-12b8e750ac1b"
+Parent: "cae0babc-ca97-4ea0-be2f-1e6cf8457700"
+Template: "cae0babc-ca97-4ea0-be2f-1e6cf8457700"
+Path: /sitecore/templates/Project/Workwear/Page Content/Logos/Logo Item/__Standard Values
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251204T093600Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "07d39a37-4300-4653-9757-16dbe992df20"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20251204T093600Z

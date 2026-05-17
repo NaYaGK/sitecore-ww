@@ -1,0 +1,8 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Vertical stem (reduced to ~3/4 width, same height) -->
+  <rect x="9" y="3" width="6" height="11" fill="black" />
+  <!-- Wider arrow head (centered on stem) -->
+  <path d="M5 11L12 17L19 11Z" fill="black" />
+  <!-- Bottom bar (reduced to ~3/4 width, same height) -->
+  <rect x="5" y="19" width="14" height="2" fill="black" />
+</svg>

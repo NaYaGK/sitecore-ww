@@ -1,0 +1,119 @@
+﻿---
+ID: "0939f281-11ee-4dee-85f9-81c3ccbc2180"
+Parent: "b07340a7-3b23-4d53-97ce-b5014882f014"
+Template: "04646a89-996f-4ee7-878a-ffdbf1f0ef0d"
+Path: /sitecore/layout/Renderings/Project/Workwear/Page Content/LandingPageProductsCollections
+SharedFields:
+- ID: "037fe404-dd19-4bf7-8e30-4dadf68b27b0"
+  Hint: componentName
+  Value: LandingPageProductsCollections
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Apps/32x32/Books.png
+- ID: "17bb046a-a32a-41b3-8315-81217947611b"
+  Hint: ComponentQuery
+  Value: |
+    query ProductCollectionsQuery($datasource: String!, $language: String!) {
+      datasource: item(path: $datasource, language: $language) {
+        title: field(name: "Title") {
+          value
+        }
+        tabs: field(name: "Tabs") {
+          ... on MultilistField {
+            targetItems {
+              ...tabFields
+            }
+          }
+        }
+      }
+    }
+    
+    fragment tabFields on ProductCollectionTabs {
+      title: field(name: "Title") {
+        value
+      }
+      description: field(name: "Description") {
+        value
+      }
+      image: field(name: "Image") {
+        jsonValue
+      }
+      products: field(name: "Products") {
+        ... on MultilistField {
+          targetItems {
+            ...productFields
+          }
+        }
+      }
+    }
+    
+    fragment productFields on ProductVariants {
+      title: field(name: "Title") {
+        value
+      }
+      description: field(name: "Description") {
+        value
+      }
+      productVariants: field(name: "ProductVariants") {
+        ... on MultilistField {
+          targetItems {
+            ...productVariantFields
+          }
+        }
+      }
+    }
+    
+    fragment productVariantFields on ProductVariant {
+      image: field(name: "Image") {
+        jsonValue
+      }
+      variant: field(name: "Variant") {
+        value
+      }
+      imageLink: field(name: "Image Link") {
+        value
+      }
+    }
+    
+- ID: "1a7c85e5-dc0b-490d-9187-bb1dbcb4c72f"
+  Hint: Datasource Template
+  Value: /sitecore/templates/Project/Workwear/Page Content/Landing Pages/Landing Page Product Collections/ProductCollection
+- ID: "a77e8568-1ab3-44f1-a664-b7c37ec7810d"
+  Hint: Parameters Template
+  Value: "{5E4ED9BD-D6DB-415A-A911-717CDED10E6E}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "c473f36f-6745-48c8-98ca-99f3580974a9"
+Languages:
+- Language: en
+  Fields:
+  - ID: "30e85e5d-e00a-4864-b358-7624d511deb4"
+    Hint: __Unversioned revision
+    Value: "696a724b-7c47-470f-b315-97b6a466e061"
+  - ID: "b5e02ad9-d56f-4c41-a065-a133db87bdeb"
+    Hint: __Display name
+    Value: Landing Page Product Collections
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260302T212843Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\sergey@7kingscode.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\sergey@7kingscode.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a57e5e16-11c2-4105-a26e-050a91466426"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\vikramacholan@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260314T113251Z

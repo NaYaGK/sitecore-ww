@@ -1,0 +1,41 @@
+﻿---
+ID: "73dc9f25-986f-4dbe-b183-fdacbb20915a"
+Parent: "8a0e37f2-b06a-48f5-bf73-a4c10f6954c2"
+Template: "8a0e37f2-b06a-48f5-bf73-a4c10f6954c2"
+Path: /sitecore/templates/Project/Workwear/Page Content/Downward Animation/DownwardAnimationFolder/__Standard Values
+SharedFields:
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: /~/icon/applicationsv2/32x32/arrow_down_green.png
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{F9E0558A-417C-43C0-86A2-59FE908F8027}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "85ce40c5-603b-4279-9239-269361986506"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251202T133147Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "116132d3-6f19-4fcb-8e53-3e62f801baa6"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\pramod@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260107T131112Z

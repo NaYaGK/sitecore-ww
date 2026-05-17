@@ -1,0 +1,38 @@
+﻿---
+ID: "80385754-150f-4003-9008-c9faa296bbc0"
+Parent: "5015170b-e12a-4aaf-96b8-83b896cfab79"
+Template: "5015170b-e12a-4aaf-96b8-83b896cfab79"
+Path: /sitecore/templates/Project/Workwear/Page Content/Promo/Promo Data Folder/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: "{A1886CC8-AD9F-4E8A-98DA-26303D18359F}"
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "3fd6c3a8-1d00-4bbe-86ad-9d28c4a923a3"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260220T125703Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "202f0c73-48e9-4de9-a15b-3540e4e786a8"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T125745Z

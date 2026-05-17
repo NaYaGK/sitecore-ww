@@ -1,0 +1,23 @@
+﻿---
+ID: "70bb1489-73f3-45dd-9ad2-d2080c8f1aa3"
+Parent: "7a4e304b-2d58-42c9-9fff-d5728146b691"
+Template: "e269fbb5-3750-427a-9149-7aa950b49301"
+Path: /sitecore/templates/Project/Workwear/Page Content/Advantage Cards/AdvantageCards/AdvantageCards
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T210000Z
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "ab327b2e-0f4a-4da7-baee-f3ad362df302"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260129T161529Z

@@ -1,0 +1,630 @@
+﻿---
+ID: "120ab238-50a8-4e07-957f-c8687aade0cb"
+Parent: "80e6779d-f201-4231-aeaa-9d8597559693"
+Template: "80e6779d-f201-4231-aeaa-9d8597559693"
+Path: /sitecore/templates/Project/Workwear/Pages/Landing Base Page/__Standard Values
+SharedFields:
+- ID: "1172f251-dad4-4efb-a329-0c63500e4f1e"
+  Hint: __Masters
+  Value: |
+    {2A21DA99-42DE-492A-BCBE-251761F3614E}
+    {02BE8C1D-6482-4354-AE50-00F387D3467A}
+    {09AF41BD-2652-49DD-93C8-30C4483C142D}
+- ID: "dbbbeca1-21c7-4906-9dd2-493c1efa59a2"
+  Hint: __Shared revision
+  Value: "94b0a282-2790-4352-abd7-f7c6d97529bd"
+- ID: "f1a1fe9e-a60c-4ddb-a3a0-bb5b29fe732e"
+  Hint: __Renderings
+  Value: |
+    <r xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <d
+        id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}"
+        l="{96E5F4BA-A2CF-4A4C-A4E7-64DA88226362}">
+        <p
+          uid="{70CB75B4-2DAD-499F-A90A-7DC4BE9FEF52}"
+          key="headless-main"
+          md="{8E7FC6F3-B3DB-4529-9141-F341013DB99E}" />
+      </d>
+    </r>
+Languages:
+- Language: "cs-CZ"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T190633Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Obsahová Stránka
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "aaece637-8982-4976-b85d-c1d2425c9cd7"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110609Z
+- Language: "de-AT"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T183639Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Inhaltsseite
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "31eb5421-e614-40ed-b852-c65542f7dc28"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110600Z
+- Language: "de-CH"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T133012Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Inhaltsseite
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a2808b72-d6e3-4a3c-b12f-56750b716a65"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110654Z
+- Language: "de-DE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T191800Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Inhaltsseite
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "79647836-024e-4b61-8c6f-b7930cc9c635"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260219T115411Z
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251127T184231Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Inhaltsseite
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\atanas@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "621e7238-f54e-4e54-8b12-1fef91ac4c61"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "a14f1b0c-4384-49ec-8790-28a440f3670c"
+      Hint: __Semantics
+      Value: 
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\vikramacholan@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260313T221924Z
+- Language: "en-IE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T140229Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Inhaltsseite
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "7fb4db49-4665-43e0-9b7d-d19a532e307a"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110442Z
+- Language: "fr-BE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T185305Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Page De Contenu
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "909c684a-3ee7-41ff-a022-6ad9b7e6b3d5"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110435Z
+- Language: "fr-CH"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T142648Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Page De Contenu
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "01f19c4b-38d3-4991-95ae-4071ab977643"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110632Z
+- Language: "fr-LU"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T143621Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Page De Contenu
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "dd962e53-ff18-4e5e-b92a-79a1a8e3bcc6"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110402Z
+- Language: "hr-HR"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T185638Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Stranica Sa Sadržajem
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "7625c68a-fc09-4f14-aef1-6657679511fc"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110214Z
+- Language: "hu-HU"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T150449Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Tartalom Oldal
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "79af6af2-2b38-408a-97b7-d0132670915f"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110303Z
+- Language: "nl-BE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260212T185043Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Inhoud Pagina
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "84f599cd-567b-4fcb-9a6b-60c8c60bad1b"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110317Z
+- Language: "nl-NL"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T153325Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Inhoud Pagina
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "fa52916f-09d1-4bc6-b058-10173963bc19"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110501Z
+- Language: "pl-PL"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T155601Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Strona Zawartości
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "e32f585a-478b-45e9-9ab3-d1862f33b09e"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110645Z
+- Language: "ro-RO"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T164335Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Pagina De Conținut
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "f5ffcd95-cb08-48b5-86b4-0ef4f1e28df5"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110524Z
+- Language: "sk-SK"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T165056Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Obsahová Stránka
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "3b4753a4-985f-4aaa-ad83-6812fe88dc77"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110542Z
+- Language: "sl-SI"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T165811Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Stran Vsebine
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\rounak@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "1269d548-3436-4036-af13-4a4ce5f3636c"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110741Z
+- Language: "sv-SE"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "06b69df9-0436-4240-bcfe-4fd3abd7bc94"
+      Hint: isSearchable
+      Value: 1
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20260213T111825Z
+    - ID: "464933db-a959-486d-987f-4a5ba691e418"
+      Hint: MetaType
+      Value: Sida Med Innehåll
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "ebe23b94-cabf-4c23-bb2a-93144c9128d0"
+    - ID: "9340dfc7-150a-43ad-9849-855e8300e938"
+      Hint: Page Tags
+      Value: "{4E00600E-DCFF-41FF-A2AC-0711BB099D35}"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\manoj@7kctech.com
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20260220T110337Z

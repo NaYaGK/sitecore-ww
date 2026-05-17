@@ -1,0 +1,17 @@
+﻿---
+ID: "2bcf885f-aabc-41c4-9e2c-67e4eedbc625"
+Parent: "530a6153-97e9-421f-a1d6-b885af085375"
+Template: "455a3e98-a627-4b40-8035-e683a0331ac7"
+Path: /sitecore/templates/Project/Workwear/Page Content/Global Footer/GlobalFooter/Content/Copyright
+SharedFields:
+- ID: "ab162cc0-dc80-4abf-8871-998ee5d7ba32"
+  Hint: Type
+  Value: "Single-Line Text"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20251124T220000Z

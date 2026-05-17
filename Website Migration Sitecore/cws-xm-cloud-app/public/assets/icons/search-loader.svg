@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none">
+  <style>
+    .loader-circle {
+      animation: rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+      transform-origin: center;
+    }
+    .loader-dot {
+      animation: color-change 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    }
+    .loader-dot:nth-child(1) { animation-delay: 0s; }
+    .loader-dot:nth-child(2) { animation-delay: -0.1s; }
+    .loader-dot:nth-child(3) { animation-delay: -0.2s; }
+    .loader-dot:nth-child(4) { animation-delay: -0.3s; }
+    .loader-dot:nth-child(5) { animation-delay: -0.4s; }
+    .loader-dot:nth-child(6) { animation-delay: -0.5s; }
+    .loader-dot:nth-child(7) { animation-delay: -0.6s; }
+    .loader-dot:nth-child(8) { animation-delay: -0.7s; }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes color-change {
+      0%, 100% {
+        fill: #d1d5db;
+        opacity: 0.3;
+      }
+      50% {
+        fill: #374151;
+        opacity: 1;
+      }
+    }
+  </style>
+
+  <g class="loader-circle">
+    <circle class="loader-dot" cx="12" cy="4" r="2" />
+    <circle class="loader-dot" cx="18.5" cy="6.5" r="2" />
+    <circle class="loader-dot" cx="20" cy="12" r="2" />
+    <circle class="loader-dot" cx="18.5" cy="17.5" r="2" />
+    <circle class="loader-dot" cx="12" cy="20" r="2" />
+    <circle class="loader-dot" cx="5.5" cy="17.5" r="2" />
+    <circle class="loader-dot" cx="4" cy="12" r="2" />
+    <circle class="loader-dot" cx="5.5" cy="6.5" r="2" />
+  </g>
+</svg>
