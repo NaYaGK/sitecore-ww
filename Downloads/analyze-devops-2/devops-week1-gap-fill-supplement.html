@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 Gap-Fill Supplement | Missing Pieces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07070d;
+  --surface:  #0e0e18;
+  --surface2: #14141f;
+  --surface3: #1b1b2a;
+  --border:   #242436;
+  --border2:  #323250;
+  --text:     #dde0f0;
+  --dim:      #7878a0;
+  --ok:       #52f07a;
+  --warn:     #f0c040;
+  --danger:   #f05060;
+  --info:     #40c8f8;
+  --gap:      #e040fb;     /* gap-fill accent — distinct from both packs */
+  --d2:       #40d4f0;
+  --d1:       #7fff6a;
+  --mono: 'IBM Plex Mono', monospace;
+  --body: 'Barlow', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed; left: 0; top: 0;
+  width: 215px; height: 100vh;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 22px 0;
+  overflow-y: auto;
+  z-index: 200;
+  scrollbar-width: thin;
+}
+.nav-brand {
+  padding: 0 18px 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.nav-brand .tag {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gap); display: block; margin-bottom: 4px;
+}
+.nav-brand strong { font-family: var(--body); font-size: 15px; font-weight: 800; }
+.nav-grp { padding: 10px 18px 4px; font-family: var(--mono); font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dim); }
+.nav a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 18px;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--dim); text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.12s;
+}
+.nav a:hover, .nav a.active { color: var(--gap); background: var(--surface2); border-left-color: var(--gap); }
+.ndot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
+
+/* ── MAIN ── */
+.main { margin-left: 215px; padding: 0 52px 80px; max-width: 1120px; }
+
+/* ── HERO ── */
+.hero { padding: 64px 0 44px; }
+.hero-tag {
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gap); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-tag::after { content:''; flex:1; height:1px; background: linear-gradient(90deg, var(--gap), transparent); opacity:0.3; }
+.hero h1 { font-family: var(--body); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+.hero h1 em { font-style: normal; color: var(--gap); }
+.hero p { color: var(--dim); font-size: 14.5px; max-width: 640px; margin-bottom: 24px; }
+.what-is {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-left: 4px solid var(--gap);
+  padding: 18px 22px;
+  border-radius: 6px;
+  margin-bottom: 28px;
+}
+.what-is h3 { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--gap); margin-bottom: 10px; }
+.what-is p { font-size: 13.5px; color: var(--dim); }
+.what-is ul { padding-left: 18px; margin-top: 8px; }
+.what-is li { font-size: 13.5px; color: var(--dim); margin-bottom: 4px; }
+.what-is li strong { color: var(--text); }
+
+/* ── SECTION HEADER ── */
+.sec-hdr {
+  display: flex; align-items: center; gap: 14px;
+  margin: 52px 0 22px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border);
+}
+.sec-pill {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  padding: 5px 12px; border-radius: 3px; flex-shrink: 0;
+}
+.sec-pill.d1 { background: rgba(127,255,106,0.1); color: var(--d1); border: 1px solid rgba(127,255,106,0.3); }
+.sec-pill.d2 { background: rgba(64,212,240,0.1); color: var(--d2); border: 1px solid rgba(64,212,240,0.3); }
+.sec-pill.d4 { background: rgba(240,192,64,0.1); color: var(--warn); border: 1px solid rgba(240,192,64,0.3); }
+.sec-pill.gap { background: rgba(224,64,251,0.1); color: var(--gap); border: 1px solid rgba(224,64,251,0.3); }
+.sec-hdr h2 { font-size: clamp(1.2rem, 2vw, 1.8rem); font-weight: 800; color: var(--text); }
+.sec-hdr .where { margin-left: auto; font-family: var(--mono); font-size: 10px; color: var(--dim); text-align: right; white-space: nowrap; }
+
+/* ── SUB ── */
+.sub { display: flex; align-items: center; gap: 12px; margin: 26px 0 12px; }
+.sub h3 { font-weight: 700; font-size: 15px; color: var(--text); white-space: nowrap; }
+.sub::after { content:''; flex:1; height:1px; background: var(--border); }
+
+/* ── CALLOUTS ── */
+.box { border-radius: 6px; padding: 14px 20px; margin: 12px 0; font-size: 13.5px; }
+.box.info  { background: rgba(64,200,248,0.05); border: 1px solid rgba(64,200,248,0.25); border-left: 4px solid var(--info); }
+.box.warn  { background: rgba(240,192,64,0.05); border: 1px solid rgba(240,192,64,0.25); border-left: 4px solid var(--warn); }
+.box.ok    { background: rgba(82,240,122,0.05); border: 1px solid rgba(82,240,122,0.25); border-left: 4px solid var(--ok); }
+.box.fire  { background: rgba(240,80,96,0.05); border: 1px solid rgba(240,80,96,0.25); border-left: 4px solid var(--danger); }
+.box.gap   { background: rgba(224,64,251,0.05); border: 1px solid rgba(224,64,251,0.25); border-left: 4px solid var(--gap); }
+.box h4 { font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+.box.info h4 { color: var(--info); } .box.warn h4 { color: var(--warn); }
+.box.ok h4 { color: var(--ok); } .box.fire h4 { color: var(--danger); } .box.gap h4 { color: var(--gap); }
+.box p { color: var(--dim); } .box p + p { margin-top: 6px; }
+.box strong { color: var(--text); }
+
+/* ── TERMINAL ── */
+.term {
+  background: #030307;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  margin: 12px 0;
+  overflow: hidden;
+  font-family: var(--mono);
+}
+.term-bar {
+  background: var(--surface2);
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px;
+}
+.term-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+.term-bar .dot.r { background: #ff5f57; }
+.term-bar .dot.y { background: #febc2e; }
+.term-bar .dot.g { background: #28c840; }
+.term-bar .lbl { margin-left: 8px; font-size: 10.5px; color: var(--dim); }
+.term-bar .badge {
+  margin-left: auto; font-size: 9px; text-transform: uppercase;
+  letter-spacing: 1.5px; padding: 2px 8px; border-radius: 2px;
+}
+.term-bar .badge.gap { background: rgba(224,64,251,0.15); color: var(--gap); }
+.term-bar .badge.crit { background: rgba(240,80,96,0.15); color: var(--danger); }
+.term-body { padding: 18px 22px; font-size: 12.5px; line-height: 1.85; }
+.pr  { color: var(--ok); margin-right: 5px; user-select: none; }
+.cm  { color: #c0c8f0; }
+.cmt { color: var(--dim); font-size: 11.5px; }
+.out { color: #6070a0; margin: 2px 0 2px 20px; font-size: 12px; display: block; }
+.out.ok   { color: var(--ok); }
+.out.err  { color: var(--danger); }
+.out.wrn  { color: var(--warn); }
+.out.info { color: var(--info); }
+.sl { font-size: 9.5px; text-transform: uppercase; letter-spacing: 2px; color: var(--dim); margin: 16px 0 8px; padding-top: 14px; border-top: 1px solid var(--border); }
+.sl:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+
+/* ── CONCEPT GRID ── */
+.cgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(225px,1fr)); gap: 12px; margin: 12px 0; }
+.ccard {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 6px; padding: 15px 17px;
+}
+.ccard .ico { font-size: 17px; margin-bottom: 7px; }
+.ccard h4 { font-size: 13.5px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+.ccard p { font-size: 12.5px; color: var(--dim); }
+.ccard .why { font-size: 12px; color: var(--gap); margin-top: 7px; font-style: italic; }
+
+/* ── INLINE CODE ── */
+code {
+  font-family: var(--mono); font-size: 12px;
+  background: rgba(64,200,248,0.1); color: var(--info);
+  padding: 2px 6px; border-radius: 3px;
+}
+
+/* ── INTERVIEW BLOCK ── */
+.int-block { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin: 12px 0; }
+.int-q {
+  padding: 11px 17px;
+  background: rgba(224,64,251,0.06);
+  border-bottom: 1px solid rgba(224,64,251,0.2);
+  font-size: 13.5px; font-weight: 600; color: var(--gap);
+  display: flex; gap: 10px;
+}
+.int-q .ql { font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--dim); flex-shrink: 0; margin-top: 2px; }
+.int-a { padding: 13px 17px; font-size: 13.5px; color: var(--dim); }
+.int-a strong { color: var(--text); }
+
+/* ── QUIZ ── */
+.quiz { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 20px 24px; margin: 12px 0; }
+.quiz-title { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--info); margin-bottom: 16px; }
+.qitem { margin-bottom: 18px; }
+.qitem:last-child { margin-bottom: 0; }
+.qq { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.qq .qn { color: var(--dim); font-family: var(--mono); margin-right: 6px; }
+.opts { display: flex; flex-direction: column; gap: 5px; }
+.opt { background: var(--surface3); border: 1px solid var(--border); border-radius: 4px; padding: 9px 14px; font-size: 13px; cursor: pointer; transition: all 0.12s; }
+.opt:hover { border-color: var(--info); color: var(--info); }
+.opt.c { background: rgba(82,240,122,0.08); border-color: var(--ok); color: var(--ok); }
+.opt.w { background: rgba(240,80,96,0.06); border-color: var(--danger); color: var(--danger); }
+.exp { display: none; margin-top: 10px; padding: 10px 14px; background: var(--surface3); border-left: 3px solid var(--info); border-radius: 0 4px 4px 0; font-size: 12.5px; color: var(--dim); }
+.exp.show { display: block; }
+
+/* ── MISTAKE CARD ── */
+.mk-wrap { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin: 12px 0; }
+.mk-hdr { padding: 10px 20px; font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 2px; color: var(--danger); background: rgba(240,80,96,0.06); border-bottom: 1px solid rgba(240,80,96,0.2); }
+.mk { padding: 13px 20px; border-bottom: 1px solid rgba(255,255,255,0.03); display: flex; gap: 12px; }
+.mk:last-child { border: none; }
+.mx { color: var(--danger); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+.mc strong { display: block; color: var(--text); font-size: 13.5px; margin-bottom: 3px; }
+.mc p { font-size: 12.5px; color: var(--dim); }
+.mc .fix { font-family: var(--mono); font-size: 11.5px; color: var(--ok); display: block; margin-top: 5px; }
+
+/* ── TABLE ── */
+.tbl { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+.tbl th { background: var(--surface3); padding: 9px 14px; text-align: left; font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--dim); border-bottom: 1px solid var(--border); }
+.tbl td { padding: 9px 14px; border-bottom: 1px solid rgba(255,255,255,0.03); vertical-align: top; color: var(--dim); }
+.tbl td:first-child { font-family: var(--mono); font-size: 12px; color: var(--info); white-space: nowrap; }
+.tbl td strong { color: var(--text); display: block; margin-bottom: 2px; }
+.tbl tr:hover td { background: var(--surface2); }
+
+/* ── CHECKLIST ── */
+.chk-list { list-style: none; }
+.chk-list li { padding: 7px 0; font-size: 13.5px; color: var(--dim); border-bottom: 1px solid rgba(255,255,255,0.03); display: flex; align-items: flex-start; gap: 10px; }
+.chk-list li:last-child { border: none; }
+.chk-list li::before { content: '□'; color: var(--border2); font-size: 14px; flex-shrink: 0; }
+
+/* ── GITHUB TEMPLATE ── */
+.gh { background: #02020a; border: 1px solid var(--border2); border-radius: 7px; overflow: hidden; margin: 12px 0; font-family: var(--mono); }
+.gh-bar { background: var(--surface2); border-bottom: 1px solid var(--border); padding: 9px 16px; display: flex; justify-content: space-between; font-size: 10.5px; color: var(--dim); }
+.gh pre { padding: 18px 22px; font-size: 12.5px; color: #8888b8; overflow-x: auto; line-height: 1.65; }
+.mh1 { color: #fff; } .mh2 { color: #b0b0e8; } .mh3 { color: #8888cc; }
+.mcod { color: var(--info); } .mcom { color: var(--dim); } .mbdg { color: var(--ok); }
+
+/* ── FOOTER ── */
+.footer { margin-top: 72px; padding: 24px 0; border-top: 1px solid var(--border); text-align: center; font-family: var(--mono); font-size: 11px; color: var(--dim); }
+.footer span { color: var(--gap); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) { .nav { display: none; } .main { margin-left: 0; padding: 24px 20px 60px; } }
+
+/* ── ANCHORS ── */
+#billing, #git-gaps, #linux-missing, #linux-debug-gaps, #env-shell, #week1-checklist { scroll-margin-top: 24px; }
+
+p { color: var(--dim); font-size: 14px; }
+strong { color: var(--text); }
+ul { padding-left: 20px; }
+ul li { color: var(--dim); font-size: 13.5px; margin-bottom: 4px; }
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.main > * { animation: fadeIn 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <span class="tag">Week 1 — Gap Fill</span>
+    <strong>Missing Pieces</strong>
+  </div>
+
+  <div class="nav-grp">Critical Gaps</div>
+  <a href="#billing"><span class="ndot"></span>AWS Billing Safety</a>
+  <a href="#git-gaps"><span class="ndot"></span>Git Branching + Undo</a>
+  <a href="#linux-missing"><span class="ndot"></span>Linux Text Processing</a>
+  <a href="#linux-debug-gaps"><span class="ndot"></span>journalctl + lsof + scp</a>
+  <a href="#env-shell"><span class="ndot"></span>export, alias, .bashrc</a>
+
+  <div class="nav-grp">Reference</div>
+  <a href="#mistakes-gap"><span class="ndot"></span>New Mistake Cards</a>
+  <a href="#interview-gap"><span class="ndot"></span>Interview Prompts</a>
+  <a href="#quiz-gap"><span class="ndot"></span>Gap Quiz</a>
+  <a href="#week1-checklist"><span class="ndot"></span>Week 1 Master Checklist</a>
+  <a href="#github-gap"><span class="ndot"></span>GitHub Template Patch</a>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Week 1 · Supplement · Gap-Fill</div>
+    <h1>What We <em>Missed.</em><br>Fixed Now.</h1>
+    <p>Audit of both packs found real gaps — not cosmetic ones. This supplement patches them in the correct order. Read it alongside Days 1–7. Every section tells you <strong>which day it belongs to</strong> so you slot it into the right session.</p>
+
+    <div class="what-is">
+      <h3>What This Supplement Covers (and what day it patches)</h3>
+      <ul>
+        <li><strong>AWS Billing Alerts</strong> — belongs in Day 2, before anything else in AWS</li>
+        <li><strong>Git branching, stash, revert vs reset</strong> — belongs in Day 2</li>
+        <li><strong>Linux text processing: awk, cut, sort, uniq, wc, tar</strong> — belongs in Day 1</li>
+        <li><strong>journalctl, lsof, scp</strong> — belongs in Day 1 (service debugging + file transfer)</li>
+        <li><strong>export, alias, .bashrc customisation</strong> — belongs in Day 1/Day 4</li>
+        <li><strong>aws configure --profile, named profiles</strong> — belongs in Day 2</li>
+        <li><strong>EBS snapshots</strong> — belongs in Day 3 (before experiments on your EC2)</li>
+      </ul>
+    </div>
+
+    <div class="box fire">
+      <h4>🔴 Senior Engineer — Why These Gaps Actually Matter</h4>
+      <p><strong>The billing alert gap</strong> is the most dangerous omission. Beginners regularly get surprise AWS bills in the hundreds of pounds because they left something running. Set billing alerts on Day 2 before you do anything else in the console — non-negotiable.</p>
+      <p><strong>The git branching gap</strong> will cost you an interview. "Show me your git workflow" is a standard question and if you only know the main branch commit cycle, you look like you've never worked on a team. Branching takes 20 minutes to learn. Do it Day 2.</p>
+      <p><strong>The journalctl gap</strong> will cost you debugging time every week. <code>/var/log/</code> is old-school. Modern systemd Linux uses journalctl. Most DevOps issues you hit in Weeks 2–13 are diagnosed with journalctl first.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ GAP 1: AWS BILLING SAFETY ═══════════ -->
+  <div id="billing">
+    <div class="sec-hdr">
+      <div class="sec-pill d2">Add to Day 2</div>
+      <h2>AWS Billing Safety — Do This Before Anything Else</h2>
+      <div class="where">Slot after: aws configure<br>Before: launching EC2</div>
+    </div>
+
+    <div class="box fire">
+      <h4>🔴 This is not optional</h4>
+      <p>Beginners have received £500+ surprise AWS bills from forgotten EC2 instances, NAT Gateways, or accidentally created resources in the wrong region. Set a billing alarm on your very first day in the console — it takes 4 minutes and prevents a potentially traumatic experience.</p>
+    </div>
+
+    <div class="sub"><h3>⌨️ Set Billing Alarm + Budget via CLI</h3></div>
+    <div class="term">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="lbl">AWS Billing Safety Setup — Day 2, Session 1</span>
+        <span class="badge crit">Critical — Do First</span>
+      </div>
+      <div class="term-body">
+        <div class="sl">Step 1: Enable billing alerts (one-time account setting)</div>
+        <span class="out">  # Must be done in the AWS Console (not CLI) — one time only:</span>
+        <span class="out">  # Console → Account (top right) → Billing preferences</span>
+        <span class="out">  # ✓ Check: "Receive Billing Alerts"</span>
+        <span class="out">  # ✓ Check: "Receive Free Tier Usage Alerts"</span>
+        <span class="out">  # Click Save. Takes effect immediately.</span>
+
+        <div class="sl">Step 2: Create a billing alarm via CLI (us-east-1 only — billing metrics are global but live there)</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws sns create-topic --name billing-alerts --region us-east-1</span></div>
+        <span class="out info">{ "TopicArn": "arn:aws:sns:us-east-1:123456789:billing-alerts" }</span>
+        <span class="out">  # Save the TopicArn — you'll need it below</span>
+
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws sns subscribe \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --topic-arn arn:aws:sns:us-east-1:YOUR_ACCOUNT:billing-alerts \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --protocol email \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --notification-endpoint your@email.com \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --region us-east-1</span></div>
+        <span class="out wrn">  # Check your email — you must CONFIRM the subscription or alerts won't send</span>
+
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws cloudwatch put-metric-alarm \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --alarm-name "Monthly-Bill-10-USD" \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --alarm-description "Alert when estimated charges exceed $10" \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --metric-name EstimatedCharges \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --namespace AWS/Billing \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --statistic Maximum \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --dimensions Name=Currency,Value=USD \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --period 86400 \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --evaluation-periods 1 \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --threshold 10 \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --comparison-operator GreaterThanOrEqualToThreshold \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --alarm-actions arn:aws:sns:us-east-1:YOUR_ACCOUNT:billing-alerts \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --region us-east-1</span></div>
+        <span class="out ok">  # Alarm created. You will be emailed if your monthly bill approaches $10.</span>
+        <span class="out">  # Change threshold to 1 (dollar) for extra safety during learning.</span>
+
+        <div class="sl">Step 3: Create a Budget (harder limit)</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">cat > /tmp/budget.json << 'EOF'</span></div>
+        <span class="out">{</span>
+        <span class="out">  "BudgetName": "DevOps-Learning-Budget",</span>
+        <span class="out">  "BudgetLimit": { "Amount": "10", "Unit": "USD" },</span>
+        <span class="out">  "TimeUnit": "MONTHLY",</span>
+        <span class="out">  "BudgetType": "COST"</span>
+        <span class="out">}</span>
+        <span class="out">EOF</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws budgets create-budget \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --account-id $ACCOUNT_ID \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --budget file:///tmp/budget.json</span></div>
+        <span class="out ok">  # Budget set. AWS will alert at 80% and 100% of $10 monthly limit.</span>
+
+        <div class="sl">Step 4: aws configure with named profiles (safe multi-account)</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws configure --profile learning</span></div>
+        <span class="out">  AWS Access Key ID:     YOUR_IAM_KEY</span>
+        <span class="out">  AWS Secret Access Key: YOUR_IAM_SECRET</span>
+        <span class="out">  Default region:        eu-west-1</span>
+        <span class="out">  Default output format: json</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 ls --profile learning</span> <span class="cmt">  # Use explicit profile flag</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">export AWS_PROFILE=learning</span> <span class="cmt">  # Or set it as env var for the session</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws sts get-caller-identity</span> <span class="cmt">  # Confirm correct profile is active</span></div>
+        <span class="out">  # Named profiles protect you from running commands in the wrong account</span>
+        <span class="out">  # In future: "learning" profile vs "production" profile — you'll never mix them</span>
+
+        <div class="sl">Daily habit: stop unused resources before closing laptop</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 describe-instances \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --query 'Reservations[*].Instances[*].[InstanceId,State.Name,Tags[?Key==`Name`].Value|[0]]' \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --output table</span></div>
+        <span class="out">  # See all instances and their state — run this before closing for the day</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 stop-instances --instance-ids $(aws ec2 describe-instances \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --filters "Name=instance-state-name,Values=running" \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --query 'Reservations[*].Instances[*].InstanceId' \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --output text)</span></div>
+        <span class="out wrn">  # CAREFUL: stops ALL running instances — review before running in real account</span>
+      </div>
+    </div>
+
+    <div class="box warn">
+      <h4>⚠ Free Tier Traps — Know These Before They Bite You</h4>
+      <p><strong>NAT Gateway</strong>: ~$0.045/hour + data transfer. Costs money from the first second. Always delete after experiments.</p>
+      <p><strong>Elastic IP not attached</strong>: An Elastic IP with no instance attached costs $0.005/hour. Delete unused EIPs.</p>
+      <p><strong>EC2 in wrong region</strong>: Free tier is per-account, not per-region. If you launch a t2.micro in eu-west-1 AND us-east-1, you exceed free tier hours.</p>
+      <p><strong>RDS (Week 2)</strong>: Even a stopped RDS instance still charges for storage. Snapshot + delete when not in use.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ GAP 2: GIT BRANCHING ═══════════ -->
+  <div id="git-gaps">
+    <div class="sec-hdr">
+      <div class="sec-pill d2">Add to Day 2</div>
+      <h2>Git Branching, Stash, and Safe Undo</h2>
+      <div class="where">Slot after: first push to GitHub<br>Time: ~45 minutes</div>
+    </div>
+
+    <div class="box gap">
+      <h4>Why This Was Missing and Why It Matters</h4>
+      <p>The Day 2 pack covered the single-branch git workflow (add → commit → push on main). That's fine for solo learning but every team uses branches. "Show me a git branching workflow" is a first-round interview question. You need to know it before your first application.</p>
+    </div>
+
+    <div class="cgrid">
+      <div class="ccard">
+        <div class="ico">🌿</div>
+        <h4>Why Branches Exist</h4>
+        <p>A branch is an independent copy of the codebase. You do new work on a branch so main stays clean and deployable. When the work is ready, you merge. Main = always working. Branch = work in progress.</p>
+        <p class="why">Production rule: never commit directly to main. Create a branch, do the work, merge via PR.</p>
+      </div>
+      <div class="ccard">
+        <div class="ico">🗃</div>
+        <h4>git stash — Park Your Work</h4>
+        <p>You're mid-task and need to switch branches. Your changes aren't ready to commit. <code>git stash</code> saves them temporarily. <code>git stash pop</code> brings them back. Like a clipboard for code.</p>
+        <p class="why">Used daily on teams. "I need to quickly check something on main — let me stash this first."</p>
+      </div>
+      <div class="ccard">
+        <div class="ico">↩️</div>
+        <h4>git revert vs git reset</h4>
+        <p><code>git revert</code>: creates a new commit that undoes a previous one. Safe — history is preserved. <code>git reset --hard</code>: moves HEAD backwards, erases commits. Destructive — never use on shared branches.</p>
+        <p class="why">Rule: revert on shared branches. reset only on your private branch before first push.</p>
+      </div>
+    </div>
+
+    <div class="sub"><h3>⌨️ Git Branching Command Flow</h3></div>
+    <div class="term">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="lbl">Git Branching — The Full Workflow</span>
+        <span class="badge gap">Day 2 Add-on</span>
+      </div>
+      <div class="term-body">
+        <div class="sl">Create and switch to a new branch</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git branch</span> <span class="cmt">  # List all branches. * = current branch</span></div>
+        <span class="out">* main</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git checkout -b feature/add-health-script</span></div>
+        <span class="out ok">Switched to a new branch 'feature/add-health-script'</span>
+        <span class="out">  # Naming convention: feature/description, fix/description, docs/description</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git branch</span></div>
+        <span class="out ok">* feature/add-health-script</span>
+        <span class="out">  main</span>
+
+        <div class="sl">Do work on the branch, commit it</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "# Health Check Script" > scripts/health_check.sh</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git add scripts/health_check.sh</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git commit -m "feat: Add health check script skeleton"</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git push -u origin feature/add-health-script</span></div>
+        <span class="out ok">Branch 'feature/add-health-script' set up to track remote branch.</span>
+
+        <div class="sl">Switch back to main and merge</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git checkout main</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git pull</span> <span class="cmt">  # Always pull latest main before merging</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git merge feature/add-health-script</span></div>
+        <span class="out ok">Updating a3f4b12..c8d9e01</span>
+        <span class="out ok">Fast-forward</span>
+        <span class="out"> scripts/health_check.sh | 1 +</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git push</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git branch -d feature/add-health-script</span> <span class="cmt">  # Delete merged branch locally</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git push origin --delete feature/add-health-script</span> <span class="cmt">  # Delete from GitHub too</span></div>
+
+        <div class="sl">git stash — save unfinished work temporarily</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "work in progress" >> README.md</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git stash</span></div>
+        <span class="out ok">Saved working directory and index state WIP on main: c8d9e01</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git status</span></div>
+        <span class="out">nothing to commit, working tree clean</span>
+        <span class="out">  # Changes are hidden. Safe to switch branches or pull.</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git stash list</span></div>
+        <span class="out">stash@{0}: WIP on main: c8d9e01 feat: Add health check script skeleton</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git stash pop</span></div>
+        <span class="out ok">On branch main — Changes restored.</span>
+
+        <div class="sl">git diff — review changes before committing</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git diff</span> <span class="cmt">  # Changes not yet staged (unstaged vs last commit)</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git diff --staged</span> <span class="cmt">  # Changes staged but not yet committed</span></div>
+        <span class="out">  # Run git diff --staged BEFORE every commit. Review what you're about to save.</span>
+        <span class="out">  # This is how you catch accidentally staged files (like .env or secrets)</span>
+
+        <div class="sl">git revert — safe undo on shared branches</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git log --oneline</span></div>
+        <span class="out">c8d9e01 (HEAD) feat: Add health check script</span>
+        <span class="out">a3f4b12 docs: Add Day 01 notes</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git revert c8d9e01</span> <span class="cmt">  # Creates new "undo" commit, preserves history</span></div>
+        <span class="out ok">[main f1e2d3c] Revert "feat: Add health check script"</span>
+        <span class="out">  # SAFE: history shows what happened, no data lost</span>
+
+        <div class="sl">git log — visual branch view</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">git log --oneline --graph --all</span></div>
+        <span class="out">* c8d9e01 (HEAD -> main, origin/main) feat: Add health check script</span>
+        <span class="out">* a3f4b12 docs: Add Day 01 notes</span>
+        <span class="out">  # --graph shows branch lines visually. --all shows all branches.</span>
+      </div>
+    </div>
+
+    <div class="int-block">
+      <div class="int-q"><span class="ql">INT Q →</span>"Walk me through how you'd use git in a team environment."</div>
+      <div class="int-a"><strong>Model answer:</strong> "My workflow starts with pulling the latest main: git pull. Then I create a feature branch named after the work: git checkout -b feature/nginx-config-update. I do the work in small focused commits. If I need to switch context mid-task I stash unfinished work with git stash. When the feature is done, I push the branch to GitHub and open a Pull Request — a PR gives teammates a chance to review the code before it hits main. After the PR is approved and merged, I delete the branch both locally and on the remote. I never commit directly to main — main should always be in a deployable state."</div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ GAP 3: LINUX TEXT PROCESSING ═══════════ -->
+  <div id="linux-missing">
+    <div class="sec-hdr">
+      <div class="sec-pill d1">Add to Day 1</div>
+      <h2>Linux Text Processing — The Commands That Actually Run DevOps</h2>
+      <div class="where">Slot after: grep section<br>Time: ~60 minutes</div>
+    </div>
+
+    <div class="box gap">
+      <h4>Why These Were Missing and Why They Matter Now</h4>
+      <p>The Day 1 pack covered grep and cat but skipped the text processing tools that show up constantly in production: awk (used in the Day 4 health_check.sh script already), cut, sort, uniq, wc, and tar. These are the tools you use every day to parse logs, extract data, and manage files. You've already seen awk in Day 4 — now understand why it works.</p>
+    </div>
+
+    <div class="sub"><h3>⌨️ awk, cut, sort, uniq, wc, tar — Full Command Flow</h3></div>
+    <div class="term">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="lbl">Text Processing on EC2 — Day 1 Session 2 Add-on</span>
+        <span class="badge gap">Day 1 Add-on</span>
+      </div>
+      <div class="term-body">
+        <div class="sl">awk — column extraction (you already used this in health_check.sh)</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">df -h</span></div>
+        <span class="out">Filesystem      Size  Used Avail Use% Mounted on</span>
+        <span class="out">/dev/xvda1       8G   1.4G  6.6G  18% /</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">df -h | awk 'NR==2 {print $5}'</span></div>
+        <span class="out ok">18%</span>
+        <span class="out">  # awk: NR==2 = row 2 (skip header). $5 = column 5 (Use%). 100% readable.</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">df -h | awk 'NR>1 {print $1, $5}'</span> <span class="cmt">  # NR>1 = all rows except header</span></div>
+        <span class="out">/dev/xvda1 18%</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">free -m | awk 'NR==2 {print $4}'</span> <span class="cmt">  # RAM free (column 4, row 2)</span></div>
+        <span class="out">842</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">ps aux | awk '{print $1, $11}' | head -5</span> <span class="cmt">  # User + Process name</span></div>
+        <span class="out">USER COMMAND</span>
+        <span class="out">root /sbin/init</span>
+
+        <div class="sl">cut — extract fields from delimited text</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">cat /etc/passwd | cut -d: -f1</span></div>
+        <span class="out">root</span>
+        <span class="out">daemon</span>
+        <span class="out">ubuntu</span>
+        <span class="out">  # -d: = delimiter is colon. -f1 = field 1 (username)</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "2026-06-05 14:30:01" | cut -d' ' -f1</span></div>
+        <span class="out ok">2026-06-05</span>
+        <span class="out">  # Split on space, take first field (date). Used for log parsing.</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "192.168.1.1" | cut -d. -f1-3</span></div>
+        <span class="out">192.168.1</span>
+        <span class="out">  # -f1-3 = fields 1 through 3 (first 3 octets of IP)</span>
+
+        <div class="sl">sort + uniq — count and deduplicate</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">cat /var/log/nginx/access.log | awk '{print $1}' | sort | uniq -c | sort -rn | head -10</span></div>
+        <span class="out">  127 203.0.113.45</span>
+        <span class="out">   43 198.51.100.22</span>
+        <span class="out">   12 192.0.2.1</span>
+        <span class="out">  # Top 10 IP addresses hitting your nginx server, sorted by frequency</span>
+        <span class="out">  # sort: alphabetically. uniq -c: count consecutive duplicates. sort -rn: reverse numeric sort.</span>
+        <span class="out">  # This pipeline is real log analysis — used in incident response daily.</span>
+
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">cat /var/log/auth.log | grep "Failed password" | wc -l</span></div>
+        <span class="out wrn">147</span>
+        <span class="out">  # How many failed SSH login attempts today. On a public EC2: this is always non-zero.</span>
+        <span class="out">  # This is why you use key-based auth, not passwords.</span>
+
+        <div class="sl">wc — count lines, words, characters</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">wc -l /var/log/syslog</span></div>
+        <span class="out">4521 /var/log/syslog</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">wc -l /etc/passwd</span></div>
+        <span class="out">30 /etc/passwd</span>
+        <span class="out">  # 30 user accounts on this server — useful baseline to know</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">ls /etc/ | wc -l</span></div>
+        <span class="out">196</span>
+        <span class="out">  # Count files/directories in /etc — pipe anything into wc -l</span>
+
+        <div class="sl">tar — compress and extract archives</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">tar -czf backup-$(date +%Y%m%d).tar.gz ~/devops-notes/</span></div>
+        <span class="out">  # -c = create archive. -z = gzip compress. -f = filename to write to</span>
+        <span class="out">  # Result: backup-20260605.tar.gz</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">tar -tzf backup-20260605.tar.gz | head -10</span></div>
+        <span class="out">  # -t = list contents without extracting. Verify before you extract.</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">tar -xzf backup-20260605.tar.gz -C /tmp/restore/</span></div>
+        <span class="out">  # -x = extract. -C = extract TO this directory (must exist)</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 cp backup-20260605.tar.gz s3://devops-config-YOURNAME/backups/</span></div>
+        <span class="out ok">  # Upload backup to S3 — now recoverable from anywhere</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ GAP 4: JOURNALCTL + LSOF + SCP ═══════════ -->
+  <div id="linux-debug-gaps">
+    <div class="sec-hdr">
+      <div class="sec-pill d1">Add to Day 1</div>
+      <h2>journalctl + lsof + scp — Modern Linux Debugging</h2>
+      <div class="where">Slot after: systemctl section<br>Time: ~30 minutes</div>
+    </div>
+
+    <div class="box gap">
+      <h4>The Gap That Will Cost You Most Debug Time</h4>
+      <p>The Day 1 pack used <code>/var/log/nginx/error.log</code> for debugging. That works for nginx specifically. But most modern Ubuntu services write logs to <strong>journald</strong>, not to files. <code>journalctl</code> is the correct tool for 80% of service debugging on modern Linux. Not knowing it means you're looking in the wrong place.</p>
+    </div>
+
+    <div class="sub"><h3>⌨️ journalctl, lsof, scp</h3></div>
+    <div class="term">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="lbl">Modern Linux Debugging Commands</span>
+        <span class="badge gap">Day 1 Add-on</span>
+      </div>
+      <div class="term-body">
+        <div class="sl">journalctl — systemd's centralised log system</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl -u nginx</span> <span class="cmt">  # All logs for nginx service</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl -u nginx -f</span> <span class="cmt">  # -f = follow (live stream like tail -f)</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl -u nginx --since "1 hour ago"</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl -u nginx --since "2026-06-05 14:00" --until "2026-06-05 15:00"</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl -u nginx -n 50</span> <span class="cmt">  # Last 50 lines only</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl -p err -u nginx</span> <span class="cmt">  # Only error-level messages</span></div>
+        <span class="out">  # -p levels: emerg, alert, crit, err, warning, notice, info, debug</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl --disk-usage</span> <span class="cmt">  # How much disk journal is using</span></div>
+        <span class="out ok">Archived and active journals take up 56.0M on disk.</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl -b</span> <span class="cmt">  # All logs since last boot</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">journalctl -b -1</span> <span class="cmt">  # Logs from previous boot (useful after a crash)</span></div>
+
+        <div class="sl">lsof — what process is using a port</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">sudo lsof -i :80</span></div>
+        <span class="out ok">COMMAND  PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span>
+        <span class="out ok">nginx   2341     root   6u  IPv4  18923      0t0  TCP *:http (LISTEN)</span>
+        <span class="out">  # If this shows something other than nginx, THAT'S your port conflict</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">sudo lsof -i :22</span> <span class="cmt">  # Who is listening on SSH port</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">sudo lsof -p 2341</span> <span class="cmt">  # All files opened by process ID 2341</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">sudo ss -tlnp | grep :80</span> <span class="cmt">  # Alternative: faster, no lsof needed</span></div>
+        <span class="out ok">LISTEN 0 511 0.0.0.0:80 0.0.0.0:* users:(("nginx",pid=2341,fd=6))</span>
+
+        <div class="sl">scp — secure copy files to/from EC2</div>
+        <span class="out">  # FROM your laptop TO EC2:</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">scp -i ~/.ssh/my-key.pem ~/local-file.txt ubuntu@EC2_IP:~/remote-file.txt</span></div>
+        <span class="out">  # FROM EC2 TO your laptop:</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">scp -i ~/.ssh/my-key.pem ubuntu@EC2_IP:~/logs/health.log ~/Downloads/</span></div>
+        <span class="out">  # Entire directory:</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">scp -ri ~/.ssh/my-key.pem ubuntu@EC2_IP:~/devops-notes/ ~/Desktop/ec2-backup/</span></div>
+        <span class="out">  # -r = recursive (for directories). Same syntax as cp, but remote.</span>
+        <span class="out">  # Use case: download logs for analysis, upload config files to EC2</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ GAP 5: EXPORT, ALIAS, .BASHRC ═══════════ -->
+  <div id="env-shell">
+    <div class="sec-hdr">
+      <div class="sec-pill d1">Add to Day 1 + Day 4</div>
+      <h2>export, alias, and .bashrc Customisation</h2>
+      <div class="where">Day 1: export + .bashrc<br>Day 4: alias in scripts</div>
+    </div>
+
+    <div class="box gap">
+      <h4>Why These Matter</h4>
+      <p><code>export</code> is how environment variables are passed to child processes — shell scripts see exported vars, not just local ones. <code>alias</code> saves significant time and every senior engineer uses them. <code>.bashrc</code> is where permanent changes live — without it, your settings disappear on next login.</p>
+    </div>
+
+    <div class="sub"><h3>⌨️ export, alias, .bashrc</h3></div>
+    <div class="term">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="lbl">Shell Environment — export, alias, .bashrc</span>
+        <span class="badge gap">Day 1 + Day 4 Add-on</span>
+      </div>
+      <div class="term-body">
+        <div class="sl">export — make variables available to child processes</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">MY_VAR="local only"</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">bash -c 'echo $MY_VAR'</span></div>
+        <span class="out">           # Empty — child bash can't see parent's non-exported var</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">export MY_VAR="now exported"</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">bash -c 'echo $MY_VAR'</span></div>
+        <span class="out ok">now exported   # Child process can now see it</span>
+        <span class="out">  # This is why AWS_PROFILE, AWS_REGION, PATH must be exported</span>
+
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">export AWS_PROFILE=learning</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">export AWS_DEFAULT_REGION=eu-west-1</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">export PATH="$PATH:/usr/local/bin"</span> <span class="cmt">  # Add to PATH (colon-separated)</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">env | grep AWS</span> <span class="cmt">  # See all exported environment variables matching AWS</span></div>
+        <span class="out ok">AWS_PROFILE=learning</span>
+        <span class="out ok">AWS_DEFAULT_REGION=eu-west-1</span>
+
+        <div class="sl">alias — shortcuts for long commands</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">alias ll='ls -la'</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">ll</span></div>
+        <span class="out ok">total 40</span>
+        <span class="out">drwxr-xr-x 5 ubuntu ubuntu 4096 Jun  5 14:30 .</span>
+        <span class="out">  # alias works for the current session only — lost on next login</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">alias</span> <span class="cmt">  # List all current aliases</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">unalias ll</span> <span class="cmt">  # Remove alias</span></div>
+        <span class="out">  # Useful aliases for DevOps work:</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">alias gs='git status'</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">alias gl='git log --oneline --graph --all'</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">alias nlog='sudo tail -f /var/log/nginx/access.log'</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">alias myip='curl -s ifconfig.me'</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">alias k='kubectl'</span> <span class="cmt">  # Week 8 — preview</span></div>
+
+        <div class="sl">.bashrc — make changes permanent across logins</div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">nano ~/.bashrc</span></div>
+        <span class="out">  # Add at the bottom of the file:</span>
+        <span class="out">&nbsp;</span>
+        <span class="out">## DevOps Learning Customisation</span>
+        <span class="out">export AWS_PROFILE=learning</span>
+        <span class="out">export AWS_DEFAULT_REGION=eu-west-1</span>
+        <span class="out">export EDITOR=nano</span>
+        <span class="out">&nbsp;</span>
+        <span class="out">## Aliases</span>
+        <span class="out">alias ll='ls -la --color=auto'</span>
+        <span class="out">alias gs='git status'</span>
+        <span class="out">alias gl='git log --oneline --graph --all'</span>
+        <span class="out">alias nlog='sudo tail -f /var/log/nginx/access.log'</span>
+        <span class="out">alias myip='curl -s ifconfig.me && echo'</span>
+        <span class="out">alias ports='sudo ss -tlnp'</span>
+        <span class="out">&nbsp;</span>
+        <span class="out">## Prompt improvement — show git branch</span>
+        <span class="out">parse_git_branch() { git branch 2>/dev/null | sed -n 's/* //p'; }</span>
+        <span class="out">PS1='\u@\h:\w$([ -n "$(parse_git_branch)" ] &amp;&amp; echo " ($(parse_git_branch))")\$ '</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">source ~/.bashrc</span> <span class="cmt">  # Apply changes immediately (don't log out)</span></div>
+        <span class="out ok">  # Your prompt now shows the current git branch. All aliases persist.</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ GAP 6: EBS SNAPSHOT ═══════════ -->
+  <div id="ebs-snapshot">
+    <div class="sec-hdr">
+      <div class="sec-pill d2">Add to Day 3</div>
+      <h2>EBS Snapshots — Back Up Before You Break Things</h2>
+      <div class="where">Slot before: Day 3 experiments<br>Time: 10 minutes</div>
+    </div>
+
+    <div class="box warn">
+      <h4>⚠ The habit that saves you from rebuilding</h4>
+      <p>Before any Day 3+ experiment that modifies your EC2 significantly, take a snapshot. A snapshot is an EBS backup — it costs a few cents per GB per month and takes 2 CLI commands. Not taking one before a major config change and then breaking the server costs you 2 hours of rebuilding.</p>
+    </div>
+
+    <div class="term">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="lbl">EBS Snapshot — Quick Backup Before Experiments</span>
+        <span class="badge gap">Day 3 Add-on</span>
+      </div>
+      <div class="term-body">
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">VOLUME_ID=$(aws ec2 describe-instances \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --instance-ids $INSTANCE_ID \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --query 'Reservations[0].Instances[0].BlockDeviceMappings[0].Ebs.VolumeId' \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --output text)</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "Volume to snapshot: $VOLUME_ID"</span></div>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 create-snapshot \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --volume-id $VOLUME_ID \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --description "Pre-experiment backup $(date +%Y-%m-%d)"</span></div>
+        <span class="out ok">{ "SnapshotId": "snap-0a1234567890abcde", "State": "pending" }</span>
+        <span class="out">  # Snapshot runs in background. Takes 5-20 min depending on disk size.</span>
+        <span class="out">  # Cost: ~$0.05/GB/month — essentially free for a learning t2.micro (8GB = $0.40/month)</span>
+        <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 describe-snapshots --snapshot-ids snap-0a1234567890abcde \</span></div>
+        <div class="cmd-line"><span class="pr"> </span><span class="cm">  --query 'Snapshots[0].State' --output text</span></div>
+        <span class="out ok">completed</span>
+        <span class="out">  # When "completed" — safe to proceed with experiments</span>
+        <span class="out">  # To restore: create new volume from snapshot, attach to EC2</span>
+        <span class="out">  # Clean up old snapshots: aws ec2 delete-snapshot --snapshot-id snap-xxxx</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ MISTAKE CARDS — NEW ═══════════ -->
+  <div id="mistakes-gap">
+    <div class="sec-hdr">
+      <div class="sec-pill gap">New Mistakes</div>
+      <h2>Mistakes Not Covered in the Original Packs</h2>
+      <div class="where">Cross-week reference</div>
+    </div>
+
+    <div class="mk-wrap">
+      <div class="mk-hdr">⚠ Additional Beginner Mistakes Found in Audit</div>
+      <div class="mk">
+        <div class="mx">✗</div>
+        <div class="mc">
+          <strong>Working directly on the main branch — no branching workflow</strong>
+          <p>Every commit goes straight to main. This means you can't separate experimental work from stable code. On a team, this blocks everyone when you break something.</p>
+          <span class="fix">✓ Fix: Create a branch for every piece of work: git checkout -b feature/what-you-are-doing. Merge to main only when it works.</span>
+        </div>
+      </div>
+      <div class="mk">
+        <div class="mx">✗</div>
+        <div class="mc">
+          <strong>Not setting a billing alarm before starting AWS practice</strong>
+          <p>Forgotten NAT Gateways, left-running EC2s in unexpected regions, and accidentally created services have cost learners hundreds of pounds. This is the most financially dangerous beginner gap.</p>
+          <span class="fix">✓ Fix: Set a CloudWatch billing alarm for $10 and an AWS Budget on Day 2 — before any other AWS work. Takes 4 minutes. See Billing Safety section above.</span>
+        </div>
+      </div>
+      <div class="mk">
+        <div class="mx">✗</div>
+        <div class="mc">
+          <strong>Using /var/log/ when journalctl would find the answer faster</strong>
+          <p>Some services write to both. Many write only to journald. If your Google search says "check /var/log/service.log" and it's empty or doesn't exist — the service is writing to journald. Checking only /var/log/ means you miss half the logs on modern Ubuntu.</p>
+          <span class="fix">✓ Fix: For any service issue, run journalctl -u SERVICE -n 50 first. Then check /var/log/ if journal is empty.</span>
+        </div>
+      </div>
+      <div class="mk">
+        <div class="mx">✗</div>
+        <div class="mc">
+          <strong>Thinking git reset --hard is the right way to undo a commit on a shared branch</strong>
+          <p>git reset --hard rewrites history. If you've pushed to GitHub and others have pulled, reset creates divergent histories that require a force push — which overwrites colleagues' work. This is a serious team incident.</p>
+          <span class="fix">✓ Fix: Use git revert on any commit that has been pushed. It creates a new "undo" commit, preserves history, and is safe for shared branches.</span>
+        </div>
+      </div>
+      <div class="mk">
+        <div class="mx">✗</div>
+        <div class="mc">
+          <strong>Not understanding that aws configure sets the DEFAULT profile, not a named one</strong>
+          <p>Running aws configure without --profile sets credentials for the [default] profile. If you later run aws configure --profile learning, you now have two profiles but all commands still use [default] unless you specify --profile learning or set AWS_PROFILE. Confusion leads to commands running in the wrong account.</p>
+          <span class="fix">✓ Fix: Always use named profiles from Day 2: aws configure --profile learning. Set export AWS_PROFILE=learning in .bashrc. Verify with aws sts get-caller-identity before important operations.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ INTERVIEW GAPS ═══════════ -->
+  <div id="interview-gap">
+    <div class="sec-hdr">
+      <div class="sec-pill gap">Interview Gaps</div>
+      <h2>Interview Prompts — Gap Topics</h2>
+      <div class="where">Practise these out loud</div>
+    </div>
+
+    <div class="int-block">
+      <div class="int-q"><span class="ql">INT Q →</span>"How do you diagnose a service that's failing to start — walk me through your process."</div>
+      <div class="int-a"><strong>Model answer:</strong> "First step is always to check the service status: sudo systemctl status servicename — this shows the last few log lines and the exit code. If the status isn't enough detail, I go to the journal: journalctl -u servicename -n 50 gives me the last 50 log entries for that unit. If it's a port conflict — another process already using port 80 for example — I check with sudo ss -tlnp or lsof -i :80 to see what process has the port. For nginx specifically I also run sudo nginx -t to test config syntax before attempting a restart. I work top-down: service status → logs → config → resources — rather than restarting blindly and hoping."</div>
+    </div>
+    <div class="int-block">
+      <div class="int-q"><span class="ql">INT Q →</span>"What is the difference between git revert and git reset?"</div>
+      <div class="int-a"><strong>Model answer:</strong> "Both undo changes but in fundamentally different ways. git revert creates a new commit that reverses the changes from a previous commit — the original commit stays in history. It's safe to use on any branch including shared ones because it doesn't rewrite history. git reset moves the HEAD pointer backwards — it can remove commits from history entirely. reset --hard also discards working directory changes. Reset is useful for cleaning up local commits before a first push, but you should never use it on a branch that teammates have already pulled from because it creates divergent histories that require a force push. My rule: revert on anything that's been pushed, reset only on strictly local work."</div>
+    </div>
+    <div class="int-block">
+      <div class="int-q"><span class="ql">INT Q →</span>"How do you make a configuration change permanent on a Linux server vs just the current session?"</div>
+      <div class="int-a"><strong>Model answer:</strong> "It depends on what you're changing. For shell environment variables and aliases — things you want every time you log in — I add them to ~/.bashrc (or ~/.bash_profile for login shells). After editing, I run source ~/.bashrc to apply without logging out. For PATH changes, service configurations, or system-wide settings, it depends on the service: nginx config lives in /etc/nginx/, systemd unit files live in /etc/systemd/system/. For a service change, after editing the unit file I run systemctl daemon-reload and then systemctl restart or reload. The key mental model is: anything done in a terminal session is temporary — to make it survive reboots or new login sessions, it needs to be written to the appropriate config file."</div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ GAP QUIZ ═══════════ -->
+  <div id="quiz-gap">
+    <div class="sec-hdr">
+      <div class="sec-pill gap">Gap Quiz</div>
+      <h2>Quiz — Gap Topics Only</h2>
+      <div class="where">Pass = 5/6</div>
+    </div>
+    <div class="quiz">
+      <div class="quiz-title">⚡ Week 1 Supplement Quiz — Covers All Gap Topics</div>
+
+      <div class="qitem">
+        <div class="qq"><span class="qn">Q1.</span> You need to check nginx logs but journalctl -u nginx shows nothing. Where else do you look?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) /tmp/nginx/</div>
+          <div class="opt" onclick="qa(this,true)">B) /var/log/nginx/error.log and /var/log/nginx/access.log</div>
+          <div class="opt" onclick="qa(this,false)">C) ~/.nginx/logs/</div>
+          <div class="opt" onclick="qa(this,false)">D) /etc/nginx/logs/</div>
+        </div>
+        <div class="exp">nginx writes its own logs to /var/log/nginx/ in addition to (or instead of) journald, depending on configuration. If journalctl is empty, the nginx-specific log files are the next place to check. Access log shows all requests; error log shows failures.</div>
+      </div>
+
+      <div class="qitem">
+        <div class="qq"><span class="qn">Q2.</span> What does this command do: <code>cat /var/log/auth.log | awk '{print $1,$2}' | sort | uniq -c | sort -rn | head -5</code></div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Deletes the 5 oldest auth log entries</div>
+          <div class="opt" onclick="qa(this,true)">B) Shows the 5 most frequent date-time combinations in the auth log — a basic log frequency analysis</div>
+          <div class="opt" onclick="qa(this,false)">C) Copies the auth log to a new file</div>
+          <div class="opt" onclick="qa(this,false)">D) Counts total lines in the auth log</div>
+        </div>
+        <div class="exp">This pipeline: extracts columns 1+2 (date and time), sorts them alphabetically, counts consecutive duplicates with uniq -c, sorts numerically in reverse, and shows top 5. The result is: which minute had the most auth log activity — useful for spotting brute-force attack patterns.</div>
+      </div>
+
+      <div class="qitem">
+        <div class="qq"><span class="qn">Q3.</span> Your .bashrc has <code>alias gs='git status'</code> but after running source ~/.bashrc, the alias stops working when you run a shell script that calls gs. Why?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Shell scripts don't support aliases</div>
+          <div class="opt" onclick="qa(this,true)">B) Aliases are only available in interactive shells by default — not in non-interactive script subshells</div>
+          <div class="opt" onclick="qa(this,false)">C) The alias syntax is wrong</div>
+          <div class="opt" onclick="qa(this,false)">D) You need to restart the EC2</div>
+        </div>
+        <div class="exp">Bash only expands aliases in interactive shells by default. A script runs in a non-interactive subshell where .bashrc aliases are not loaded. Solution for scripts: use the full command (git status) or use a function instead of an alias. This is why aliases are for human sessions, not automation scripts.</div>
+      </div>
+
+      <div class="qitem">
+        <div class="qq"><span class="qn">Q4.</span> You want to securely copy a log file from your EC2 to your laptop. Which command?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) aws s3 cp only works for this</div>
+          <div class="opt" onclick="qa(this,true)">B) scp -i key.pem ubuntu@EC2_IP:~/logs/health.log ~/Downloads/</div>
+          <div class="opt" onclick="qa(this,false)">C) ssh -i key.pem ubuntu@EC2_IP cat health.log</div>
+          <div class="opt" onclick="qa(this,false)">D) rsync is the only option</div>
+        </div>
+        <div class="exp">scp (secure copy) uses SSH under the hood — same key, same host, same user. The syntax is source → destination. For EC2-to-local: ubuntu@IP:remote/path local/path. It transfers the file directly over your SSH connection without any AWS CLI or S3 required.</div>
+      </div>
+
+      <div class="qitem">
+        <div class="qq"><span class="qn">Q5.</span> Why must billing alerts be set in us-east-1 specifically, even if your EC2 is in eu-west-1?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) It's a bug in AWS</div>
+          <div class="opt" onclick="qa(this,false)">B) Billing alarms only work in us-east-1 for paid accounts</div>
+          <div class="opt" onclick="qa(this,true)">C) AWS publishes estimated charge metrics to CloudWatch only in us-east-1 — it's the global billing region regardless of where your resources are</div>
+          <div class="opt" onclick="qa(this,false)">D) You can use any region for billing alarms</div>
+        </div>
+        <div class="exp">AWS billing is a global construct aggregated in us-east-1. The EstimatedCharges CloudWatch metric only exists in us-east-1. If you create a billing alarm in eu-west-1, it simply won't have the metric to trigger on — the alarm will never fire. Always use --region us-east-1 for billing-related CloudWatch operations.</div>
+      </div>
+
+      <div class="qitem">
+        <div class="qq"><span class="qn">Q6.</span> What does <code>tar -czf archive.tar.gz ~/scripts/</code> do and what does each flag mean?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Extracts archive.tar.gz into ~/scripts/</div>
+          <div class="opt" onclick="qa(this,true)">B) Creates (-c) a gzip-compressed (-z) archive (-f) named archive.tar.gz containing the ~/scripts/ directory</div>
+          <div class="opt" onclick="qa(this,false)">C) Lists the contents of an existing archive</div>
+          <div class="opt" onclick="qa(this,false)">D) Compresses only without creating an archive</div>
+        </div>
+        <div class="exp">-c = create a new archive. -z = compress using gzip (smaller file). -f = the next argument is the filename to write to. To extract: tar -xzf archive.tar.gz. To list without extracting: tar -tzf archive.tar.gz. The "czf" mnemonic: Create Zipped File.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════ WEEK 1 MASTER CHECKLIST ═══════════ -->
+  <div id="week1-checklist">
+    <div class="sec-hdr">
+      <div class="sec-pill gap">Master Checklist</div>
+      <h2>Week 1 Complete — Everything You Should Be Able to Do</h2>
+      <div class="where">Tick these off before Week 2</div>
+    </div>
+
+    <div class="box ok">
+      <h4>✅ This Is Your Week 1 Standard</h4>
+      <p>If you can do every item on this list without notes, you are genuinely ready for Week 2. Be honest with yourself — "I sort of know it" is not the same as "I can do it cold in a terminal." Items you can't do = gaps to re-do before Monday.</p>
+    </div>
+
+    <table class="tbl">
+      <thead><tr><th>Category</th><th>Skill</th></tr></thead>
+      <tbody>
+        <tr><td>Linux</td><td><strong>Navigate the filesystem</strong> — cd, ls -la, pwd, find from memory</td></tr>
+        <tr><td>Linux</td><td><strong>Manage files and permissions</strong> — chmod, chown, mkdir, cp, mv, rm</td></tr>
+        <tr><td>Linux</td><td><strong>Read and search logs</strong> — cat, grep, tail -f, journalctl -u service</td></tr>
+        <tr><td>Linux</td><td><strong>Process text</strong> — awk '{print $N}', cut -d: -f1, sort | uniq -c, wc -l</td></tr>
+        <tr><td>Linux</td><td><strong>Debug services</strong> — systemctl status, journalctl, lsof -i :PORT, ss -tlnp</td></tr>
+        <tr><td>Linux</td><td><strong>Transfer files</strong> — scp to/from EC2 with key auth</td></tr>
+        <tr><td>Linux</td><td><strong>Archive files</strong> — tar -czf and tar -xzf</td></tr>
+        <tr><td>Linux</td><td><strong>Shell environment</strong> — export, alias, source ~/.bashrc</td></tr>
+        <tr><td>Git</td><td><strong>Full commit cycle</strong> — status, add, diff --staged, commit, push</td></tr>
+        <tr><td>Git</td><td><strong>Branching</strong> — checkout -b, merge, delete branch, log --graph</td></tr>
+        <tr><td>Git</td><td><strong>Safe undo</strong> — revert (shared), reset (local only), stash + pop</td></tr>
+        <tr><td>Git</td><td><strong>.gitignore</strong> — add *.pem, .env, *.log before first commit</td></tr>
+        <tr><td>AWS</td><td><strong>Billing safety</strong> — CloudWatch billing alarm + AWS Budget set</td></tr>
+        <tr><td>AWS</td><td><strong>IAM</strong> — named profiles, get-caller-identity, least-privilege policy JSON</td></tr>
+        <tr><td>AWS</td><td><strong>EC2</strong> — launch, SSH in, stop/terminate, describe via CLI</td></tr>
+        <tr><td>AWS</td><td><strong>S3</strong> — create bucket, upload, download, enable versioning</td></tr>
+        <tr><td>AWS</td><td><strong>VPC</strong> — create from scratch: VPC + subnets + IGW + route tables via CLI</td></tr>
+        <tr><td>AWS</td><td><strong>IAM Role</strong> — create role, trust policy, attach to EC2, verify no keys on server</td></tr>
+        <tr><td>Bash</td><td><strong>Script structure</strong> — shebang, set -euo pipefail, functions, exit codes</td></tr>
+        <tr><td>Bash</td><td><strong>Conditionals + Loops</strong> — if/elif/else with correct operators, for loop over list</td></tr>
+        <tr><td>Bash</td><td><strong>Cron</strong> — write a cron entry with full paths and 2>&amp;1 log redirect</td></tr>
+        <tr><td>Bash</td><td><strong>Debug</strong> — bash -x, shellcheck, read error messages before Googling</td></tr>
+        <tr><td>nginx</td><td><strong>Deploy and configure</strong> — install, start, enable, reload (not restart)</td></tr>
+        <tr><td>nginx</td><td><strong>Debug</strong> — nginx -t before every reload, check error log, check port</td></tr>
+        <tr><td>Portfolio</td><td><strong>GitHub</strong> — daily commits, meaningful messages, README in every day folder</td></tr>
+        <tr><td>Portfolio</td><td><strong>Interview verbal</strong> — 2-minute description of Week 1 capstone, cold</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ═══════════ GITHUB PATCH TEMPLATE ═══════════ -->
+  <div id="github-gap">
+    <div class="sec-hdr">
+      <div class="sec-pill gap">GitHub Patch</div>
+      <h2>Updated Week 1 README — With Gap Topics Included</h2>
+      <div class="where">Update: devops-90days/week-01/README.md</div>
+    </div>
+
+    <div class="gh">
+      <div class="gh-bar"><span>devops-90days/week-01/README.md — UPDATED VERSION</span><span>Commit: "docs: Add gap-fill topics to Week 01 summary"</span></div>
+      <pre><span class="mh1"># Week 01 Complete — DevOps Foundation (Full)</span>
+<span class="mcom">Includes: all gap-fill topics from supplement pack</span>
+
+<span class="mh2">## ✅ Week 1 Skills — Full List</span>
+
+<span class="mh3">### Linux</span>
+- Filesystem navigation, permissions, users, services
+- Text processing: awk, cut, sort, uniq, wc, tar, grep
+- Debugging: journalctl, lsof, ss, bash -x, shellcheck
+- Shell: export, alias, .bashrc customisation, scp
+
+<span class="mh3">### Git</span>
+- Full commit cycle + .gitignore
+- Branching workflow: checkout -b, merge, delete
+- Safe undo: revert (shared), reset (local), stash
+
+<span class="mh3">### AWS</span>
+- Billing alert + Budget set (FIRST day in console)
+- IAM: users, roles, trust policies, least privilege
+- EC2: launch/stop/terminate via CLI
+- S3: buckets, versioning, static hosting, IAM role access
+- VPC: custom 2-tier from scratch
+
+<span class="mh3">### Bash + Automation</span>
+- set -euo pipefail, functions, loops, conditionals
+- health_check.sh + cron schedule
+- deploy.sh + week1_deploy.sh
+
+<span class="mh2">## 📋 Commands I Can Run Cold (no notes)</span>
+
+<span class="mcod">```bash</span>
+<span class="mcom"># Log analysis</span>
+journalctl -u nginx -f
+journalctl -u nginx --since "1 hour ago"
+cat /var/log/auth.log | grep "Failed" | wc -l
+cat /var/log/nginx/access.log | awk '{print $1}' | sort | uniq -c | sort -rn | head
+
+<span class="mcom"># Port debugging</span>
+sudo lsof -i :80
+sudo ss -tlnp | grep :80
+
+<span class="mcom"># File transfer</span>
+scp -i key.pem file.txt ubuntu@IP:~/
+scp -i key.pem ubuntu@IP:~/logs/health.log ~/Downloads/
+
+<span class="mcom"># Archiving</span>
+tar -czf backup-$(date +%Y%m%d).tar.gz ~/scripts/
+tar -xzf backup.tar.gz -C /tmp/restore/
+
+<span class="mcom"># Shell setup</span>
+export AWS_PROFILE=learning
+alias gs='git status'
+source ~/.bashrc
+
+<span class="mcom"># Git branching</span>
+git checkout -b feature/name
+git stash && git stash pop
+git revert COMMIT_HASH
+git log --oneline --graph --all
+
+<span class="mcom"># AWS billing</span>
+aws cloudwatch put-metric-alarm --alarm-name "bill" ...  # us-east-1!
+aws budgets create-budget --account-id ...
+
+<span class="mcom"># EBS backup</span>
+aws ec2 create-snapshot --volume-id vol-xxx --description "pre-experiment"
+<span class="mcod">```</span>
+
+<span class="mh2">## 🐛 Errors Added to My Debug Process</span>
+| Symptom | Tool | Where to Look |
+|---------|------|--------------|
+| Service fails to start | journalctl -u NAME -n 50 | Journal logs |
+| Port already in use | lsof -i :PORT | Process using port |
+| Cron job not running | sudo grep CRON /var/log/syslog | Cron execution log |
+| AWS command fails in cron | which aws | Full path issue |
+| Billing surprise | aws ce get-cost-and-usage | Cost Explorer |</pre>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Week 1 — <span>Gap-Fill Supplement</span> · Read alongside Days 1–7 packs</p>
+    <p style="margin-top:6px;">Three files. One complete Week 1. No missing pieces.</p>
+  </div>
+
+</main>
+
+<script>
+function qa(el, correct) {
+  const opts = el.parentElement.querySelectorAll('.opt');
+  opts.forEach(o => o.style.pointerEvents = 'none');
+  el.classList.add(correct ? 'c' : 'w');
+  if (!correct) {
+    opts.forEach(o => { if (o.onclick && o.onclick.toString().includes('true')) o.classList.add('c'); });
+  }
+  const exp = el.parentElement.nextElementSibling;
+  if (exp && exp.classList.contains('exp')) exp.classList.add('show');
+}
+window.addEventListener('scroll', () => {
+  let cur = '';
+  document.querySelectorAll('[id]').forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  document.querySelectorAll('.nav a').forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + cur); });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Days 1–3 | Trainer Beside You Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+  /* ── ROOT TOKENS ── */
+  :root {
+    --bg:        #09090f;
+    --surface:   #111118;
+    --surface2:  #18181f;
+    --border:    #2a2a3a;
+    --accent:    #7fff6a;
+    --accent2:   #4df0ff;
+    --warn:      #ffb84d;
+    --danger:    #ff5c5c;
+    --muted:     #5a5a75;
+    --text:      #e8e8f0;
+    --text-dim:  #9090aa;
+    --d1:        #7fff6a;
+    --d2:        #4df0ff;
+    --d3:        #ff85e0;
+    --mono:      'JetBrains Mono', monospace;
+    --sans:      'Syne', sans-serif;
+    --code:      'Syne Mono', monospace;
+  }
+
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── SCANLINE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.06) 2px,
+      rgba(0,0,0,0.06) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ── NAV SIDEBAR ── */
+  .nav {
+    position: fixed;
+    left: 0; top: 0;
+    width: 220px;
+    height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 28px 0;
+    overflow-y: auto;
+    z-index: 100;
+  }
+  .nav-logo {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .nav-logo span {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+  }
+  .nav-logo strong {
+    font-family: var(--sans);
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 13.5px;
+    font-family: var(--mono);
+    letter-spacing: 0.3px;
+    transition: all 0.15s;
+    border-left: 3px solid transparent;
+  }
+  .nav a:hover, .nav a.active {
+    color: var(--text);
+    background: var(--surface2);
+    border-left-color: var(--accent);
+  }
+  .nav a .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .nav-section {
+    padding: 16px 20px 6px;
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .nav a.d1 .dot { background: var(--d1); }
+  .nav a.d2 .dot { background: var(--d2); }
+  .nav a.d3 .dot { background: var(--d3); }
+
+  /* ── NAV DROPDOWN ACCORDIONS ── */
+  .nav-dropdown {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .nav-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 20px 8px;
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .nav-dropdown-toggle:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.03);
+  }
+  .nav-dropdown-toggle .chevron {
+    font-size: 9px;
+    transition: transform 0.25s ease;
+    color: var(--muted);
+  }
+  .nav-dropdown.open .nav-dropdown-toggle {
+    color: var(--text);
+  }
+  .nav-dropdown.open .nav-dropdown-toggle .chevron {
+    transform: rotate(90deg);
+  }
+  .nav-dropdown-toggle.d1-toggle:hover,
+  .nav-dropdown.open .nav-dropdown-toggle.d1-toggle { color: var(--d1); }
+  .nav-dropdown-toggle.d2-toggle:hover,
+  .nav-dropdown.open .nav-dropdown-toggle.d2-toggle { color: var(--d2); }
+  .nav-dropdown-toggle.d3-toggle:hover,
+  .nav-dropdown.open .nav-dropdown-toggle.d3-toggle { color: var(--d3); }
+  .nav-dropdown-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-dropdown.open .nav-dropdown-body {
+    max-height: 500px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: 220px;
+    padding: 40px 48px;
+    max-width: 1100px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 60px 0 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -120px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(127,255,106,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: var(--sans);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub {
+    color: var(--text-dim);
+    font-size: 16.5px;
+    max-width: 680px;
+    margin-bottom: 32px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .hero-badge span { color: var(--accent2); font-weight: 600; }
+
+  /* ── MARKET BRIEF ── */
+  .market-brief {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 28px 32px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+  .market-brief h2 {
+    font-size: 15px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .market-stat {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    border-radius: 6px;
+  }
+  .market-stat .val {
+    font-family: var(--mono);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent2);
+    display: block;
+  }
+  .market-stat .label {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* ── DUAL VOICE ADVISOR ── */
+  .advisor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .advisor-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .advisor-header {
+    padding: 12px 18px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .advisor-header.senior { background: rgba(127,255,106,0.08); color: var(--accent); border-bottom: 1px solid rgba(127,255,106,0.2); }
+  .advisor-header.trainer { background: rgba(77,240,255,0.08); color: var(--accent2); border-bottom: 1px solid rgba(77,240,255,0.2); }
+  .advisor-body { padding: 16px 18px; font-size: 15px; color: var(--text-dim); }
+  .advisor-body p + p { margin-top: 8px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .day-pill.d1 { background: rgba(127,255,106,0.12); color: var(--d1); border: 1px solid rgba(127,255,106,0.25); }
+  .day-pill.d2 { background: rgba(77,240,255,0.12); color: var(--d2); border: 1px solid rgba(77,240,255,0.25); }
+  .day-pill.d3 { background: rgba(255,133,224,0.12); color: var(--d3); border: 1px solid rgba(255,133,224,0.25); }
+  .section-head h2 {
+    font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+    font-weight: 800;
+  }
+  .section-head .time-block {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ── SCHEDULE TABLE ── */
+  .schedule {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 28px;
+    font-size: 14.5px;
+  }
+  .schedule th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .schedule td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+  .schedule tr:last-child td { border-bottom: none; }
+  .schedule tr:hover td { background: var(--surface); }
+  .time-col { font-family: var(--mono); font-size: 13.5px; color: var(--text-dim); width: 140px; white-space: nowrap; }
+  .phase-col { font-size: 12.5px; color: var(--accent); font-family: var(--mono); width: 140px; }
+  .activity-col strong { display: block; color: var(--text); font-size: 15px; }
+  .activity-col span { color: var(--text-dim); font-size: 14px; }
+
+  /* ── TERMINAL BLOCK ── */
+  .terminal {
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 16px 0;
+    overflow: hidden;
+    font-family: var(--mono);
+  }
+  .terminal-bar {
+    background: var(--surface2);
+    padding: 9px 14px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border-bottom: 1px solid var(--border);
+  }
+  .terminal-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-bar .dot.r { background: #ff5f57; }
+  .terminal-bar .dot.y { background: #ffbd2e; }
+  .terminal-bar .dot.g { background: #28ca41; }
+  .terminal-bar .label { margin-left: 8px; font-size: 11px; color: var(--muted); }
+  .terminal-body { padding: 18px 22px; font-size: 14.5px; }
+  .cmd-line { margin: 4px 0; }
+  .cmd-line .prompt { color: var(--accent); margin-right: 6px; user-select: none; }
+  .cmd-line .cmd { color: #c8d3f5; }
+  .cmd-line .comment { color: var(--muted); font-size: 13.5px; }
+  .output-line { color: #7a8099; margin: 2px 0 2px 18px; font-size: 13.5px; }
+  .output-ok { color: var(--accent); }
+  .output-warn { color: var(--warn); }
+  .output-err { color: var(--danger); }
+  .cmd-section { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .cmd-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .cmd-section-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  .callout.warn {
+    background: rgba(255,184,77,0.07);
+    border: 1px solid rgba(255,184,77,0.3);
+    border-left: 4px solid var(--warn);
+  }
+  .callout.danger {
+    background: rgba(255,92,92,0.07);
+    border: 1px solid rgba(255,92,92,0.3);
+    border-left: 4px solid var(--danger);
+  }
+  .callout.ok {
+    background: rgba(127,255,106,0.07);
+    border: 1px solid rgba(127,255,106,0.3);
+    border-left: 4px solid var(--accent);
+  }
+  .callout.info {
+    background: rgba(77,240,255,0.07);
+    border: 1px solid rgba(77,240,255,0.3);
+    border-left: 4px solid var(--accent2);
+  }
+  .callout-icon { font-size: 18px; margin-bottom: 4px; display: block; }
+  .callout h4 { font-size: 13.5px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .callout.warn h4 { color: var(--warn); }
+  .callout.danger h4 { color: var(--danger); }
+  .callout.ok h4 { color: var(--accent); }
+  .callout.info h4 { color: var(--accent2); }
+  .callout p + p { margin-top: 6px; }
+
+  /* ── DEBUG TREE ── */
+  .debug-tree {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .debug-tree h4 {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--danger);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .debug-step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding-left: 8px;
+  }
+  .debug-num {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--danger);
+    margin-top: 1px;
+  }
+  .debug-content { font-size: 14.5px; }
+  .debug-content strong { color: var(--text); display: block; margin-bottom: 2px; }
+  .debug-content span { color: var(--text-dim); font-size: 14px; }
+  .debug-cmd { font-family: var(--mono); font-size: 13.5px; color: var(--accent); background: rgba(127,255,106,0.08); padding: 2px 8px; border-radius: 3px; display: inline-block; margin-top: 4px; }
+
+  /* ── MISTAKE LIST ── */
+  .mistakes {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .mistakes-header {
+    background: rgba(255,92,92,0.08);
+    border-bottom: 1px solid rgba(255,92,92,0.2);
+    padding: 12px 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--danger);
+  }
+  .mistake-item {
+    padding: 13px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    gap: 12px;
+    font-size: 15px;
+  }
+  .mistake-item:last-child { border-bottom: none; }
+  .mistake-x { color: var(--danger); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .mistake-content strong { display: block; color: var(--text); margin-bottom: 2px; }
+  .mistake-content span { color: var(--text-dim); font-size: 14px; }
+  .mistake-fix { font-family: var(--mono); font-size: 13px; color: var(--accent); margin-top: 5px; display: block; }
+
+  /* ── MINI PROJECT ── */
+  .mini-project {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 24px 0;
+  }
+  .project-header {
+    padding: 16px 22px;
+    background: linear-gradient(135deg, rgba(127,255,106,0.06), rgba(77,240,255,0.06));
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .project-header .meta { flex: 1; }
+  .project-header .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+  .project-header h3 { font-size: 19px; font-weight: 700; }
+  .project-header .time-est {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .project-body { padding: 20px 22px; }
+  .project-goal {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: var(--surface2);
+    border-radius: 5px;
+    border-left: 3px solid var(--accent2);
+  }
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 7px 0;
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '□';
+    color: var(--border);
+    font-size: 15.5px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── INTERVIEW PROMPT ── */
+  .interview-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 16px 0;
+    overflow: hidden;
+  }
+  .interview-q {
+    background: rgba(255,133,224,0.07);
+    border-bottom: 1px solid rgba(255,133,224,0.2);
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--d3);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .interview-q .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+  .interview-a { padding: 14px 18px; font-size: 15px; color: var(--text-dim); }
+  .interview-a strong { color: var(--text); }
+
+  /* ── QUIZ ── */
+  .quiz {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 24px;
+    margin: 20px 0;
+  }
+  .quiz-header {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quiz-q {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 14px 0 8px;
+  }
+  .quiz-q .num { color: var(--muted); margin-right: 6px; font-family: var(--mono); }
+  .quiz-options { display: flex; flex-direction: column; gap: 6px; }
+  .quiz-opt {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 10px 16px;
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .quiz-opt:hover { border-color: var(--accent2); color: var(--accent2); }
+  .quiz-opt.correct { background: rgba(127,255,106,0.1); border-color: var(--accent); color: var(--accent); }
+  .quiz-opt.wrong { background: rgba(255,92,92,0.08); border-color: var(--danger); color: var(--danger); }
+  .quiz-explain {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--text-dim);
+    border-left: 3px solid var(--accent);
+  }
+  .quiz-explain.show { display: block; }
+
+  /* ── GITHUB DOC TEMPLATE ── */
+  .doc-template {
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 16px 0;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: #b0bec5;
+    overflow: hidden;
+  }
+  .doc-template-bar {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    padding: 9px 16px;
+    font-size: 11px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+  }
+  .doc-template pre { padding: 18px 22px; overflow-x: auto; line-height: 1.6; }
+  .md-h1 { color: #fff; font-size: 15.5px; }
+  .md-h2 { color: #c5c5ff; }
+  .md-h3 { color: #a0a0f0; }
+  .md-badge { color: var(--accent); }
+  .md-code { color: var(--accent2); }
+  .md-comment { color: var(--muted); }
+
+  /* ── EXPECTED OUTPUT BOX ── */
+  .expected-output {
+    background: rgba(77,240,255,0.04);
+    border: 1px solid rgba(77,240,255,0.2);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .expected-output .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* ── CONCEPT CARDS ── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .concept-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 16px 18px;
+  }
+  .concept-card .icon { font-size: 20px; margin-bottom: 8px; }
+  .concept-card h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .concept-card p { font-size: 14px; color: var(--text-dim); }
+  .concept-card .analogy { font-size: 13.5px; color: var(--accent); margin-top: 8px; font-style: italic; }
+
+  /* ── PROGRESS BAR ── */
+  .week-progress {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+  }
+  .week-progress h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .day-track {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .day-seg {
+    flex: 1;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--muted);
+    position: relative;
+  }
+  .day-seg.active { background: rgba(127,255,106,0.15); border-color: var(--accent); color: var(--accent); }
+  .day-seg.upcoming { background: var(--surface2); }
+
+  /* ── SECTION DIVIDERS ── */
+  .subsection {
+    margin: 32px 0 16px;
+  }
+  .subsection h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .subsection h3::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .subsection p { font-size: 13.5px; color: var(--text-dim); }
+
+  /* ── INLINE CODE ── */
+  code {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    background: rgba(77,240,255,0.08);
+    color: var(--accent2);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* ── TEXT STYLES ── */
+  h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  p { font-size: 16px; color: var(--text-dim); margin-bottom: 10px; line-height: 1.8; }
+  strong { color: var(--text); }
+  ul { padding-left: 22px; }
+  ul li { font-size: 15px; color: var(--text-dim); margin-bottom: 6px; line-height: 1.7; }
+
+  /* ── STICKY PROGRESS ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(9,9,15,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    margin-bottom: 0;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+  }
+  .sticky-pill {
+    flex-shrink: 0;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: all 0.15s;
+  }
+  .sticky-pill:hover { color: var(--accent); border-color: var(--accent); }
+  .sticky-pill.d1 { color: var(--d1); border-color: rgba(127,255,106,0.3); }
+  .sticky-pill.d2 { color: var(--d2); border-color: rgba(77,240,255,0.3); }
+  .sticky-pill.d3 { color: var(--d3); border-color: rgba(255,133,224,0.3); }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 80px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer span { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav { display: none; }
+    .main { margin-left: 0; padding: 24px 20px; }
+    .advisor-grid { grid-template-columns: 1fr; }
+    .market-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .main > * { animation: fadeUp 0.3s ease both; }
+  .main > *:nth-child(2)  { animation-delay: 0.05s; }
+  .main > *:nth-child(3)  { animation-delay: 0.10s; }
+  .main > *:nth-child(4)  { animation-delay: 0.15s; }
+
+  /* ── DAY ANCHORS ── */
+  #day1, #day2, #day3 { scroll-margin-top: 60px; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <span>90 Days DevOps</span>
+    <strong>Days 1–3 Pack</strong>
+  </div>
+  <div class="nav-section">Overview</div>
+  <a href="#overview" class="d1"><span class="dot d1"></span>Market Brief</a>
+  <a href="#advisors" class="d1"><span class="dot d1"></span>Senior + Trainer Voice</a>
+  <a href="#week-track" class="d1"><span class="dot d1"></span>Week Tracker</a>
+
+  <div class="nav-dropdown" data-day="day1">
+    <button class="nav-dropdown-toggle d1-toggle" onclick="toggleDropdown(this)">
+      <span>▸ Day 1 — Linux</span>
+      <span class="chevron">▸</span>
+    </button>
+    <div class="nav-dropdown-body">
+      <a href="#d1-schedule" class="d1"><span class="dot d1"></span>8h Schedule</a>
+      <a href="#d1-concepts" class="d1"><span class="dot d1"></span>Core Concepts</a>
+      <a href="#d1-commands" class="d1"><span class="dot d1"></span>Commands</a>
+      <a href="#d1-debug" class="d1"><span class="dot d1"></span>Debug Tree</a>
+      <a href="#d1-mistakes" class="d1"><span class="dot d1"></span>Mistakes</a>
+      <a href="#d1-project" class="d1"><span class="dot d1"></span>Mini Project</a>
+      <a href="#d1-interview" class="d1"><span class="dot d1"></span>Interview Prompts</a>
+      <a href="#d1-quiz" class="d1"><span class="dot d1"></span>Quiz</a>
+      <a href="#d1-github" class="d1"><span class="dot d1"></span>GitHub Notes</a>
+    </div>
+  </div>
+
+  <div class="nav-dropdown" data-day="day2">
+    <button class="nav-dropdown-toggle d2-toggle" onclick="toggleDropdown(this)">
+      <span>▸ Day 2 — Git + AWS</span>
+      <span class="chevron">▸</span>
+    </button>
+    <div class="nav-dropdown-body">
+      <a href="#d2-schedule" class="d2"><span class="dot d2"></span>8h Schedule</a>
+      <a href="#d2-concepts" class="d2"><span class="dot d2"></span>Core Concepts</a>
+      <a href="#d2-commands" class="d2"><span class="dot d2"></span>Commands</a>
+      <a href="#d2-debug" class="d2"><span class="dot d2"></span>Debug Tree</a>
+      <a href="#d2-mistakes" class="d2"><span class="dot d2"></span>Mistakes</a>
+      <a href="#d2-project" class="d2"><span class="dot d2"></span>Mini Project</a>
+      <a href="#d2-interview" class="d2"><span class="dot d2"></span>Interview Prompts</a>
+      <a href="#d2-quiz" class="d2"><span class="dot d2"></span>Quiz</a>
+      <a href="#d2-github" class="d2"><span class="dot d2"></span>GitHub Notes</a>
+    </div>
+  </div>
+
+  <div class="nav-dropdown" data-day="day3">
+    <button class="nav-dropdown-toggle d3-toggle" onclick="toggleDropdown(this)">
+      <span>▸ Day 3 — EC2 Deploy</span>
+      <span class="chevron">▸</span>
+    </button>
+    <div class="nav-dropdown-body">
+      <a href="#d3-schedule" class="d3"><span class="dot d3"></span>8h Schedule</a>
+      <a href="#d3-concepts" class="d3"><span class="dot d3"></span>Core Concepts</a>
+      <a href="#d3-commands" class="d3"><span class="dot d3"></span>Commands</a>
+      <a href="#d3-debug" class="d3"><span class="dot d3"></span>Debug Tree</a>
+      <a href="#d3-mistakes" class="d3"><span class="dot d3"></span>Mistakes</a>
+      <a href="#d3-project" class="d3"><span class="dot d3"></span>Mini Project</a>
+      <a href="#d3-interview" class="d3"><span class="dot d3"></span>Interview Prompts</a>
+      <a href="#d3-quiz" class="d3"><span class="dot d3"></span>Quiz</a>
+      <a href="#d3-github" class="d3"><span class="dot d3"></span>GitHub Notes</a>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">● DevOps Bootcamp — Days 1 to 3</div>
+    <h1>Trainer <em>Beside You.</em><br>Zero to EC2 in 3 Days.</h1>
+    <p class="hero-sub">You are 33, starting from zero, and the market is paying £55K–£90K for junior DevOps. This pack is your first 3 days of a guided apprenticeship — not a course. Every command is explained. Every mistake is documented. Every hour is accounted for.</p>
+    <div class="hero-meta">
+      <div class="hero-badge">Target: <span>Junior DevOps / Cloud Engineer</span></div>
+      <div class="hero-badge">Timeline: <span>Days 1–3 of 90</span></div>
+      <div class="hero-badge">Platform: <span>AWS EC2 (Ubuntu 22.04)</span></div>
+      <div class="hero-badge">Daily Hours: <span>8 hrs structured</span></div>
+    </div>
+  </div>
+
+  <!-- QUICK NAV -->
+  <div class="sticky-nav" id="overview">
+    <a href="#day1" class="sticky-pill d1">↓ Day 1 Linux</a>
+    <a href="#day2" class="sticky-pill d2">↓ Day 2 Git + AWS</a>
+    <a href="#day3" class="sticky-pill d3">↓ Day 3 EC2 Deploy</a>
+  </div>
+
+  <!-- MARKET BRIEF -->
+  <div class="market-brief" style="margin-top:32px;">
+    <h2>📊 Market Brief — Why This Order Matters</h2>
+    <p style="color:var(--text-dim);font-size:13.5px;margin-bottom:12px;">Senior engineers who review your GitHub and interview you in 2026 will immediately test: Linux fluency → Git hygiene → AWS EC2 basics → CI/CD logic. That is the exact sequence of these 3 days. The market has shifted: mid-level generalists are being squeezed. You need depth in the fundamentals before you touch Docker or Kubernetes. Build the foundation correctly now.</p>
+    <div class="market-grid">
+      <div class="market-stat">
+        <span class="val">£55K–90K</span>
+        <span class="label">Junior DevOps range (UK, 2026)</span>
+      </div>
+      <div class="market-stat">
+        <span class="val">EC2 + Git</span>
+        <span class="label">Tested in 90%+ of junior interviews</span>
+      </div>
+      <div class="market-stat">
+        <span class="val">Linux CLI</span>
+        <span class="label">Screened in first phone call</span>
+      </div>
+      <div class="market-stat">
+        <span class="val">IAM + VPC</span>
+        <span class="label">Week 2 target — not yet</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DUAL ADVISOR VOICES -->
+  <div id="advisors">
+    <div class="subsection">
+      <h3>🎙 Two Trainers. One Pack.</h3>
+    </div>
+    <div class="advisor-grid">
+      <div class="advisor-card">
+        <div class="advisor-header senior">⚡ SENIOR DEVOPS ENGINEER — Blunt Reality</div>
+        <div class="advisor-body">
+          <p>Your biggest enemy in Week 1 is skipping Linux for Docker tutorials. Do not do it. I have interviewed hundreds of "DevOps candidates" who cannot tell me the difference between <code>chmod 755</code> and <code>chmod 644</code>. They fail. Immediately.</p>
+          <p>At 33 you have a cognitive advantage: you have real-world discipline. Use it. The commands I am about to give you are not optional exercises — they are the exact same commands you will run in production on your first job. Treat them like that.</p>
+          <p>Every command block: type it, do not paste it. Your hands need to learn this. A senior will spot a copy-paste candidate in the first 10 minutes of a technical screen.</p>
+        </div>
+      </div>
+      <div class="advisor-card">
+        <div class="advisor-header trainer">🎓 SENIOR TRAINER — Learning Framework</div>
+        <div class="advisor-body">
+          <p>I have trained people who switched from hospitality, retail, finance — all backgrounds. The pattern that gets people hired: understand the why before the how, then repeat the how until the hands know it without the brain.</p>
+          <p>For Days 1–3 I want you to think in three frames: What does this command do? Why would a system need this? What breaks if I do it wrong? Every section below gives you all three.</p>
+          <p>Do not rush to tick boxes. One concept fully understood is worth ten commands memorised. This pack is built so Day 3 feels hard — that tension is the signal you are actually learning.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK TRACKER -->
+  <div class="week-progress" id="week-track">
+    <h3>📅 Week 1 Progression Map</h3>
+    <div class="day-track">
+      <div class="day-seg active">D1</div>
+      <div class="day-seg active">D2</div>
+      <div class="day-seg active">D3</div>
+      <div class="day-seg upcoming">D4</div>
+      <div class="day-seg upcoming">D5</div>
+      <div class="day-seg upcoming">D6</div>
+      <div class="day-seg upcoming">D7</div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);font-family:var(--mono);">D1: Linux Foundations → D2: Git + AWS Account → D3: EC2 Live Deploy → D4–7: (next pack) Bash scripting, IAM, Security Groups, S3</p>
+  </div>
+
+  <!-- ══════════════════ DAY 1 ══════════════════ -->
+  <div id="day1">
+    <div class="section-head">
+      <div class="day-pill d1">Day 1</div>
+      <h2>Linux Foundations on EC2</h2>
+      <span class="time-block">8 hours</span>
+    </div>
+
+    <div class="callout ok">
+      <span class="callout-icon">🎯</span>
+      <h4>Day 1 Goal</h4>
+      <p>By end of Day 1 you can navigate a Linux server, create and manage files, understand permissions, and not panic when you only have a terminal. Expected output: a <code>setup.sh</code> script on your EC2 that a teammate could run to replicate your environment.</p>
+    </div>
+
+    <!-- SCHEDULE -->
+    <div class="subsection" id="d1-schedule">
+      <h3>📋 8-Hour Schedule</h3>
+    </div>
+    <table class="schedule">
+      <thead>
+        <tr><th>Time Block</th><th>Phase</th><th>Activity + Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time-col">09:00 – 09:45</td>
+          <td class="phase-col">SETUP</td>
+          <td class="activity-col"><strong>AWS Free Tier account + EC2 instance launch</strong><span>Your practice server. Everything from Day 1 onward happens here. Never do DevOps on your local machine when you have a real server available.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">09:45 – 10:30</td>
+          <td class="phase-col">THEORY</td>
+          <td class="activity-col"><strong>What Linux actually is + the terminal mental model</strong><span>15 min: Linux distros and why Ubuntu. 20 min: Filesystem hierarchy — / vs /home vs /etc vs /var. 15 min: Process model (kernel → shell → process).</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">10:30 – 10:45</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>15-minute physical break — mandatory</strong><span>Step away from the screen. Walk. Your brain encodes what you learned in the previous block during rest.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">10:45 – 12:30</td>
+          <td class="phase-col">HANDS-ON</td>
+          <td class="activity-col"><strong>Navigation + File system commands</strong><span>Type every command in this pack. Do not paste. Make deliberate mistakes to see error messages. Read the error — it tells you exactly what went wrong.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">12:30 – 13:15</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>Lunch. Away from screen.</strong><span>No passive "learning" videos during lunch. Your concentration degrades after 3 hours.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">13:15 – 15:00</td>
+          <td class="phase-col">HANDS-ON</td>
+          <td class="activity-col"><strong>Permissions, users, process management</strong><span>The most screened Linux topics in junior DevOps interviews. chmod, chown, ps, kill, systemctl — you will use these in production on Day 1 of your first job.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">15:00 – 15:15</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>Short break + review mental notes</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">15:15 – 16:30</td>
+          <td class="phase-col">PROJECT</td>
+          <td class="activity-col"><strong>Mini Project: server_setup.sh</strong><span>Build the bash script. Test it. Break it intentionally. Fix it. This is your first portfolio artifact.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">16:30 – 17:00</td>
+          <td class="phase-col">DOCUMENT</td>
+          <td class="activity-col"><strong>Write GitHub notes + Quiz yourself</strong><span>Open your notes repo. Write what you learned in your own words. Do the quiz at the end of this section. If you score below 70%, re-read the commands block.</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- CONCEPTS -->
+    <div class="subsection" id="d1-concepts">
+      <h3>🧠 Core Concepts — The Why Behind Every Command</h3>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="icon">🗂</div>
+        <h4>Filesystem Hierarchy Standard</h4>
+        <p>Linux organises everything under <code>/</code> (root). Every file, device, and process is a path. There are no drive letters like Windows.</p>
+        <p class="analogy">Analogy: Think of <code>/</code> like the ground floor of a building. <code>/home</code> is the residents' floor. <code>/etc</code> is the manager's office with config files. <code>/var</code> is the storage room with logs and data.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🔐</div>
+        <h4>File Permissions (rwx)</h4>
+        <p>Every file has 3 permission sets: owner, group, others. r=read(4), w=write(2), x=execute(1). These numbers add up: 755 = owner full, group+others read+execute.</p>
+        <p class="analogy">Analogy: Your front door key (owner), spare key for family (group), and the fact a stranger can ring the bell but not enter (others).</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">⚙️</div>
+        <h4>Processes and Services</h4>
+        <p>Every running program is a process with a PID (process ID). <code>systemd</code> manages services — programs that start at boot and run in the background (like nginx, sshd).</p>
+        <p class="analogy">Analogy: A process is like a running app on your phone. A service is like an app set to auto-start when you turn the phone on.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">📦</div>
+        <h4>Package Manager (apt)</h4>
+        <p><code>apt</code> is Ubuntu's app store for the terminal. <code>apt install</code> downloads and installs software. <code>apt update</code> fetches the latest list of available software — do this before every install.</p>
+        <p class="analogy">Analogy: <code>apt update</code> = refreshing your app store. <code>apt install nginx</code> = downloading and installing the app.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">📝</div>
+        <h4>Text Editors: nano vs vim</h4>
+        <p>On a server you have no GUI. You edit files in the terminal. <code>nano</code> is beginner-friendly. <code>vim</code> is what seniors use. Learn nano first — know that vim exists.</p>
+        <p class="analogy">Analogy: nano is like Notepad. vim is like a professional IDE but keyboard-only — has modes that confuse beginners.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🔌</div>
+        <h4>SSH (Secure Shell)</h4>
+        <p>SSH is how you connect to a remote server (like your EC2) from your laptop. You use a private key (.pem file) instead of a password. The server has the matching public key.</p>
+        <p class="analogy">Analogy: A lock-and-key system. Your .pem file is the physical key. The EC2 is the lock. Only your key opens it.</p>
+      </div>
+    </div>
+
+    <!-- COMMANDS -->
+    <div class="subsection" id="d1-commands">
+      <h3>⌨️ Exact Command Flow — Type Every Line</h3>
+      <p>These are grouped into sessions. Do each session in one sitting before moving on.</p>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">SESSION 1 of 4 — Connecting to EC2 + First Navigation</span>
+      </div>
+      <div class="terminal-body">
+        <div class="cmd-section">
+          <div class="cmd-section-label">From your local machine (Mac/Linux terminal or Windows WSL/Git Bash)</div>
+          <div class="cmd-line"><span class="prompt"># STEP 1:</span> <span class="cmd comment">Fix key permissions — AWS refuses connection if key is too open</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">chmod 400 ~/Downloads/my-ec2-key.pem</span></div>
+          <div class="output-line comment"># chmod 400 = only owner can read. Required by SSH.</div>
+
+          <div class="cmd-line" style="margin-top:12px;"><span class="prompt">$</span> <span class="cmd">ssh -i ~/Downloads/my-ec2-key.pem ubuntu@YOUR_EC2_PUBLIC_IP</span></div>
+          <div class="output-line comment"># Replace YOUR_EC2_PUBLIC_IP with the IPv4 from EC2 console</div>
+          <div class="output-line comment"># First time: type 'yes' when asked about host authenticity</div>
+          <div class="output-ok">Welcome to Ubuntu 22.04.4 LTS (GNU/Linux 6.5.0-1022-aws x86_64)</div>
+          <div class="output-line">ubuntu@ip-172-31-xx-xx:~$</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Now inside EC2 — Navigation Commands</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">pwd</span> <span class="comment">   # Print Working Directory — where am I right now?</span></div>
+          <div class="output-line">/home/ubuntu</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ls</span> <span class="comment">    # List files in current directory</span></div>
+          <div class="output-line comment"># Empty — you just connected, nothing here yet</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ls -la</span> <span class="comment"> # l=long format, a=show hidden files (starting with .)</span></div>
+          <div class="output-line">drwxr-x--- 4 ubuntu ubuntu 4096 Jun  2 09:12 .</div>
+          <div class="output-line">drwxr-xr-x 3 root   root   4096 Jun  2 09:00 ..</div>
+          <div class="output-line">-rw-r--r-- 1 ubuntu ubuntu  220 Jan  1 2024 .bash_logout</div>
+          <div class="output-line">-rw-r--r-- 1 ubuntu ubuntu 3526 Jan  1 2024 .bashrc</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">cd /</span> <span class="comment">   # Change to root directory</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ls</span></div>
+          <div class="output-line">bin  boot  dev  etc  home  lib  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</div>
+          <div class="output-line comment"># This is the entire Linux filesystem. Know each major one:</div>
+          <div class="output-line comment"># /etc = system config files (nginx.conf, sshd_config, etc)</div>
+          <div class="output-line comment"># /var = variable data — logs live at /var/log/</div>
+          <div class="output-line comment"># /home = user home directories</div>
+          <div class="output-line comment"># /tmp = temporary files, cleared on reboot</div>
+          <div class="output-line comment"># /usr = user programs (installed software)</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">cd ~</span> <span class="comment">   # ~ means "my home directory" — fastest way home</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">pwd</span></div>
+          <div class="output-line">/home/ubuntu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">SESSION 2 of 4 — File Operations</span>
+      </div>
+      <div class="terminal-body">
+        <div class="cmd-section">
+          <div class="cmd-section-label">Creating, Moving, Editing Files</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">mkdir devops-notes</span> <span class="comment">  # Make directory</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">cd devops-notes</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">touch day1.txt</span> <span class="comment">     # Create empty file</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">echo "Day 1 learning DevOps" > day1.txt</span> <span class="comment">  # Write text to file</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">cat day1.txt</span> <span class="comment">       # Read file contents</span></div>
+          <div class="output-line">Day 1 learning DevOps</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">echo "Second line" >> day1.txt</span> <span class="comment">  # >> appends, > overwrites</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">cat day1.txt</span></div>
+          <div class="output-line">Day 1 learning DevOps</div>
+          <div class="output-line">Second line</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">cp day1.txt day1-backup.txt</span> <span class="comment">  # Copy</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">mv day1-backup.txt backup/</span> <span class="comment">   # Move (rename or relocate)</span></div>
+          <div class="output-err">mv: cannot stat 'backup/': No such file or directory</div>
+          <div class="output-line comment"># Expected error! You haven't created backup/ yet. Fix:</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">mkdir backup</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">mv day1-backup.txt backup/</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ls -la backup/</span></div>
+          <div class="output-line">-rw-rw-r-- 1 ubuntu ubuntu 35 Jun 2 10:30 day1-backup.txt</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">rm backup/day1-backup.txt</span> <span class="comment">  # Remove file</span></div>
+          <div class="output-warn"># WARNING: rm has NO RECYCLE BIN. Gone is gone. Never run rm -rf / as root.</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">nano day1.txt</span> <span class="comment">  # Open editor. Ctrl+X to exit, Y to save.</span></div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Searching Inside Files</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">grep "Day" day1.txt</span> <span class="comment">         # Find lines containing "Day"</span></div>
+          <div class="output-line output-ok">Day 1 learning DevOps</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">grep -r "ubuntu" /etc/</span> <span class="comment">   # Recursive search in /etc</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">find / -name "*.txt" 2>/dev/null</span> <span class="comment">  # Find all .txt files, hide errors</span></div>
+          <div class="output-line comment"># 2>/dev/null = throw permission errors in the bin — you don't own every file</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">cat /var/log/syslog | grep "error"</span> <span class="comment">  # Pipe output into grep</span></div>
+          <div class="output-line comment"># | (pipe) sends output of left command into right command. Vital for DevOps.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">SESSION 3 of 4 — Permissions + Users + Services</span>
+      </div>
+      <div class="terminal-body">
+        <div class="cmd-section">
+          <div class="cmd-section-label">Understanding and Changing Permissions</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ls -la day1.txt</span></div>
+          <div class="output-line">-rw-rw-r-- 1 ubuntu ubuntu 35 Jun 2 10:30 day1.txt</div>
+          <div class="output-line comment"># Breakdown: - (file) rw- (owner: read+write) rw- (group: rw) r-- (others: read only)</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">chmod 755 day1.txt</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ls -la day1.txt</span></div>
+          <div class="output-line">-rwxr-xr-x 1 ubuntu ubuntu 35 Jun 2 10:30 day1.txt</div>
+          <div class="output-line comment"># 7=rwx (owner), 5=r-x (group), 5=r-x (others)</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">chmod 600 day1.txt</span> <span class="comment">  # Owner read+write only, nobody else</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">chmod +x myscript.sh</span> <span class="comment"> # Add execute permission (symbolic method)</span></div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">chown root:root day1.txt</span> <span class="comment">  # Change owner to root</span></div>
+          <div class="output-err">chown: changing ownership of 'day1.txt': Operation not permitted</div>
+          <div class="output-line comment"># You need sudo (superuser do) for that. This is correct behavior.</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo chown ubuntu:ubuntu day1.txt</span> <span class="comment">  # sudo grants temporary root powers</span></div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Processes and System Services</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ps aux</span> <span class="comment">   # All running processes. USER PID %CPU %MEM COMMAND</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ps aux | grep ssh</span> <span class="comment">  # Filter: find the sshd service process</span></div>
+          <div class="output-line">root 789 0.0 0.3 /usr/sbin/sshd -D</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">top</span> <span class="comment">   # Live process monitor. Press q to quit.</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">htop</span> <span class="comment">  # Better version. Install if not present:</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo apt update && sudo apt install htop -y</span></div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl status ssh</span> <span class="comment">   # Check if SSH service is running</span></div>
+          <div class="output-ok">● ssh.service - OpenBSD Secure Shell server</div>
+          <div class="output-ok">   Active: active (running) since Mon 2026-06-02 09:00:15 UTC</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl stop ssh</span> <span class="comment">   # CAREFUL: stops SSH — you'd disconnect!</span></div>
+          <div class="output-warn"># Do NOT run this unless you want to lose your connection!</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl start nginx</span> <span class="comment">  # Start nginx (if installed)</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl enable nginx</span> <span class="comment"> # Auto-start on reboot</span></div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">df -h</span> <span class="comment">   # Disk usage. -h = human readable (GB, MB)</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">free -h</span> <span class="comment">  # RAM usage</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">uptime</span> <span class="comment">  # How long server has been running</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">who</span> <span class="comment">     # Who is logged in right now</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">history</span> <span class="comment"> # All commands you've typed this session</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">history | grep chmod</span> <span class="comment">  # Search your command history</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="expected-output">
+      <span class="label">✅ Expected Output After Session 3</span>
+      You can: SSH into your EC2, navigate directories without getting lost, create/edit/delete files, read permission strings, use chmod and chown, check which services are running, and see disk/RAM usage. If any of these feel shaky, re-do that section before Day 2.
+    </div>
+
+    <!-- DEBUG TREE -->
+    <div class="subsection" id="d1-debug">
+      <h3>🐛 Debugging Flow — Day 1 Most Common Failures</h3>
+    </div>
+    <div class="debug-tree">
+      <h4>⚡ If SSH Connection Fails</h4>
+      <div class="debug-step">
+        <div class="debug-num">1</div>
+        <div class="debug-content">
+          <strong>Check error message first</strong>
+          <span>"Permission denied (publickey)" → key problem. "Connection timed out" → network/security group problem.</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">2</div>
+        <div class="debug-content">
+          <strong>Key permissions wrong (most common)</strong>
+          <span>AWS refuses connection if .pem is readable by others.</span>
+          <span class="debug-cmd">chmod 400 your-key.pem</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">3</div>
+        <div class="debug-content">
+          <strong>Wrong username — Ubuntu EC2 uses "ubuntu", not "ec2-user"</strong>
+          <span>Amazon Linux uses ec2-user. Ubuntu AMI uses ubuntu. Check which you launched.</span>
+          <span class="debug-cmd">ssh -i key.pem ubuntu@IP</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">4</div>
+        <div class="debug-content">
+          <strong>Security Group blocking port 22</strong>
+          <span>Go to EC2 console → Security Groups → Inbound Rules. Port 22 must allow your IP (or 0.0.0.0/0 for testing, never in production).</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">5</div>
+        <div class="debug-content">
+          <strong>Instance is stopped</strong>
+          <span>Check EC2 console. Instance State must be "Running". Start it if stopped.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="debug-tree">
+      <h4>⚡ If a Command Says "Permission denied"</h4>
+      <div class="debug-step">
+        <div class="debug-num">1</div>
+        <div class="debug-content">
+          <strong>Try running with sudo first</strong>
+          <span class="debug-cmd">sudo [your command here]</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">2</div>
+        <div class="debug-content">
+          <strong>Check file ownership</strong>
+          <span>Who owns the file? Who are you?</span>
+          <span class="debug-cmd">ls -la filename && whoami</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">3</div>
+        <div class="debug-content">
+          <strong>Check if execute bit is missing for a script</strong>
+          <span class="debug-cmd">chmod +x script.sh && ./script.sh</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MISTAKES -->
+    <div class="subsection" id="d1-mistakes">
+      <h3>💥 Common Beginner Mistakes — Day 1</h3>
+    </div>
+    <div class="mistakes">
+      <div class="mistakes-header">⚠ Mistakes Senior Engineers See Every Week From Beginners</div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Using sudo for everything</strong>
+          <span>Running all commands as root because "it avoids permission errors." This destroys proper file ownership and creates real security risks in production. Use sudo only when explicitly needed.</span>
+          <span class="mistake-fix">✓ Fix: Run as ubuntu, escalate to sudo only when the command itself requires it.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Using > when they mean >></strong>
+          <span><code>echo "line" > file.txt</code> overwrites the entire file every time. Beginners lose data they wanted to keep.</span>
+          <span class="mistake-fix">✓ Fix: Use >> to append. Use > only when you want to replace the entire file content.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Not updating before apt install</strong>
+          <span><code>apt install nginx</code> without running <code>apt update</code> first installs old or wrong versions from a stale package list.</span>
+          <span class="mistake-fix">✓ Fix: Always: sudo apt update && sudo apt install [package] -y</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Leaving EC2 running when not studying</strong>
+          <span>Free tier has limits. Leaving a t2.micro running for 31 days is fine. Leaving 2–3 running or running larger instances drains your free tier allowance and causes unexpected charges.</span>
+          <span class="mistake-fix">✓ Fix: Stop (not terminate) EC2 when done for the day. Stop = paused, billed for storage only. Terminate = permanently deleted.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Pasting commands without reading them</strong>
+          <span>Copying a Stack Overflow command and running it blindly. In DevOps this causes real outages. In learning it means you understand nothing.</span>
+          <span class="mistake-fix">✓ Fix: Read every command word by word. Look up any flag you don't know with man [command] or [command] --help.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Treating chmod 777 as the fix-everything command</strong>
+          <span>chmod 777 gives everyone read+write+execute access to a file. Beginners use it to fix permission errors. In production it's a critical security vulnerability.</span>
+          <span class="mistake-fix">✓ Fix: Diagnose why you need access (wrong user? wrong group?), fix the root cause. chmod 777 is almost never the right answer.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINI PROJECT -->
+    <div class="subsection" id="d1-project">
+      <h3>🏗 Mini Project: Server Setup Script</h3>
+    </div>
+    <div class="mini-project">
+      <div class="project-header">
+        <div class="meta">
+          <div class="tag">📁 Day 1 Mini Project</div>
+          <h3>server_setup.sh — Your First Automation Script</h3>
+        </div>
+        <div class="time-est">⏱ ~60 minutes</div>
+      </div>
+      <div class="project-body">
+        <div class="project-goal">
+          <strong>Goal:</strong> Write a bash script that a teammate could run on a fresh Ubuntu EC2 to replicate your development environment. This is the beginner version of what DevOps engineers call "server provisioning" — automating the setup of a machine.
+        </div>
+        <ul class="checklist">
+          <li>Create the file <code>~/devops-notes/server_setup.sh</code></li>
+          <li>The script must update the package list with apt update</li>
+          <li>Install: git, curl, htop, tree, unzip</li>
+          <li>Create a directory structure: <code>~/projects</code>, <code>~/projects/scripts</code>, <code>~/projects/logs</code></li>
+          <li>Write a success message at the end: echo "✓ Setup complete — $(date)"</li>
+          <li>Make the script executable with chmod +x</li>
+          <li>Run it and verify it works without errors</li>
+          <li>Run it a second time — it should still work without breaking</li>
+        </ul>
+
+        <div class="terminal" style="margin-top:16px;">
+          <div class="terminal-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="label">server_setup.sh — Build This File</span>
+          </div>
+          <div class="terminal-body">
+            <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">nano ~/devops-notes/server_setup.sh</span></div>
+            <div class="output-line comment"># Inside nano, type this script:</div>
+            <div class="output-line">#!/bin/bash</div>
+            <div class="output-line comment"># The shebang line — tells the system to use bash to run this</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">set -e</div>
+            <div class="output-line comment"># set -e: exit immediately if any command fails — catches errors early</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "=== Starting server setup ==="</div>
+            <div class="output-line">echo "Date: $(date)"</div>
+            <div class="output-line">echo "User: $(whoami)"</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "--- Updating package list ---"</div>
+            <div class="output-line">sudo apt update -y</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "--- Installing tools ---"</div>
+            <div class="output-line">sudo apt install -y git curl htop tree unzip</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "--- Creating project directories ---"</div>
+            <div class="output-line">mkdir -p ~/projects/scripts ~/projects/logs</div>
+            <div class="output-line comment"># -p flag: creates parent dirs if they don't exist, no error if they do</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "--- Verifying installs ---"</div>
+            <div class="output-line">git --version</div>
+            <div class="output-line">curl --version | head -1</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "=== ✓ Setup complete — $(date) ==="</div>
+            <div class="output-line comment"># Ctrl+X, then Y, then Enter to save and exit nano</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">chmod +x ~/devops-notes/server_setup.sh</span></div>
+            <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">bash ~/devops-notes/server_setup.sh</span></div>
+          </div>
+        </div>
+
+        <div class="expected-output">
+          <span class="label">Expected Output</span>
+          === Starting server setup ===<br>
+          Date: Tue Jun 2 14:30:00 UTC 2026<br>
+          User: ubuntu<br>
+          --- Updating package list ---<br>
+          [apt output]<br>
+          --- Installing tools ---<br>
+          [apt install output]<br>
+          --- Verifying installs ---<br>
+          git version 2.43.0<br>
+          curl 7.88.1 (x86_64-pc-linux-gnu)<br>
+          === ✓ Setup complete — Tue Jun 2 14:32:41 UTC 2026 ===
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERVIEW PROMPTS -->
+    <div class="subsection" id="d1-interview">
+      <h3>🎤 Interview Explanation Prompts — Day 1 Topics</h3>
+      <p>Practise saying these out loud. Recruiter phone screens often start with "can you explain..."</p>
+    </div>
+
+    <div class="interview-block">
+      <div class="interview-q"><span class="label">INT Q →</span> "Can you explain Linux file permissions to me?"</div>
+      <div class="interview-a">
+        <strong>Your answer structure:</strong> "Linux permissions are split into three groups: the owner of the file, the group it belongs to, and everyone else — called others. Each group gets three bits: read, write, and execute, represented as rwx. These map to numbers: r=4, w=2, x=1, so 7 means full access, 5 means read and execute, 4 means read only. A permission of 755 means the owner has full access, and the group and others can read and execute but not write. chmod is the command to change permissions, chown changes ownership. I use chmod 600 for private key files — only the owner can read, nobody else can touch it."
+      </div>
+    </div>
+
+    <div class="interview-block">
+      <div class="interview-q"><span class="label">INT Q →</span> "What's the difference between a process and a service?"</div>
+      <div class="interview-a">
+        <strong>Your answer structure:</strong> "A process is any running program — it has a Process ID, uses CPU and memory, and ends when its job is done. A service is a special type of process managed by systemd — it's designed to start at boot time, run continuously in the background, and be monitored and restarted if it crashes. For example, when I install nginx on a server, I use systemctl enable nginx to make it a service that starts automatically on every reboot, rather than having to manually start it each time."
+      </div>
+    </div>
+
+    <div class="interview-block">
+      <div class="interview-q"><span class="label">INT Q →</span> "Why would you use sudo and when wouldn't you?"</div>
+      <div class="interview-a">
+        <strong>Your answer structure:</strong> "sudo — superuser do — temporarily elevates your privileges to root level for a single command. I use it when I need to install packages, modify system configuration files in /etc, or manage services with systemctl. I would not use it for anything involving my own files in my home directory, or when writing application code. Running everything as root is dangerous because a bug or mistyped command has system-wide consequences — there's no safety net."
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="subsection" id="d1-quiz">
+      <h3>🧪 Day 1 Quiz — Test Yourself Before Moving On</h3>
+    </div>
+    <div class="quiz">
+      <div class="quiz-header">⚡ Day 1 Knowledge Check — Pass = 4/5 correct</div>
+
+      <div class="quiz-q"><span class="num">Q1.</span> What does <code>chmod 644 notes.txt</code> mean?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) Owner, group, others all have read+write access</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) Owner has read+write; group and others have read-only</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) Everyone has full access</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) Owner has execute; group has write</div>
+      </div>
+      <div class="quiz-explain">6=rw (4+2), 4=r (read only). So owner gets read+write, group gets read, others get read. Perfect for a public config file — everyone can read it, only you can edit it.</div>
+
+      <div class="quiz-q"><span class="num">Q2.</span> You want to append a line to a file without deleting its contents. Which operator?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) <code>></code></div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) <code>>></code></div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) <code>|</code></div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) <code>&</code></div>
+      </div>
+      <div class="quiz-explain">> overwrites. >> appends. | pipes. This is one of the most common beginner mistakes that causes data loss.</div>
+
+      <div class="quiz-q"><span class="num">Q3.</span> A service file change isn't taking effect after editing it. What are the correct two commands to apply the change?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) sudo reboot && sudo apt update</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">B) sudo service reload && sudo restart</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">C) sudo systemctl daemon-reload && sudo systemctl restart [service]</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) sudo kill [pid] && sudo start [service]</div>
+      </div>
+      <div class="quiz-explain">After editing a systemd service file you must daemon-reload (re-read the config) then restart the specific service. Rebooting the whole server is amateur behaviour in production.</div>
+
+      <div class="quiz-q"><span class="num">Q4.</span> Where would you look for nginx error logs on a Linux server?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) /home/ubuntu/logs/</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">B) /etc/nginx/errors/</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">C) /var/log/nginx/</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) /tmp/nginx/</div>
+      </div>
+      <div class="quiz-explain">/var is for variable data — logs live at /var/log/. Application logs (nginx, apache, etc.) almost always live here. Learning to read logs is 50% of being a DevOps engineer.</div>
+
+      <div class="quiz-q"><span class="num">Q5.</span> What command shows all currently running processes including their CPU and memory usage, live?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) ps aux</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">B) df -h</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">C) top or htop</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) who</div>
+      </div>
+      <div class="quiz-explain">ps aux gives a snapshot. top and htop are live/real-time views that update every second. htop has a better interface and is preferred by most engineers.</div>
+    </div>
+
+    <!-- GITHUB DOC TEMPLATE -->
+    <div class="subsection" id="d1-github">
+      <h3>📂 GitHub Notes Template — Push This Tonight</h3>
+    </div>
+    <div class="doc-template">
+      <div class="doc-template-bar">
+        <span>devops-notes/day-01/README.md</span>
+        <span>Your documentation habit starts now. Every day gets a file.</span>
+      </div>
+      <pre><span class="md-h1"># Day 01 — Linux Foundations on EC2</span>
+<span class="md-comment">**Date:** YYYY-MM-DD | **Status:** ✅ Complete | **Difficulty:** Beginner</span>
+
+---
+
+<span class="md-h2">## 🎯 What I Learned Today</span>
+<span class="md-comment"><!-- Write this in YOUR OWN WORDS. Not copy-paste. --></span>
+- Linux filesystem hierarchy: why /etc holds config, /var holds logs
+- File permissions with chmod: 755 vs 644 vs 600 explained in my own words
+- The difference between a process (any running program) and a service (managed by systemd)
+- How SSH key authentication works (public/private key pair)
+
+<span class="md-h2">## ⌨️ Commands I Actually Used</span>
+
+<span class="md-code">```bash</span>
+<span class="md-comment"># Navigation</span>
+pwd           # where am I?
+ls -la        # list with permissions and hidden files
+cd ~          # go home
+cd /etc       # go to system config directory
+
+<span class="md-comment"># File operations</span>
+touch file.txt
+echo "text" > file.txt     # overwrite
+echo "text" >> file.txt    # append
+cat file.txt
+grep "word" file.txt
+
+<span class="md-comment"># Permissions</span>
+chmod 755 file.sh     # owner full, others read+execute
+chmod 600 key.pem     # owner read+write only (private files)
+sudo chown user:group file
+
+<span class="md-comment"># Services</span>
+sudo systemctl status nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx   # auto-start on boot
+<span class="md-code">```</span>
+
+<span class="md-h2">## 🐛 Errors I Hit (and How I Fixed Them)</span>
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| Permission denied (publickey) | .pem file had wrong permissions | chmod 400 key.pem |
+| mv: No such file or directory | Destination folder didn't exist | mkdir -p destination/ first |
+| [Write your own error here] | [What caused it] | [How you fixed it] |
+
+<span class="md-h2">## 🏗 Mini Project: server_setup.sh</span>
+- Script location: ~/devops-notes/server_setup.sh
+- What it does: installs development tools on a fresh Ubuntu EC2
+- Test result: Ran twice, no errors on second run ✅
+
+<span class="md-h2">## ❓ Questions I Still Have</span>
+- [Write any concepts you're still fuzzy on — Google them tomorrow]
+
+<span class="md-h2">## 📈 Tomorrow (Day 2)</span>
+Git + GitHub workflow + AWS account setup + first EC2 IAM user</pre>
+    </div>
+
+  </div>
+  <!-- END DAY 1 -->
+
+
+  <!-- ══════════════════ DAY 2 ══════════════════ -->
+  <div id="day2">
+    <div class="section-head">
+      <div class="day-pill d2">Day 2</div>
+      <h2>Git Workflow + AWS Account Setup</h2>
+      <span class="time-block">8 hours</span>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">🎯</span>
+      <h4>Day 2 Goal</h4>
+      <p>By end of Day 2 you have a real GitHub repository for your DevOps notes, understand the git commit cycle, and have an AWS account with IAM — not root — credentials configured. You never use the root account again after today.</p>
+    </div>
+
+    <!-- SCHEDULE -->
+    <div class="subsection" id="d2-schedule">
+      <h3>📋 8-Hour Schedule</h3>
+    </div>
+    <table class="schedule">
+      <thead>
+        <tr><th>Time Block</th><th>Phase</th><th>Activity + Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time-col">09:00 – 09:30</td>
+          <td class="phase-col">REVIEW</td>
+          <td class="activity-col"><strong>Day 1 recap — type 10 commands from memory</strong><span>No notes. Open your EC2. Navigate to /etc, /var/log, check running services. If you can do this without looking at your notes, proceed.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">09:30 – 10:30</td>
+          <td class="phase-col">THEORY</td>
+          <td class="activity-col"><strong>Git mental model — commits, branches, remotes</strong><span>Why version control exists. The three areas: working directory → staging → repository. Why git is the backbone of every CI/CD pipeline.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">10:30 – 10:45</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>Break</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">10:45 – 12:30</td>
+          <td class="phase-col">HANDS-ON</td>
+          <td class="activity-col"><strong>Git setup + first real repository on EC2</strong><span>Install git, configure identity, init a repo, make commits, link to GitHub, push. This is the full git cycle — repeat it until it feels automatic.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">12:30 – 13:15</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>Lunch</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">13:15 – 14:30</td>
+          <td class="phase-col">SETUP</td>
+          <td class="activity-col"><strong>AWS Account + IAM setup</strong><span>Create your AWS free tier account. Lock the root account. Create an IAM user with AdministratorAccess for your daily use. Set up MFA on root. This is mandatory security hygiene — skipping it creates billing nightmares.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">14:30 – 15:30</td>
+          <td class="phase-col">HANDS-ON</td>
+          <td class="activity-col"><strong>AWS CLI installation + first CLI commands</strong><span>The AWS Console GUI is for beginners and demos. DevOps is done via CLI. Install and configure aws-cli, run your first real AWS commands from the terminal.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">15:30 – 15:45</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>Break</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">15:45 – 16:45</td>
+          <td class="phase-col">PROJECT</td>
+          <td class="activity-col"><strong>Mini Project: Push your Day 1 notes to GitHub</strong><span>Real DevOps engineers document everything in version control. Your first repo is your public portfolio — future employers look at this.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">16:45 – 17:00</td>
+          <td class="phase-col">DOCUMENT</td>
+          <td class="activity-col"><strong>Write Day 2 notes + Quiz</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- CONCEPTS -->
+    <div class="subsection" id="d2-concepts">
+      <h3>🧠 Core Concepts</h3>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="icon">🌿</div>
+        <h4>Git Three-Area Model</h4>
+        <p>Working Directory: files you're editing. Staging Area (index): changes marked ready to commit. Repository (.git): permanent history of commits.</p>
+        <p class="analogy">Analogy: Working dir = shopping basket. Staging = items at the checkout belt. Repository = receipt/purchase history.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🔗</div>
+        <h4>Remote vs Local Repository</h4>
+        <p>Local repo lives on your machine (or EC2). Remote repo lives on GitHub/GitLab. <code>git push</code> sends local → remote. <code>git pull</code> brings remote → local.</p>
+        <p class="analogy">Analogy: Local repo = your personal notebook. GitHub = the cloud-backed shared copy your whole team can read.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🪪</div>
+        <h4>IAM — Identity and Access Management</h4>
+        <p>AWS root account = god mode. Never use it for daily work. IAM lets you create users with specific permissions. Every person, application, or EC2 that touches AWS needs an IAM identity.</p>
+        <p class="analogy">Analogy: Root is the master key to the building. IAM users are individual keycards with specific room access.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">⌨️</div>
+        <h4>AWS CLI</h4>
+        <p>The AWS web console is a GUI for learning. Real DevOps uses the CLI or infrastructure-as-code. aws configure sets up your access keys. Then you can control EC2, S3, IAM from the terminal.</p>
+        <p class="analogy">Analogy: Console = ATM touchscreen. CLI = talking directly to the bank system. Faster, scriptable, auditable.</p>
+      </div>
+    </div>
+
+    <!-- COMMANDS -->
+    <div class="subsection" id="d2-commands">
+      <h3>⌨️ Exact Command Flow</h3>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">SESSION 1 — Git Setup and First Commits</span>
+      </div>
+      <div class="terminal-body">
+        <div class="cmd-section">
+          <div class="cmd-section-label">Install and Configure Git on EC2</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git --version</span></div>
+          <div class="output-line comment"># If it says "command not found":</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo apt update && sudo apt install git -y</span></div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git config --global user.name "Your Name"</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git config --global user.email "your@email.com"</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git config --global init.defaultBranch main</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git config --list</span> <span class="comment">  # Verify your settings</span></div>
+          <div class="output-line">user.name=Your Name</div>
+          <div class="output-line">user.email=your@email.com</div>
+          <div class="output-line">init.defaultBranch=main</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Create Your First Repository</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">mkdir ~/devops-90days && cd ~/devops-90days</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git init</span></div>
+          <div class="output-line">Initialized empty Git repository in /home/ubuntu/devops-90days/.git/</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">mkdir day-01 day-02</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">touch README.md day-01/notes.md day-02/notes.md</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">echo "# 90 Days DevOps Journey" > README.md</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">echo "## About" >> README.md</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">echo "Learning DevOps from zero. Documenting every day." >> README.md</span></div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git status</span> <span class="comment">   # See what git knows about</span></div>
+          <div class="output-line output-warn">Untracked files:</div>
+          <div class="output-line">  README.md</div>
+          <div class="output-line">  day-01/</div>
+          <div class="output-line">  day-02/</div>
+          <div class="output-line comment"># Untracked = git sees them but isn't tracking changes yet</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">The Commit Cycle — Learn This Cold</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git add README.md</span> <span class="comment">   # Stage ONE file</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git status</span></div>
+          <div class="output-line output-ok">Changes to be committed:</div>
+          <div class="output-line output-ok">  new file: README.md</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git add .</span> <span class="comment">   # Stage ALL changes</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git commit -m "Day 01: Add initial project structure and README"</span></div>
+          <div class="output-line">[main (root-commit) a3f4b12] Day 01: Add initial project structure and README</div>
+          <div class="output-line"> 3 files changed, 4 insertions(+)</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git log --oneline</span> <span class="comment">  # See commit history</span></div>
+          <div class="output-line">a3f4b12 (HEAD -> main) Day 01: Add initial project structure and README</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git log</span> <span class="comment">  # Full detail version</span></div>
+          <div class="output-line">commit a3f4b12... (HEAD -> main)</div>
+          <div class="output-line">Author: Your Name &lt;your@email.com&gt;</div>
+          <div class="output-line">Date:   Tue Jun 2 14:30:00 2026</div>
+          <div class="output-line">    Day 01: Add initial project structure and README</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Connect to GitHub and Push</div>
+          <div class="output-line comment"># First: Create a new repo on github.com — click "New repository"</div>
+          <div class="output-line comment"># Name it: devops-90days | Set to Public | Do NOT add README (you have one)</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git remote add origin https://github.com/YOURUSERNAME/devops-90days.git</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git remote -v</span> <span class="comment">  # Verify remote is set</span></div>
+          <div class="output-line">origin  https://github.com/YOURUSERNAME/devops-90days.git (fetch)</div>
+          <div class="output-line">origin  https://github.com/YOURUSERNAME/devops-90days.git (push)</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git push -u origin main</span></div>
+          <div class="output-line comment"># First push: GitHub will ask for username + personal access token (NOT password)</div>
+          <div class="output-line comment"># Create token: GitHub Settings → Developer Settings → Personal Access Tokens → Tokens (classic)</div>
+          <div class="output-line comment"># Give it: repo scope. Copy the token — you only see it once.</div>
+          <div class="output-line">Branch 'main' set up to track remote branch 'main' from 'origin'.</div>
+          <div class="output-ok">Everything up-to-date</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">echo "# Day 01 Notes" >> day-01/notes.md</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git add day-01/notes.md</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git commit -m "Day 01: Add day 1 notes file"</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">git push</span> <span class="comment">  # After first push, just git push works</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">SESSION 2 — AWS CLI Setup</span>
+      </div>
+      <div class="terminal-body">
+        <div class="cmd-section">
+          <div class="cmd-section-label">Install AWS CLI v2 on EC2</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">unzip awscliv2.zip</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo ./aws/install</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws --version</span></div>
+          <div class="output-line output-ok">aws-cli/2.17.0 Python/3.11.8 Linux/6.5.0 exe/x86_64</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Configure with IAM User Credentials</div>
+          <div class="output-line comment"># First: Go to IAM Console → Users → Your IAM user → Security credentials</div>
+          <div class="output-line comment"># Create Access Key → select "CLI" use case → download the CSV</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws configure</span></div>
+          <div class="output-line">AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE</div>
+          <div class="output-line">AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</div>
+          <div class="output-line">Default region name [None]: eu-west-1</div>
+          <div class="output-line comment"># Use your closest region: eu-west-1=Ireland, us-east-1=Virginia, ap-south-1=Mumbai</div>
+          <div class="output-line">Default output format [None]: json</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws sts get-caller-identity</span> <span class="comment">  # Verify credentials work</span></div>
+          <div class="output-line">{</div>
+          <div class="output-line">    "UserId": "AIDAIOSFODNN7EXAMPLE",</div>
+          <div class="output-line">    "Account": "123456789012",</div>
+          <div class="output-line">    "Arn": "arn:aws:iam::123456789012:user/devops-learner"</div>
+          <div class="output-line">}</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws ec2 describe-instances --output table</span> <span class="comment">  # List your EC2 instances</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws s3 ls</span> <span class="comment">  # List your S3 buckets (empty if new account)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEBUG TREE -->
+    <div class="subsection" id="d2-debug">
+      <h3>🐛 Debugging Flow — Day 2 Most Common Failures</h3>
+    </div>
+    <div class="debug-tree">
+      <h4>⚡ Git Push Fails with Authentication Error</h4>
+      <div class="debug-step">
+        <div class="debug-num">1</div>
+        <div class="debug-content">
+          <strong>GitHub stopped accepting passwords in August 2021</strong>
+          <span>You must use a Personal Access Token (PAT), not your GitHub password.</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">2</div>
+        <div class="debug-content">
+          <strong>Generate a PAT: GitHub → Settings → Developer settings → PAT → Tokens (classic)</strong>
+          <span>Give it "repo" scope minimum. Copy it — shown once only.</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">3</div>
+        <div class="debug-content">
+          <strong>When prompted for password, paste the token</strong>
+          <span class="debug-cmd">git config --global credential.helper store</span>
+          <span style="display:block;margin-top:4px;font-size:12.5px;color:var(--text-dim)">After first successful push with token, this caches it.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="debug-tree">
+      <h4>⚡ AWS CLI "An error occurred (AuthFailure)" or "InvalidClientTokenId"</h4>
+      <div class="debug-step">
+        <div class="debug-num">1</div>
+        <div class="debug-content">
+          <strong>Check credentials are set correctly</strong>
+          <span class="debug-cmd">cat ~/.aws/credentials</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">2</div>
+        <div class="debug-content">
+          <strong>Ensure you're using IAM user keys, not root keys</strong>
+          <span>Root access keys are in "Security credentials" under the account menu — top right of console. IAM user keys are in IAM → Users → [username] → Security credentials.</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">3</div>
+        <div class="debug-content">
+          <strong>Re-run aws configure to overwrite bad credentials</strong>
+          <span class="debug-cmd">aws configure</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MISTAKES -->
+    <div class="subsection" id="d2-mistakes">
+      <h3>💥 Common Beginner Mistakes — Day 2</h3>
+    </div>
+    <div class="mistakes">
+      <div class="mistakes-header">⚠ Git + AWS Mistakes That Will Bite You Later</div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Committing AWS access keys to GitHub</strong>
+          <span>This is the most dangerous mistake in DevOps. Bots scan GitHub constantly. A real access key committed to a public repo will be exploited within minutes, causing unexpected AWS charges in the thousands.</span>
+          <span class="mistake-fix">✓ Fix: Add .env and *.pem to your .gitignore immediately. Never use echo with keys near a git directory.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Working with the AWS root account credentials daily</strong>
+          <span>Root has no restrictions. One compromised root credential = full account takeover, all regions, all services, all billing.</span>
+          <span class="mistake-fix">✓ Fix: Enable MFA on root. Create an IAM admin user. Use IAM for everything. Lock root away.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Vague commit messages like "update" or "fix stuff"</strong>
+          <span>In three weeks you will have no idea what "update" meant. In a team, everyone hates this. Your GitHub is your professional portfolio — commit messages reflect your engineering thinking.</span>
+          <span class="mistake-fix">✓ Fix: Format: "Type: Short description". Examples: "feat: add nginx setup to server_setup.sh" | "fix: correct chmod on pem key" | "docs: add Day 02 notes"</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>git add . on every single commit without checking git status first</strong>
+          <span>You'll accidentally commit log files, compiled binaries, environment files, or temporary data.</span>
+          <span class="mistake-fix">✓ Fix: Always run git status before git add. Create a .gitignore file immediately: echo "*.log\n*.pem\n.env\n__pycache__/" >> .gitignore</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINI PROJECT -->
+    <div class="subsection" id="d2-project">
+      <h3>🏗 Mini Project: Your Live DevOps Notes Repository</h3>
+    </div>
+    <div class="mini-project">
+      <div class="project-header">
+        <div class="meta">
+          <div class="tag">📁 Day 2 Mini Project</div>
+          <h3>devops-90days — Push Your First Real Portfolio Repo</h3>
+        </div>
+        <div class="time-est">⏱ ~60 minutes</div>
+      </div>
+      <div class="project-body">
+        <div class="project-goal">
+          <strong>Goal:</strong> By the end of this project you have a live GitHub repository with proper structure, a meaningful README, and your Day 1 notes committed. This is the start of your public evidence of learning — recruiters look at commit history.
+        </div>
+        <ul class="checklist">
+          <li>Create a .gitignore before your first commit (add *.pem, .env, *.log)</li>
+          <li>Write a real README.md with: what this repo is, what you're learning, your goal</li>
+          <li>Create folder structure: /day-01/, /day-02/, /scripts/, /projects/</li>
+          <li>Copy your server_setup.sh from Day 1 into /scripts/</li>
+          <li>Write a meaningful commit message for each piece of work (not "add files")</li>
+          <li>Push to GitHub and verify it displays correctly at github.com/yourusername/devops-90days</li>
+          <li>Bonus: Add a GitHub Actions badge placeholder to your README (you'll fill it in Week 2)</li>
+        </ul>
+
+        <div class="callout warn">
+          <h4>⚠ Before You Push — Check This</h4>
+          <p>Run <code>git status</code> and <code>git diff --staged</code> before committing. Scan every file in staging. If you see any file containing keys, tokens, or passwords — remove it from staging with <code>git reset HEAD filename</code> and add it to .gitignore immediately.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERVIEW -->
+    <div class="subsection" id="d2-interview">
+      <h3>🎤 Interview Explanation Prompts — Day 2 Topics</h3>
+    </div>
+
+    <div class="interview-block">
+      <div class="interview-q"><span class="label">INT Q →</span> "Walk me through the git workflow — what happens when you make a change?"</div>
+      <div class="interview-a">
+        <strong>Your answer:</strong> "Git has three areas. The working directory is where you edit files. When a change is ready to be saved, I stage it with git add — this moves it to the staging area, also called the index. I then run git commit with a meaningful message, which permanently records that snapshot in the local repository. If I'm working with a team, I push to the remote — GitHub in most cases — using git push. Git pull brings other people's changes down to my local copy. The reason we have a staging area is intentional: it lets you commit only part of your changes, giving you fine-grained control over what goes in each commit."
+      </div>
+    </div>
+
+    <div class="interview-block">
+      <div class="interview-q"><span class="label">INT Q →</span> "Why does AWS have IAM and why shouldn't you use the root account?"</div>
+      <div class="interview-a">
+        <strong>Your answer:</strong> "The root account in AWS is the original account owner and has unrestricted access to everything — all services, all regions, all billing. IAM — Identity and Access Management — lets you create separate users and roles with only the permissions they actually need. This follows the principle of least privilege. If an IAM user's credentials are compromised, the damage is limited to what that user can do. If root credentials are compromised, an attacker has full control of your entire AWS account. In practice: I enable MFA on root, lock the root credentials away, and create an IAM user with AdministratorAccess for my daily work. In a company, individual team members would have even more restricted IAM roles — a developer might only be able to write to S3 and trigger Lambda, not touch EC2 or billing."
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="subsection" id="d2-quiz">
+      <h3>🧪 Day 2 Quiz</h3>
+    </div>
+    <div class="quiz">
+      <div class="quiz-header">⚡ Day 2 Knowledge Check</div>
+
+      <div class="quiz-q"><span class="num">Q1.</span> You edited 5 files but only want to commit 2 of them. What's the correct git flow?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) git add . → git commit -m "partial commit"</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) git add file1.txt file2.txt → git commit -m "message"</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) git commit -m "message" → git add file1 file2</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) git push → git add .</div>
+      </div>
+      <div class="quiz-explain">Stage selectively. git add . stages everything — dangerous when you have partial work. Always git add the specific files you want in that commit, then commit.</div>
+
+      <div class="quiz-q"><span class="num">Q2.</span> What is the correct command to check what credentials aws CLI is using?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) aws credentials show</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) aws sts get-caller-identity</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) aws iam whoami</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) cat /etc/aws/config</div>
+      </div>
+      <div class="quiz-explain">aws sts get-caller-identity tells you exactly which IAM user or role the CLI is authenticated as. Use this whenever you're unsure if your credentials are correctly configured.</div>
+
+      <div class="quiz-q"><span class="num">Q3.</span> A teammate accidentally committed their AWS secret key to GitHub. What is the immediate first action?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) Delete the commit with git reset and push</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">B) Make the repo private</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">C) Revoke/delete the key in IAM console immediately, then clean git history</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) Email GitHub support</div>
+      </div>
+      <div class="quiz-explain">The key was already exposed the moment it was pushed — bots scrape GitHub in real time. Making the repo private or deleting the commit does NOT help after it's public. Revoke the key first (in IAM), then clean history. The key is already compromised.</div>
+
+      <div class="quiz-q"><span class="num">Q4.</span> What does git pull do?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) Sends your local commits to the remote repository</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) Fetches changes from the remote and merges them into your local branch</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) Creates a new branch from remote</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) Pulls all branches from GitHub</div>
+      </div>
+      <div class="quiz-explain">git pull = git fetch (download remote changes) + git merge (apply them). Used every morning on a team project to get your colleagues' changes before you start working.</div>
+    </div>
+
+    <!-- GITHUB NOTES -->
+    <div class="subsection" id="d2-github">
+      <h3>📂 GitHub Notes Template — Day 2</h3>
+    </div>
+    <div class="doc-template">
+      <div class="doc-template-bar">
+        <span>devops-notes/day-02/README.md</span>
+        <span>Commit message: "docs: Add Day 02 notes — Git workflow and AWS CLI setup"</span>
+      </div>
+      <pre><span class="md-h1"># Day 02 — Git Workflow + AWS CLI Setup</span>
+<span class="md-comment">**Date:** YYYY-MM-DD | **Status:** ✅ Complete | **Difficulty:** Beginner+</span>
+
+---
+
+<span class="md-h2">## 🎯 What I Learned Today</span>
+- Git three-area model: working directory → staging → repository
+- The full commit cycle: add → commit → push
+- Why root AWS credentials are dangerous and how IAM solves it
+- AWS CLI installation and aws configure setup
+
+<span class="md-h2">## ⌨️ Git Commands Reference</span>
+
+<span class="md-code">```bash</span>
+git init                          # Start a new repo
+git config --global user.name ""  # One-time setup
+git status                        # Always check before add
+git add filename                  # Stage specific file
+git add .                         # Stage all changes (careful!)
+git commit -m "type: description" # Create commit
+git log --oneline                 # View commit history
+git remote add origin URL          # Connect to GitHub
+git push -u origin main           # First push (sets tracking)
+git push                          # Subsequent pushes
+git pull                          # Get teammate changes
+<span class="md-code">```</span>
+
+<span class="md-h2">## ☁️ AWS Commands Reference</span>
+
+<span class="md-code">```bash</span>
+aws configure                     # Set up credentials
+aws sts get-caller-identity       # Verify who I'm authenticated as
+aws ec2 describe-instances        # List EC2 instances
+aws s3 ls                         # List S3 buckets
+aws iam list-users                # List IAM users
+<span class="md-code">```</span>
+
+<span class="md-h2">## 🔐 Security Decisions Made Today</span>
+- Created IAM user with AdministratorAccess for daily use
+- Enabled MFA on root account
+- Added .gitignore with *.pem, .env, *.log before first commit
+- AWS credentials stored in ~/.aws/credentials (NOT in any code file)
+
+<span class="md-h2">## 🐛 Issues Hit Today</span>
+| Issue | Fix |
+|-------|-----|
+| [Write yours here] | [How you fixed it] |
+
+<span class="md-h2">## 📈 Tomorrow (Day 3)</span>
+Launching EC2 via CLI, configuring security groups, deploying a live web server</pre>
+    </div>
+
+  </div>
+  <!-- END DAY 2 -->
+
+
+  <!-- ══════════════════ DAY 3 ══════════════════ -->
+  <div id="day3">
+    <div class="section-head">
+      <div class="day-pill d3">Day 3</div>
+      <h2>EC2: Launch → Configure → Deploy Web Server</h2>
+      <span class="time-block">8 hours — Hardest Day This Week</span>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">🎯</span>
+      <h4>Day 3 Goal</h4>
+      <p>By end of Day 3 you have launched an EC2 instance using the AWS CLI (not the GUI), configured a security group, SSHed in, installed nginx, and served a real web page to the public internet. You will point someone to your EC2's IP and they will see your page. This is your first "it's live" moment.</p>
+    </div>
+
+    <div class="callout warn">
+      <h4>⚠ Day 3 is Intentionally Harder</h4>
+      <p>You will hit errors today that aren't in this guide. That is the point. A senior engineer's superpower is not knowing every answer — it's the systematic debugging process when something breaks. The debug tree in this section teaches that process. Work through it before asking for help.</p>
+    </div>
+
+    <!-- SCHEDULE -->
+    <div class="subsection" id="d3-schedule">
+      <h3>📋 8-Hour Schedule</h3>
+    </div>
+    <table class="schedule">
+      <thead>
+        <tr><th>Time Block</th><th>Phase</th><th>Activity + Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time-col">09:00 – 09:30</td>
+          <td class="phase-col">REVIEW</td>
+          <td class="activity-col"><strong>Day 2 recap — git cycle without notes</strong><span>From memory: init a repo, commit a file, push to GitHub. If you need notes, spend another 20 mins drilling the git cycle before proceeding.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">09:30 – 10:30</td>
+          <td class="phase-col">THEORY</td>
+          <td class="activity-col"><strong>EC2, VPC, Security Groups, and Networking Basics</strong><span>How EC2 connects to the internet. What a Security Group is and why it's the first thing you check when a deployment isn't working. Inbound vs outbound rules. Public IP vs Elastic IP.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">10:30 – 10:45</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>Break</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">10:45 – 12:30</td>
+          <td class="phase-col">HANDS-ON</td>
+          <td class="activity-col"><strong>Launch EC2 via AWS CLI, SSH in, install nginx</strong><span>No GUI today. Everything from the terminal. This is how it's done in real DevOps: the console is for reading, the CLI is for doing.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">12:30 – 13:15</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>Lunch</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">13:15 – 14:30</td>
+          <td class="phase-col">HANDS-ON</td>
+          <td class="activity-col"><strong>Configure nginx, write custom HTML, verify live</strong><span>Edit nginx config. Serve your own HTML page. Hit the public IP in a browser and see it work. This is your first live deployment.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">14:30 – 15:30</td>
+          <td class="phase-col">DEBUGGING</td>
+          <td class="activity-col"><strong>Deliberate break-and-fix exercise</strong><span>I'll tell you exactly what to break. You fix it using the debug tree. This simulates 40% of real DevOps work.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">15:30 – 15:45</td>
+          <td class="phase-col">BREAK</td>
+          <td class="activity-col"><strong>Break</strong></td>
+        </tr>
+        <tr>
+          <td class="time-col">15:45 – 16:45</td>
+          <td class="phase-col">PROJECT</td>
+          <td class="activity-col"><strong>Mini Project: Automated deployment script</strong><span>Combine Day 1 (bash scripting) + Day 2 (git) + Day 3 (EC2 + nginx) into one script that deploys a web page from a git repo.</span></td>
+        </tr>
+        <tr>
+          <td class="time-col">16:45 – 17:00</td>
+          <td class="phase-col">DOCUMENT</td>
+          <td class="activity-col"><strong>Day 3 notes + Week 1 reflection</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- CONCEPTS -->
+    <div class="subsection" id="d3-concepts">
+      <h3>🧠 Core Concepts</h3>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="icon">🌐</div>
+        <h4>Security Groups — The First Debugging Stop</h4>
+        <p>A security group is EC2's firewall. It controls which traffic can reach your instance. Inbound rules = who can connect to you. Outbound rules = what your instance can connect to. By default: only port 22 (SSH) is open.</p>
+        <p class="analogy">Analogy: A building's door security list. Port 22 (SSH) = staff entrance. Port 80 (HTTP) = public entrance. If you forget to open port 80, no browser can reach your web server — and that's the #1 mistake on Day 3.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🏷</div>
+        <h4>Public IP vs Elastic IP</h4>
+        <p>When you stop and start an EC2, the public IP changes. An Elastic IP is a static IP that stays assigned to your instance. For learning, the dynamic public IP is fine. For production, you'd use an Elastic IP or a load balancer DNS name.</p>
+        <p class="analogy">Analogy: Dynamic IP = a rental car that's a different car every morning. Elastic IP = your own car with a fixed number plate.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🔄</div>
+        <h4>User Data — EC2 Launch Scripts</h4>
+        <p>You can pass a shell script to EC2 at launch time. It runs as root the very first boot. This is how DevOps engineers automate server setup — no manual SSHing and installing. This is the seed of configuration management.</p>
+        <p class="analogy">Analogy: Like writing instructions on a sticky note that the server reads and executes the moment it wakes up for the first time.</p>
+      </div>
+      <div class="concept-card">
+        <div class="icon">🕸</div>
+        <h4>Nginx — What a Web Server Does</h4>
+        <p>Nginx is a web server. It listens on port 80 (HTTP) or 443 (HTTPS). When a browser requests your IP, nginx receives the request, finds the right HTML file, and sends it back. Config lives at /etc/nginx/sites-available/.</p>
+        <p class="analogy">Analogy: A restaurant host. The browser is the customer. Nginx is the host who greets them, checks which table (URL path) they want, and delivers the right dish (HTML file).</p>
+      </div>
+    </div>
+
+    <!-- COMMANDS -->
+    <div class="subsection" id="d3-commands">
+      <h3>⌨️ Exact Command Flow</h3>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">SESSION 1 — Launch EC2 via AWS CLI</span>
+      </div>
+      <div class="terminal-body">
+        <div class="cmd-section">
+          <div class="cmd-section-label">Step 1: Find the right AMI (Ubuntu 22.04)</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws ec2 describe-images \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --owners amazon \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --filters "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*" \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --query 'sort_by(Images,&CreationDate)[-1].ImageId' \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --output text</span></div>
+          <div class="output-ok">ami-0a1234567890abcde</div>
+          <div class="output-line comment"># Save this AMI ID — you'll use it in the next command</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Step 2: Create a key pair for this EC2</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws ec2 create-key-pair \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --key-name devops-day3-key \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --query 'KeyMaterial' \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --output text > devops-day3-key.pem</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">chmod 400 devops-day3-key.pem</span></div>
+          <div class="output-line comment"># chmod 400 immediately — SSH won't work without it</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Step 3: Create a Security Group</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws ec2 create-security-group \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --group-name devops-web-sg \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --description "Security group for DevOps learning web server"</span></div>
+          <div class="output-line">{</div>
+          <div class="output-line">    "GroupId": "sg-0a1234567890abcde"</div>
+          <div class="output-line">}</div>
+          <div class="output-line comment"># Save the GroupId</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws ec2 authorize-security-group-ingress \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --group-id sg-0a1234567890abcde \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --protocol tcp --port 22 --cidr 0.0.0.0/0</span></div>
+          <div class="output-line comment"># Port 22 = SSH</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws ec2 authorize-security-group-ingress \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --group-id sg-0a1234567890abcde \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --protocol tcp --port 80 --cidr 0.0.0.0/0</span></div>
+          <div class="output-line comment"># Port 80 = HTTP web traffic — CRITICAL for your web server</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Step 4: Launch the Instance</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws ec2 run-instances \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --image-id ami-0a1234567890abcde \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --instance-type t2.micro \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --key-name devops-day3-key \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --security-group-ids sg-0a1234567890abcde \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --count 1 \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=devops-day3-webserver}]'</span></div>
+          <div class="output-line">{</div>
+          <div class="output-line">    "Instances": [{</div>
+          <div class="output-line">        "InstanceId": "i-0a1234567890abcde",</div>
+          <div class="output-line">        "State": {"Name": "pending"},</div>
+          <div class="output-line">        ...</div>
+          <div class="output-line">    }]</div>
+          <div class="output-line">}</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">aws ec2 describe-instances \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --instance-ids i-0a1234567890abcde \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --query 'Reservations[0].Instances[0].PublicIpAddress' \</span></div>
+          <div class="cmd-line"><span class="prompt"> </span> <span class="cmd">  --output text</span></div>
+          <div class="output-ok">3.250.xxx.xxx</div>
+          <div class="output-line comment"># Wait 1-2 minutes for instance to reach "running" state first</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Step 5: SSH In and Install nginx</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ssh -i devops-day3-key.pem ubuntu@3.250.xxx.xxx</span></div>
+          <div class="output-ok">Welcome to Ubuntu 22.04.4 LTS</div>
+          <div class="output-line">ubuntu@ip-172-31-xx-xx:~$</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo apt update && sudo apt install nginx -y</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl start nginx</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl enable nginx</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl status nginx</span></div>
+          <div class="output-ok">● nginx.service - A high performance web server and a reverse proxy server</div>
+          <div class="output-ok">   Active: active (running)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="label">SESSION 2 — Deploy Your Web Page</span>
+      </div>
+      <div class="terminal-body">
+        <div class="cmd-section">
+          <div class="cmd-section-label">Create Your Web Page</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">ls /var/www/html/</span></div>
+          <div class="output-line">index.nginx-debian.html</div>
+          <div class="output-line comment"># This is the default nginx page. Replace it with yours.</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo nano /var/www/html/index.html</span></div>
+          <div class="output-line comment"># Type this inside nano:</div>
+          <div class="output-line">&lt;!DOCTYPE html&gt;</div>
+          <div class="output-line">&lt;html&gt;</div>
+          <div class="output-line">&lt;head&gt;&lt;title&gt;My DevOps Server&lt;/title&gt;&lt;/head&gt;</div>
+          <div class="output-line">&lt;body style="background:#09090f;color:#7fff6a;font-family:monospace;padding:40px"&gt;</div>
+          <div class="output-line">  &lt;h1&gt;🚀 Day 3 Complete!&lt;/h1&gt;</div>
+          <div class="output-line">  &lt;p&gt;Deployed by [Your Name] | $(date)&lt;/p&gt;</div>
+          <div class="output-line">  &lt;p&gt;Server: EC2 Ubuntu 22.04 | Web server: nginx&lt;/p&gt;</div>
+          <div class="output-line">&lt;/body&gt;&lt;/html&gt;</div>
+          <div class="output-line comment"># Ctrl+X, Y, Enter to save</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl reload nginx</span></div>
+          <div class="output-line comment"># reload applies config changes without fully restarting (zero downtime)</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">curl http://localhost</span> <span class="comment">  # Test from the server itself</span></div>
+          <div class="output-ok">&lt;!DOCTYPE html&gt;... (your HTML content)</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Verify From the Public Internet</div>
+          <div class="output-line comment"># Open a browser on your laptop. Type: http://3.250.xxx.xxx</div>
+          <div class="output-line comment"># You should see your web page. If you don't, go to the debug tree.</div>
+
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo tail -f /var/log/nginx/access.log</span> <span class="comment">  # Watch live requests</span></div>
+          <div class="output-line">3.250.xxx.xxx - - [02/Jun/2026:14:30:01 +0000] "GET / HTTP/1.1" 200 612</div>
+          <div class="output-line comment"># 200 = success! Every request logged with status code.</div>
+          <div class="output-line comment"># 404 = file not found. 403 = forbidden. 500 = server error. Know these.</div>
+        </div>
+
+        <div class="cmd-section">
+          <div class="cmd-section-label">Deliberate Break-and-Fix Exercise</div>
+          <div class="output-line comment"># BREAK IT: Stop nginx and try to access the page</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl stop nginx</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">curl http://localhost</span></div>
+          <div class="output-err">curl: (7) Failed to connect to localhost port 80: Connection refused</div>
+          <div class="output-line comment"># Browser would show: "This site can't be reached"</div>
+          <div class="output-line comment"># FIX IT — using the debug process, not by guessing:</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl status nginx</span> <span class="comment">  # Step 1: check service status</span></div>
+          <div class="output-err">● nginx.service ... inactive (dead)</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl start nginx</span></div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl status nginx</span></div>
+          <div class="output-ok">Active: active (running)</div>
+
+          <div class="output-line comment"># BREAK IT AGAIN: Introduce a syntax error in nginx config</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo nano /etc/nginx/nginx.conf</span></div>
+          <div class="output-line comment"># Delete a semicolon somewhere. Save. Then:</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo nginx -t</span></div>
+          <div class="output-err">nginx: [emerg] unexpected "}" in /etc/nginx/nginx.conf:65</div>
+          <div class="output-line comment"># nginx -t = test config WITHOUT restarting. Always run this before reload/restart.</div>
+          <div class="output-line comment"># Fix the error in nano, run nginx -t again until it says:</div>
+          <div class="output-ok">nginx: configuration file /etc/nginx/nginx.conf test is successful</div>
+          <div class="cmd-line"><span class="prompt">$</span> <span class="cmd">sudo systemctl reload nginx</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEBUG TREE -->
+    <div class="subsection" id="d3-debug">
+      <h3>🐛 The Most Important Debug Tree — Nginx Not Loading in Browser</h3>
+    </div>
+
+    <div class="callout danger">
+      <h4>🔴 "This site can't be reached" — Systematic Approach</h4>
+      <p>Do not guess. Do not Google first. Work through this tree top to bottom. One of these will find your problem 95% of the time.</p>
+    </div>
+
+    <div class="debug-tree">
+      <h4>⚡ Nginx Not Serving in Browser — Full Debug Flow</h4>
+      <div class="debug-step">
+        <div class="debug-num">1</div>
+        <div class="debug-content">
+          <strong>Check if nginx is actually running</strong>
+          <span>The most common cause. The service stopped or was never started.</span>
+          <span class="debug-cmd">sudo systemctl status nginx</span>
+          <span style="display:block;margin-top:4px;font-size:12px;color:var(--text-dim)">If "inactive (dead)" → start it. If "failed" → check logs.</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">2</div>
+        <div class="debug-content">
+          <strong>Check Security Group allows port 80</strong>
+          <span>Second most common cause. You might have only opened port 22.</span>
+          <span class="debug-cmd">aws ec2 describe-security-groups --group-ids sg-YOUR_ID</span>
+          <span style="display:block;margin-top:4px;font-size:12px;color:var(--text-dim)">Look for IpPermissions with FromPort:80. If not there, add the inbound rule.</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">3</div>
+        <div class="debug-content">
+          <strong>Test from inside the server first</strong>
+          <span>Isolates whether it's nginx or network.</span>
+          <span class="debug-cmd">curl http://localhost</span>
+          <span style="display:block;margin-top:4px;font-size:12px;color:var(--text-dim)">If this works but browser doesn't → Security Group problem. If this fails too → nginx problem.</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">4</div>
+        <div class="debug-content">
+          <strong>Check nginx error logs</strong>
+          <span>Always look at logs when something fails. This is the universal debugging principle.</span>
+          <span class="debug-cmd">sudo tail -50 /var/log/nginx/error.log</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">5</div>
+        <div class="debug-content">
+          <strong>Check nginx config is valid</strong>
+          <span>A syntax error silently breaks nginx on reload.</span>
+          <span class="debug-cmd">sudo nginx -t</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">6</div>
+        <div class="debug-content">
+          <strong>Check if something else is using port 80</strong>
+          <span>Apache might be installed alongside nginx, or another service grabbed the port.</span>
+          <span class="debug-cmd">sudo ss -tlnp | grep :80</span>
+        </div>
+      </div>
+      <div class="debug-step">
+        <div class="debug-num">7</div>
+        <div class="debug-content">
+          <strong>Verify EC2 public IP is correct</strong>
+          <span>If you stopped and restarted, the IP changed.</span>
+          <span class="debug-cmd">aws ec2 describe-instances --query 'Reservations[0].Instances[0].PublicIpAddress' --output text</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MISTAKES -->
+    <div class="subsection" id="d3-mistakes">
+      <h3>💥 Common Beginner Mistakes — Day 3</h3>
+    </div>
+    <div class="mistakes">
+      <div class="mistakes-header">⚠ Day 3 Mistakes That Block Your First Deployment</div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Using the browser IP as https:// when you haven't set up SSL</strong>
+          <span>You set up port 80 (HTTP). The browser defaults to https:// which is port 443. It will refuse because you haven't configured SSL certificates. Always start with http://.</span>
+          <span class="mistake-fix">✓ Fix: Explicitly type http://YOUR_IP (not https). SSL comes in Week 3 with Let's Encrypt.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Editing the default nginx config directly instead of creating a site file</strong>
+          <span>Modifying /etc/nginx/nginx.conf directly for site content is the wrong place. nginx has a sites-available / sites-enabled pattern for a reason: multiple sites, clean separation.</span>
+          <span class="mistake-fix">✓ For now: edit /var/www/html/index.html. Week 2 covers creating proper site configs in sites-available.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Restarting nginx instead of reloading after a config change</strong>
+          <span>sudo systemctl restart nginx drops all active connections (briefly). sudo systemctl reload nginx applies config changes with zero downtime. In production, this matters.</span>
+          <span class="mistake-fix">✓ Fix: Use reload for config changes. Reserve restart for major failures or when reload fails.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Forgetting --tag-specifications when launching EC2 via CLI</strong>
+          <span>Without a Name tag your EC2 instance has no label in the console. You'll launch 3 instances over 90 days and can't tell which is which.</span>
+          <span class="mistake-fix">✓ Fix: Always add a Name tag at launch. It costs nothing and saves enormous confusion.</span>
+        </div>
+      </div>
+      <div class="mistake-item">
+        <div class="mistake-x">✗</div>
+        <div class="mistake-content">
+          <strong>Not stopping the practice EC2 at end of Day 3</strong>
+          <span>t2.micro is free tier but only for 750 hours/month. Running multiple instances or forgetting to stop burns through your free hours. Also: a running server with port 80 open is a security exposure.</span>
+          <span class="mistake-fix">✓ Fix: aws ec2 stop-instances --instance-ids i-YOUR_ID at the end of every session. Terminate at end of week if you don't need it.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINI PROJECT -->
+    <div class="subsection" id="d3-project">
+      <h3>🏗 Mini Project: Automated Web Deployment Script</h3>
+    </div>
+    <div class="mini-project">
+      <div class="project-header">
+        <div class="meta">
+          <div class="tag">📁 Day 3 Mini Project — Week 1 Capstone</div>
+          <h3>deploy.sh — One Script That Deploys Your Web Page From Git</h3>
+        </div>
+        <div class="time-est">⏱ ~75 minutes</div>
+      </div>
+      <div class="project-body">
+        <div class="project-goal">
+          <strong>Goal:</strong> Write a script that, when run on a fresh Ubuntu EC2, installs nginx, clones your GitHub repo, and copies the HTML file to serve it. This is a primitive version of what CI/CD pipelines do — it pulls latest code and deploys it. This script belongs in your portfolio.
+        </div>
+        <ul class="checklist">
+          <li>Create deploy.sh in your GitHub repo at /scripts/deploy.sh</li>
+          <li>Script must: apt update, install nginx, install git</li>
+          <li>Clone your devops-90days repo from GitHub into /var/www/</li>
+          <li>Copy the HTML file from the repo into /var/www/html/</li>
+          <li>Start and enable nginx</li>
+          <li>Print the server's public IP so you know where to look</li>
+          <li>Test: run it on a fresh EC2 instance — the page must be live when script ends</li>
+          <li>Commit the script to GitHub with message "feat: Add automated web deployment script"</li>
+        </ul>
+
+        <div class="terminal" style="margin-top:16px;">
+          <div class="terminal-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="label">deploy.sh — Build This</span>
+          </div>
+          <div class="terminal-body">
+            <div class="output-line">#!/bin/bash</div>
+            <div class="output-line">set -e</div>
+            <div class="output-line">set -o pipefail</div>
+            <div class="output-line comment"># pipefail: if any command in a pipe fails, the whole script fails</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">REPO_URL="https://github.com/YOURUSERNAME/devops-90days.git"</div>
+            <div class="output-line">WEB_ROOT="/var/www/html"</div>
+            <div class="output-line">CLONE_DIR="/var/www/devops-90days"</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "=============================="</div>
+            <div class="output-line">echo "  DevOps Deployment Script"</div>
+            <div class="output-line">echo "  $(date)"</div>
+            <div class="output-line">echo "=============================="</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "[1/5] Updating packages..."</div>
+            <div class="output-line">sudo apt update -qq</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "[2/5] Installing nginx and git..."</div>
+            <div class="output-line">sudo apt install -y nginx git</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "[3/5] Cloning repository..."</div>
+            <div class="output-line">if [ -d "$CLONE_DIR" ]; then</div>
+            <div class="output-line">  echo "  Repo exists, pulling latest..."</div>
+            <div class="output-line">  cd "$CLONE_DIR" && git pull</div>
+            <div class="output-line">else</div>
+            <div class="output-line">  sudo git clone "$REPO_URL" "$CLONE_DIR"</div>
+            <div class="output-line">fi</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "[4/5] Deploying web files..."</div>
+            <div class="output-line">sudo cp "$CLONE_DIR"/day-03/index.html "$WEB_ROOT/index.html"</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">echo "[5/5] Starting nginx..."</div>
+            <div class="output-line">sudo systemctl enable nginx</div>
+            <div class="output-line">sudo systemctl restart nginx</div>
+            <div class="output-line">&nbsp;</div>
+            <div class="output-line">PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)</div>
+            <div class="output-line">echo "=============================="</div>
+            <div class="output-line">echo "✓ Deployment complete!"</div>
+            <div class="output-line">echo "  Visit: http://$PUBLIC_IP"</div>
+            <div class="output-line">echo "=============================="</div>
+          </div>
+        </div>
+
+        <div class="expected-output">
+          <span class="label">Expected Final Output When Script Runs</span>
+          ==============================<br>
+          &nbsp; DevOps Deployment Script<br>
+          &nbsp; Tue Jun 2 16:45:00 UTC 2026<br>
+          ==============================<br>
+          [1/5] Updating packages...<br>
+          [2/5] Installing nginx and git...<br>
+          [3/5] Cloning repository...<br>
+          [4/5] Deploying web files...<br>
+          [5/5] Starting nginx...<br>
+          ==============================<br>
+          ✓ Deployment complete!<br>
+          &nbsp; Visit: http://3.250.xxx.xxx<br>
+          ==============================
+        </div>
+
+        <div class="callout ok">
+          <h4>✅ Portfolio Moment</h4>
+          <p>When this works: screenshot your browser showing your page + your terminal showing the script output. That's your first DevOps portfolio evidence. This is the kind of thing you describe in interviews: "I wrote a bash script that clones a GitHub repo and deploys a web page to an EC2 instance — it was my introduction to what CI/CD pipelines automate at scale."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERVIEW -->
+    <div class="subsection" id="d3-interview">
+      <h3>🎤 Interview Explanation Prompts — Day 3 Topics</h3>
+    </div>
+
+    <div class="interview-block">
+      <div class="interview-q"><span class="label">INT Q →</span> "What is a security group in AWS?"</div>
+      <div class="interview-a">
+        <strong>Your answer:</strong> "A security group is a virtual firewall that controls inbound and outbound traffic for EC2 instances. Inbound rules define what traffic can reach the instance — I always need port 22 open for SSH. If I'm running a web server, I also open port 80 for HTTP and port 443 for HTTPS. Outbound rules control what the instance can connect to — by default all outbound traffic is allowed. Security groups are stateful, meaning if I allow an inbound request, the response traffic is automatically allowed without needing an explicit outbound rule. This is different from network ACLs, which are stateless. Security groups are the first place I check when a service isn't reachable from outside — in about 60% of cases, a missing inbound rule is the problem."
+      </div>
+    </div>
+
+    <div class="interview-block">
+      <div class="interview-q"><span class="label">INT Q →</span> "What does nginx do and how did you deploy a web page with it?"</div>
+      <div class="interview-a">
+        <strong>Your answer:</strong> "Nginx is a high-performance web server and reverse proxy. In its simplest use case — which is what I did on Day 3 of my training — it serves static HTML files. I installed it on an EC2 instance, placed my HTML file in /var/www/html/, and nginx automatically served it to any browser that hit the instance's public IP on port 80. I configured the security group to allow port 80 inbound. To verify it was working I first used curl from inside the server to isolate nginx itself, then hit the public IP from my laptop's browser. I also learned that sudo nginx -t tests config syntax before applying it — you should always run that before a reload to avoid taking a site down with a config error."
+      </div>
+    </div>
+
+    <div class="interview-block">
+      <div class="interview-q"><span class="label">INT Q →</span> "Describe a deployment you've done — even a simple one."</div>
+      <div class="interview-a">
+        <strong>Your answer:</strong> "I wrote a bash script that automates the full deployment of a web page to a fresh EC2 instance. It updates the package list, installs nginx and git, clones a GitHub repository, copies the HTML files to the nginx web root, then starts and enables nginx so it survives reboots. At the end it fetches the EC2's public IP from the instance metadata service and prints the URL. This script means I can take a brand new EC2 from launch to serving a web page in under 3 minutes without touching the AWS console. It's a simplified version of what CI/CD pipelines do at scale — the pipeline would also run tests and handle rollbacks, but the core concept is the same: pull code from a repository and deploy it to a server."
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="subsection" id="d3-quiz">
+      <h3>🧪 Day 3 Quiz — Pass = 4/5</h3>
+    </div>
+    <div class="quiz">
+      <div class="quiz-header">⚡ Day 3 — EC2 + nginx + Deployment</div>
+
+      <div class="quiz-q"><span class="num">Q1.</span> Your web page is not loading in the browser. nginx status shows "active (running)". What is the FIRST thing you check next?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) Check if the HTML file exists</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) Check if the Security Group has port 80 open for inbound traffic</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) Restart the EC2 instance</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) Reinstall nginx</div>
+      </div>
+      <div class="quiz-explain">If nginx is running but the browser can't reach it, it's almost always the Security Group. Port 80 must have an inbound rule. Run: aws ec2 describe-security-groups and check IpPermissions for port 80.</div>
+
+      <div class="quiz-q"><span class="num">Q2.</span> What is the difference between systemctl restart and systemctl reload for nginx?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) They do the same thing — both restart the process</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) restart stops and starts nginx (drops connections); reload applies new config without stopping (zero downtime)</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) reload is only for security updates</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) restart is faster than reload</div>
+      </div>
+      <div class="quiz-explain">reload = graceful config update. Active connections finish normally while new config is applied. Always prefer reload for config changes in production. Use restart only when reload fails or for major version upgrades.</div>
+
+      <div class="quiz-q"><span class="num">Q3.</span> You edited nginx.conf and ran sudo systemctl reload nginx but the site broke. What should you have done BEFORE the reload?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) Backed up the config file</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) Run sudo nginx -t to test config syntax</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) Rebooted the server first</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) Checked the security group</div>
+      </div>
+      <div class="quiz-explain">sudo nginx -t validates config syntax without touching the running nginx. If it reports an error, the file has a problem. Never reload nginx without testing first — a bad config can take the site down immediately.</div>
+
+      <div class="quiz-q"><span class="num">Q4.</span> Inside your deploy.sh you want to check if a directory exists before cloning. Which bash check is correct?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) if exists "$DIR"; then</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">B) if [ -d "$DIR" ]; then</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">C) if directory "$DIR"; then</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) if file "$DIR"; then</div>
+      </div>
+      <div class="quiz-explain">-d tests for directory. -f tests for file. -e tests for either. [ -d "$DIR" ] is the correct bash syntax for directory existence check. Always quote variables in bash — unquoted paths with spaces break scripts.</div>
+
+      <div class="quiz-q"><span class="num">Q5.</span> Where does nginx serve files from by default?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">A) /home/ubuntu/www/</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">B) /etc/nginx/html/</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, true)">C) /var/www/html/</div>
+        <div class="quiz-opt" onclick="answerQuiz(this, false)">D) /usr/share/nginx/</div>
+      </div>
+      <div class="quiz-explain">/var/www/html/ is the default nginx web root on Ubuntu. The config at /etc/nginx/sites-available/default points to this path. When you replace index.html here, nginx serves your file immediately after reload.</div>
+    </div>
+
+    <!-- GITHUB NOTES -->
+    <div class="subsection" id="d3-github">
+      <h3>📂 GitHub Notes Template — Day 3</h3>
+    </div>
+    <div class="doc-template">
+      <div class="doc-template-bar">
+        <span>devops-notes/day-03/README.md</span>
+        <span>Commit: "docs: Add Day 03 notes — EC2 launch and nginx deployment"</span>
+      </div>
+      <pre><span class="md-h1"># Day 03 — EC2 Launch + nginx Deployment</span>
+<span class="md-comment">**Date:** YYYY-MM-DD | **Status:** ✅ Complete | **Difficulty:** Intermediate</span>
+<span class="md-badge">![Live Server](https://img.shields.io/badge/status-deployed-brightgreen)</span>
+
+---
+
+<span class="md-h2">## 🎯 What I Deployed</span>
+- Launched EC2 (Ubuntu 22.04, t2.micro) via AWS CLI — no console GUI
+- Configured security group with ports 22 and 80
+- Installed and started nginx
+- Served a live web page at: http://[EC2-PUBLIC-IP]
+- Created deploy.sh automation script
+
+<span class="md-h2">## ⌨️ AWS CLI Commands Used Today</span>
+
+<span class="md-code">```bash</span>
+<span class="md-comment"># Find Ubuntu AMI</span>
+aws ec2 describe-images --owners amazon \
+  --filters "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04*" \
+  --query 'sort_by(Images,&CreationDate)[-1].ImageId' --output text
+
+<span class="md-comment"># Create key pair</span>
+aws ec2 create-key-pair --key-name my-key --query 'KeyMaterial' --output text > my-key.pem
+chmod 400 my-key.pem
+
+<span class="md-comment"># Create security group and open ports</span>
+aws ec2 create-security-group --group-name my-sg --description "Learning SG"
+aws ec2 authorize-security-group-ingress --group-id sg-xxx --protocol tcp --port 22 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id sg-xxx --protocol tcp --port 80 --cidr 0.0.0.0/0
+
+<span class="md-comment"># Launch instance</span>
+aws ec2 run-instances --image-id ami-xxx --instance-type t2.micro \
+  --key-name my-key --security-group-ids sg-xxx \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=webserver}]'
+
+<span class="md-comment"># Get public IP</span>
+aws ec2 describe-instances --instance-ids i-xxx \
+  --query 'Reservations[0].Instances[0].PublicIpAddress' --output text
+
+<span class="md-comment"># Stop when done (never leave running)</span>
+aws ec2 stop-instances --instance-ids i-xxx
+<span class="md-code">```</span>
+
+<span class="md-h2">## 🐛 Errors I Hit and Fixed</span>
+
+| Error | Root Cause | Fix |
+|-------|-----------|-----|
+| Site not loading in browser | Port 80 not in Security Group | Added inbound rule for port 80 |
+| nginx config broke after edit | Missing semicolon | sudo nginx -t → found error line → fixed it |
+| [Your error here] | | |
+
+<span class="md-h2">## 🔑 Key Concepts Understood</span>
+- Security Group = EC2's firewall. Port 80 must be open for web traffic.
+- nginx serves from /var/www/html/ by default
+- systemctl reload applies config without dropping connections
+- sudo nginx -t = ALWAYS run before reload
+- curl http://localhost = test nginx from inside before testing from browser
+
+<span class="md-h2">## 🏗 Mini Project: deploy.sh</span>
+- Location: /scripts/deploy.sh
+- What it does: Full automated deployment from git clone to live nginx page
+- Live URL tested: http://[EC2-IP] ✅
+
+<span class="md-h2">## 📈 Week 1 Complete — What's Next</span>
+Days 4–7: Bash scripting depth, IAM roles, S3, VPC networking, ALB basics</pre>
+    </div>
+
+    <!-- WEEK 1 SUMMARY -->
+    <div class="callout ok" style="margin-top:32px;">
+      <span class="callout-icon">🏆</span>
+      <h4>Week 1 — What You've Actually Built</h4>
+      <p><strong>Day 1:</strong> Linux-fluent on a real remote server. File permissions, processes, services — the vocabulary every DevOps interview starts with.</p>
+      <p><strong>Day 2:</strong> Git workflow that would not embarrass you on a team. AWS CLI configured with proper IAM credentials. Your notes are version-controlled and public.</p>
+      <p><strong>Day 3:</strong> A live web server on EC2, deployed from a bash script that clones your git repository. You have described this to yourself in interview language. This is the foundation everything else in DevOps sits on.</p>
+    </div>
+
+  </div>
+  <!-- END DAY 3 -->
+
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>DevOps Bootcamp Pack — Days 1–3 | <span>Trainer Beside You Series</span></p>
+    <p style="margin-top:6px;">Next: Request Days 4–7 → Bash Scripting Depth + IAM Roles + S3 + VPC + Load Balancers</p>
+    <p style="margin-top:12px;font-size:11px;color:var(--border);">For a 33-year-old who started from zero and decided to go all the way.</p>
+  </div>
+
+</main>
+
+<script>
+  function answerQuiz(el, isCorrect) {
+    const parent = el.parentElement;
+    const opts = parent.querySelectorAll('.quiz-opt');
+    const explain = parent.nextElementSibling;
+    
+    opts.forEach(o => o.style.pointerEvents = 'none');
+    el.classList.add(isCorrect ? 'correct' : 'wrong');
+    
+    if (!isCorrect) {
+      opts.forEach(o => {
+        if (o.onclick.toString().includes('true')) {
+          o.classList.add('correct');
+        }
+      });
+    }
+    
+    if (explain && explain.classList.contains('quiz-explain')) {
+      explain.classList.add('show');
+    }
+  }
+
+  // Toggle dropdown in sidebar nav
+  function toggleDropdown(btn) {
+    const dropdown = btn.parentElement;
+    dropdown.classList.toggle('open');
+  }
+
+  // Highlight active nav link on scroll & auto-open matching dropdown
+  const navLinks = document.querySelectorAll('.nav a');
+  const sections = document.querySelectorAll('[id]');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+
+    // Auto-open the dropdown for the current day section
+    const dayDropdowns = document.querySelectorAll('.nav-dropdown');
+    dayDropdowns.forEach(dd => {
+      const dayId = dd.getAttribute('data-day');
+      const hasActive = dd.querySelector('a.active');
+      if (hasActive) {
+        dd.classList.add('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

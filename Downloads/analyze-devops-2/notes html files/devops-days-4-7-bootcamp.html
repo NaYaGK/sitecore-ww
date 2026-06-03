@@ -1,0 +1,4228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps Days 4–7 | Week 1 Complete — Trainer Beside You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════
+   ROOT DESIGN TOKENS — Days 4–7
+   Darker, more intense than Days 1–3.
+   Same family, noticeably harder feel.
+═══════════════════════════════════ */
+    :root {
+      --bg: #050509;
+      --surface: #0c0c14;
+      --surface2: #13131e;
+      --surface3: #1a1a28;
+      --border: #252538;
+      --border2: #333350;
+
+      --d4: #f0c040;
+      /* Day 4.1: amber  — Bash scripting */
+      --d5: #40d4f0;
+      /* Day 5: cyan   — IAM + S3 */
+      --d6: #f07040;
+      /* Day 6: orange — VPC networking */
+      --d7: #e040fb;
+      /* Day 7: violet — Week capstone */
+
+      --ok: #5af078;
+      --warn: #f0b840;
+      --danger: #f05050;
+      --info: #40c8f0;
+      --muted: #484868;
+      --text: #e0e0f0;
+      --text-dim: #8888aa;
+
+      --mono: 'IBM Plex Mono', monospace;
+      --head: 'Bebas Neue', sans-serif;
+      --body: 'Barlow', sans-serif;
+    }
+
+    /* ─ RESET ─ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.75;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─ NOISE TEXTURE ─ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ─ SIDEBAR NAV ─ */
+    .nav {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 210px;
+      height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+      overflow-y: auto;
+      z-index: 200;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .nav-brand {
+      padding: 0 18px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .nav-brand .week-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--warn);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .nav-brand strong {
+      font-family: var(--head);
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: var(--text);
+      display: block;
+    }
+
+    .nav-group-label {
+      padding: 12px 18px 5px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 18px;
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-dim);
+      border-left: 3px solid transparent;
+      transition: all 0.12s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .nav a.d4 {
+      --dc: var(--d4);
+    }
+
+    .nav a.d5 {
+      --dc: var(--d5);
+    }
+
+    .nav a.d6 {
+      --dc: var(--d6);
+    }
+
+    .nav a.d7 {
+      --dc: var(--d7);
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      border-left-color: var(--dc, var(--warn));
+      color: var(--dc, var(--text));
+    }
+
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    /* ─ MAIN AREA ─ */
+    .main {
+      margin-left: 210px;
+      padding: 0 52px 80px;
+      max-width: 1140px;
+    }
+
+    /* ─ HERO BANNER ─ */
+    .hero {
+      padding: 72px 0 56px;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--warn);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--warn) 0%, transparent 100%);
+      opacity: 0.3;
+    }
+
+    .hero h1 {
+      font-family: var(--head);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      letter-spacing: 3px;
+      line-height: 0.95;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .line1 {
+      color: var(--text);
+      display: block;
+    }
+
+    .hero h1 .line2 {
+      color: var(--warn);
+      display: block;
+    }
+
+    .hero h1 .line3 {
+      color: var(--text-dim);
+      display: block;
+      font-size: 55%;
+    }
+
+    .hero-desc {
+      max-width: 660px;
+      color: var(--text-dim);
+      font-size: 15px;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .hero-stat .v {
+      color: var(--info);
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .hero-stat .l {
+      color: var(--text-dim);
+    }
+
+    /* ─ QUICK NAV PILLS ─ */
+    .qnav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .qnav a {
+      text-decoration: none;
+      padding: 7px 16px;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.15s;
+      border: 1px solid;
+    }
+
+    .qnav a.d4 {
+      color: var(--d4);
+      border-color: rgba(240, 192, 64, 0.3);
+      background: rgba(240, 192, 64, 0.05);
+    }
+
+    .qnav a.d5 {
+      color: var(--d5);
+      border-color: rgba(64, 212, 240, 0.3);
+      background: rgba(64, 212, 240, 0.05);
+    }
+
+    .qnav a.d6 {
+      color: var(--d6);
+      border-color: rgba(240, 112, 64, 0.3);
+      background: rgba(240, 112, 64, 0.05);
+    }
+
+    .qnav a.d7 {
+      color: var(--d7);
+      border-color: rgba(224, 64, 251, 0.3);
+      background: rgba(224, 64, 251, 0.05);
+    }
+
+    .qnav a:hover {
+      opacity: 0.8;
+      transform: translateY(-1px);
+    }
+
+    /* ─ THREE VOICES BLOCK ─ */
+    .voices {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin: 28px 0 40px;
+    }
+
+    .voice-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .voice-header {
+      padding: 11px 16px;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .voice-header.sv {
+      background: rgba(240, 192, 64, 0.07);
+      color: var(--d4);
+      border-bottom-color: rgba(240, 192, 64, 0.2);
+    }
+
+    .voice-header.tr {
+      background: rgba(64, 212, 240, 0.07);
+      color: var(--d5);
+      border-bottom-color: rgba(64, 212, 240, 0.2);
+    }
+
+    .voice-header.hd {
+      background: rgba(224, 64, 251, 0.07);
+      color: var(--d7);
+      border-bottom-color: rgba(224, 64, 251, 0.2);
+    }
+
+    .voice-body {
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    .voice-body p+p {
+      margin-top: 8px;
+    }
+
+    /* ─ PROGRESS RAMP ─ */
+    .ramp {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+
+    .ramp h3 {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .ramp-bar {
+      display: flex;
+      gap: 5px;
+    }
+
+    .ramp-seg {
+      flex: 1;
+      border-radius: 3px;
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .ramp-seg .day-lbl {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .ramp-seg .day-desc {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .ramp-seg.done {
+      background: rgba(90, 240, 120, 0.07);
+      border: 1px solid rgba(90, 240, 120, 0.2);
+    }
+
+    .ramp-seg.done .day-lbl {
+      color: var(--ok);
+    }
+
+    .ramp-seg.s4 {
+      background: rgba(240, 192, 64, 0.08);
+      border: 1px solid rgba(240, 192, 64, 0.25);
+    }
+
+    .ramp-seg.s4 .day-lbl {
+      color: var(--d4);
+    }
+
+    .ramp-seg.s5 {
+      background: rgba(64, 212, 240, 0.08);
+      border: 1px solid rgba(64, 212, 240, 0.25);
+    }
+
+    .ramp-seg.s5 .day-lbl {
+      color: var(--d5);
+    }
+
+    .ramp-seg.s6 {
+      background: rgba(240, 112, 64, 0.08);
+      border: 1px solid rgba(240, 112, 64, 0.25);
+    }
+
+    .ramp-seg.s6 .day-lbl {
+      color: var(--d6);
+    }
+
+    .ramp-seg.s7 {
+      background: rgba(224, 64, 251, 0.1);
+      border: 1px solid rgba(224, 64, 251, 0.3);
+    }
+
+    .ramp-seg.s7 .day-lbl {
+      color: var(--d7);
+    }
+
+    /* ─ DAY SECTION HEADER ─ */
+    .day-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 0 16px;
+      margin: 56px 0 28px;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    .day-badge {
+      font-family: var(--head);
+      font-size: 52px;
+      letter-spacing: 2px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .day-badge.d4 {
+      color: var(--d4);
+    }
+
+    .day-badge.d5 {
+      color: var(--d5);
+    }
+
+    .day-badge.d6 {
+      color: var(--d6);
+    }
+
+    .day-badge.d7 {
+      color: var(--d7);
+    }
+
+    .day-title-block h2 {
+      font-family: var(--head);
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      letter-spacing: 1px;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .day-title-block .subtitle {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 5px;
+      letter-spacing: 0.5px;
+    }
+
+    .day-diff {
+      margin-left: auto;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .diff-pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 4px 10px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .diff-pill.med {
+      background: rgba(240, 192, 64, 0.12);
+      color: var(--d4);
+      border: 1px solid rgba(240, 192, 64, 0.3);
+    }
+
+    .diff-pill.hard {
+      background: rgba(240, 112, 64, 0.12);
+      color: var(--d6);
+      border: 1px solid rgba(240, 112, 64, 0.3);
+    }
+
+    .diff-pill.very-hard {
+      background: rgba(224, 64, 251, 0.12);
+      color: var(--d7);
+      border: 1px solid rgba(224, 64, 251, 0.3);
+    }
+
+    .day-diff .hrs {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      display: block;
+      margin-top: 3px;
+    }
+
+    /* ─ SUB-SECTION ─ */
+    .sub {
+      margin: 32px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sub h3 {
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .sub::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .sub p {
+      font-size: 13.5px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    /* ─ CALLOUT ─ */
+    .box {
+      border-radius: 6px;
+      padding: 15px 20px;
+      margin: 14px 0;
+      font-size: 13.5px;
+    }
+
+    .box.goal {
+      background: rgba(90, 240, 120, 0.05);
+      border: 1px solid rgba(90, 240, 120, 0.25);
+      border-left: 4px solid var(--ok);
+    }
+
+    .box.warn {
+      background: rgba(240, 184, 64, 0.05);
+      border: 1px solid rgba(240, 184, 64, 0.25);
+      border-left: 4px solid var(--warn);
+    }
+
+    .box.fire {
+      background: rgba(240, 80, 80, 0.05);
+      border: 1px solid rgba(240, 80, 80, 0.25);
+      border-left: 4px solid var(--danger);
+    }
+
+    .box.info {
+      background: rgba(64, 200, 240, 0.05);
+      border: 1px solid rgba(64, 200, 240, 0.25);
+      border-left: 4px solid var(--info);
+    }
+
+    .box h4 {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 7px;
+    }
+
+    .box.goal h4 {
+      color: var(--ok);
+    }
+
+    .box.warn h4 {
+      color: var(--warn);
+    }
+
+    .box.fire h4 {
+      color: var(--danger);
+    }
+
+    .box.info h4 {
+      color: var(--info);
+    }
+
+    .box p {
+      color: var(--text-dim);
+    }
+
+    .box p+p {
+      margin-top: 6px;
+    }
+
+    /* ─ CONCEPT GRID ─ */
+    .concepts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+
+    .concept {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 15px 18px;
+    }
+
+    .concept .ico {
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+
+    .concept h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .concept p {
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+
+    .concept .why {
+      font-size: 12px;
+      color: var(--info);
+      margin-top: 7px;
+      font-style: italic;
+    }
+
+    /* ─ SCHEDULE TABLE ─ */
+    .sched {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 14px 0;
+    }
+
+    .sched th {
+      background: var(--surface3);
+      padding: 9px 14px;
+      text-align: left;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sched td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      vertical-align: top;
+    }
+
+    .sched tr:last-child td {
+      border: none;
+    }
+
+    .sched tr:hover td {
+      background: var(--surface2);
+    }
+
+    .tc {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-dim);
+      width: 130px;
+      white-space: nowrap;
+    }
+
+    .pc {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      width: 120px;
+    }
+
+    .pc.s4 {
+      color: var(--d4);
+    }
+
+    .pc.s5 {
+      color: var(--d5);
+    }
+
+    .pc.s6 {
+      color: var(--d6);
+    }
+
+    .pc.s7 {
+      color: var(--d7);
+    }
+
+    .ac strong {
+      display: block;
+      color: var(--text);
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .ac span {
+      color: var(--text-dim);
+      font-size: 12.5px;
+    }
+
+    /* ─ TERMINAL ─ */
+    .term {
+      background: #040408;
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      margin: 14px 0;
+      overflow: hidden;
+      font-family: var(--mono);
+    }
+
+    .term-bar {
+      background: var(--surface2);
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .term-bar .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .term-bar .dot.r {
+      background: #ff5f57;
+    }
+
+    .term-bar .dot.y {
+      background: #febc2e;
+    }
+
+    .term-bar .dot.g {
+      background: #28c840;
+    }
+
+    .term-bar .lbl {
+      margin-left: 8px;
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+
+    .term-bar .diff-tag {
+      margin-left: auto;
+      font-size: 9px;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+
+    .term-bar .diff-tag.med {
+      background: rgba(240, 192, 64, 0.15);
+      color: var(--d4);
+    }
+
+    .term-bar .diff-tag.hard {
+      background: rgba(240, 112, 64, 0.15);
+      color: var(--d6);
+    }
+
+    .term-bar .diff-tag.adv {
+      background: rgba(224, 64, 251, 0.15);
+      color: var(--d7);
+    }
+
+    .term-body {
+      padding: 18px 22px;
+      font-size: 12.5px;
+      line-height: 1.8;
+    }
+
+    .cmd-line {
+      display: flex;
+      gap: 0;
+      margin: 3px 0;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .pr {
+      color: var(--ok);
+      margin-right: 5px;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .cm {
+      color: #c8d3f5;
+    }
+
+    .cmt {
+      color: var(--muted);
+      font-size: 11.5px;
+    }
+
+    .out {
+      color: #6872a0;
+      margin: 2px 0 2px 20px;
+      font-size: 12px;
+      display: block;
+    }
+
+    .out.ok {
+      color: var(--ok);
+    }
+
+    .out.err {
+      color: var(--danger);
+    }
+
+    .out.wrn {
+      color: var(--warn);
+    }
+
+    .out.json {
+      color: #a0c4ff;
+    }
+
+    .sect-lbl {
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--muted);
+      margin: 16px 0 8px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sect-lbl:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+
+    /* ─ INLINE CODE ─ */
+    code {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: rgba(64, 200, 240, 0.1);
+      color: var(--info);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* ─ DEBUG TREE ─ */
+    .debug-tree {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--danger);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin: 14px 0;
+    }
+
+    .debug-tree h4 {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--danger);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ds {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding-left: 6px;
+    }
+
+    .dn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(240, 80, 80, 0.1);
+      border: 1px solid rgba(240, 80, 80, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--danger);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .dc strong {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .dc span {
+      color: var(--text-dim);
+      font-size: 12.5px;
+    }
+
+    .dc .fix {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--ok);
+      background: rgba(90, 240, 120, 0.08);
+      padding: 3px 9px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .if-then {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px 16px;
+      margin: 10px 0;
+    }
+
+    .if-then .iff {
+      color: var(--danger);
+      margin-bottom: 4px;
+    }
+
+    .if-then .then {
+      color: var(--ok);
+      margin-bottom: 2px;
+      padding-left: 12px;
+    }
+
+    .if-then .chk {
+      color: var(--warn);
+      padding-left: 12px;
+    }
+
+    /* ─ MISTAKE CARDS ─ */
+    .mistakes-wrap {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 14px 0;
+    }
+
+    .mistakes-header {
+      padding: 11px 20px;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--danger);
+      background: rgba(240, 80, 80, 0.06);
+      border-bottom: 1px solid rgba(240, 80, 80, 0.2);
+    }
+
+    .mk {
+      padding: 13px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      display: flex;
+      gap: 12px;
+    }
+
+    .mk:last-child {
+      border: none;
+    }
+
+    .mx {
+      color: var(--danger);
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 14px;
+    }
+
+    .mc strong {
+      display: block;
+      color: var(--text);
+      font-size: 13.5px;
+      margin-bottom: 3px;
+    }
+
+    .mc p {
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+
+    .mc .fix {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--ok);
+      display: block;
+      margin-top: 6px;
+    }
+
+    .mc .who {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    .mc .who.sv {
+      background: rgba(240, 192, 64, 0.1);
+      color: var(--d4);
+    }
+
+    .mc .who.tr {
+      background: rgba(64, 212, 240, 0.1);
+      color: var(--d5);
+    }
+
+    .mc .who.hd {
+      background: rgba(224, 64, 251, 0.1);
+      color: var(--d7);
+    }
+
+    /* ─ MINI PROJECT ─ */
+    .project {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 18px 0;
+    }
+
+    .project-hdr {
+      padding: 18px 22px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .project-hdr .meta .tag {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    .project-hdr .meta .tag.d4 {
+      color: var(--d4);
+    }
+
+    .project-hdr .meta .tag.d5 {
+      color: var(--d5);
+    }
+
+    .project-hdr .meta .tag.d6 {
+      color: var(--d6);
+    }
+
+    .project-hdr .meta .tag.d7 {
+      color: var(--d7);
+    }
+
+    .project-hdr h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .project-hdr .time {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .project-body {
+      padding: 20px 22px;
+    }
+
+    .project-goal {
+      background: var(--surface3);
+      border-left: 3px solid var(--info);
+      padding: 12px 16px;
+      font-size: 13.5px;
+      color: var(--text-dim);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 16px;
+    }
+
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      padding: 7px 0;
+      font-size: 13.5px;
+      color: var(--text-dim);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .checklist li:last-child {
+      border: none;
+    }
+
+    .checklist li::before {
+      content: '□';
+      color: var(--border2);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ─ EXPECTED OUTPUT ─ */
+    .expected {
+      background: rgba(64, 200, 240, 0.03);
+      border: 1px solid rgba(64, 200, 240, 0.2);
+      border-radius: 5px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .expected .lbl {
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--info);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* ─ INTERVIEW BLOCK ─ */
+    .int-block {
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .int-q {
+      padding: 12px 18px;
+      background: rgba(224, 64, 251, 0.06);
+      border-bottom: 1px solid rgba(224, 64, 251, 0.2);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--d7);
+      display: flex;
+      gap: 10px;
+    }
+
+    .int-q .ql {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .int-a {
+      padding: 14px 18px;
+      font-size: 13.5px;
+      color: var(--text-dim);
+    }
+
+    .int-a strong {
+      color: var(--text);
+    }
+
+    .int-a .voice-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 2px 7px;
+      border-radius: 2px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .int-a .voice-tag.sv {
+      background: rgba(240, 192, 64, 0.1);
+      color: var(--d4);
+    }
+
+    .int-a .voice-tag.hd {
+      background: rgba(224, 64, 251, 0.1);
+      color: var(--d7);
+    }
+
+    /* ─ QUIZ ─ */
+    .quiz-wrap {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin: 14px 0;
+    }
+
+    .quiz-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--info);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quiz-q {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 16px 0 8px;
+    }
+
+    .quiz-q .qn {
+      color: var(--muted);
+      font-family: var(--mono);
+      margin-right: 6px;
+    }
+
+    .opts {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .opt {
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 9px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .opt:hover {
+      border-color: var(--info);
+      color: var(--info);
+    }
+
+    .opt.correct {
+      background: rgba(90, 240, 120, 0.08);
+      border-color: var(--ok);
+      color: var(--ok);
+    }
+
+    .opt.wrong {
+      background: rgba(240, 80, 80, 0.06);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .explain {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: var(--surface3);
+      border-left: 3px solid var(--info);
+      border-radius: 0 4px 4px 0;
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+
+    .explain.show {
+      display: block;
+    }
+
+    /* ─ GITHUB TEMPLATE ─ */
+    .gh-template {
+      background: #020206;
+      border: 1px solid var(--border2);
+      border-radius: 7px;
+      overflow: hidden;
+      margin: 14px 0;
+      font-family: var(--mono);
+    }
+
+    .gh-bar {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 9px 16px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .gh-template pre {
+      padding: 18px 22px;
+      font-size: 12.5px;
+      color: #9090b8;
+      overflow-x: auto;
+      line-height: 1.65;
+    }
+
+    .mh1 {
+      color: #ffffff;
+    }
+
+    .mh2 {
+      color: #c0c0f0;
+    }
+
+    .mh3 {
+      color: #9090cc;
+    }
+
+    .mbdg {
+      color: var(--ok);
+    }
+
+    .mcod {
+      color: var(--info);
+    }
+
+    .mcom {
+      color: var(--muted);
+    }
+
+    /* ─ WEEK SUMMARY ─ */
+    .week-summary {
+      background: linear-gradient(135deg, rgba(240, 192, 64, 0.04), rgba(224, 64, 251, 0.04));
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin-top: 48px;
+    }
+
+    .week-summary h2 {
+      font-family: var(--head);
+      font-size: 2rem;
+      letter-spacing: 2px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .skills-earned {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .skill-item {
+      background: var(--surface3);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .skill-item .tick {
+      color: var(--ok);
+      margin-right: 5px;
+    }
+
+    .skill-item .name {
+      color: var(--text);
+    }
+
+    /* ─ FOOTER ─ */
+    .footer {
+      margin-top: 80px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .footer span {
+      color: var(--warn);
+    }
+
+    /* ─ RESPONSIVE ─ */
+    @media (max-width: 860px) {
+      .nav {
+        display: none;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 24px 20px 60px;
+      }
+
+      .voices {
+        grid-template-columns: 1fr;
+      }
+
+      .ramp-bar {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* ─ SCROLL ANCHOR OFFSET ─ */
+    #day4.1,
+    #day5,
+    #day6,
+    #day7 {
+      scroll-margin-top: 24px;
+    }
+
+    /* ─ TEXT ─ */
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    p {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      color: var(--text-dim);
+      font-size: 13.5px;
+      margin-bottom: 4px;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    /* ─ ANIM ─ */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .main>* {
+      animation: fadeIn 0.35s ease both;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══ SIDEBAR ══ -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <span class="week-tag">Week 1 — Days 4–7</span>
+      <strong>DEVOPS PACK</strong>
+    </div>
+
+    <div class="nav-group-label">Overview</div>
+    <a href="#voices" class="d4"><span class="nav-dot"></span>Three Voices</a>
+    <a href="#ramp" class="d4"><span class="nav-dot"></span>Difficulty Ramp</a>
+
+    <div class="nav-group-label">Day 4.1 — Bash</div>
+    <a href="#d4-sched" class="d4"><span class="nav-dot"></span>8h Schedule</a>
+    <a href="#d4-concepts" class="d4"><span class="nav-dot"></span>Concepts</a>
+    <a href="#d4-commands" class="d4"><span class="nav-dot"></span>Commands</a>
+    <a href="#d4-debug" class="d4"><span class="nav-dot"></span>Debug Tree</a>
+    <a href="#d4-mistakes" class="d4"><span class="nav-dot"></span>Mistakes</a>
+    <a href="#d4-project" class="d4"><span class="nav-dot"></span>Mini Project</a>
+    <a href="#d4-interview" class="d4"><span class="nav-dot"></span>Interview</a>
+    <a href="#d4-quiz" class="d4"><span class="nav-dot"></span>Quiz</a>
+    <a href="#d4-github" class="d4"><span class="nav-dot"></span>GitHub Notes</a>
+
+    <div class="nav-group-label">Day 5 — IAM + S3</div>
+    <a href="#d5-sched" class="d5"><span class="nav-dot"></span>8h Schedule</a>
+    <a href="#d5-concepts" class="d5"><span class="nav-dot"></span>Concepts</a>
+    <a href="#d5-commands" class="d5"><span class="nav-dot"></span>Commands</a>
+    <a href="#d5-debug" class="d5"><span class="nav-dot"></span>Debug Tree</a>
+    <a href="#d5-mistakes" class="d5"><span class="nav-dot"></span>Mistakes</a>
+    <a href="#d5-project" class="d5"><span class="nav-dot"></span>Mini Project</a>
+    <a href="#d5-interview" class="d5"><span class="nav-dot"></span>Interview</a>
+    <a href="#d5-quiz" class="d5"><span class="nav-dot"></span>Quiz</a>
+    <a href="#d5-github" class="d5"><span class="nav-dot"></span>GitHub Notes</a>
+
+    <div class="nav-group-label">Day 6 — VPC</div>
+    <a href="#d6-sched" class="d6"><span class="nav-dot"></span>8h Schedule</a>
+    <a href="#d6-concepts" class="d6"><span class="nav-dot"></span>Concepts</a>
+    <a href="#d6-commands" class="d6"><span class="nav-dot"></span>Commands</a>
+    <a href="#d6-debug" class="d6"><span class="nav-dot"></span>Debug Tree</a>
+    <a href="#d6-mistakes" class="d6"><span class="nav-dot"></span>Mistakes</a>
+    <a href="#d6-project" class="d6"><span class="nav-dot"></span>Mini Project</a>
+    <a href="#d6-interview" class="d6"><span class="nav-dot"></span>Interview</a>
+    <a href="#d6-quiz" class="d6"><span class="nav-dot"></span>Quiz</a>
+    <a href="#d6-github" class="d6"><span class="nav-dot"></span>GitHub Notes</a>
+
+    <div class="nav-group-label">Day 7 — Capstone</div>
+    <a href="#d7-sched" class="d7"><span class="nav-dot"></span>8h Schedule</a>
+    <a href="#d7-concepts" class="d7"><span class="nav-dot"></span>Concepts</a>
+    <a href="#d7-commands" class="d7"><span class="nav-dot"></span>Commands</a>
+    <a href="#d7-debug" class="d7"><span class="nav-dot"></span>Debug Tree</a>
+    <a href="#d7-project" class="d7"><span class="nav-dot"></span>Capstone Project</a>
+    <a href="#d7-interview" class="d7"><span class="nav-dot"></span>Interview</a>
+    <a href="#d7-quiz" class="d7"><span class="nav-dot"></span>Quiz</a>
+    <a href="#week-summary" class="d7"><span class="nav-dot"></span>Week 1 Summary</a>
+  </nav>
+
+  <!-- ══ MAIN ══ -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-eyebrow">90 Days DevOps &nbsp;·&nbsp; Week 1 Completion Pack</div>
+      <h1>
+        <span class="line1">DAYS 4 TO 7</span>
+        <span class="line2">BASH · IAM · VPC · CAPSTONE</span>
+        <span class="line3">Trainer Beside You — Week 1 Final Push</span>
+      </h1>
+      <p class="hero-desc">You survived Days 1–3 and now have a live EC2 web server in version control. Days 4–7 is
+        where it gets real. Bash scripting, IAM policies, VPC architecture, and a full Week 1 capstone project that ties
+        everything together. Day 7 is intentionally hard — that's the point.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="v">4 days</span><span class="l">remaining in Week 1</span></div>
+        <div class="hero-stat"><span class="v">Bash + IAM + S3 + VPC</span><span class="l">this pack covers</span></div>
+        <div class="hero-stat"><span class="v">Day 7</span><span class="l">noticeably harder than Day 4.1</span></div>
+        <div class="hero-stat"><span class="v">EC2-first</span><span class="l">all practice on your instance</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK NAV -->
+    <div class="qnav">
+      <a href="#day4.1" class="d4">↓ Day 4.1 Bash</a>
+      <a href="#day5" class="d5">↓ Day 5 IAM + S3</a>
+      <a href="#day6" class="d6">↓ Day 6 VPC</a>
+      <a href="#day7" class="d7">↓ Day 7 Capstone</a>
+    </div>
+
+    <!-- THREE VOICES -->
+    <div id="voices">
+      <div class="sub">
+        <h3>🎙 Three Voices. One Pack.</h3>
+      </div>
+      <div class="voices">
+        <div class="voice-card">
+          <div class="voice-header sv">⚡ Senior DevOps Engineer — Reality Check</div>
+          <div class="voice-body">
+            <p>By the end of Day 3 you had a server running. That's table stakes. What separates a hired junior from a
+              perpetual bootcamper is the ability to <em>reason about failures</em> before Googling them.</p>
+            <p>Days 4–7 are where I see the most dropouts — not because the material is impossible, but because people
+              hit their first bash script error or first IAM AccessDenied and immediately reach for YouTube. Don't. Read
+              the error message in full. Every error message in AWS is remarkably specific. The answer is always in the
+              message.</p>
+            <p>Day 7 capstone: I will push back if your architecture has security holes. Fixing them is part of the
+              exercise.</p>
+          </div>
+        </div>
+        <div class="voice-card">
+          <div class="voice-header tr">🎓 Senior DevOps Trainer — Learning Framework</div>
+          <div class="voice-body">
+            <p>At 33 your biggest asset is patience and pattern recognition from real life. Use that. When I teach Bash
+              conditionals, I don't just teach the syntax — I want you to feel the logic. An
+              <code>if [ -f "$FILE" ]</code> check in a script is the same mental process as "check if the door is
+              unlocked before you try to open it."</p>
+            <p>For Days 4–7, your learning framework shifts: less memorising, more building. You will hit errors this
+              week that I have deliberately left in the exercises. Your job is to diagnose them without a hint first,
+              then use the debug tree if stuck.</p>
+            <p>Goal by Friday: you can explain what you built this week to a non-technical person. That ability is 30%
+              of landing the job.</p>
+          </div>
+        </div>
+        <div class="voice-card">
+          <div class="voice-header hd">🏢 Head of DevOps — Hiring Perspective</div>
+          <div class="voice-body">
+            <p>I review 40–60 applications per open junior role. Let me tell you exactly what I look for in a Week 1
+              candidate that makes me call them for a screen.</p>
+            <p>Their GitHub has <em>daily commits</em> with proper commit messages. Their README explains decisions, not
+              just steps. Their scripts have comments. They have hit errors and <em>documented the fix</em>. That tells
+              me they're systematic, they write, and they're honest about struggle.</p>
+            <p>The VPC section in Day 6 is what I test hardest in phone screens — not because everyone knows it, but
+              because how you <em>think about</em> network isolation tells me whether you understand security as a
+              mindset or as a checkbox. Build the VPC slowly. Understand every component.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIFFICULTY RAMP -->
+    <div class="ramp" id="ramp">
+      <h3>📈 Week 1 Difficulty Ramp — Where You Are</h3>
+      <div class="ramp-bar">
+        <div class="ramp-seg done"><span class="day-lbl">D1 ✓</span><span class="day-desc">Linux basics</span></div>
+        <div class="ramp-seg done"><span class="day-lbl">D2 ✓</span><span class="day-desc">Git + AWS CLI</span></div>
+        <div class="ramp-seg done"><span class="day-lbl">D3 ✓</span><span class="day-desc">EC2 + nginx live</span></div>
+        <div class="ramp-seg s4"><span class="day-lbl">D4 →</span><span class="day-desc">Bash scripting</span></div>
+        <div class="ramp-seg s5"><span class="day-lbl">D5 →</span><span class="day-desc">IAM + S3</span></div>
+        <div class="ramp-seg s6"><span class="day-lbl">D6 →</span><span class="day-desc">VPC + Networking</span></div>
+        <div class="ramp-seg s7"><span class="day-lbl">D7 ★</span><span class="day-desc">Week capstone</span></div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════ DAY 4.1 ══════════════════════════ -->
+    <div id="day4.1">
+      <div class="day-header">
+        <div class="day-badge d4">D4.1</div>
+        <div class="day-title-block">
+          <h2>BASH SCRIPTING DEPTH</h2>
+          <div class="subtitle">Variables · Conditionals · Loops · Functions · Error Handling · Cron</div>
+        </div>
+        <div class="day-diff">
+          <span class="diff-pill med">Medium</span>
+          <span class="hrs">8 hrs</span>
+        </div>
+      </div>
+
+      <div class="box goal">
+        <h4>🎯 Day 4.1 Goal</h4>
+        <p>By end of Day 4.1 you can write bash scripts that use variables, conditionals, loops, and functions — and
+          handle errors without panicking. You will build a <strong>health_check.sh</strong> script that monitors your
+          EC2 and logs results. This is the kind of script that runs on cron in production every 5 minutes.</p>
+        <p>Expected output: A working health check script committed to GitHub and scheduled via cron on your EC2. It
+          runs whether you're watching or not.</p>
+      </div>
+
+      <div class="sub" id="d4-sched">
+        <h3>📋 8-Hour Schedule</h3>
+      </div>
+      <table class="sched">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Phase</th>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tc">09:00–09:20</td>
+            <td class="pc s4">RECALL</td>
+            <td class="ac"><strong>Day 3 cold review</strong><span>From memory: launch EC2 CLI, open port 80, install
+                nginx. If you can't do this without notes, you haven't consolidated — spend 30 mins drilling Day 3
+                commands before Bash.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">09:20–10:30</td>
+            <td class="pc s4">THEORY</td>
+            <td class="ac"><strong>Bash mental model</strong><span>Variables, quoting rules (single vs double), exit
+                codes, the $? variable, why scripts fail silently without set -e. Every concept explained with a real
+                scenario.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">10:30–10:45</td>
+            <td class="pc s4">BREAK</td>
+            <td class="ac"><strong>15 min away from screen</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">10:45–12:30</td>
+            <td class="pc s4">HANDS-ON</td>
+            <td class="ac"><strong>Conditionals + Loops on EC2</strong><span>Type every example. Then intentionally
+                break them — wrong brackets, missing quotes, wrong operator. Read every error message before
+                fixing.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">12:30–13:15</td>
+            <td class="pc s4">BREAK</td>
+            <td class="ac"><strong>Lunch — no passive learning</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">13:15–14:30</td>
+            <td class="pc s4">HANDS-ON</td>
+            <td class="ac"><strong>Functions + Error Handling + set -euo pipefail</strong><span>Functions let you write
+                reusable blocks. Error handling is what makes scripts safe to run in production. A script without error
+                handling is a liability.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">14:30–15:30</td>
+            <td class="pc s4">HANDS-ON</td>
+            <td class="ac"><strong>Cron jobs on EC2</strong><span>Schedule scripts to run automatically. This is how
+                monitoring, backups, and maintenance work in real systems. Build cron syntax from scratch — don't copy
+                it.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">15:30–15:45</td>
+            <td class="pc s4">BREAK</td>
+            <td class="ac"><strong>Break</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">15:45–16:45</td>
+            <td class="pc s4">PROJECT</td>
+            <td class="ac"><strong>health_check.sh — build and schedule it</strong><span>Full script: checks disk, RAM,
+                nginx status, writes timestamped log. Cron it. This is your first "always-running" automation.</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="tc">16:45–17:00</td>
+            <td class="pc s4">COMMIT</td>
+            <td class="ac"><strong>Commit + push + write Day 4.1 notes</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sub" id="d4-concepts">
+        <h3>🧠 Core Concepts — The Why</h3>
+      </div>
+      <div class="concepts">
+        <div class="concept">
+          <div class="ico">💲</div>
+          <h4>Variables + Quoting</h4>
+          <p>Variables store values. <code>NAME="ubuntu"</code>. Always double-quote variables: <code>"$NAME"</code>.
+            Without quotes, a variable with spaces breaks your script silently.</p>
+          <p class="why">Why it matters: A path with a space, like <code>/home/my user/</code>, kills scripts that don't
+            quote variables. This causes real outages.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🔀</div>
+          <h4>Exit Codes + $?</h4>
+          <p>Every Linux command returns a number when it finishes. 0 = success. Anything else = failure.
+            <code>$?</code> holds the last command's exit code. Scripts check this to decide what to do next.</p>
+          <p class="why">Why it matters: Your scripts must know if a step succeeded. Blindly continuing after a failed
+            command creates corrupted state.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🛡</div>
+          <h4>set -euo pipefail</h4>
+          <p><code>set -e</code>: exit on any error. <code>set -u</code>: exit if undefined variable used.
+            <code>set -o pipefail</code>: fail if any part of a pipe fails. This trio is on line 2 of every professional
+            bash script.</p>
+          <p class="why">Why it matters: Without these, a bash script will happily continue past failures, compounding
+            damage. Always use them.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🔁</div>
+          <h4>Loops (for / while)</h4>
+          <p><code>for</code> iterates over a list. <code>while</code> runs until a condition is false. These let you
+            automate repetitive tasks — processing multiple files, retrying failed operations, scanning lists of
+            servers.</p>
+          <p class="why">Why it matters: The same script that manages 1 server manages 100 with a loop. Scalability is
+            built into bash from the start.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🧩</div>
+          <h4>Functions</h4>
+          <p>Functions group reusable logic. <code>function log_info() { echo "[INFO] $1"; }</code>. Call it with
+            <code>log_info "Starting"</code>. DRY — Don't Repeat Yourself — is as important in shell scripts as in code.
+          </p>
+          <p class="why">Why it matters: A 200-line script without functions is unreadable and unmaintainable. Employers
+            check your script quality.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">⏰</div>
+          <h4>Cron — Scheduled Automation</h4>
+          <p>Cron runs scripts on a schedule. <code>crontab -e</code> opens the cron editor. The format is: minute hour
+            day month weekday command. <code>*/5 * * * * /script.sh</code> runs every 5 minutes.</p>
+          <p class="why">Why it matters: Every production system has cron jobs — health checks, log rotation, backups,
+            cleanup. This is fundamental infrastructure automation.</p>
+        </div>
+      </div>
+
+      <div class="sub" id="d4-commands">
+        <h3>⌨️ Exact Command Flow — Type Every Line</h3>
+      </div>
+
+      <div class="term">
+        <div class="term-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="lbl">SESSION 1 — Variables, Quoting, Exit Codes</span>
+          <span class="diff-tag med">Medium</span>
+        </div>
+        <div class="term-body">
+          <div class="sect-lbl">Variables — Declare and Reference</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">NAME="DevOps-Learner"</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "Hello $NAME"</span></div>
+          <span class="out ok">Hello DevOps-Learner</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo 'Hello $NAME'</span> <span class="cmt"> #
+              Single quotes = no variable expansion</span></div>
+          <span class="out">Hello $NAME</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">MY_DATE=$(date +%Y-%m-%d)</span> <span
+              class="cmt"> # Command substitution — store output</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "Today is: $MY_DATE"</span></div>
+          <span class="out ok">Today is: 2026-06-05</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">readonly MAX_RETRY=3</span> <span class="cmt">
+              # Constant — cannot be changed later</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">MAX_RETRY=5</span></div>
+          <span class="out err">bash: MAX_RETRY: readonly variable</span>
+          <span class="out"> # This error is correct — readonly variables are protected</span>
+
+          <div class="sect-lbl">Exit Codes — Understanding Success and Failure</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">ls /tmp</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "Exit code: $?"</span></div>
+          <span class="out ok">Exit code: 0</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">ls /nonexistent_directory</span></div>
+          <span class="out err">ls: cannot access '/nonexistent_directory': No such file or directory</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "Exit code: $?"</span></div>
+          <span class="out err">Exit code: 2</span>
+          <span class="out"> # Non-zero = failure. Your scripts must check this.</span>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">cat /etc/passwd | grep "ubuntu" && echo "User
+              found" || echo "User not found"</span></div>
+          <span class="out ok">ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash</span>
+          <span class="out ok">User found</span>
+          <span class="out"> # && runs if left side succeeds. || runs if left side fails.</span>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="lbl">SESSION 2 — Conditionals + Loops</span>
+          <span class="diff-tag med">Medium</span>
+        </div>
+        <div class="term-body">
+          <div class="sect-lbl">Conditionals — Making Decisions</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">nano ~/test_cond.sh</span></div>
+          <span class="out"> # Type the following inside nano:</span>
+          <span class="out">#!/bin/bash</span>
+          <span class="out">set -euo pipefail</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">DISK_USAGE=$(df / | awk 'NR==2 {print $5}' | tr -d '%')</span>
+          <span class="out"> # awk extracts column 5 (use%). tr -d removes the % sign</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">if [ "$DISK_USAGE" -gt 80 ]; then</span>
+          <span class="out"> echo "WARNING: Disk usage is ${DISK_USAGE}% — investigate"</span>
+          <span class="out">elif [ "$DISK_USAGE" -gt 60 ]; then</span>
+          <span class="out"> echo "NOTICE: Disk usage is ${DISK_USAGE}% — watch this"</span>
+          <span class="out">else</span>
+          <span class="out"> echo "OK: Disk usage is ${DISK_USAGE}%"</span>
+          <span class="out">fi</span>
+          <span class="out"> # Ctrl+X, Y, Enter</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">chmod +x ~/test_cond.sh && bash
+              ~/test_cond.sh</span></div>
+          <span class="out ok">OK: Disk usage is 18%</span>
+
+          <div class="sect-lbl">Comparison Operators — Critical Reference</div>
+          <span class="out"> # INTEGER comparisons (numbers only):</span>
+          <span class="out"> -eq (equal) -ne (not equal)</span>
+          <span class="out"> -gt (greater than) -lt (less than)</span>
+          <span class="out"> -ge (>=) -le (&lt;=)</span>
+          <span class="out">&nbsp;</span>
+          <span class="out"> # STRING comparisons:</span>
+          <span class="out"> = (equal strings) != (not equal)</span>
+          <span class="out"> -z (string is empty) -n (string is not empty)</span>
+          <span class="out">&nbsp;</span>
+          <span class="out"> # FILE checks:</span>
+          <span class="out"> -f (file exists) -d (directory exists)</span>
+          <span class="out"> -r (readable) -w (writable) -x (executable)</span>
+
+          <div class="sect-lbl">Loops — for and while</div>
+          <span class="out"> # FOR loop — iterate over a list</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">for SERVICE in nginx ssh cron; do</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> STATUS=$(systemctl is-active "$SERVICE"
+              2>/dev/null || echo "inactive")</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> echo "$SERVICE: $STATUS"</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm">done</span></div>
+          <span class="out ok">nginx: active</span>
+          <span class="out ok">ssh: active</span>
+          <span class="out ok">cron: active</span>
+
+          <span class="out">&nbsp;</span>
+          <span class="out"> # FOR loop — iterate over files</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">for LOG in /var/log/*.log; do</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> SIZE=$(du -sh "$LOG" | cut -f1)</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> echo "$SIZE $LOG"</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm">done</span></div>
+          <span class="out">4.0K /var/log/auth.log</span>
+          <span class="out">20K /var/log/syslog</span>
+
+          <span class="out">&nbsp;</span>
+          <span class="out"> # WHILE loop — retry with countdown</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">RETRIES=0; MAX=3</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">while [ $RETRIES -lt $MAX ]; do</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> echo "Attempt $((RETRIES+1)) of
+              $MAX..."</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> RETRIES=$((RETRIES+1))</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> sleep 1</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm">done</span></div>
+          <span class="out">Attempt 1 of 3...</span>
+          <span class="out">Attempt 2 of 3...</span>
+          <span class="out">Attempt 3 of 3...</span>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="lbl">SESSION 3 — Functions + Cron</span>
+          <span class="diff-tag med">Medium</span>
+        </div>
+        <div class="term-body">
+          <div class="sect-lbl">Functions — Write Once, Call Many Times</div>
+          <span class="out"> # Functions go at TOP of script, before they're called</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">nano ~/test_functions.sh</span></div>
+          <span class="out">#!/bin/bash</span>
+          <span class="out">set -euo pipefail</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">LOG_FILE="/tmp/test.log"</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">function log() {</span>
+          <span class="out"> local LEVEL="$1" # local = variable only exists inside this function</span>
+          <span class="out"> local MSG="$2"</span>
+          <span class="out"> echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$LEVEL] $MSG" | tee -a "$LOG_FILE"</span>
+          <span class="out"> # tee writes to stdout AND appends to log file simultaneously</span>
+          <span class="out">}</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">function check_service() {</span>
+          <span class="out"> local SVC="$1"</span>
+          <span class="out"> if systemctl is-active --quiet "$SVC"; then</span>
+          <span class="out"> log "OK" "$SVC is running"</span>
+          <span class="out"> return 0</span>
+          <span class="out"> else</span>
+          <span class="out"> log "ERROR" "$SVC is NOT running — attempting restart"</span>
+          <span class="out"> sudo systemctl start "$SVC" || log "CRITICAL" "Could not start $SVC"</span>
+          <span class="out"> return 1</span>
+          <span class="out"> fi</span>
+          <span class="out">}</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">log "INFO" "Starting service check"</span>
+          <span class="out">check_service "nginx"</span>
+          <span class="out">check_service "ssh"</span>
+          <span class="out">log "INFO" "Check complete"</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">chmod +x ~/test_functions.sh && bash
+              ~/test_functions.sh</span></div>
+          <span class="out ok">[2026-06-05 14:30:01] [OK] nginx is running</span>
+          <span class="out ok">[2026-06-05 14:30:01] [OK] ssh is running</span>
+          <span class="out ok">[2026-06-05 14:30:01] [INFO] Check complete</span>
+
+          <div class="sect-lbl">Cron — Schedule Automation</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">crontab -l</span> <span class="cmt"> # List
+              existing cron jobs (empty if new)</span></div>
+          <span class="out">no crontab for ubuntu</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">crontab -e</span> <span class="cmt"> # Opens
+              editor (choose nano if asked)</span></div>
+          <span class="out"> # Cron format: minute hour day_of_month month day_of_week command</span>
+          <span class="out"> # * = any value */5 = every 5 1-5 = range 1,3 = list</span>
+          <span class="out">&nbsp;</span>
+          <span class="out"> # Add this line to run health check every 5 minutes:</span>
+          <span class="out"> */5 * * * * /home/ubuntu/scripts/health_check.sh >> /home/ubuntu/logs/health.log
+            2>&amp;1</span>
+          <span class="out">&nbsp;</span>
+          <span class="out"> # 2>&amp;1 = redirect stderr to stdout — captures ALL output, including errors</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">crontab -l</span></div>
+          <span class="out ok">*/5 * * * * /home/ubuntu/scripts/health_check.sh >> /home/ubuntu/logs/health.log
+            2>&amp;1</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">sudo grep CRON /var/log/syslog | tail
+              -5</span> <span class="cmt"> # Verify cron ran</span></div>
+          <span class="out">Jun 5 14:35:01 ip-172-31 CRON[4521]: (ubuntu) CMD
+            (/home/ubuntu/scripts/health_check.sh)</span>
+        </div>
+      </div>
+
+      <div class="expected">
+        <span class="lbl">✅ Expected State After Day 4.1 Commands</span>
+        You can write a bash script with variables, conditionals, loops, functions, and error handling from scratch. You
+        have a script scheduled in cron that runs automatically every 5 minutes. The log file in ~/logs/ grows over time
+        with timestamped entries — check it in the morning.
+      </div>
+
+      <div class="sub" id="d4-debug">
+        <h3>🐛 Debug Tree — Bash Script Failures</h3>
+      </div>
+
+      <div class="debug-tree">
+        <h4>⚡ Script Fails or Does Nothing — Systematic Diagnosis</h4>
+        <div class="ds">
+          <div class="dn">1</div>
+          <div class="dc"><strong>Always run with bash -x first — shows every line as it executes</strong><span>This is
+              the single most powerful bash debugging tool.</span><span class="fix">bash -x
+              /path/to/your/script.sh</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">2</div>
+          <div class="dc"><strong>Check shebang line — is it correct?</strong><span>Line 1 must be
+              <code>#!/bin/bash</code>. If missing, Linux uses sh which has different syntax.</span><span
+              class="fix">head -1 script.sh</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">3</div>
+          <div class="dc"><strong>Check execute permission</strong><span class="fix">ls -la script.sh → chmod +x
+              script.sh</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">4</div>
+          <div class="dc"><strong>shellcheck — automated syntax checker</strong><span>Catches missing quotes, wrong
+              operators, style issues before you even run.</span><span class="fix">sudo apt install shellcheck -y &&
+              shellcheck script.sh</span></div>
+        </div>
+      </div>
+
+      <div class="if-then">
+        <div class="iff">❌ If script exits immediately with "unbound variable"</div>
+        <div class="then">→ You used <code>set -u</code> and referenced a variable before setting it</div>
+        <div class="chk">→ Check: add a default: <code>${MYVAR:-default_value}</code></div>
+        <br>
+        <div class="iff">❌ If script continues past a failed command (not stopping)</div>
+        <div class="then">→ You're missing <code>set -e</code> on line 2</div>
+        <div class="chk">→ Add: <code>set -euo pipefail</code> immediately after shebang</div>
+        <br>
+        <div class="iff">❌ If cron job doesn't seem to run</div>
+        <div class="then">→ Check: <code>sudo grep CRON /var/log/syslog</code> to confirm it fired</div>
+        <div class="chk">→ Check: full absolute path in cron — relative paths don't work in cron</div>
+        <div class="chk">→ Check: script has execute permission (+x)</div>
+        <br>
+        <div class="iff">❌ If [ comparison fails unexpectedly</div>
+        <div class="then">→ Using -gt/-lt on a string, or = on a number? They're not interchangeable</div>
+        <div class="chk">→ Numbers: use -eq, -gt, -lt | Strings: use =, !=</div>
+      </div>
+
+      <div class="sub" id="d4-mistakes">
+        <h3>💥 Common Beginner Mistakes — Day 4.1</h3>
+      </div>
+      <div class="mistakes-wrap">
+        <div class="mistakes-header">⚠ Bash Mistakes That Kill Scripts in Production</div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc">
+            <strong>Spaces around the = in variable assignment</strong>
+            <p><code>NAME = "ubuntu"</code> causes a "command not found" error. Bash sees "NAME" as a command, not an
+              assignment. No spaces allowed around = in variable assignment.</p>
+            <span class="fix">✓ Fix: NAME="ubuntu" (no spaces, ever)</span>
+            <span class="who tr">Trainer: This trips up everyone from Python/JS background — spaces matter differently
+              in Bash</span>
+          </div>
+        </div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc">
+            <strong>Not quoting variables — especially paths</strong>
+            <p><code>rm -rf $DIR</code> where <code>$DIR="/my project"</code> becomes <code>rm -rf /my project</code> —
+              deletes two separate paths. If <code>$DIR</code> is empty it becomes <code>rm -rf</code> — catastrophic.
+            </p>
+            <span class="fix">✓ Fix: Always: rm -rf "$DIR" (double quotes wrap the whole value)</span>
+            <span class="who sv">Senior: I've seen this delete production data. Quote every variable, every time.</span>
+          </div>
+        </div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc">
+            <strong>Using relative paths in cron jobs</strong>
+            <p>Cron runs in a minimal environment without your normal PATH. A script that works from your terminal fails
+              in cron because it can't find commands like <code>aws</code> or <code>docker</code>.</p>
+            <span class="fix">✓ Fix: Use full paths in cron: /usr/bin/aws, /usr/local/bin/docker. Or add
+              PATH=/usr/bin:/usr/local/bin at top of crontab.</span>
+            <span class="who hd">Head of DevOps: 40% of "my cron job doesn't work" tickets I see are path issues.</span>
+          </div>
+        </div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc">
+            <strong>Not redirecting stderr in cron (2>&amp;1)</strong>
+            <p>Without <code>2>&amp;1</code>, error output from cron jobs is silently discarded. You have no idea why
+              something failed.</p>
+            <span class="fix">✓ Fix: Always append both stdout and stderr to log: >> /path/to/script.log 2>&amp;1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="d4-project">
+        <h3>🏗 Mini Project: health_check.sh</h3>
+      </div>
+      <div class="project">
+        <div class="project-hdr">
+          <div class="meta">
+            <div class="tag d4">📁 Day 4.1 Mini Project</div>
+            <h3>health_check.sh — Production-Grade Monitoring Script</h3>
+          </div>
+          <div class="time">⏱ ~75 min</div>
+        </div>
+        <div class="project-body">
+          <div class="project-goal"><strong>Goal:</strong> A script that checks your EC2's health (disk, RAM, CPU,
+            services) every 5 minutes via cron, writes a timestamped log, and sends a different exit code for healthy vs
+            critical state. This is what junior DevOps engineers write in their first week on the job.</div>
+          <ul class="checklist">
+            <li>Script lives at <code>~/scripts/health_check.sh</code>, log at <code>~/logs/health.log</code></li>
+            <li>Uses set -euo pipefail on line 2</li>
+            <li>Contains a reusable <code>log()</code> function that timestamps every message</li>
+            <li>Checks disk usage — warns above 70%, CRITICAL above 90%</li>
+            <li>Checks available RAM — warns if less than 200MB free</li>
+            <li>Checks nginx and ssh service status — attempts restart on failure</li>
+            <li>Exits with code 0 (healthy) or 1 (problem found)</li>
+            <li>Scheduled in crontab to run every 5 minutes</li>
+            <li>After scheduling, verify it ran: check syslog and log file after 5 minutes</li>
+            <li>Commit to GitHub: <code>feat: Add EC2 health monitoring script with cron schedule</code></li>
+          </ul>
+
+          <div class="term" style="margin-top:16px;">
+            <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span
+                class="lbl">health_check.sh — Full Script (Build This)</span></div>
+            <div class="term-body">
+              <span class="out">#!/bin/bash</span>
+              <span class="out">set -euo pipefail</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">###############################################</span>
+              <span class="out"># health_check.sh — EC2 System Health Monitor</span>
+              <span class="out"># Runs via cron every 5 minutes</span>
+              <span class="out">###############################################</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">LOG_FILE="${HOME}/logs/health.log"</span>
+              <span class="out">DISK_WARN=70</span>
+              <span class="out">DISK_CRIT=90</span>
+              <span class="out">RAM_WARN_MB=200</span>
+              <span class="out">HEALTHY=0</span>
+              <span class="out">PROBLEMS=0</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">mkdir -p "${HOME}/logs"</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">function log() {</span>
+              <span class="out"> echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$1] $2" | tee -a "$LOG_FILE"</span>
+              <span class="out">}</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">function check_disk() {</span>
+              <span class="out"> local USAGE</span>
+              <span class="out"> USAGE=$(df / | awk 'NR==2 {print $5}' | tr -d '%')</span>
+              <span class="out"> if [ "$USAGE" -ge "$DISK_CRIT" ]; then</span>
+              <span class="out"> log "CRITICAL" "Disk usage: ${USAGE}% — exceeds ${DISK_CRIT}% threshold"</span>
+              <span class="out"> PROBLEMS=$((PROBLEMS+1))</span>
+              <span class="out"> elif [ "$USAGE" -ge "$DISK_WARN" ]; then</span>
+              <span class="out"> log "WARN" "Disk usage: ${USAGE}% — above ${DISK_WARN}% warning"</span>
+              <span class="out"> else</span>
+              <span class="out"> log "OK" "Disk usage: ${USAGE}%"</span>
+              <span class="out"> fi</span>
+              <span class="out">}</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">function check_ram() {</span>
+              <span class="out"> local FREE_MB</span>
+              <span class="out"> FREE_MB=$(free -m | awk 'NR==2 {print $4}')</span>
+              <span class="out"> if [ "$FREE_MB" -lt "$RAM_WARN_MB" ]; then</span>
+              <span class="out"> log "WARN" "Low RAM: ${FREE_MB}MB free — below ${RAM_WARN_MB}MB threshold"</span>
+              <span class="out"> PROBLEMS=$((PROBLEMS+1))</span>
+              <span class="out"> else</span>
+              <span class="out"> log "OK" "RAM: ${FREE_MB}MB free"</span>
+              <span class="out"> fi</span>
+              <span class="out">}</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">function check_service() {</span>
+              <span class="out"> local SVC="$1"</span>
+              <span class="out"> if systemctl is-active --quiet "$SVC"; then</span>
+              <span class="out"> log "OK" "Service ${SVC}: running"</span>
+              <span class="out"> else</span>
+              <span class="out"> log "ERROR" "Service ${SVC}: DOWN — attempting restart"</span>
+              <span class="out"> sudo systemctl start "$SVC" && log "OK" "Restarted ${SVC}" || {</span>
+              <span class="out"> log "CRITICAL" "Cannot restart ${SVC} — manual intervention needed"</span>
+              <span class="out"> PROBLEMS=$((PROBLEMS+1))</span>
+              <span class="out"> }</span>
+              <span class="out"> fi</span>
+              <span class="out">}</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">log "INFO" "=== Health check started ==="</span>
+              <span class="out">check_disk</span>
+              <span class="out">check_ram</span>
+              <span class="out">check_service "nginx"</span>
+              <span class="out">check_service "ssh"</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">if [ "$PROBLEMS" -eq 0 ]; then</span>
+              <span class="out"> log "INFO" "=== All checks passed ==="</span>
+              <span class="out"> exit 0</span>
+              <span class="out">else</span>
+              <span class="out"> log "WARN" "=== $PROBLEMS problem(s) found ==="</span>
+              <span class="out"> exit 1</span>
+              <span class="out">fi</span>
+            </div>
+          </div>
+
+          <div class="expected">
+            <span class="lbl">Expected Log Output (~/logs/health.log after cron runs)</span>
+            [2026-06-05 14:35:02] [INFO] === Health check started ===<br>
+            [2026-06-05 14:35:02] [OK] Disk usage: 18%<br>
+            [2026-06-05 14:35:02] [OK] RAM: 842MB free<br>
+            [2026-06-05 14:35:02] [OK] Service nginx: running<br>
+            [2026-06-05 14:35:02] [OK] Service ssh: running<br>
+            [2026-06-05 14:35:02] [INFO] === All checks passed ===
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="d4-interview">
+        <h3>🎤 Interview Explanation Prompts</h3>
+      </div>
+      <div class="int-block">
+        <div class="int-q"><span class="ql">INT Q →</span>"Walk me through a bash script you've written."</div>
+        <div class="int-a">
+          <span class="voice-tag sv">Senior</span><strong>Model answer:</strong> "I built a health monitoring script
+          that runs every 5 minutes via cron on an EC2 instance. It checks disk usage, available RAM, and verifies that
+          nginx and SSH are running. Each check calls a reusable log function that timestamps and writes to a log file
+          simultaneously using tee. If a service is down, the script attempts a restart and logs the result. The script
+          uses set -euo pipefail so any unexpected failure exits immediately rather than continuing in an unknown state.
+          It exits with code 0 if all checks pass, 1 if any problems were found — which means a monitoring system could
+          call this script and interpret the exit code."
+        </div>
+      </div>
+      <div class="int-block">
+        <div class="int-q"><span class="ql">INT Q →</span>"What does set -euo pipefail do and why use it?"</div>
+        <div class="int-a">
+          <strong>Your answer:</strong> "These are three shell options that make scripts safer. set -e exits the script
+          immediately if any command returns a non-zero exit code — prevents blindly continuing after a failure. set -u
+          causes the script to exit if any undefined variable is referenced — catches typos in variable names. set -o
+          pipefail makes a pipeline fail if any command in the pipe fails, not just the last one. Without pipefail,
+          <code>cat file | process_data</code> could fail silently if 'cat' failed because only the exit code of
+          'process_data' would be checked. Together these three turn bash from a lenient interpreter into something that
+          behaves predictably in production."
+        </div>
+      </div>
+
+      <div class="sub" id="d4-quiz">
+        <h3>🧪 Day 4.1 Quiz — Pass = 4/5</h3>
+      </div>
+      <div class="quiz-wrap">
+        <div class="quiz-title">⚡ Day 4.1 — Bash Scripting Knowledge Check</div>
+
+        <div class="quiz-q"><span class="qn">Q1.</span> What is wrong with this line? <code>NAME = "ubuntu"</code></div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Should use single quotes not double</div>
+          <div class="opt" onclick="qa(this,true)">B) Spaces around = are not allowed in bash variable assignment</div>
+          <div class="opt" onclick="qa(this,false)">C) Variable names cannot contain uppercase</div>
+          <div class="opt" onclick="qa(this,false)">D) Nothing is wrong</div>
+        </div>
+        <div class="explain">Bash interprets NAME as a command, not a variable name. Commands don't use = for assignment
+          — that's a bash-specific rule. This causes "command not found: NAME" which confuses everyone from other
+          languages.</div>
+
+        <div class="quiz-q"><span class="qn">Q2.</span> Your cron job runs fine from the terminal but fails silently in
+          cron. Most likely reason?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Cron only runs root scripts</div>
+          <div class="opt" onclick="qa(this,false)">B) The script has a syntax error</div>
+          <div class="opt" onclick="qa(this,true)">C) Commands like 'aws' or 'docker' use relative paths not available
+            in cron's environment</div>
+          <div class="opt" onclick="qa(this,false)">D) Cron doesn't support bash scripts</div>
+        </div>
+        <div class="explain">Cron has a minimal environment with a stripped-down PATH. /usr/local/bin where tools like
+          aws-cli live may not be included. Fix: use full paths (/usr/local/bin/aws) or add PATH=/usr/bin:/usr/local/bin
+          at top of the crontab file.</div>
+
+        <div class="quiz-q"><span class="qn">Q3.</span> What does <code>2>&amp;1</code> do in this cron line:
+          <code>*/5 * * * * /script.sh >> /log.log 2>&amp;1</code></div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Runs the script twice</div>
+          <div class="opt" onclick="qa(this,false)">B) Sends output to two files</div>
+          <div class="opt" onclick="qa(this,true)">C) Redirects stderr (error output) to the same place as stdout (the
+            log file)</div>
+          <div class="opt" onclick="qa(this,false)">D) Suppresses all output</div>
+        </div>
+        <div class="explain">2 = file descriptor for stderr. 1 = file descriptor for stdout. 2>&amp;1 merges stderr into
+          stdout. Without it, error messages are discarded in cron — you'd never know why a cron job failed. Always use
+          2>&amp;1 in production cron lines.</div>
+
+        <div class="quiz-q"><span class="qn">Q4.</span> Which comparison operator checks if integer A is greater than
+          integer B in bash?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) A > B</div>
+          <div class="opt" onclick="qa(this,false)">A) A == B</div>
+          <div class="opt" onclick="qa(this,true)">C) [ "$A" -gt "$B" ]</div>
+          <div class="opt" onclick="qa(this,false)">D) (( A &gt; B )) is the only valid way</div>
+        </div>
+        <div class="explain">-gt is the bash integer greater-than operator. A &gt; B works too in (( )) arithmetic
+          context, but inside [ ] you need -gt. Using &gt; inside [ ] redirects output, it doesn't compare — a subtle
+          and dangerous mistake.</div>
+
+        <div class="quiz-q"><span class="qn">Q5.</span> What is the most important first step when debugging a failing
+          bash script?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Rewrite it from scratch</div>
+          <div class="opt" onclick="qa(this,false)">B) Add echo "debug" everywhere</div>
+          <div class="opt" onclick="qa(this,true)">C) Run with bash -x to see each command as it executes</div>
+          <div class="opt" onclick="qa(this,false)">D) Google the error immediately</div>
+        </div>
+        <div class="explain">bash -x prints each command with a + prefix before executing it, showing exactly what bash
+          is doing and what values variables hold at each step. This takes 2 seconds and gives you the answer in 90% of
+          cases. Always try this before anything else.</div>
+      </div>
+
+      <div class="sub" id="d4-github">
+        <h3>📂 GitHub Notes Template — Day 4.1</h3>
+      </div>
+      <div class="gh-template">
+        <div class="gh-bar"><span>devops-90days/day-04/README.md</span><span>Commit: "docs: Add Day 04 notes — Bash
+            scripting and cron automation"</span></div>
+        <pre><span class="mh1"># Day 04 — Bash Scripting + Cron Automation</span>
+<span class="mcom">**Date:** YYYY-MM-DD | **Difficulty:** Medium | **Status:** ✅ Complete</span>
+
+---
+
+<span class="mh2">## 🎯 What I Built Today</span>
+- health_check.sh: monitors disk, RAM, and services with timestamped logging
+- Cron job: runs health_check.sh every 5 minutes automatically
+- Learned set -euo pipefail and why scripts explode without it
+
+<span class="mh2">## ⌨️ Key Commands</span>
+
+<span class="mcod">```bash</span>
+<span class="mcom"># Run script with debug trace</span>
+bash -x script.sh
+
+<span class="mcom"># Validate syntax without running</span>
+shellcheck script.sh
+
+<span class="mcom"># Edit cron jobs</span>
+crontab -e   # edit
+crontab -l   # list
+crontab -r   # CAREFUL: removes ALL your cron jobs
+
+<span class="mcom"># Critical cron format</span>
+*/5 * * * * /full/path/script.sh >> /full/path/log.log 2>&amp;1
+
+<span class="mcom"># Verify cron ran</span>
+sudo grep CRON /var/log/syslog | tail -10
+<span class="mcod">```</span>
+
+<span class="mh2">## 🔑 Bash Patterns I Now Use</span>
+
+<span class="mcod">```bash</span>
+<span class="mcom"># Top of every script</span>
+#!/bin/bash
+set -euo pipefail
+
+<span class="mcom"># Logging function</span>
+function log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$1] $2" | tee -a "$LOG_FILE"; }
+
+<span class="mcom"># Safe variable default</span>
+VALUE="${MY_VAR:-default_if_empty}"
+
+<span class="mcom"># Check before acting</span>
+[ -f "$FILE" ] && process_file "$FILE"
+<span class="mcod">```</span>
+
+<span class="mh2">## 🐛 Errors I Hit</span>
+| Error | Root Cause | Fix |
+|-------|-----------|-----|
+| [your error] | | |
+
+<span class="mh2">## 📈 Tomorrow — Day 5</span>
+IAM deep-dive: policies, roles, least-privilege. S3: buckets, versioning, bucket policies vs IAM policies.</pre>
+      </div>
+    </div>
+    <!-- END DAY 4.1 -->
+
+
+    <!-- ══════════════════════════ DAY 5 ══════════════════════════ -->
+    <div id="day5">
+      <div class="day-header">
+        <div class="day-badge d5">D5</div>
+        <div class="day-title-block">
+          <h2>IAM DEPTH + S3</h2>
+          <div class="subtitle">Policies · Roles · Least Privilege · S3 Buckets · Bucket Policies · Static Site</div>
+        </div>
+        <div class="day-diff">
+          <span class="diff-pill hard">Hard</span>
+          <span class="hrs">8 hrs</span>
+        </div>
+      </div>
+
+      <div class="box goal">
+        <h4>🎯 Day 5 Goal</h4>
+        <p>By end of Day 5 you understand IAM at the level interviews test. You can write a custom IAM policy from
+          scratch, attach a role to your EC2, and use S3 for real storage from the terminal — not the console. You will
+          host a static website on S3. This day has the most "AccessDenied" errors — each one is a learning opportunity,
+          not a failure.</p>
+        <p>Expected output: An EC2 with an IAM role that has read-only S3 access. A static website hosted on S3. IAM
+          policy JSON you wrote yourself committed to GitHub.</p>
+      </div>
+
+      <div class="box warn">
+        <h4>⚠ Day 5 Warning</h4>
+        <p>IAM is where most beginners get overconfident. They see AdministratorAccess and think "that's easy, I'll just
+          use that." That thinking gets people fired in production when a misconfigured Lambda deletes your database.
+          Spend time on least-privilege today — it changes how you think about security permanently.</p>
+      </div>
+
+      <div class="sub" id="d5-sched">
+        <h3>📋 8-Hour Schedule</h3>
+      </div>
+      <table class="sched">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Phase</th>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tc">09:00–09:20</td>
+            <td class="pc s5">RECALL</td>
+            <td class="ac"><strong>Day 4.1 cold review</strong><span>Write a 10-line bash script from memory with a
+                function, a loop, and error handling. If you can't, re-read Day 4.1 before starting IAM.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">09:20–10:45</td>
+            <td class="pc s5">THEORY</td>
+            <td class="ac"><strong>IAM deep-dive: Users, Groups, Roles, Policies</strong><span>These are four different
+                things. Most beginners confuse Roles and Users. Today you will understand the difference cold. Read
+                actual AWS IAM JSON policies — not abstractions.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">10:45–11:00</td>
+            <td class="pc s5">BREAK</td>
+            <td class="ac"><strong>Break</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">11:00–12:30</td>
+            <td class="pc s5">HANDS-ON</td>
+            <td class="ac"><strong>Write IAM policies from JSON, attach to EC2 via role</strong><span>No AWS console for
+                this. CLI only. Create a role, write a custom policy, attach it to your EC2. Verify the permissions
+                work. Then deliberately exceed them and read the AccessDenied error — understand what it tells
+                you.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">12:30–13:15</td>
+            <td class="pc s5">BREAK</td>
+            <td class="ac"><strong>Lunch</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">13:15–14:45</td>
+            <td class="pc s5">HANDS-ON</td>
+            <td class="ac"><strong>S3: buckets, versioning, lifecycle, static website</strong><span>Create a bucket,
+                upload files, configure versioning, understand bucket policies vs IAM policies, and host a static
+                website.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">14:45–15:45</td>
+            <td class="pc s5">PROJECT</td>
+            <td class="ac"><strong>Mini Project: EC2 reads from S3 via IAM Role</strong><span>Your EC2 should pull files
+                from S3 using an attached IAM role — no access keys stored on the server. This is the production-safe
+                way to give EC2 access to AWS services.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">15:45–16:00</td>
+            <td class="pc s5">BREAK</td>
+            <td class="ac"><strong>Break</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">16:00–17:00</td>
+            <td class="pc s5">DOCUMENT</td>
+            <td class="ac"><strong>Day 5 notes + quiz + commit IAM policy JSON to repo</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sub" id="d5-concepts">
+        <h3>🧠 Core Concepts — IAM + S3</h3>
+      </div>
+      <div class="concepts">
+        <div class="concept">
+          <div class="ico">👤</div>
+          <h4>IAM User vs Role</h4>
+          <p><strong>User</strong>: a person. Has long-term access keys. Use for humans and CLI tools.
+            <strong>Role</strong>: an identity assumed by a service (EC2, Lambda, etc.). No long-term keys — uses
+            temporary credentials. Never put access keys on an EC2 server; attach a role.</p>
+          <p class="why">Interview: "Why would you use a role instead of access keys on EC2?" This answer will come up
+            in every AWS interview you ever have.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">📋</div>
+          <h4>IAM Policy = JSON Permission Document</h4>
+          <p>A policy is a JSON document that says: Effect (Allow/Deny), Action (what operation), Resource (what AWS
+            resource the ARN). Attach policies to users, groups, or roles. Every AWS operation is controlled by a policy
+            somewhere.</p>
+          <p class="why">Write policies yourself. Don't just use AWS managed policies — you won't understand what you're
+            allowing.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🔒</div>
+          <h4>Least Privilege Principle</h4>
+          <p>Grant only the permissions needed for the specific job — nothing more. An EC2 that only needs to read from
+            one S3 bucket should have a policy that allows exactly <code>s3:GetObject</code> on exactly that bucket ARN.
+            Not <code>s3:*</code> on <code>*</code>.</p>
+          <p class="why">The Head of DevOps tests this. In interviews: "The principle of least privilege means..." then
+            describe a concrete example from your lab work.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🪣</div>
+          <h4>S3 Bucket vs IAM Policy</h4>
+          <p>IAM policy: attached to an identity (user/role). Controls what that identity can do to any resource. Bucket
+            policy: attached to the S3 bucket. Controls who can access that bucket. Both can grant or deny. When both
+            exist, most permissive wins — unless there's an explicit Deny.</p>
+          <p class="why">This confuses everyone. Draw a diagram. Two separate JSON documents. Two separate attachment
+            points.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">📦</div>
+          <h4>S3 Versioning</h4>
+          <p>Versioning keeps every version of every object. Delete doesn't actually delete — it creates a "delete
+            marker". This protects against accidental deletion and is the foundation of S3-based backup strategies.</p>
+          <p class="why">Enable versioning on any bucket that holds important data. Costs slightly more. Worth it every
+            single time.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🌐</div>
+          <h4>S3 Static Website Hosting</h4>
+          <p>S3 can serve HTML/CSS/JS files directly as a website. No server needed. No nginx. Objects are public via a
+            bucket policy, and S3 gives you a URL like <code>bucket.s3-website-region.amazonaws.com</code>. Used for
+            documentation, landing pages, single-page apps.</p>
+          <p class="why">This is real infrastructure skill — S3 static hosting is used in production by hundreds of
+            thousands of companies.</p>
+        </div>
+      </div>
+
+      <div class="sub" id="d5-commands">
+        <h3>⌨️ Exact Command Flow</h3>
+      </div>
+
+      <div class="term">
+        <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span
+            class="lbl">SESSION 1 — IAM Role + Custom Policy for EC2</span><span class="diff-tag hard">Hard</span></div>
+        <div class="term-body">
+          <div class="sect-lbl">Step 1: Create a custom IAM policy (read-only S3 for one bucket)</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">BUCKET_NAME="devops-learning-$(date
+              +%s)"</span> <span class="cmt"> # Unique name using timestamp</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo $BUCKET_NAME</span></div>
+          <span class="out">devops-learning-1748956801</span>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">cat > /tmp/s3-read-policy.json << EOF</span>
+          </div>
+          <span class="out json">{</span>
+          <span class="out json"> "Version": "2012-10-17",</span>
+          <span class="out json"> "Statement": [</span>
+          <span class="out json"> {</span>
+          <span class="out json"> "Sid": "ReadMyBucketOnly",</span>
+          <span class="out json"> "Effect": "Allow",</span>
+          <span class="out json"> "Action": [</span>
+          <span class="out json"> "s3:GetObject",</span>
+          <span class="out json"> "s3:ListBucket"</span>
+          <span class="out json"> ],</span>
+          <span class="out json"> "Resource": [</span>
+          <span class="out json"> "arn:aws:s3:::${BUCKET_NAME}",</span>
+          <span class="out json"> "arn:aws:s3:::${BUCKET_NAME}/*"</span>
+          <span class="out json"> ]</span>
+          <span class="out json"> }</span>
+          <span class="out json"> ]</span>
+          <span class="out json">}</span>
+          <span class="out">EOF</span>
+          <span class="out"> # This policy: Allow reading from ONE specific bucket. Nothing else.</span>
+          <span class="out"> # Compare to: "Action": "s3:*", "Resource": "*" — which allows ALL S3 actions
+            everywhere</span>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws iam create-policy \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --policy-name DevOpsLearningS3ReadPolicy
+              \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --policy-document
+              file:///tmp/s3-read-policy.json</span></div>
+          <span class="out json">{</span>
+          <span class="out json"> "Policy": {</span>
+          <span class="out json"> "PolicyName": "DevOpsLearningS3ReadPolicy",</span>
+          <span class="out json"> "Arn": "arn:aws:iam::123456789:policy/DevOpsLearningS3ReadPolicy",</span>
+          <span class="out json"> ...</span>
+          <span class="out json"> }</span>
+          <span class="out json">}</span>
+          <span class="out"> # Save the Arn — you'll need it shortly</span>
+
+          <div class="sect-lbl">Step 2: Create an IAM Role that EC2 can assume</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">cat > /tmp/ec2-trust-policy.json << EOF</span>
+          </div>
+          <span class="out json">{</span>
+          <span class="out json"> "Version": "2012-10-17",</span>
+          <span class="out json"> "Statement": [{</span>
+          <span class="out json"> "Effect": "Allow",</span>
+          <span class="out json"> "Principal": { "Service": "ec2.amazonaws.com" },</span>
+          <span class="out json"> "Action": "sts:AssumeRole"</span>
+          <span class="out json"> }]</span>
+          <span class="out json">}</span>
+          <span class="out">EOF</span>
+          <span class="out"> # Trust policy: "EC2 instances are allowed to assume this role"</span>
+          <span class="out"> # This is the "who can wear this hat" document</span>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws iam create-role \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --role-name EC2-S3-ReadOnly-Role \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --assume-role-policy-document
+              file:///tmp/ec2-trust-policy.json</span></div>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws iam attach-role-policy \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --role-name EC2-S3-ReadOnly-Role \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --policy-arn
+              arn:aws:iam::YOUR_ACCOUNT_ID:policy/DevOpsLearningS3ReadPolicy</span></div>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws iam create-instance-profile
+              --instance-profile-name EC2-S3-ReadOnly-Profile</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws iam add-role-to-instance-profile \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --instance-profile-name
+              EC2-S3-ReadOnly-Profile \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --role-name EC2-S3-ReadOnly-Role</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 associate-iam-instance-profile
+              \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --instance-id i-YOUR_INSTANCE_ID \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --iam-instance-profile
+              Name=EC2-S3-ReadOnly-Profile</span></div>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span
+            class="lbl">SESSION 2 — S3 Buckets + Static Website</span><span class="diff-tag hard">Hard</span></div>
+        <div class="term-body">
+          <div class="sect-lbl">Create and Configure S3 Bucket</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 mb s3://$BUCKET_NAME --region
+              eu-west-1</span></div>
+          <span class="out ok">make_bucket: devops-learning-1748956801</span>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 ls</span> <span class="cmt"> # List all
+              your buckets</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "Hello from S3" > /tmp/test.txt</span>
+          </div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 cp /tmp/test.txt
+              s3://$BUCKET_NAME/</span></div>
+          <span class="out ok">upload: /tmp/test.txt to s3://devops-learning-1748956801/test.txt</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 ls s3://$BUCKET_NAME/</span></div>
+          <span class="out">2026-06-05 14:30:00 16 test.txt</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 cp s3://$BUCKET_NAME/test.txt
+              /tmp/downloaded.txt</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">cat /tmp/downloaded.txt</span></div>
+          <span class="out ok">Hello from S3</span>
+
+          <div class="sect-lbl">Enable Versioning</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3api put-bucket-versioning \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --bucket $BUCKET_NAME \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --versioning-configuration
+              Status=Enabled</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "Updated content" > /tmp/test.txt</span>
+          </div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 cp /tmp/test.txt
+              s3://$BUCKET_NAME/</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3api list-object-versions --bucket
+              $BUCKET_NAME</span></div>
+          <span class="out json"> # Shows two versions of test.txt — original and updated</span>
+
+          <div class="sect-lbl">Static Website Hosting</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">SITE_BUCKET="devops-static-site-$(date
+              +%s)"</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 mb s3://$SITE_BUCKET --region
+              eu-west-1</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 website s3://$SITE_BUCKET/
+              --index-document index.html</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">cat > /tmp/index.html << EOF</span>
+          </div>
+          <span class="out">&lt;html&gt;&lt;body
+            style="background:#050509;color:#40d4f0;font-family:monospace;padding:40px"&gt;</span>
+          <span class="out">&lt;h1&gt;Week 1, Day 5 — Hosted on S3&lt;/h1&gt;</span>
+          <span class="out">&lt;p&gt;No server. No nginx. Just S3 + a bucket policy.&lt;/p&gt;</span>
+          <span class="out">&lt;/body&gt;&lt;/html&gt;</span>
+          <span class="out">EOF</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 cp /tmp/index.html
+              s3://$SITE_BUCKET/</span></div>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">cat > /tmp/site-policy.json << EOF</span>
+          </div>
+          <span class="out json">{</span>
+          <span class="out json"> "Version": "2012-10-17",</span>
+          <span class="out json"> "Statement": [{</span>
+          <span class="out json"> "Sid": "PublicReadGetObject",</span>
+          <span class="out json"> "Effect": "Allow",</span>
+          <span class="out json"> "Principal": "*",</span>
+          <span class="out json"> "Action": "s3:GetObject",</span>
+          <span class="out json"> "Resource": "arn:aws:s3:::${SITE_BUCKET}/*"</span>
+          <span class="out json"> }]</span>
+          <span class="out json">}</span>
+          <span class="out">EOF</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3api put-public-access-block \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --bucket $SITE_BUCKET \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --public-access-block-configuration
+              BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false</span>
+          </div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3api put-bucket-policy --bucket
+              $SITE_BUCKET --policy file:///tmp/site-policy.json</span></div>
+          <span class="out ok"> # Access in browser: http://SITE_BUCKET.s3-website-eu-west-1.amazonaws.com</span>
+        </div>
+      </div>
+
+      <div class="sub" id="d5-debug">
+        <h3>🐛 Debug Tree — IAM + S3 Failures</h3>
+      </div>
+      <div class="debug-tree">
+        <h4>⚡ AccessDenied — The Most Common Day 5 Error</h4>
+        <div class="ds">
+          <div class="dn">1</div>
+          <div class="dc"><strong>Read the full error message — it tells you exactly what was denied</strong><span>AWS
+              error messages include: the Action that was denied, the Resource ARN it was on, and the identity that was
+              trying. Every piece is diagnostic.</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">2</div>
+          <div class="dc"><strong>Check which identity is making the call</strong><span class="fix">aws sts
+              get-caller-identity</span><span
+              style="display:block;margin-top:4px;font-size:12px;color:var(--text-dim)">Are you calling as the IAM user
+              you think? Or as the EC2 role? This tells you which policy to look at.</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">3</div>
+          <div class="dc"><strong>Check the specific policy attached to that identity</strong><span class="fix">aws iam
+              list-attached-user-policies --user-name YOUR_USER</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">4</div>
+          <div class="dc"><strong>Use IAM Policy Simulator</strong><span>AWS console → IAM → Policy Simulator. Lets you
+              test "would this identity be allowed to do X on resource Y?" without actually doing it.</span></div>
+        </div>
+      </div>
+
+      <div class="if-then">
+        <div class="iff">❌ "The bucket does not allow ACLs" when putting public-access policy</div>
+        <div class="then">→ New S3 buckets have Block Public Access enabled by default</div>
+        <div class="chk">→ Must first disable Block Public Access before applying a public bucket policy</div>
+        <br>
+        <div class="iff">❌ EC2 gets AccessDenied when accessing S3 via role</div>
+        <div class="then">→ Role attached but permission is missing, OR wrong bucket name in policy ARN</div>
+        <div class="chk">→ Check: aws iam list-attached-role-policies --role-name YOUR_ROLE</div>
+        <div class="chk">→ Check: ARN in your policy matches the actual bucket name exactly</div>
+        <br>
+        <div class="iff">❌ S3 website returns 403 Forbidden</div>
+        <div class="then">→ Bucket policy not applied, or public access block still on</div>
+        <div class="chk">→ Check: aws s3api get-bucket-policy --bucket YOUR_BUCKET</div>
+      </div>
+
+      <div class="sub" id="d5-mistakes">
+        <h3>💥 Common Beginner Mistakes — Day 5</h3>
+      </div>
+      <div class="mistakes-wrap">
+        <div class="mistakes-header">⚠ IAM + S3 Mistakes With Real Consequences</div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc"><strong>Using "Resource": "*" in every policy</strong>
+            <p>Wildcard resource on s3:PutObject means your EC2 can write to ANY bucket in your account — including
+              backups and other projects. This is not least privilege.</p><span class="fix">✓ Fix: Always specify the
+              exact bucket ARN: "arn:aws:s3:::EXACT-BUCKET-NAME/*"</span><span class="who hd">Head of DevOps: I declined
+              candidates in interviews for saying "I'd just give it S3 full access, it's easier." No.</span>
+          </div>
+        </div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc"><strong>Storing AWS access keys inside an EC2 instance with ~/.aws/credentials</strong>
+            <p>If your EC2 is ever compromised, those long-term keys are exfiltrated and used immediately. Keys on EC2
+              are a serious security incident waiting to happen.</p><span class="fix">✓ Fix: Attach an IAM Role to EC2.
+              The AWS SDK and CLI automatically use temporary role credentials from the EC2 metadata service — no key
+              file needed.</span><span class="who sv">Senior: I've seen breach post-mortems where this was the root
+              cause. IAM roles on EC2. Always.</span>
+          </div>
+        </div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc"><strong>Not understanding S3 global name uniqueness</strong>
+            <p>S3 bucket names are globally unique across all AWS accounts in all regions. "mybucket" is almost
+              certainly taken. This causes confusing creation errors.</p><span class="fix">✓ Fix: Add a timestamp,
+              account ID, or random suffix: my-devops-bucket-$(date +%s)</span>
+          </div>
+        </div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc"><strong>Confusing a bucket policy with an IAM policy</strong>
+            <p>They are separate JSON documents attached to different things. An IAM policy on a user controls what that
+              user can do. A bucket policy on an S3 bucket controls who can access that bucket. Both must allow the
+              action for cross-account access to work.</p><span class="fix">✓ Fix: Draw it. IAM policy = attached to
+              identity. Bucket policy = attached to resource. Both are evaluated on every S3 request.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="d5-project">
+        <h3>🏗 Mini Project: EC2 Deploys From S3 Using IAM Role</h3>
+      </div>
+      <div class="project">
+        <div class="project-hdr">
+          <div class="meta">
+            <div class="tag d5">📁 Day 5 Mini Project</div>
+            <h3>IAM Role → EC2 Reads Config From S3 — No Keys on Server</h3>
+          </div>
+          <div class="time">⏱ ~70 min</div>
+        </div>
+        <div class="project-body">
+          <div class="project-goal"><strong>Goal:</strong> Create an S3 bucket that holds a configuration file. Give
+            your EC2 an IAM role that allows reading only that bucket. SSH into EC2 and pull the config file using aws
+            s3 cp — no access keys on the server. Verify that trying to write to S3 is denied. This is the production
+            pattern used by virtually every cloud-native application.</div>
+          <ul class="checklist">
+            <li>Create an S3 bucket: <code>devops-config-YOURNAME</code></li>
+            <li>Upload a file: <code>app.conf</code> containing some key=value config</li>
+            <li>Create IAM policy: allow s3:GetObject and s3:ListBucket on that bucket only</li>
+            <li>Create IAM Role with EC2 trust relationship, attach the policy</li>
+            <li>Attach the role to your running EC2 instance</li>
+            <li>SSH into EC2 — run <code>aws s3 cp s3://devops-config-YOURNAME/app.conf /tmp/</code> — it must work
+              WITHOUT any credentials configured</li>
+            <li>Try to upload a file: <code>aws s3 cp /tmp/test.txt s3://devops-config-YOURNAME/</code> — it must fail
+              with AccessDenied (your policy doesn't allow writes)</li>
+            <li>Commit the policy JSON file to GitHub under <code>/iam-policies/ec2-s3-readonly.json</code></li>
+          </ul>
+          <div class="expected">
+            <span class="lbl">Expected: Reading succeeds, Writing is denied</span>
+            # From EC2 (no keys configured):<br>
+            $ aws s3 cp s3://devops-config-YOURNAME/app.conf /tmp/<br>
+            <span style="color:var(--ok)">download: s3://devops-config.../app.conf to /tmp/app.conf ←
+              success</span><br><br>
+            $ aws s3 cp /tmp/test.txt s3://devops-config-YOURNAME/<br>
+            <span style="color:var(--danger)">An error occurred (AccessDenied)... ← correct! Your policy works.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="d5-interview">
+        <h3>🎤 Interview Prompts</h3>
+      </div>
+      <div class="int-block">
+        <div class="int-q"><span class="ql">INT Q →</span>"What is the difference between an IAM User, a Group, and a
+          Role?"</div>
+        <div class="int-a">
+          <span class="voice-tag hd">Head of DevOps</span><strong>Answer they want to hear:</strong> "A User is an
+          identity for a specific person or application that needs long-term credentials — access key ID and secret. A
+          Group is a collection of users — you attach policies to the group and all users in it inherit those
+          permissions, which makes permission management scalable. A Role is fundamentally different: it has no password
+          or access key. Instead, it can be assumed by a trusted entity — like an EC2 instance, a Lambda function, or a
+          user from another account. When EC2 assumes a role, it gets temporary credentials that rotate automatically
+          every few hours. This is why you should never put static access keys on an EC2 — roles are more secure because
+          the credentials are short-lived and automatically managed by AWS."
+        </div>
+      </div>
+      <div class="int-block">
+        <div class="int-q"><span class="ql">INT Q →</span>"Explain the principle of least privilege. Give me a real
+          example from work you've done."</div>
+        <div class="int-a"><strong>Your answer:</strong> "Least privilege means granting only the exact permissions
+          required to do a specific job and nothing more. In practice this week: I created an EC2 instance that needs to
+          read configuration files from one S3 bucket. I wrote an IAM policy that allows only s3:GetObject and
+          s3:ListBucket on exactly that bucket's ARN. It cannot write, delete, or access any other bucket. I verified
+          this by attempting to upload a file from the EC2 — it was correctly denied with AccessDenied. The reason this
+          matters: if that EC2 were ever compromised, the attacker can only read that config bucket. They can't write
+          malicious files to S3, can't spin up EC2 instances, can't touch IAM. The blast radius is minimised."</div>
+      </div>
+
+      <div class="sub" id="d5-quiz">
+        <h3>🧪 Day 5 Quiz — Pass = 4/5</h3>
+      </div>
+      <div class="quiz-wrap">
+        <div class="quiz-title">⚡ Day 5 — IAM + S3 Knowledge Check</div>
+        <div class="quiz-q"><span class="qn">Q1.</span> Why should you never store AWS access keys in ~/.aws/credentials
+          on an EC2 instance?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) EC2 can't read that directory</div>
+          <div class="opt" onclick="qa(this,true)">B) If the instance is compromised, those long-term keys are stolen
+            and can be used indefinitely</div>
+          <div class="opt" onclick="qa(this,false)">C) Access keys don't work on Ubuntu</div>
+          <div class="opt" onclick="qa(this,false)">D) It only matters for production instances</div>
+        </div>
+        <div class="explain">IAM roles give EC2 temporary credentials that auto-rotate via the metadata service. Static
+          keys in a file are permanent until manually rotated. A compromised instance with static keys is a far worse
+          security event than one using a role with temporary credentials.</div>
+
+        <div class="quiz-q"><span class="qn">Q2.</span> What is the "Principal" field in an IAM trust policy?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) The action being allowed</div>
+          <div class="opt" onclick="qa(this,true)">B) Who (which entity) is allowed to assume the role</div>
+          <div class="opt" onclick="qa(this,false)">C) The resource the policy applies to</div>
+          <div class="opt" onclick="qa(this,false)">D) The owner of the policy</div>
+        </div>
+        <div class="explain">A trust policy on a role defines who can assume it. Principal: "Service":
+          "ec2.amazonaws.com" means EC2 instances can assume this role. Principal: "AWS": "arn:aws:iam::123:user/bob"
+          means only that specific IAM user can assume it. Without a correct Principal, nobody can use the role.</div>
+
+        <div class="quiz-q"><span class="qn">Q3.</span> Your S3 bucket website returns 403. You have a bucket policy
+          allowing s3:GetObject. What is missing?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) The bucket name is wrong</div>
+          <div class="opt" onclick="qa(this,true)">B) Block Public Access is still enabled on the bucket, overriding the
+            policy</div>
+          <div class="opt" onclick="qa(this,false)">C) You need to enable HTTPS</div>
+          <div class="opt" onclick="qa(this,false)">D) S3 websites require Route53</div>
+        </div>
+        <div class="explain">AWS S3 has a setting called Block Public Access that overrides bucket policies. New buckets
+          have it on by default. You must explicitly disable it before a public bucket policy takes effect. This trips
+          everyone on their first static site deployment.</div>
+
+        <div class="quiz-q"><span class="qn">Q4.</span> What does S3 versioning do when you delete an object?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Permanently deletes all versions immediately</div>
+          <div class="opt" onclick="qa(this,true)">B) Creates a delete marker — object appears deleted but all versions
+            are still recoverable</div>
+          <div class="opt" onclick="qa(this,false)">C) Moves it to a trash folder</div>
+          <div class="opt" onclick="qa(this,false)">D) Disables versioning on that object</div>
+        </div>
+        <div class="explain">A delete marker is a zero-byte placeholder. The object appears deleted to normal operations
+          but all previous versions remain. You recover by deleting the delete marker. To truly permanently delete with
+          versioning on, you must delete each version ID explicitly.</div>
+
+        <div class="quiz-q"><span class="qn">Q5.</span> You need your Lambda to read from DynamoDB. What is the correct
+          approach?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Hardcode access keys in the Lambda environment variables</div>
+          <div class="opt" onclick="qa(this,false)">B) Use your personal IAM user's keys</div>
+          <div class="opt" onclick="qa(this,true)">C) Create an IAM Role with a DynamoDB read policy, attach it as the
+            Lambda execution role</div>
+          <div class="opt" onclick="qa(this,false)">D) Give Lambda full admin access so it definitely has permission
+          </div>
+        </div>
+        <div class="explain">Lambda execution roles are the same pattern as EC2 instance profiles — temporary
+          credentials, no stored keys, specific permissions. This is the AWS-recommended approach for all
+          service-to-service interactions. Hardcoded keys in Lambda are a security and operational failure.</div>
+      </div>
+
+      <div class="sub" id="d5-github">
+        <h3>📂 GitHub Notes Template — Day 5</h3>
+      </div>
+      <div class="gh-template">
+        <div class="gh-bar"><span>devops-90days/day-05/README.md</span><span>Commit: "docs: Add Day 05 — IAM roles,
+            least privilege, S3 versioning and static hosting"</span></div>
+        <pre><span class="mh1"># Day 05 — IAM Deep-Dive + S3</span>
+<span class="mcom">**Date:** YYYY-MM-DD | **Difficulty:** Hard | **Status:** ✅ Complete</span>
+
+---
+
+<span class="mh2">## 🎯 What I Built Today</span>
+- Custom IAM policy (least privilege, not AdministratorAccess)
+- IAM Role with EC2 trust relationship
+- EC2 reading S3 config via role — no credentials file on server
+- S3 bucket with versioning enabled
+- Static website hosted on S3 with bucket policy
+
+<span class="mh2">## 🔑 IAM Policy Anatomy</span>
+
+<span class="mcod">```json</span>
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Sid": "HumanReadableID",          // optional label
+    "Effect": "Allow",                  // Allow or Deny
+    "Action": ["s3:GetObject"],         // what operation
+    "Resource": "arn:aws:s3:::BUCKET/*" // on which resource (specific ARN, not *)
+  }]
+}
+<span class="mcod">```</span>
+
+<span class="mh2">## ⌨️ Key Commands</span>
+
+<span class="mcod">```bash</span>
+aws iam create-policy --policy-name NAME --policy-document file://policy.json
+aws iam create-role --role-name NAME --assume-role-policy-document file://trust.json
+aws iam attach-role-policy --role-name NAME --policy-arn ARN
+aws iam create-instance-profile --instance-profile-name NAME
+aws iam add-role-to-instance-profile --instance-profile-name NAME --role-name NAME
+aws ec2 associate-iam-instance-profile --instance-id ID --iam-instance-profile Name=NAME
+
+aws s3 mb s3://bucket-name --region eu-west-1
+aws s3 cp file.txt s3://bucket-name/
+aws s3api put-bucket-versioning --bucket NAME --versioning-configuration Status=Enabled
+aws s3 website s3://bucket/ --index-document index.html
+aws sts get-caller-identity   # always verify who you're authenticated as
+<span class="mcod">```</span>
+
+<span class="mh2">## 💡 Key Mental Models</span>
+- IAM User = person. Has permanent keys. For humans/CLI.
+- IAM Role = identity for a service. Temporary keys. For EC2/Lambda/etc.
+- IAM Policy = JSON document granting/denying actions on resources.
+- Trust policy = "who can wear this role's hat"
+- Least privilege = only the exact actions on the exact resources needed. Nothing else.
+- Bucket policy ≠ IAM policy. Same JSON structure, different attachment point.
+
+<span class="mh2">## 📈 Tomorrow — Day 6</span>
+VPC: subnets, route tables, internet gateways, NAT gateways. Building a proper 2-tier VPC from scratch via CLI.</pre>
+      </div>
+    </div>
+    <!-- END DAY 5 -->
+
+
+    <!-- ══════════════════════════ DAY 6 ══════════════════════════ -->
+    <div id="day6">
+      <div class="day-header">
+        <div class="day-badge d6">D6</div>
+        <div class="day-title-block">
+          <h2>VPC NETWORKING</h2>
+          <div class="subtitle">Subnets · Route Tables · Internet Gateway · NAT · Security Groups · NACLs</div>
+        </div>
+        <div class="day-diff">
+          <span class="diff-pill hard">Hard</span>
+          <span class="hrs">8 hrs</span>
+        </div>
+      </div>
+
+      <div class="box goal">
+        <h4>🎯 Day 6 Goal</h4>
+        <p>By end of Day 6 you can build a VPC with a public subnet and a private subnet from scratch using the CLI. You
+          understand why traffic flows the way it does, and you can explain it in an interview. A second EC2 in the
+          private subnet is NOT reachable from the internet — and you know exactly why and how to change that if needed.
+        </p>
+        <p>Expected output: A custom VPC, two subnets, internet gateway, route tables all wired together — built
+          entirely with CLI commands. This is the interview question that separates candidates.</p>
+      </div>
+
+      <div class="box fire">
+        <h4>🔴 Head of DevOps — This Is The Screening Question</h4>
+        <p>"Build a VPC with a public and private subnet" — I ask this in every phone screen for junior DevOps roles.
+          Not because I expect perfection. Because how you answer tells me if you understand <em>why</em> networking
+          works, not just what buttons to click. Go slow today. Draw every component on paper before building it.</p>
+      </div>
+
+      <div class="sub" id="d6-sched">
+        <h3>📋 8-Hour Schedule</h3>
+      </div>
+      <table class="sched">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Phase</th>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tc">09:00–09:20</td>
+            <td class="pc s6">RECALL</td>
+            <td class="ac"><strong>IAM cold review</strong><span>From memory: what's the difference between a role and a
+                user? What's in a trust policy? If you need notes, re-read Day 5 concepts before networking.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">09:20–10:45</td>
+            <td class="pc s6">THEORY</td>
+            <td class="ac"><strong>VPC mental model — draw before you build</strong><span>VPC, CIDR, subnets (public vs
+                private), route tables, internet gateway, NAT gateway. Before touching the CLI, draw this on paper: a
+                box (VPC), two inner boxes (subnets), an internet cloud connected only to the public subnet via IGW.
+                This is the picture you describe in interviews.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">10:45–11:00</td>
+            <td class="pc s6">BREAK</td>
+            <td class="ac"><strong>Break</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">11:00–12:30</td>
+            <td class="pc s6">HANDS-ON</td>
+            <td class="ac"><strong>Build the VPC: CLI steps 1–6</strong><span>Create VPC, subnets, IGW, route tables.
+                Each command creates one piece. After each step, describe what you just built aloud. "I just created a
+                route table for the public subnet that sends 0.0.0.0/0 to the internet gateway."</span></td>
+          </tr>
+          <tr>
+            <td class="tc">12:30–13:15</td>
+            <td class="pc s6">BREAK</td>
+            <td class="ac"><strong>Lunch</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">13:15–14:30</td>
+            <td class="pc s6">HANDS-ON</td>
+            <td class="ac"><strong>Launch EC2 in each subnet + verify connectivity</strong><span>Launch EC2 in public
+                subnet — verify reachable from internet. Launch EC2 in private subnet — verify NOT reachable. This is
+                the practical test that confirms you built it correctly.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">14:30–15:30</td>
+            <td class="pc s6">HANDS-ON</td>
+            <td class="ac"><strong>Security Groups vs NACLs — difference and demo</strong><span>These are two different
+                firewall layers. Most beginners know only Security Groups. Understanding NACLs as the second layer puts
+                you ahead of 70% of junior candidates.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">15:30–15:45</td>
+            <td class="pc s6">BREAK</td>
+            <td class="ac"><strong>Break</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">15:45–16:45</td>
+            <td class="pc s6">PROJECT</td>
+            <td class="ac"><strong>Mini Project: Fully networked 2-tier VPC</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">16:45–17:00</td>
+            <td class="pc s6">COMMIT</td>
+            <td class="ac"><strong>Day 6 notes, architecture diagram description, commit</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sub" id="d6-concepts">
+        <h3>🧠 Core Concepts — VPC Architecture</h3>
+      </div>
+      <div class="concepts">
+        <div class="concept">
+          <div class="ico">🏘</div>
+          <h4>VPC + CIDR Block</h4>
+          <p>A VPC is your private, isolated network inside AWS. The CIDR block (e.g. 10.0.0.0/16) defines its IP
+            address range. /16 gives you 65,536 IP addresses to distribute among subnets.</p>
+          <p class="why">Use 10.0.0.0/16 for your VPC. Don't use 192.168.0.0/16 — it conflicts with most home routers if
+            you ever need VPN connectivity.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🔵</div>
+          <h4>Public vs Private Subnet</h4>
+          <p>Public subnet: has a route to the Internet Gateway. Resources can have public IPs and talk to the internet
+            directly. Private subnet: no route to internet. Resources can't be reached from outside — only from within
+            the VPC.</p>
+          <p class="why">Web servers go in public. Databases and backend services go in private. This is the fundamental
+            security architecture of every production cloud app.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🌐</div>
+          <h4>Internet Gateway (IGW)</h4>
+          <p>The door between your VPC and the public internet. Without it, nothing inside the VPC can reach or be
+            reached from the internet. One IGW per VPC. Attached to the VPC, not to a subnet.</p>
+          <p class="why">Making a subnet "public" means: create a route table that sends 0.0.0.0/0 to the IGW, then
+            associate that route table with the subnet. That's it.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🔄</div>
+          <h4>Route Table</h4>
+          <p>A routing rule table. Each subnet has exactly one route table. Routes say "traffic to X goes to Y." The
+            local route (10.0.0.0/16 → local) is always there. You add 0.0.0.0/0 → igw-xxx to make a subnet public.</p>
+          <p class="why">The most common VPC mistake is building an IGW but forgetting to add the route. Build the IGW.
+            Then add the route. Two separate steps.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🔀</div>
+          <h4>NAT Gateway</h4>
+          <p>Lets private subnet resources access the internet (for updates, API calls) without exposing them with a
+            public IP. Traffic goes: Private EC2 → NAT Gateway (in public subnet) → IGW → internet. Return traffic
+            reverses.</p>
+          <p class="why">NAT Gateway costs money (~$32/month). For learning, skip it. For production, it's mandatory for
+            any private subnet that needs outbound internet. We skip it in today's build but understand it conceptually.
+          </p>
+        </div>
+        <div class="concept">
+          <div class="ico">🧱</div>
+          <h4>Security Group vs NACL</h4>
+          <p><strong>Security Group:</strong> stateful, attached to EC2. If inbound is allowed, response is
+            automatically allowed. <strong>NACL:</strong> stateless, attached to subnet. You must explicitly allow both
+            inbound AND outbound for each flow. NACLs are evaluated first, SGs second.</p>
+          <p class="why">Security groups are your primary tool. NACLs are the subnet-level guardrail. Most teams manage
+            SGs; some add NACLs for extra security layers.</p>
+        </div>
+      </div>
+
+      <div class="sub" id="d6-commands">
+        <h3>⌨️ Exact Command Flow — Build a 2-Tier VPC Step by Step</h3>
+      </div>
+      <div class="term">
+        <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span
+            class="lbl">VPC Build — Steps 1 to 8 (CLI only, no console)</span><span class="diff-tag hard">Hard</span>
+        </div>
+        <div class="term-body">
+          <div class="sect-lbl">Step 1: Create the VPC</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">VPC_ID=$(aws ec2 create-vpc \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --cidr-block 10.0.0.0/16 \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --tag-specifications
+              'ResourceType=vpc,Tags=[{Key=Name,Value=devops-learning-vpc}]' \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --query 'Vpc.VpcId' --output text)</span>
+          </div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "VPC ID: $VPC_ID"</span></div>
+          <span class="out ok">VPC ID: vpc-0a1234567890abcde</span>
+          <span class="out"> # We captured the ID into a variable — reuse it in every step below</span>
+
+          <div class="sect-lbl">Step 2: Create Public and Private Subnets</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">PUBLIC_SUBNET=$(aws ec2 create-subnet \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --vpc-id $VPC_ID \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --cidr-block 10.0.1.0/24 \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --availability-zone eu-west-1a \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --tag-specifications
+              'ResourceType=subnet,Tags=[{Key=Name,Value=public-subnet}]' \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --query 'Subnet.SubnetId' --output
+              text)</span></div>
+          <span class="out"> # 10.0.1.0/24 = 256 IPs in this subnet (AWS reserves 5, so 251 usable)</span>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">PRIVATE_SUBNET=$(aws ec2 create-subnet
+              \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --vpc-id $VPC_ID \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --cidr-block 10.0.2.0/24 \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --availability-zone eu-west-1a \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --tag-specifications
+              'ResourceType=subnet,Tags=[{Key=Name,Value=private-subnet}]' \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --query 'Subnet.SubnetId' --output
+              text)</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">echo "Public: $PUBLIC_SUBNET | Private:
+              $PRIVATE_SUBNET"</span></div>
+
+          <div class="sect-lbl">Step 3: Create and Attach Internet Gateway</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">IGW_ID=$(aws ec2 create-internet-gateway
+              \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --tag-specifications
+              'ResourceType=internet-gateway,Tags=[{Key=Name,Value=devops-igw}]' \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --query 'InternetGateway.InternetGatewayId'
+              --output text)</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 attach-internet-gateway --vpc-id
+              $VPC_ID --internet-gateway-id $IGW_ID</span></div>
+          <span class="out"> # CRITICAL: Creating the IGW alone does nothing. Must attach it to the VPC.</span>
+          <span class="out"> # Then ALSO create a route pointing to it. IGW without a route = useless.</span>
+
+          <div class="sect-lbl">Step 4: Create Route Table for Public Subnet</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">PUBLIC_RT=$(aws ec2 create-route-table
+              \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --vpc-id $VPC_ID \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --tag-specifications
+              'ResourceType=route-table,Tags=[{Key=Name,Value=public-rt}]' \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --query 'RouteTable.RouteTableId' --output
+              text)</span></div>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 create-route \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --route-table-id $PUBLIC_RT \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --destination-cidr-block 0.0.0.0/0 \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --gateway-id $IGW_ID</span></div>
+          <span class="out"> # 0.0.0.0/0 = "all traffic not matching a specific route" → send to IGW</span>
+          <span class="out"> # This is THE line that makes a subnet public. Without it, it's private.</span>
+
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 associate-route-table --subnet-id
+              $PUBLIC_SUBNET --route-table-id $PUBLIC_RT</span></div>
+          <span class="out"> # Link the public route table to the public subnet</span>
+
+          <div class="sect-lbl">Step 5: Enable Auto-assign Public IP in Public Subnet</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 modify-subnet-attribute \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --subnet-id $PUBLIC_SUBNET \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --map-public-ip-on-launch</span></div>
+          <span class="out"> # EC2 instances launched here automatically get a public IP</span>
+
+          <div class="sect-lbl">Step 6: Create Security Group for Public EC2</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">PUBLIC_SG=$(aws ec2 create-security-group
+              \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --group-name public-sg \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --description "Public subnet SG" \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --vpc-id $VPC_ID \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --query 'GroupId' --output text)</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 authorize-security-group-ingress
+              --group-id $PUBLIC_SG --protocol tcp --port 22 --cidr 0.0.0.0/0</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 authorize-security-group-ingress
+              --group-id $PUBLIC_SG --protocol tcp --port 80 --cidr 0.0.0.0/0</span></div>
+
+          <div class="sect-lbl">Step 7: Launch EC2 in Public Subnet</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 run-instances \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --image-id ami-YOUR_UBUNTU_AMI \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --instance-type t2.micro \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --key-name YOUR_KEY_NAME \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --subnet-id $PUBLIC_SUBNET \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --security-group-ids $PUBLIC_SG \</span>
+          </div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --tag-specifications
+              'ResourceType=instance,Tags=[{Key=Name,Value=public-ec2}]'</span></div>
+
+          <div class="sect-lbl">Step 8: Verify — What Can and Cannot Reach the Internet</div>
+          <span class="out"> # Public EC2: can SSH in from laptop ✓, can ping 8.8.8.8 from inside ✓</span>
+          <span class="out"> # Private subnet EC2 (if launched): cannot be SSHed from laptop ✓</span>
+          <span class="out"> # Private subnet EC2: cannot reach internet (no NAT) ✓</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 describe-instances \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --filters "Name=tag:Name,Values=public-ec2"
+              \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --query
+              'Reservations[0].Instances[0].[PublicIpAddress,SubnetId,VpcId]' \</span></div>
+          <div class="cmd-line"><span class="pr"> </span><span class="cm"> --output text</span></div>
+          <span class="out ok">3.250.xxx.xxx subnet-0pub... vpc-0abc...</span>
+        </div>
+      </div>
+
+      <div class="sub" id="d6-debug">
+        <h3>🐛 Debug Tree — VPC/Connectivity Failures</h3>
+      </div>
+      <div class="debug-tree">
+        <h4>⚡ EC2 in VPC Not Reachable — Full Diagnostic</h4>
+        <div class="ds">
+          <div class="dn">1</div>
+          <div class="dc"><strong>Is the instance in the right subnet?</strong><span class="fix">aws ec2
+              describe-instances --instance-ids i-xxx --query 'Reservations[0].Instances[0].SubnetId'</span><span
+              style="display:block;margin-top:4px;font-size:12px;color:var(--text-dim)">Confirm it's in the public
+              subnet, not the private one.</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">2</div>
+          <div class="dc"><strong>Does the instance have a public IP?</strong><span>Launched in public subnet without
+              auto-assign public IP, or forgot --associate-public-ip-address.</span><span class="fix">aws ec2
+              describe-instances --query 'Reservations[0].Instances[0].PublicIpAddress'</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">3</div>
+          <div class="dc"><strong>Does the subnet's route table have a route to the IGW?</strong><span>The most common
+              VPC mistake. IGW attached but route missing.</span><span class="fix">aws ec2 describe-route-tables
+              --filters "Name=association.subnet-id,Values=$SUBNET_ID"</span><span
+              style="display:block;margin-top:4px;font-size:12px;color:var(--text-dim)">Look for a route: 0.0.0.0/0 →
+              igw-xxx. If it's not there, traffic has nowhere to go.</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">4</div>
+          <div class="dc"><strong>Does the security group allow inbound on the port you're trying?</strong><span>Port 22
+              for SSH, port 80 for HTTP.</span><span class="fix">aws ec2 describe-security-groups --group-ids
+              $SG_ID</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">5</div>
+          <div class="dc"><strong>Is the IGW attached to the VPC?</strong><span class="fix">aws ec2
+              describe-internet-gateways --filters "Name=attachment.vpc-id,Values=$VPC_ID"</span><span
+              style="display:block;margin-top:4px;font-size:12px;color:var(--text-dim)">State should be "attached". If
+              it's "detached", you created but forgot to attach.</span></div>
+        </div>
+      </div>
+
+      <div class="sub" id="d6-mistakes">
+        <h3>💥 Common Beginner Mistakes — Day 6</h3>
+      </div>
+      <div class="mistakes-wrap">
+        <div class="mistakes-header">⚠ VPC Mistakes That Create Hours of Confusion</div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc"><strong>Forgetting to add the 0.0.0.0/0 route to the IGW</strong>
+            <p>Creating an IGW and attaching it to a VPC does NOT automatically make any subnet public. You must create
+              a route table with a 0.0.0.0/0 → igw-xxx route AND associate it with the subnet. Two separate steps. Most
+              people forget step 2.</p><span class="fix">✓ Fix: After creating the route, always verify: aws ec2
+              describe-route-tables --route-table-id RT_ID | grep 0.0.0.0</span><span class="who sv">Senior: This causes
+              60% of "my EC2 isn't reachable" tickets in Week 1.</span>
+          </div>
+        </div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc"><strong>Launching EC2 in default VPC instead of custom VPC</strong>
+            <p>If you omit --subnet-id, AWS puts it in the default VPC. Your custom VPC work was pointless — you're not
+              even using it.</p><span class="fix">✓ Fix: Always specify --subnet-id explicitly. Verify instance VPC
+              after launch with describe-instances.</span>
+          </div>
+        </div>
+        <div class="mk">
+          <div class="mx">✗</div>
+          <div class="mc"><strong>Confusing Security Groups (stateful) with NACLs (stateless)</strong>
+            <p>On NACLs, allowing inbound port 80 does NOT automatically allow the response. You must also add an
+              outbound rule for ephemeral ports (1024-65535) that the response uses. Forgetting this breaks outbound
+              traffic silently.</p><span class="fix">✓ Fix: For learning, stick to Security Groups. Only add NACLs when
+              you specifically need subnet-level controls. Remember: NACLs are stateless — both inbound AND outbound
+              rules are required.</span><span class="who hd">Head of DevOps: This distinction is on almost every AWS
+              associate exam. Know it cold.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="d6-project">
+        <h3>🏗 Mini Project: 2-Tier VPC Architecture</h3>
+      </div>
+      <div class="project">
+        <div class="project-hdr">
+          <div class="meta">
+            <div class="tag d6">📁 Day 6 Mini Project</div>
+            <h3>Build a 2-Tier VPC — Public Web Tier, Private Data Tier</h3>
+          </div>
+          <div class="time">⏱ ~80 min</div>
+        </div>
+        <div class="project-body">
+          <div class="project-goal"><strong>Goal:</strong> Build a complete 2-tier VPC from scratch using only CLI.
+            Public subnet has an EC2 running nginx (accessible from internet). Private subnet has an EC2 that can only
+            be accessed from the public subnet via SSH jump (not directly from internet). Write an architecture
+            description in your README using text — this trains you to describe infrastructure verbally, which is what
+            interviews require.</div>
+          <ul class="checklist">
+            <li>VPC: 10.0.0.0/16, tagged "devops-week1-vpc"</li>
+            <li>Public subnet: 10.0.1.0/24, has auto-assign public IP enabled</li>
+            <li>Private subnet: 10.0.2.0/24, no public IP assignment</li>
+            <li>IGW created, attached to VPC</li>
+            <li>Public route table: 0.0.0.0/0 → IGW, associated with public subnet</li>
+            <li>Private route table: local route only (no internet), associated with private subnet</li>
+            <li>Public SG: allows port 22 and 80 from 0.0.0.0/0</li>
+            <li>Private SG: allows port 22 ONLY from the public subnet CIDR (10.0.1.0/24)</li>
+            <li>EC2 in public subnet: install nginx, verify accessible from browser</li>
+            <li>EC2 in private subnet: verify you CANNOT SSH directly from your laptop</li>
+            <li>From public EC2, SSH into private EC2 (jump host pattern) — this should work</li>
+            <li>Write architecture diagram as ASCII art in your GitHub README</li>
+          </ul>
+          <div class="expected">
+            <span class="lbl">Expected: What should work vs what should fail</span>
+            laptop → Public EC2 port 22: ✓ SUCCESS<br>
+            laptop → Public EC2 port 80: ✓ SUCCESS (nginx)<br>
+            laptop → Private EC2 port 22: ✗ CONNECTION TIMEOUT (no route to internet)<br>
+            Public EC2 → Private EC2 port 22: ✓ SUCCESS (same VPC, SG allows from 10.0.1.0/24)<br>
+            Private EC2 → internet (ping 8.8.8.8): ✗ TIMEOUT (no NAT gateway)
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="d6-interview">
+        <h3>🎤 Interview Prompts</h3>
+      </div>
+      <div class="int-block">
+        <div class="int-q"><span class="ql">INT Q →</span>"What is a VPC and why would you build a custom one instead of
+          using the default?"</div>
+        <div class="int-a"><span class="voice-tag hd">Head of DevOps</span><strong>Model answer:</strong> "A VPC —
+          Virtual Private Cloud — is an isolated network section within AWS where you control the IP address range,
+          subnets, routing, and security. The default VPC is convenient for learning but it's configured for simplicity,
+          not security — all subnets can talk to each other and to the internet by default, there's no subnet
+          segregation. A custom VPC lets you implement proper architecture: public subnets for internet-facing resources
+          like load balancers and web servers, private subnets for databases and application servers that should never
+          be directly internet-accessible. You control every routing decision and security layer. In production, you
+          always use a custom VPC — the default VPC is never used beyond testing."</div>
+      </div>
+      <div class="int-block">
+        <div class="int-q"><span class="ql">INT Q →</span>"What makes a subnet public in AWS?"</div>
+        <div class="int-a"><strong>Your answer — be precise:</strong> "Three things must all be true for a subnet to be
+          effectively public. One: the VPC must have an Internet Gateway attached. Two: the subnet's route table must
+          have a route entry for 0.0.0.0/0 pointing to that Internet Gateway — this is the line that makes internet
+          traffic possible. Three: the resource inside the subnet must have a public IP address and the security group
+          must allow the relevant inbound traffic. If any of these three are missing, the subnet effectively behaves as
+          private. I verified this in my lab by building a subnet with an IGW but deliberately leaving out the route —
+          SSH connections timed out immediately, confirming the route is the critical piece."</div>
+      </div>
+
+      <div class="sub" id="d6-quiz">
+        <h3>🧪 Day 6 Quiz — Pass = 4/5</h3>
+      </div>
+      <div class="quiz-wrap">
+        <div class="quiz-title">⚡ Day 6 — VPC Networking Knowledge Check</div>
+        <div class="quiz-q"><span class="qn">Q1.</span> You created an Internet Gateway and attached it to your VPC, but
+          EC2 in the public subnet is still unreachable. What is the most likely missing step?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) The EC2 doesn't have enough RAM</div>
+          <div class="opt" onclick="qa(this,true)">B) The subnet's route table doesn't have a route for 0.0.0.0/0
+            pointing to the IGW</div>
+          <div class="opt" onclick="qa(this,false)">C) The VPC needs a second IGW for redundancy</div>
+          <div class="opt" onclick="qa(this,false)">D) IGW requires a NAT Gateway to function</div>
+        </div>
+        <div class="explain">Creating and attaching an IGW doesn't automatically route anything to it. You must
+          explicitly create a route: destination 0.0.0.0/0, target igw-xxx, in the route table associated with the
+          subnet. This is the most common VPC mistake made by beginners.</div>
+
+        <div class="quiz-q"><span class="qn">Q2.</span> What CIDR block would give you 256 IP addresses in a subnet?
+        </div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) /16</div>
+          <div class="opt" onclick="qa(this,false)">A) /20</div>
+          <div class="opt" onclick="qa(this,true)">C) /24</div>
+          <div class="opt" onclick="qa(this,false)">D) /32</div>
+        </div>
+        <div class="explain">/24 = 256 IPs (2^8). AWS reserves 5 in each subnet, so 251 usable. /16 = 65,536. /20 =
+          4,096. /32 = single IP. You need to know /16 for VPCs and /24 for subnets for any AWS interview.</div>
+
+        <div class="quiz-q"><span class="qn">Q3.</span> What is the key difference between a Security Group and a NACL?
+        </div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Security Groups are for VPCs, NACLs are for EC2</div>
+          <div class="opt" onclick="qa(this,true)">B) Security Groups are stateful (return traffic automatic); NACLs are
+            stateless (return traffic must be explicitly allowed)</div>
+          <div class="opt" onclick="qa(this,false)">C) NACLs are cheaper than Security Groups</div>
+          <div class="opt" onclick="qa(this,false)">D) Security Groups apply to subnets, NACLs apply to instances</div>
+        </div>
+        <div class="explain">It's the opposite: Security Groups apply to instances (or ENIs), NACLs apply to subnets.
+          Stateful vs stateless is the critical distinction — on NACLs, you must allow both inbound request AND outbound
+          response explicitly. Security groups handle the response automatically.</div>
+
+        <div class="quiz-q"><span class="qn">Q4.</span> A private subnet EC2 needs to download software updates from the
+          internet. It has no public IP. What AWS resource enables this?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Internet Gateway directly</div>
+          <div class="opt" onclick="qa(this,false)">B) Security Group with outbound rule</div>
+          <div class="opt" onclick="qa(this,true)">C) NAT Gateway in the public subnet</div>
+          <div class="opt" onclick="qa(this,false)">D) VPC Peering</div>
+        </div>
+        <div class="explain">NAT Gateway sits in the public subnet, has a public IP itself. Private instances route
+          their outbound internet traffic to the NAT Gateway, which performs network address translation on their
+          behalf. Replies come back through the NAT, forwarded to the private instance. The instance never has a public
+          IP but can reach the internet outbound.</div>
+
+        <div class="quiz-q"><span class="qn">Q5.</span> How many Internet Gateways can be attached to a single VPC?
+        </div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,true)">A) One</div>
+          <div class="opt" onclick="qa(this,false)">B) One per subnet</div>
+          <div class="opt" onclick="qa(this,false)">C) Unlimited</div>
+          <div class="opt" onclick="qa(this,false)">D) Two (primary and backup)</div>
+        </div>
+        <div class="explain">One IGW per VPC — always. It's a one-to-one relationship. The IGW is highly available and
+          scales automatically — AWS handles the redundancy. You don't need two. If you need multiple VPCs to connect,
+          use VPC Peering or Transit Gateway, not multiple IGWs.</div>
+      </div>
+
+      <div class="sub" id="d6-github">
+        <h3>📂 GitHub Notes Template — Day 6</h3>
+      </div>
+      <div class="gh-template">
+        <div class="gh-bar"><span>devops-90days/day-06/README.md</span><span>Commit: "docs: Add Day 06 notes — VPC build
+            from scratch with 2-tier architecture"</span></div>
+        <pre><span class="mh1"># Day 06 — VPC Networking + 2-Tier Architecture</span>
+<span class="mcom">**Date:** YYYY-MM-DD | **Difficulty:** Hard | **Status:** ✅ Complete</span>
+
+---
+
+<span class="mh2">## 🏗 Architecture I Built Today</span>
+
+<span class="mcod">```</span>
+Internet
+    |
+[Internet Gateway]  ← attached to VPC
+    |
+[VPC: 10.0.0.0/16]
+    ├─ [Public Subnet: 10.0.1.0/24]
+    │    ├─ Route Table: 0.0.0.0/0 → IGW, local → local
+    │    └─ [EC2: nginx web server] ← has public IP, reachable from internet
+    │
+    └─ [Private Subnet: 10.0.2.0/24]
+         ├─ Route Table: local → local ONLY (no internet route)
+         └─ [EC2: backend] ← NO public IP, only reachable from public subnet
+<span class="mcod">```</span>
+
+<span class="mh2">## ⌨️ VPC Build Command Reference</span>
+
+<span class="mcod">```bash</span>
+# Full VPC build — use variables to chain IDs
+VPC_ID=$(aws ec2 create-vpc --cidr-block 10.0.0.0/16 --query 'Vpc.VpcId' --output text)
+PUBLIC_SUBNET=$(aws ec2 create-subnet --vpc-id $VPC_ID --cidr-block 10.0.1.0/24 ...)
+IGW_ID=$(aws ec2 create-internet-gateway --query 'InternetGateway.InternetGatewayId' --output text)
+aws ec2 attach-internet-gateway --vpc-id $VPC_ID --internet-gateway-id $IGW_ID
+PUBLIC_RT=$(aws ec2 create-route-table --vpc-id $VPC_ID --query 'RouteTable.RouteTableId' --output text)
+aws ec2 create-route --route-table-id $PUBLIC_RT --destination-cidr-block 0.0.0.0/0 --gateway-id $IGW_ID
+aws ec2 associate-route-table --subnet-id $PUBLIC_SUBNET --route-table-id $PUBLIC_RT
+<span class="mcod">```</span>
+
+<span class="mh2">## 🔑 Key Rules I Know Cold</h3>
+
+- **What makes a subnet public**: route table has 0.0.0.0/0 → IGW. That single route is it.
+- **Security Group**: stateful, attached to instance. Inbound allow = response automatic.
+- **NACL**: stateless, attached to subnet. Must explicitly allow inbound AND outbound.
+- **NAT Gateway**: lets private instances reach internet outbound. Costs ~$32/month.
+- **IGW limit**: exactly 1 per VPC, always.
+
+<span class="mh2">## 📈 Tomorrow — Day 7</span>
+Week 1 Capstone: Full automated deployment pipeline combining Bash + IAM + S3 + VPC.</pre>
+      </div>
+    </div>
+    <!-- END DAY 6 -->
+
+
+    <!-- ══════════════════════════ DAY 7 ══════════════════════════ -->
+    <div id="day7">
+      <div class="day-header">
+        <div class="day-badge d7">D7</div>
+        <div class="day-title-block">
+          <h2>WEEK 1 CAPSTONE</h2>
+          <div class="subtitle">Full Automated Deployment · Multi-Tier Architecture · Debugging Under Pressure ·
+            Portfolio Commit</div>
+        </div>
+        <div class="day-diff">
+          <span class="diff-pill very-hard">Very Hard</span>
+          <span class="hrs">8 hrs</span>
+        </div>
+      </div>
+
+      <div class="box goal">
+        <h4>🎯 Day 7 Goal</h4>
+        <p>Day 7 is where everything connects. You are building a complete system from scratch: a custom VPC, an EC2 in
+          the public subnet, an IAM role, S3 config bucket, nginx web server deployed from a bash script that pulls
+          config from S3. Every single piece was learned in Days 1–6. No tutorial. You are building from memory and your
+          own notes.</p>
+        <p>Expected output: A running system with a live URL, a GitHub repo documenting it, and the ability to describe
+          every component in a 2-minute verbal explanation. If you finish early, add a health monitoring cron job (Day
+          4) that logs to S3 (Day 5).</p>
+      </div>
+
+      <div class="box fire">
+        <h4>🔴 Senior Engineer — No Hand-Holding Today</h4>
+        <p>Day 7 commands are deliberately more sparse than Days 4–6. You have the reference material in your own GitHub
+          notes. The debugging trees are shorter because you need to build the habit of reading error messages before
+          looking up the answer. This is apprenticeship mode: I give you the spec, you figure out the implementation.
+          The debug section covers only genuinely new scenarios you haven't seen yet.</p>
+      </div>
+
+      <div class="sub" id="d7-sched">
+        <h3>📋 8-Hour Schedule — Capstone Day</h3>
+      </div>
+      <table class="sched">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Phase</th>
+            <th>Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tc">09:00–09:30</td>
+            <td class="pc s7">REVIEW</td>
+            <td class="ac"><strong>Week 1 audit — cold test yourself</strong><span>Open a fresh terminal. Without
+                looking at notes: launch an EC2, create an S3 bucket, write a function in bash, and explain what a
+                public subnet needs. Time yourself. Gaps = what to review.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">09:30–10:30</td>
+            <td class="pc s7">PLAN</td>
+            <td class="ac"><strong>Architecture planning — draw before building</strong><span>On paper: draw the system.
+                VPC box → subnets → EC2 → IAM role arrows → S3 bucket. Write the deploy flow: script runs → reads config
+                from S3 → installs nginx → starts server. Planning before building is a senior engineering habit.
+                Juniors skip this and waste 2 hours debugging.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">10:30–10:45</td>
+            <td class="pc s7">BREAK</td>
+            <td class="ac"><strong>Break</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">10:45–12:30</td>
+            <td class="pc s7">BUILD</td>
+            <td class="ac"><strong>Build Phase 1: Infrastructure — VPC + IAM + S3</strong><span>Using your Day 5 + Day 6
+                notes: create the VPC, subnets, IGW, route tables. Create S3 bucket with config file. Create IAM role
+                and attach to EC2. All CLI. No console.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">12:30–13:15</td>
+            <td class="pc s7">BREAK</td>
+            <td class="ac"><strong>Lunch — review your plan while eating, not the screen</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">13:15–15:00</td>
+            <td class="pc s7">BUILD</td>
+            <td class="ac"><strong>Build Phase 2: Application — EC2, nginx, full deploy script</strong><span>Launch EC2
+                with the IAM role in your new VPC. Write the deploy.sh that pulls config from S3 and deploys nginx. Run
+                it. Hit the URL. Fix whatever breaks. There will be something that breaks.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">15:00–15:45</td>
+            <td class="pc s7">VALIDATE</td>
+            <td class="ac"><strong>Validation + deliberate failure injection</strong><span>Deliberately break each
+                component one at a time. Remove the IGW route → what fails? Remove the IAM role → what fails? Stop nginx
+                → does health check restart it? Fix each one systematically. This trains incident response
+                thinking.</span></td>
+          </tr>
+          <tr>
+            <td class="tc">15:45–16:00</td>
+            <td class="pc s7">BREAK</td>
+            <td class="ac"><strong>Break</strong></td>
+          </tr>
+          <tr>
+            <td class="tc">16:00–17:00</td>
+            <td class="pc s7">DOCUMENT</td>
+            <td class="ac"><strong>Week 1 documentation + portfolio commit + cleanup</strong><span>Write your Week 1
+                README. Commit everything. Then STOP the EC2 and EMPTY the S3 bucket (or you'll be charged). This is
+                part of the discipline.</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sub" id="d7-concepts">
+        <h3>🧠 Systems Thinking — What Day 7 Actually Teaches</h3>
+      </div>
+      <div class="concepts">
+        <div class="concept">
+          <div class="ico">🔗</div>
+          <h4>Infrastructure as Connected Systems</h4>
+          <p>Everything you built this week is a connected system. Remove one piece and trace the failure: no IGW route
+            → EC2 unreachable → deploy script can't run → site down. Understanding these dependency chains is what
+            separates an operator from an engineer.</p>
+          <p class="why">Interview: "Walk me through your Week 1 capstone architecture." Practice this as a 2-minute
+            verbal answer.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🔒</div>
+          <h4>Defense in Depth</h4>
+          <p>Security isn't one lock — it's layers. VPC network isolation → private subnet → security group → IAM least
+            privilege → S3 bucket policy. A breach of one layer doesn't compromise everything. This is the mental model
+            employers test for.</p>
+          <p class="why">Your Week 1 system has 4 security layers. Be able to name them and explain what each one
+            prevents.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">📊</div>
+          <h4>Observability Basics</h4>
+          <p>Your health_check.sh (Day 4.1) logs to a file. The logs are the first place you look when something fails. In
+            real systems this scales to CloudWatch, Datadog, Grafana. The principle is the same: if it isn't logged, the
+            failure is invisible.</p>
+          <p class="why">Week 2 covers CloudWatch. Day 7 is the conceptual foundation for why monitoring exists.</p>
+        </div>
+        <div class="concept">
+          <div class="ico">🗂</div>
+          <h4>Infrastructure Reproducibility</h4>
+          <p>If your deploy.sh and your bash build scripts are in GitHub, a colleague could build your entire
+            environment from scratch. This is the seed of Infrastructure as Code (Terraform, CloudFormation) which
+            you'll learn in Week 3–4.</p>
+          <p class="why">Your Day 7 scripts are primitive IaC. Know how to describe them that way in an interview.</p>
+        </div>
+      </div>
+
+      <div class="sub" id="d7-commands">
+        <h3>⌨️ Day 7 Command Reference — Use Your Notes</h3>
+      </div>
+
+      <div class="term">
+        <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span
+            class="lbl">Capstone Deploy Script — week1_deploy.sh</span><span class="diff-tag adv">Advanced</span></div>
+        <div class="term-body">
+          <div class="sect-lbl">This script ties everything from Week 1 together</div>
+          <span class="out">#!/bin/bash</span>
+          <span class="out">set -euo pipefail</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">###############################################</span>
+          <span class="out"># week1_deploy.sh</span>
+          <span class="out"># Week 1 Capstone: Pull config from S3 → Deploy nginx</span>
+          <span class="out"># Requires: EC2 with IAM role that has S3 read access</span>
+          <span class="out">###############################################</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">CONFIG_BUCKET="${1:-devops-config-YOUR-NAME}"</span>
+          <span class="out"> # $1 = first argument passed to script, with fallback default</span>
+          <span class="out">LOG_FILE="${HOME}/logs/deploy-$(date +%Y%m%d-%H%M%S).log"</span>
+          <span class="out">WEB_ROOT="/var/www/html"</span>
+          <span class="out">REGION=$(curl -s http://169.254.169.254/latest/meta-data/placement/region)</span>
+          <span class="out">INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)</span>
+          <span class="out">PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)</span>
+          <span class="out"> # EC2 metadata service: always available at 169.254.169.254</span>
+          <span class="out"> # No auth needed — this is instance-local only</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">mkdir -p "$(dirname $LOG_FILE)"</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">function log() { echo "[$(date '+%H:%M:%S')] [$1] $2" | tee -a "$LOG_FILE"; }</span>
+          <span class="out">function fail() { log "FATAL" "$1"; exit 1; }</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">log "INFO" "=== Week 1 Capstone Deploy Starting ==="</span>
+          <span class="out">log "INFO" "Instance: $INSTANCE_ID | Region: $REGION | IP: $PUBLIC_IP"</span>
+          <span class="out">log "INFO" "Config bucket: $CONFIG_BUCKET"</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">log "INFO" "[1/5] Installing dependencies..."</span>
+          <span class="out">sudo apt-get update -qq || fail "apt update failed"</span>
+          <span class="out">sudo apt-get install -y nginx awscli || fail "Package install failed"</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">log "INFO" "[2/5] Pulling config from S3..."</span>
+          <span class="out">aws s3 cp "s3://${CONFIG_BUCKET}/app.conf" /tmp/app.conf \</span>
+          <span class="out"> || fail "S3 pull failed — check IAM role is attached and bucket exists"</span>
+          <span class="out">source /tmp/app.conf</span>
+          <span class="out"> # app.conf contains: SITE_TITLE="My DevOps Server" | source loads vars</span>
+          <span class="out">log "OK" "Config loaded: SITE_TITLE=${SITE_TITLE:-not set}"</span>
+          <span class="out">&nbsp;</span>
+          <span class="out">log "INFO" "[3/5] Deploying web page..."</span>
+          <span class="out">sudo tee "$WEB_ROOT/index.html" > /dev/null << HTML</span>
+              <span class="out">&lt;!DOCTYPE html&gt;</span>
+              <span class="out">&lt;html&gt;&lt;body
+                style="background:#050509;color:#e040fb;font-family:monospace;padding:40px"&gt;</span>
+              <span class="out"> &lt;h1&gt;${SITE_TITLE:-DevOps Week 1 Complete}&lt;/h1&gt;</span>
+              <span class="out"> &lt;p&gt;Instance: $INSTANCE_ID&lt;/p&gt;</span>
+              <span class="out"> &lt;p&gt;Region: $REGION&lt;/p&gt;</span>
+              <span class="out"> &lt;p&gt;Deployed: $(date)&lt;/p&gt;</span>
+              <span class="out">&lt;/body&gt;&lt;/html&gt;</span>
+              <span class="out">HTML</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">log "INFO" "[4/5] Starting nginx..."</span>
+              <span class="out">sudo nginx -t || fail "nginx config syntax error"</span>
+              <span class="out">sudo systemctl enable nginx</span>
+              <span class="out">sudo systemctl restart nginx</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">log "INFO" "[5/5] Scheduling health check..."</span>
+              <span class="out">(crontab -l 2>/dev/null; echo "*/5 * * * * ${HOME}/scripts/health_check.sh >>
+                ${HOME}/logs/health.log 2>&amp;1") | crontab -</span>
+              <span class="out">&nbsp;</span>
+              <span class="out">log "INFO" "=== Deployment Complete ==="</span>
+              <span class="out">log "INFO" " Site live at: http://$PUBLIC_IP"</span>
+              <span class="out">log "INFO" " Deploy log: $LOG_FILE"</span>
+              <span class="out">log "INFO" " Health check: crontab -l"</span>
+        </div>
+      </div>
+
+      <div class="term">
+        <div class="term-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span
+            class="lbl">Validation + Failure Injection Tests</span><span class="diff-tag adv">Advanced</span></div>
+        <div class="term-body">
+          <div class="sect-lbl">Test 1: Verify IAM role is working (not keys)</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">cat ~/.aws/credentials 2>/dev/null || echo "No
+              credentials file — good"</span></div>
+          <span class="out ok">No credentials file — good</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws sts get-caller-identity</span></div>
+          <span class="out json">{</span>
+          <span class="out json"> "Arn": "arn:aws:sts::123:assumed-role/EC2-S3-ReadOnly-Role/i-xxx"</span>
+          <span class="out json">}</span>
+          <span class="out ok"> # "assumed-role" confirms EC2 is using the role, not stored keys</span>
+
+          <div class="sect-lbl">Test 2: Deliberately remove IGW route — what breaks?</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 delete-route --route-table-id
+              $PUBLIC_RT --destination-cidr-block 0.0.0.0/0</span></div>
+          <span class="out wrn"> # From your laptop: try to SSH — connection timeout. Why?</span>
+          <span class="out wrn"> # EC2 has a public IP but the route to the IGW is gone</span>
+          <span class="out wrn"> # Traffic from internet enters IGW but VPC has no route for the return</span>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 create-route --route-table-id
+              $PUBLIC_RT --destination-cidr-block 0.0.0.0/0 --gateway-id $IGW_ID</span></div>
+          <span class="out ok"> # Route restored — SSH works again</span>
+
+          <div class="sect-lbl">Test 3: S3 permission boundary — try to exceed it</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 ls</span> <span class="cmt"> # List all
+              buckets — does your role allow this?</span></div>
+          <span class="out err"> # If using a least-privilege role: AccessDenied (expected)</span>
+          <span class="out"> # Your policy only allows GetObject + ListBucket on one specific bucket</span>
+          <span class="out"> # Not s3:ListAllMyBuckets — so this is correctly denied</span>
+
+          <div class="sect-lbl">End of Day: Clean Up (Important — prevents billing)</div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 rm s3://$BUCKET_NAME --recursive</span>
+            <span class="cmt"> # Empty bucket first</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws s3 rb s3://$BUCKET_NAME</span> <span
+              class="cmt"> # Then remove it</span></div>
+          <div class="cmd-line"><span class="pr">$</span><span class="cm">aws ec2 terminate-instances --instance-ids
+              $INSTANCE_ID</span></div>
+          <span class="out wrn"> # terminate = permanent delete. Stop = paused but billed for storage.</span>
+          <span class="out wrn"> # For learning, terminate is fine. VPC resources cost nothing when empty.</span>
+        </div>
+      </div>
+
+      <div class="sub" id="d7-debug">
+        <h3>🐛 Debug Tree — Capstone Failures (New Scenarios)</h3>
+      </div>
+      <div class="debug-tree">
+        <h4>⚡ EC2 Metadata Service Returns Nothing (curl 169.254.169.254 fails)</h4>
+        <div class="ds">
+          <div class="dn">1</div>
+          <div class="dc"><strong>Check IMDSv2 token requirement</strong><span>Newer EC2 AMIs require IMDSv2
+              (token-based metadata access). The simple curl may fail.</span><span class="fix">TOKEN=$(curl -X PUT
+              "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600") && curl -H
+              "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/</span></div>
+        </div>
+      </div>
+      <div class="debug-tree">
+        <h4>⚡ source /tmp/app.conf Fails or Variables Are Empty</h4>
+        <div class="ds">
+          <div class="dn">1</div>
+          <div class="dc"><strong>Inspect the file before sourcing</strong><span class="fix">cat /tmp/app.conf</span>
+          </div>
+        </div>
+        <div class="ds">
+          <div class="dn">2</div>
+          <div class="dc"><strong>File format must be: KEY="value" — one per line, no spaces around
+              =</strong><span>Comments (#) are fine. But any bad line causes sourcing to fail silently or error.</span>
+          </div>
+        </div>
+        <div class="ds">
+          <div class="dn">3</div>
+          <div class="dc"><strong>Verify S3 download actually worked</strong><span class="fix">aws s3 cp
+              s3://bucket/app.conf /tmp/app.conf && echo "OK" || echo "FAILED"</span></div>
+        </div>
+      </div>
+      <div class="debug-tree">
+        <h4>⚡ Cron Line Added But Already Exists (Duplicate)</h4>
+        <div class="ds">
+          <div class="dn">1</div>
+          <div class="dc"><strong>Check current crontab before adding</strong><span class="fix">crontab -l | grep
+              health_check</span></div>
+        </div>
+        <div class="ds">
+          <div class="dn">2</div>
+          <div class="dc"><strong>The capstone script uses a safe append pattern — if you run twice it
+              duplicates</strong><span>Use: crontab -l 2>/dev/null | grep -v health_check | { cat; echo "*/5 * * * *
+              ..."; } | crontab -</span><span>This pattern removes existing entry first, then adds fresh —
+              idempotent.</span></div>
+        </div>
+      </div>
+
+      <div class="sub" id="d7-project">
+        <h3>🏗 Week 1 Capstone Project</h3>
+      </div>
+      <div class="project">
+        <div class="project-hdr">
+          <div class="meta">
+            <div class="tag d7">★ Week 1 Capstone</div>
+            <h3>Full-Stack Infrastructure: VPC + IAM + S3 + EC2 + nginx + Monitoring</h3>
+          </div>
+          <div class="time">⏱ Full Day</div>
+        </div>
+        <div class="project-body">
+          <div class="project-goal"><strong>Goal:</strong> Build a complete, production-pattern system from scratch in
+            one day using only your week's notes, the command reference in this pack, and your GitHub repo. No copying
+            from old sessions. This is your Week 1 portfolio piece — it demonstrates you can build something end-to-end
+            from a specification. Document every decision.</div>
+          <ul class="checklist">
+            <li>VPC built from CLI: 10.0.0.0/16, public and private subnets, IGW, route tables</li>
+            <li>S3 config bucket: holds app.conf with SITE_TITLE and any other config vars</li>
+            <li>IAM role on EC2: read-only access to config bucket. Written as a JSON file committed to repo</li>
+            <li>EC2 launched in public subnet: t2.micro, tagged "week1-capstone"</li>
+            <li>week1_deploy.sh runs on EC2: pulls config from S3, installs nginx, serves page</li>
+            <li>Live URL accessible: browser shows page with instance ID and region pulled dynamically</li>
+            <li>health_check.sh running via cron: verify after 5+ mins that log file is growing</li>
+            <li>Failure injection test: remove IGW route → site breaks → re-add route → site recovers</li>
+            <li>GitHub repo: Week 1 README with ASCII architecture diagram, all scripts committed</li>
+            <li>Clean up: stop/terminate EC2, empty and delete S3 buckets</li>
+          </ul>
+          <div class="box warn" style="margin-top:12px;">
+            <h4>⚠ The Hard Part</h4>
+            <p>Something will break in the deploy today that isn't in any debug tree. When it does: read the full error
+              message. Use <code>bash -x</code> on the script. Check the logs at <code>~/logs/</code>. Write down the
+              error and fix in your GitHub notes. That documentation is evidence you are a systematic engineer, not
+              someone who thrashes randomly until it works.</p>
+          </div>
+          <div class="expected">
+            <span class="lbl">Final State — All Green</span>
+            ✓ curl http://YOUR-EC2-IP → HTML page with your instance ID visible<br>
+            ✓ aws sts get-caller-identity → shows "assumed-role", not your IAM user<br>
+            ✓ crontab -l → shows health_check.sh scheduled<br>
+            ✓ cat ~/logs/health.log → timestamped entries every 5 minutes<br>
+            ✓ git log --oneline → at least 8 meaningful commits across the week<br>
+            ✓ github.com/YOURNAME/devops-90days → populated, public, with READMEs
+          </div>
+        </div>
+      </div>
+
+      <div class="sub" id="d7-interview">
+        <h3>🎤 Week 1 Interview Questions — The Big Ones</h3>
+      </div>
+      <div class="int-block">
+        <div class="int-q"><span class="ql">INT Q →</span>"Tell me about a project you built independently."</div>
+        <div class="int-a">
+          <span class="voice-tag hd">Head of DevOps</span><strong>This is your Week 1 answer:</strong> "In my first week
+          of structured DevOps learning, I built a complete 2-tier AWS infrastructure from scratch. I created a custom
+          VPC with public and private subnets, an internet gateway, and separate route tables — all using the AWS CLI,
+          not the console, so everything was repeatable. I deployed an EC2 instance in the public subnet with an IAM
+          role attached — no access keys on the server. The IAM role has a least-privilege policy that reads only from
+          one specific S3 bucket. I wrote a Bash deployment script that pulls configuration from that S3 bucket,
+          installs nginx, and serves a custom web page. I also wrote a health monitoring script that runs every 5
+          minutes via cron and checks disk usage, RAM, and service status — it logs results with timestamps and exits
+          with a non-zero code if problems are found. The whole system is in GitHub with commit history and architecture
+          documentation. I know what breaks if I remove the IGW route, the IAM role, or the nginx service — because I
+          tested each failure deliberately."
+        </div>
+      </div>
+      <div class="int-block">
+        <div class="int-q"><span class="ql">INT Q →</span>"What would you change about your Week 1 architecture to make
+          it production-ready?"</div>
+        <div class="int-a">
+          <span class="voice-tag sv">Senior</span><strong>Shows you understand the gap:</strong> "Three main things.
+          First, I'd replace the manual Bash deployment with a proper CI/CD pipeline — GitHub Actions or CodePipeline
+          triggered on git push, with automated tests before deploy. Second, the IAM role policy is correct but I'd add
+          a boundary condition so even administrators can't accidentally escalate it. Third, I don't have a NAT Gateway,
+          so the private subnet EC2 can't receive software updates — in production that's a security risk. I'd add a NAT
+          Gateway for the private subnet's outbound traffic. I'd also replace the hand-built VPC with Terraform so the
+          whole environment can be destroyed and recreated in under 5 minutes from a git repo — that's Infrastructure as
+          Code, which I'm learning next."
+        </div>
+      </div>
+
+      <div class="sub" id="d7-quiz">
+        <h3>🧪 Week 1 Final Quiz — 7 Questions</h3>
+      </div>
+      <div class="quiz-wrap">
+        <div class="quiz-title">⚡ Week 1 Final — Covers All 7 Days</div>
+        <div class="quiz-q"><span class="qn">Q1.</span> In what order would you diagnose this: "My EC2 web server was
+          working, now the site is down, nginx status shows active."</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Reboot EC2, reinstall nginx, check S3</div>
+          <div class="opt" onclick="qa(this,true)">B) Check Security Group inbound rules → check IGW route → check nginx
+            config with nginx -t → check nginx error logs</div>
+          <div class="opt" onclick="qa(this,false)">C) Check IAM role → check S3 → check cron</div>
+          <div class="opt" onclick="qa(this,false)">D) Terminate and rebuild the instance</div>
+        </div>
+        <div class="explain">nginx is active but site is down — nginx process is fine. The issue is network or config.
+          Security Group first (most common), then routing, then nginx's own config for subtle issues. Never reboot
+          first — that destroys evidence of what went wrong.</div>
+
+        <div class="quiz-q"><span class="qn">Q2.</span> You want your deploy script to be idempotent — safe to run twice
+          without side effects. Which bash pattern achieves this for directory creation?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) mkdir /path/to/dir (fails if already exists)</div>
+          <div class="opt" onclick="qa(this,true)">B) mkdir -p /path/to/dir (creates if missing, silent if exists)</div>
+          <div class="opt" onclick="qa(this,false)">C) rm -rf /path && mkdir /path</div>
+          <div class="opt" onclick="qa(this,false)">D) [ -d /path ] && echo "exists"</div>
+        </div>
+        <div class="explain">Idempotency is a core DevOps principle: running the same operation multiple times produces
+          the same result. mkdir -p silently succeeds if the directory already exists. This pattern should be in every
+          setup script — it's safe to run repeatedly without breaking anything.</div>
+
+        <div class="quiz-q"><span class="qn">Q3.</span> A private subnet EC2 needs to call an external API. No NAT
+          Gateway exists. What happens?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,true)">A) The request silently times out — there is no path to the internet
+          </div>
+          <div class="opt" onclick="qa(this,false)">B) AWS automatically routes through the IGW</div>
+          <div class="opt" onclick="qa(this,false)">C) The security group blocks it</div>
+          <div class="opt" onclick="qa(this,false)">D) It uses the IAM role for internet access</div>
+        </div>
+        <div class="explain">Private subnets have no route to the internet — the route table only has the local VPC
+          route. Without a NAT Gateway, any outbound internet traffic from a private instance drops at the routing
+          layer. The connection simply times out. IAM roles have no bearing on network routing.</div>
+
+        <div class="quiz-q"><span class="qn">Q4.</span> What information does aws sts get-caller-identity give you and
+          when do you use it?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) Shows your EC2 instance metadata</div>
+          <div class="opt" onclick="qa(this,true)">B) Shows which AWS identity (user or role) the current credentials
+            belong to — use it to verify you're authenticated correctly</div>
+          <div class="opt" onclick="qa(this,false)">C) Lists all IAM users in your account</div>
+          <div class="opt" onclick="qa(this,false)">D) Checks if your S3 bucket exists</div>
+        </div>
+        <div class="explain">aws sts get-caller-identity returns: UserId, Account number, and ARN of the current
+          identity. The ARN tells you if you're running as an IAM user (arn:aws:iam::xxx:user/name) or assuming a role
+          (arn:aws:sts::xxx:assumed-role/role-name/session). Use it every time before running AWS CLI commands to
+          confirm you have the right identity.</div>
+
+        <div class="quiz-q"><span class="qn">Q5.</span> Your bash script runs fine manually but fails in cron with:
+          "/usr/bin/aws: command not found". Why?</div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) AWS CLI is not installed</div>
+          <div class="opt" onclick="qa(this,true)">B) aws CLI is in /usr/local/bin which isn't in cron's minimal PATH
+          </div>
+          <div class="opt" onclick="qa(this,false)">C) Cron doesn't support AWS commands</div>
+          <div class="opt" onclick="qa(this,false)">D) The IAM role expired</div>
+        </div>
+        <div class="explain">AWS CLI v2 installs to /usr/local/bin. Cron's default PATH is /usr/bin:/bin. Use the full
+          path in cron: /usr/local/bin/aws s3 cp ... Alternatively add PATH=/usr/bin:/usr/local/bin at the top of
+          crontab. Find the full path with: which aws.</div>
+
+        <div class="quiz-q"><span class="qn">Q6.</span> What is the correct VPC CIDR for 65,536 total IP addresses?
+        </div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) 10.0.0.0/8</div>
+          <div class="opt" onclick="qa(this,true)">B) 10.0.0.0/16</div>
+          <div class="opt" onclick="qa(this,false)">C) 10.0.0.0/24</div>
+          <div class="opt" onclick="qa(this,false)">D) 10.0.0.0/32</div>
+        </div>
+        <div class="explain">/16 = 2^16 = 65,536 IPs. This is the standard VPC size for production workloads — large
+          enough to have many subnets across multiple availability zones. /8 is too large, /24 is only 256 (subnet
+          size), /32 is a single IP.</div>
+
+        <div class="quiz-q"><span class="qn">Q7.</span> You have 8 days of commit history on GitHub. An interviewer asks
+          "I can see you've been documenting your learning — walk me through what you built." What do you lead with?
+        </div>
+        <div class="opts">
+          <div class="opt" onclick="qa(this,false)">A) "I followed a YouTube tutorial..."</div>
+          <div class="opt" onclick="qa(this,false)">B) "I installed Linux and learned some commands."</div>
+          <div class="opt" onclick="qa(this,true)">C) "I built a 2-tier AWS infrastructure: VPC with public/private
+            subnets, EC2 deployed with an IAM role that reads config from S3, nginx served by an automated deploy
+            script, and a cron-scheduled health monitor. I can show you the architecture in my README."</div>
+          <div class="opt" onclick="qa(this,false)">D) "I'm still a beginner, I haven't done anything production-ready."
+          </div>
+        </div>
+        <div class="explain">Own what you built. Be specific. Name the components and how they connect. A senior
+          interviewer asking this question wants to hear you describe a system, not apologise for being new. Your Week 1
+          project IS real infrastructure — describe it that way.</div>
+      </div>
+
+      <div class="sub" id="d7-github">
+        <h3>📂 GitHub Notes Template — Day 7 + Week 1 Summary</h3>
+      </div>
+      <div class="gh-template">
+        <div class="gh-bar"><span>devops-90days/week-01/README.md</span><span>Commit: "docs: Week 01 complete — full
+            architecture summary and lessons learned"</span></div>
+        <pre><span class="mh1"># Week 01 Complete — DevOps Foundation</span>
+<span class="mcom">**Dates:** YYYY-MM-DD to YYYY-MM-DD | **Status:** ✅ Complete</span>
+<span class="mbdg">![Days](https://img.shields.io/badge/week-1%20of%2013-brightgreen)</span>
+<span class="mbdg">![Commits](https://img.shields.io/badge/commits-8+-blue)</span>
+
+---
+
+<span class="mh2">## 🏗 Week 1 Capstone Architecture</span>
+
+<span class="mcod">```</span>
+Internet
+    |
+[Internet Gateway]
+    |
+[Custom VPC: 10.0.0.0/16]
+    |
+    ├─── [Public Subnet: 10.0.1.0/24]
+    │         Route: 0.0.0.0/0 → IGW
+    │         [EC2: t2.micro Ubuntu 22.04]
+    │              └─ IAM Role → S3 Read Access
+    │              └─ nginx (port 80 open)
+    │              └─ health_check.sh (cron: */5 * * * *)
+    │              └─ week1_deploy.sh (pulls config from S3)
+    │
+    └─── [Private Subnet: 10.0.2.0/24]
+              Route: local only
+              [EC2: backend — not internet accessible]
+
+[S3 Bucket: devops-config-YOURNAME]
+    └─ app.conf (SITE_TITLE, env vars)
+    └─ Versioning: enabled
+
+[IAM Role: EC2-S3-ReadOnly-Role]
+    └─ Policy: GetObject + ListBucket on devops-config-YOURNAME only
+<span class="mcod">```</span>
+
+<span class="mh2">## 📅 What I Built Each Day</span>
+| Day | Topic | Key Output |
+|-----|-------|-----------|
+| 1 | Linux on EC2 | server_setup.sh — automated environment setup |
+| 2 | Git + AWS CLI | devops-90days GitHub repo, IAM configured |
+| 3 | EC2 + nginx | Live web server + deploy.sh |
+| 4 | Bash scripting | health_check.sh + cron scheduled |
+| 5 | IAM + S3 | Custom policy, EC2 role, S3 static site |
+| 6 | VPC | 2-tier VPC from scratch, public/private subnets |
+| 7 | Capstone | Full system: VPC + IAM + S3 + EC2 + monitoring |
+
+<span class="mh2">## 💡 Most Important Things I Learned</span>
+1. IAM roles on EC2 — no keys on servers, ever
+2. What makes a subnet public: 0.0.0.0/0 → IGW in route table
+3. set -euo pipefail — mandatory in every script
+4. Least privilege: exact ARNs, not wildcards
+5. Debug order: read error → check service → check network → check config → check logs
+
+<span class="mh2">## 🐛 Hardest Errors I Hit and Fixed</span>
+| Error | Cause | Fix |
+|-------|-------|-----|
+| Site unreachable despite nginx running | IGW route missing from route table | aws ec2 create-route with 0.0.0.0/0 → IGW |
+| AccessDenied on S3 from EC2 | Policy had wrong bucket ARN | Fixed ARN to exact bucket name |
+| Cron job not running | Relative path for aws command | Changed to /usr/local/bin/aws |
+| [Your error] | | |
+
+<span class="mh2">## 📈 Week 2 Preview</span>
+CloudWatch logging + alarms, Load Balancer, Auto Scaling Groups, RDS basics, first CI/CD with GitHub Actions</pre>
+      </div>
+    </div>
+    <!-- END DAY 7 -->
+
+
+    <!-- ══ WEEK 1 SUMMARY ══ -->
+    <div class="week-summary" id="week-summary">
+      <h2>WEEK 1 COMPLETE</h2>
+      <p style="color:var(--text-dim);font-size:14px;margin-bottom:20px;">You went from zero to running
+        production-pattern infrastructure in 7 days. At 33, with the discipline you've shown this week, you're exactly
+        where you need to be to hit junior DevOps applications in 6–8 weeks.</p>
+      <div class="skills-earned">
+        <div class="skill-item"><span class="tick">✓</span><span class="name">Linux CLI fluency</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">Git workflow</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">AWS CLI proficiency</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">EC2 deployment</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">Bash scripting + cron</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">IAM + least privilege</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">S3 operations</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">VPC architecture</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">nginx web server</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">Error-first debugging</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">Portfolio documentation</span></div>
+        <div class="skill-item"><span class="tick">✓</span><span class="name">Interview language</span></div>
+      </div>
+      <p style="color:var(--text-dim);font-size:13px;margin-top:16px;font-family:var(--mono);">Week 2 → CloudWatch ·
+        GitHub Actions CI/CD · Load Balancer · Auto Scaling · Docker intro</p>
+    </div>
+
+    <div class="footer">
+      <p>DevOps Bootcamp — <span>Days 4–7 | Week 1 Complete</span></p>
+      <p style="margin-top:6px;">Three voices. Seven days. One foundation. Request Week 2 pack when ready.</p>
+      <p style="margin-top:12px;font-size:10px;color:var(--muted);">Built for a 33-year-old who decided to go all the
+        way.</p>
+    </div>
+
+  </main>
+
+  <script>
+    function qa(el, correct) {
+      const opts = el.parentElement.querySelectorAll('.opt');
+      opts.forEach(o => o.style.pointerEvents = 'none');
+      el.classList.add(correct ? 'correct' : 'wrong');
+      if (!correct) {
+        opts.forEach(o => {
+          if (o.onclick && o.onclick.toString().includes('true')) o.classList.add('correct');
+        });
+      }
+      const exp = el.parentElement.nextElementSibling;
+      if (exp && exp.classList.contains('explain')) exp.classList.add('show');
+    }
+
+    // Active nav on scroll
+    const navLinks = document.querySelectorAll('.nav a');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      document.querySelectorAll('[id]').forEach(s => {
+        if (window.scrollY >= s.offsetTop - 80) cur = s.id;
+      });
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
+      });
+    });
+  </script>
+</body>
+
+</html>
